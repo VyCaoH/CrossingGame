@@ -3,7 +3,7 @@
 #include "Vehicle.h"
 #include "Player.h"
 #include "Scene.h"
-#include "Win32Helper.h"
+#include "ConsoleWindow.h"
 #include <cstdint>
 #include "MMSystem.h"
 #pragma comment(lib, "winmm.lib")
@@ -85,7 +85,7 @@ public:
 		DWORD dwVol = ON;
 		waveOutSetVolume(NULL, dwVol);
 
-		PlaySound(TEXT("Music\\music.wav"), NULL, SND_ASYNC | SND_LOOP);
+		PlaySound(TEXT("Music\\menu.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
 
 	void stopMusic()
@@ -103,7 +103,7 @@ public:
 		for (auto x : row)
 			gameScene.drawOneRow(*x);
 
-		gameScene.drawEntity(player_);
+		gameScene.drawObject(player_);
 		gameScene.drawManual();
 		gameScene.PrintBuffer();
 	}

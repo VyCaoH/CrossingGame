@@ -1,10 +1,10 @@
 #include "Animal.h"
 
-Sprite* Bird::birdSprtRight = new Sprite("Sprites\\Bird-Right.txt");
-Sprite* Bird::birdSprtLeft = new Sprite("Sprites\\Bird-Left.txt");
+Limits* Bird::birdLmtRight = new Limits("Limits\\Bird-Right.txt");
+Limits* Bird::birdLmtLeft = new Limits("Limits\\Bird-Left.txt");
 
-Sprite* Dinosaur::dinoSprtRight = new Sprite("Sprites\\Dino-Right.txt");
-Sprite* Dinosaur::dinoSprtLeft = new Sprite("Sprites\\Dino-Left.txt");
+Limits* Dinosaur::dinoLmtRight = new Limits("Limits\\Dino-Right.txt");
+Limits* Dinosaur::dinoLmtLeft = new Limits("Limits\\Dino-Left.txt");
 
 Bird::Bird(int x, int y)
 {
@@ -14,8 +14,8 @@ Bird::Bird(int x, int y)
 
 Bird::~Bird()
 {
-	delete birdSprtRight;
-	delete birdSprtLeft;
+	delete birdLmtRight;
+	delete birdLmtLeft;
 }
 
 
@@ -27,6 +27,6 @@ Dinosaur::Dinosaur(int x, int y)
 
 Dinosaur::~Dinosaur()
 {
-	delete dinoSprtRight;
-	delete dinoSprtLeft;
+	delete dinoLmtRight;
+	delete dinoLmtLeft;
 }

@@ -281,17 +281,17 @@ void Scene::deadByVehicle()
 	file.close();
 }
 
-void Scene::drawEntity(const Entity & obj, bool isRight)
+void Scene::drawObject(const Object& obj, bool isRight)
 {
-	for (int y = 0; y < obj.getSpriteHeight(); ++y)
-		for (int x = 0; x < obj.getSpriteWidth(); ++x)
+	for (int y = 0; y < obj.getLimitofHeight(); ++y)
+		for (int x = 0; x < obj.getLimitofWidth(); ++x)
 		{
 			if ((y + obj.getY() - obj.getBound(0) > 0 && y + obj.getY() - obj.getBound(0) < _row - 1) && (x + obj.getX() - obj.getBound(3) > 0 && x + obj.getX() - obj.getBound(3) < _playCol - 1))
-				_contentBuffer[y + obj.getY() - obj.getBound(0)][x + obj.getX() - obj.getBound(3)] = obj.getSprite(isRight)[y][x];
+				_contentBuffer[y + obj.getY() - obj.getBound(0)][x + obj.getX() - obj.getBound(3)] = obj.getLimits(isRight)[y][x];
 		}
 }
 
-void Scene::drawOneRow(const Row & obj) // Draw rows here
+void Scene::drawOneRow(const Row& obj) // Draw rows here
 {
 	//Draw traffic light
 	if (obj.GetRedLight())
@@ -300,7 +300,7 @@ void Scene::drawOneRow(const Row & obj) // Draw rows here
 		_light[(obj.GetY() - 2) / 5 - 1] = LightMode::GREEN;
 
 	for (auto& enemy : obj.GetList())
-		drawEntity(*enemy, !obj.getIsFromRight());
+		drawObject(*enemy, !obj.getIsFromRight());
 }
 
 void Scene::drawMainMenu()

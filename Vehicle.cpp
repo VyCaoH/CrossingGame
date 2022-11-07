@@ -1,10 +1,10 @@
 #include "Vehicle.h"
 
-Sprite* Car::carSprtRight = new Sprite("Sprites\\Car-Right.txt");
-Sprite* Car::carSprtLeft = new Sprite("Sprites\\Car-Left.txt");
+Limits* Car::carLmtRight = new Limits("Limits\\Car-Right.txt");
+Limits* Car::carLmtLeft = new Limits("Limits\\Car-Left.txt");
 
-Sprite* Truck::truckSprtRight = new Sprite("Sprites\\Truck-Right.txt");
-Sprite* Truck::truckSprtLeft = new Sprite("Sprites\\Truck-Left.txt");
+Limits* Truck::truckLmtRight = new Limits("Limits\\Truck-Right.txt");
+Limits* Truck::truckLmtLeft = new Limits("Limits\\Truck-Left.txt");
 
 Car::Car(int x, int y)
 {
@@ -14,8 +14,8 @@ Car::Car(int x, int y)
 
 Car::~Car()
 {
-	delete carSprtRight;
-	delete carSprtLeft;
+	delete carLmtRight;
+	delete carLmtLeft;
 }
 
 
@@ -27,6 +27,6 @@ Truck::Truck(int x, int y)
 
 Truck::~Truck()
 {
-	delete truckSprtRight;
-	delete truckSprtLeft;
+	delete truckLmtRight;
+	delete truckLmtLeft;
 }

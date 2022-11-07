@@ -23,7 +23,7 @@ private:
 	int redLightTime; // Red light time
 	bool isFromRight; // true if Row from right
 	bool isRedLight; // true if Row has red light
-	std::vector <Entity*> inhabitance; // list of entities on row
+	std::vector <Object*> inhabitance; // list of entities on row
 
 public:
 	std::random_device gen;
@@ -45,7 +45,7 @@ public:
 
 	bool getIsFromRight() const;
 
-	std::vector <Entity*> GetList() const;
+	std::vector <Object*> GetList() const;
 
 	void SetY(int y);
 

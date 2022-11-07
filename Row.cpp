@@ -58,7 +58,7 @@ bool Row::getIsFromRight() const
 {
 	return isFromRight;
 }
-std::vector <Entity*> Row::GetList() const
+std::vector <Object*> Row::GetList() const
 {
 	return inhabitance;
 }

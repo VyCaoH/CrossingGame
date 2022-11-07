@@ -1,18 +1,18 @@
 #pragma once
 #include "Vehicle.h"
 #include "Animal.h"
-#include "Entity.h"
+#include "Object.h"
 #include "Row.h"
 
 #include <vector>
 #include <deque> 
 
-class Player : public Entity
+class Player : public Object
 {
 private:
 	bool isDead;
 
-	static Sprite* playerSprt;
+	static Limits* playerLmt;
 
 public:
 	// Maybe change this the default location
@@ -33,7 +33,6 @@ public:
 	void Left();
 
 	void Down();
-	
 	void Right();
 
 	int isImpact(std::vector<Row*>& listRow) const;
@@ -42,19 +41,19 @@ public:
 
 	bool isPlayerDead() const;
 
-	Sprite getSprite(bool isRight = 0) const override
+	Limits getLimits(bool isRight = 0) const override
 	{
-		return *playerSprt;
+		return *playerLmt;
 	}
 
-	SHORT getSpriteHeight() const override
+	SHORT getLimitofHeight() const override
 	{
-		return playerSprt->getHeight();
+		return playerLmt->getHeight();
 	}
 
-	SHORT getSpriteWidth() const override
+	SHORT getLimitofWidth() const override
 	{
-		return playerSprt->getWidth();
+		return playerLmt->getWidth();
 	}
 };
 
