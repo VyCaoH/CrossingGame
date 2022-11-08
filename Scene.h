@@ -5,9 +5,8 @@
 #include <vector>
 #include <string>
 #include "Row.h"
-#include "Sprite.h"
-#include "Pixel.h"
-#include "Win32Helper.h"
+#include "Limits.h"
+#include "ConsoleWindow.h"
 
 enum class LightMode
 {
@@ -28,7 +27,7 @@ private:
 	LightMode _prevLight[4];
 	LightMode _light[4];
 
-	Sprite _logo;
+	Limits _logo;
 public:
 	Scene();
 
@@ -59,7 +58,7 @@ public:
 
 	void deadByVehicle();
 
-	void drawEntity(const Entity& obj, bool isRight = false);
+	void drawObject(const Object& obj, bool isRight = false);
 
 	void drawOneRow(const Row& obj); // Draw rows here
 
