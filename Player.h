@@ -33,7 +33,6 @@ public:
 	void Left();
 
 	void Down();
-
 	void Right();
 
 	int isImpact(std::vector<Row*>& listRow) const;

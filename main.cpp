@@ -1,4 +1,5 @@
 #include "Game.h"
+
 #include <iostream>
 #include <thread>
 #include <conio.h>
@@ -58,7 +59,7 @@ void SubThread()
 }
 
 void main()
-{
+{	
 	game = new Game();
 	getchNext = true;
 
@@ -68,7 +69,6 @@ void main()
 	setConsoleFontSize();
 	ResizeWindow();
 	ShowConsoleCursor(false);
-
 
 	game->playMusic();
 	game->startGame();
