@@ -32,8 +32,8 @@ static bool g_isMusic = true;
 class Game
 {
 private:
-	int level_; // Current level
-	Player player_; // Player
+	int lv; // Current level
+	Player player; // Player
 
 	int vol;
 	Scene gameScene; // Scene for displaying the game
@@ -41,7 +41,7 @@ private:
 public:
 	Game()
 	{
-		level_ = 0;
+		lv = 0;
 		vol = 100;
 	}
 
@@ -56,7 +56,7 @@ public:
 
 	int getLevel() const
 	{
-		return level_;
+		return lv;
 	}
 
 	/// <summary>
@@ -98,12 +98,12 @@ public:
 	/// </summary>
 	void drawNormalGame()
 	{
-		gameScene.drawScene(level_);
+		gameScene.drawScene(lv);
 
 		for (auto x : row)
 			gameScene.drawOneRow(*x);
 
-		gameScene.drawObject(player_);
+		gameScene.drawObject(player);
 		gameScene.drawManual();
 		gameScene.PrintBuffer();
 	}
@@ -117,22 +117,22 @@ public:
 
 	void setPlayerDead()
 	{
-		player_.setState(false);
+		player.setState(false);
 	}
 
 	const Player& getPlayer() const
 	{
-		return player_;
+		return player;
 	}
 
 	void levelUp()
 	{
-		level_++;
+		lv++;
 	}
 
 	void resetLevel()
 	{
-		level_ = 0;
+		lv = 0;
 	}
 
 	void resetGame()
@@ -152,9 +152,9 @@ public:
 	void startGame()
 	{
 		g_isRunning = true;
-		player_.setState(true);
+		player.setState(true);
 
-		player_.move(55, 27);
+		player.move(55, 27);
 	}
 
 	void loadGame()
@@ -209,7 +209,7 @@ public:
 		for (int i = 0; i < n; i++)
 			if (name == listName[i])
 			{
-				level_ = listLevel[i];
+				lv = listLevel[i];
 				resetGame();
 				startGame();
 			}
@@ -226,7 +226,7 @@ public:
 		gameScene.PrintBuffer();
 
 		std::fstream out("SaveGame.txt", std::ios::app);
-		out << level_ << " " << name << std::endl;
+		out << lv << " " << name << std::endl;
 		out.close();
 	}
 
@@ -311,13 +311,13 @@ public:
 	void updatePosPeople(char moveKey)
 	{
 		if (moveKey == 'W')
-			player_.Up();
+			player.Up();
 		else if (moveKey == 'A')
-			player_.Left();
+			player.Left();
 		else if (moveKey == 'S')
-			player_.Down();
+			player.Down();
 		else if (moveKey == 'D')
-			player_.Right();
+			player.Right();
 	}
 
 	void updateRows()
@@ -333,7 +333,7 @@ public:
 
 		for (auto& x : row)
 		{
-			x->AtLevel(level_);
+			x->AtLevel(lv);
 			x->append();
 			x->move();
 		}

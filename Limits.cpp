@@ -30,8 +30,8 @@ Limits::Limits(const char* dir)
 		}
 		inputLimits.close();
 
-		height = lmt.size();
-		width = lmt[0].size();
+		this->height = height;
+		this->width = width;
 	}
 }
 
@@ -69,8 +69,8 @@ void Limits::openFile(const char* dir) {
 		}
 		inputLimits.close();
 
-		height = lmt.size();
-		width = lmt[0].size();
+		this->height = height;
+		this->width = width;
 	}
 }
 
