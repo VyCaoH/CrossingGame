@@ -1,67 +1,198 @@
-#ifndef _ANIMAL
-#define _ANIMAL
-//#include "Object.h"
-#include "Limits.h"
-#include "Object.h"
+#pragma once
+#include"Entity.h"
+#include<fstream>
+#include<string>
+#include<iostream>
+#include <vector>
 
-class Animal : public Object
+using namespace std;
+class Animal:public Entity
 {
 public:
-	/*virtual void move(int x, int y)
-	{
-		coord.X = x;
-		coord.Y = y;
-	}*/
 };
 
 class Bird : public Animal
 {
 private:
-	static Limits* birdLmtRight;
-	static Limits* birdLmtLeft;
+	float bird_dp;//van toc
+	//int height,width;
+	float bird_half_X, bird_half_Y;
+	float bird_pX, bird_pY;
+	bool is_right;
+
+protected:
+	//float bird_pX, bird_pY;
+	vector<vector<char>> entity;
 public:
-	Bird(int x, int y);
-
-	~Bird();
-
-	Limits getLimits(bool isRight = 0) const override
+	Bird()
 	{
-		return (isRight) ? *birdLmtRight : *birdLmtLeft;
+		bird_dp = 0;
+		//height = width = 0;
+		is_right = true;
+		bird_pX = 0;
+		bird_pY = 0;
+		entity.clear();
 	}
-
-	SHORT getLimitofHeight()const override
+	Bird(float posX, float posY)
 	{
-		return birdLmtRight->getHeight();
+		//bird = new Bird("Bird-Left.txt");
+		bird_pX = posX;
+		bird_pY =posY;
+		//bird->setXY(posX, posY);
+		//bird->setXY(getX(), getY());
 	}
-
-	SHORT getLimitofWidth() const override
+	//Entity* getBird() const
+	//{
+	//	/*bird->setXY(getX(), getY());
+	//	Entity temp=*bird;*/
+	//	return bird;
+	//}
+	void left(float speed,float dt,int lv) override
 	{
-		return birdLmtRight->getWidth();
+		bird_pX -= speed * dt;
+	}
+	void right(float speed, float dt) override {
+		bird_pX += speed * dt;
+	}
+	float getX() const override
+	{
+		return bird_pX;
+	}
+	float getY() const override
+	{
+		return bird_pY;
+	}
+	float getHalfX() const override
+	{
+		return bird_half_X;
+	}
+	float getHalfY()const override
+	{
+		return bird_half_Y;
+	}
+	float getDP()
+	{
+		return bird_dp;
+	}
+	bool Right()
+	{
+		return is_right;
 	}
 };
-
 class Dinosaur : public Animal
 {
 private:
-	static Limits* dinoLmtRight;
-	static Limits* dinoLmtLeft;
+	float dinosaur_dp;//van toc
+	int height, width;
+	bool is_right;
+	float dinosaur_half_X, dinosaur_half_Y;
+	float dinosaur_pX,dinosaur_pY;
+protected:
+	vector<vector<char>> entity;
 public:
-	Dinosaur(int x, int y);
-
-	~Dinosaur();
-
-	Limits getLimits(bool isRight = 0) const override
+	Dinosaur()
 	{
-		return (isRight) ? *dinoLmtRight : *dinoLmtLeft;
+		dinosaur_dp = 0;
+		height = width = 0;
+		is_right = true;
+		dinosaur_pX = 0;
+		dinosaur_pY = 0;
+		entity.clear();
 	}
-	SHORT getLimitofHeight()const override
+	Dinosaur(float posX, float posY)
 	{
-		return dinoLmtRight->getHeight();
+		//Dinosuar = new Dinosuar("Dinosuar-Left.txt");
+		dinosaur_pX = posX;
+		dinosaur_pY = posY;
+		//Dinosuar->setXY(posX, posY);
+		//Dinosuar->setXY(getX(), getY());
 	}
-
-	SHORT getLimitofWidth() const override
+	//Entity* getBird() const
+	//{
+	//	/*Dinosuar->setXY(getX(), getY());
+	//	Entity temp=*Dinosuar;*/
+	//	return Dinosuar;
+	//}
+	void left(float speed, float dt,int lv) override
 	{
-		return dinoLmtRight->getWidth();
+		dinosaur_pX -= speed * dt;
+	}
+	void right(float speed, float dt) override {
+		dinosaur_pX += speed * dt;
+	}
+	float getHalfX() const override
+	{
+		return dinosaur_half_X;
+	}
+	float getHalfY()const override
+	{
+		return dinosaur_half_Y;
+	}
+	float getX() const override
+	{
+		return dinosaur_pX;
+	}
+	float getY() const override
+	{
+		return dinosaur_pY;
+	}
+	void setX(float src) override
+	{
+		dinosaur_pX = src;
+	}
+	virtual void setY(float src) override
+	{
+		dinosaur_pY = src;
+	}
+	float getDP()
+	{
+		return dinosaur_dp;
+	}
+	bool Right()
+	{
+		return is_right;
 	}
 };
-#endif // _ANIMAL
+//	~Bird();
+//
+//	Limits getLimits(bool isRight = 0) const override
+//	{
+//		return (isRight) ? *birdLmtRight : *birdLmtLeft;
+//	}
+//
+//	SHORT getLimitofHeight()const override
+//	{
+//		return birdLmtRight->getHeight();
+//	}
+//
+//	SHORT getLimitofWidth() const override
+//	{
+//		return birdLmtRight->getWidth();
+//	}
+//};
+//
+//class Dinosaur : public Animal
+//{
+//private:
+//	static Limits* dinoLmtRight;
+//	static Limits* dinoLmtLeft;
+//public:
+//	Dinosaur(int x, int y);
+//
+//	~Dinosaur();
+//
+//	Limits getLimits(bool isRight = 0) const override
+//	{
+//		return (isRight) ? *dinoLmtRight : *dinoLmtLeft;
+//	}
+//	SHORT getLimitofHeight()const override
+//	{
+//		return dinoLmtRight->getHeight();
+//	}
+//
+//	SHORT getLimitofWidth() const override
+//	{
+//		return dinoLmtRight->getWidth();
+//	}
+//};
+//#endif // _ANIMAL

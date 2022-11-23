@@ -1,0 +1,3 @@
+Window(width,height)=(1260,335);
+truc toa do xOy
+diem (0,0) o giua man hinh

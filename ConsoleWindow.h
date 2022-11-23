@@ -1,63 +1,85 @@
 #pragma once
-#include <Windows.h>
-#include <iostream>
+#include<Windows.h>
+#define is_down(b) input->buttons[b].is_down
+//#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
+//#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
-#define FOREGROUND_BLACK			0x0
-#define FOREGROUND_BLUE				0x1		
-#define FOREGROUND_GREEN			0x2
-#define FOREGROUND_AQUA				0x3
-#define FOREGROUND_RED				0x4
-#define FOREGROUND_PURPLE			0x5 
-#define FOREGROUND_YELLOW			0x6
-#define FOREGROUND_WHITE			0x7
-#define FOREGROUND_GRAY				0x8
-#define FOREGROUND_LIGHT_BLUE		0x9 
-#define FOREGROUND_LIGHT_GREEN		0xA
-#define FOREGROUND_LIGHT_AQUA		0xB
-#define FOREGROUND_LIGHT_RED		0xC
-#define FOREGROUND_LIGHT_PURPLE		0xD
-#define FOREGROUND_LIGHT_YELLOW		0xE
-#define FOREGROUND_BRIGHT_WHITE		0xF
 
-#define BACKGROUND_BLACK			0x00
-#define BACKGROUND_BLUE				0x10
-#define BACKGROUND_GREEN			0x20
-#define BACKGROUND_AQUA				0x30
-#define BACKGROUND_RED				0x40
-#define BACKGROUND_PURPLE			0x50
-#define BACKGROUND_YELLOW			0x60
-#define BACKGROUND_WHITE			0x70
-#define BACKGROUND_GRAY				0x80
-#define BACKGROUND_LIGHT_BLUE		0x90
-#define BACKGROUND_LIGHT_GREEN		0xA0
-#define BACKGROUND_LIGHT_AQUA		0xB0
-#define BACKGROUND_LIGHT_RED		0xC0
-#define BACKGROUND_LIGHT_PURPLE		0xD0
-#define BACKGROUND_LIGHT_YELLOW		0xE0
-#define BACKGROUND_BRIGHT_WHITE		0xF0
+//#define global_variable static
 
-void FixConsoleWindow();
+static bool running = true;
 
-void GotoXY(SHORT x, SHORT y);
 
-void SetTextColor(SHORT color);
+struct Render_State {
+	int height, width;
+	void* memory;
 
-void GetWindowBufferSize(SHORT& row, SHORT& col);
+	BITMAPINFO bitmap_info;
+};
+static Render_State render_state;
 
-void ShowConsoleCursor(bool showFlag);
+#include"Renderer.h"
 
-void ClearConsoleScreen();
+struct Button_State {
+	bool is_down;
+	bool changed;
+};
 
-void ResizeWindow();
+enum {
+	BUTTON_UP,
+	BUTTON_DOWN,
+	BUTTON_W,
+	BUTTON_S,
+	BUTTON_A,
+	BUTTON_D,
+	BUTTON_LEFT,
+	BUTTON_RIGHT,
+	BUTTON_ENTER,
 
-void setConsoleFontSize();
+	BUTTON_COUNT, // Should be the last item
+};
+struct Input {
+	Button_State buttons[BUTTON_COUNT];
+};
+LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+HWND winMain();
+void messageInput(Input& input,MSG &message, HWND &window);
+Render_State getRender();
+//LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+////HWND winMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
+//WNDCLASS createWindowClass(WNDCLASS window_class);
+//void ProcessButton(MSG& message, Input& input);
 
-void SetConsoleColor(unsigned char color);
+//public:
+//	ConsoleWindow();
+//	void setRenderHeight(int);
+//	void setRenderWidth(int);
+//	void setButton_Changed(bool);
+//	void setButton_isDown(bool);
+//	bool getButton_Changed()
+//	{
+//		return button_state.changed;
+//	}
+//	bool getButton_isDown()
+//	{
+//		return button_state.is_down;
+//	}
+//	int getRenderHeight()
+//	{
+//		return render_state.height;
+//	}
+//	int getRenderWidth()
+//	{
+//		return render_state.width;
+//	}
+//	void* getRenderMemory()
+//	{
+//		return render_state.memory;
+//	}
+//	BITMAPINFO getRenderBitmap()
+//	{
+//		render_state.bitmap_info;
+//	}
 
-void noCursorType();
 
-void noScrollbar();
 
-void SetColor(int backgound_color, int text_color);
-
-void DisableSelection();

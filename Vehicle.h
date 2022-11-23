@@ -1,67 +1,171 @@
-#ifndef _VEHICLE
-#define _VEHICLE
+#pragma once
+#include"Entity.h"
+#include<fstream>
+#include<string>
+#include<iostream>
+#include <vector>
 
-#include "Object.h"
-
-class Vehicle : public Object
+using namespace std;
+class Vehicle:public Entity
 {
-public:
-	/*virtual void move(int x, int y)
-	{
-		coord.X = x;
-		coord.Y = y;;
-	}*/
 };
-
 class Car : public Vehicle
 {
 private:
-	static Limits* carLmtRight;
-	static Limits* carLmtLeft;
+	float car_dp;//van toc
+	int height, width;
+	bool is_right;
+	float car_half_X, car_half_Y;
+	float car_pX, car_pY;
+protected:
+	vector<vector<char>> entity;
 public:
-	Car(int x, int y);
-
-	~Car();
-
-	Limits getLimits(bool isRight = 0) const override
+	Car()
 	{
-		return (isRight) ? *carLmtRight : *carLmtLeft;
+		car_dp = 0;
+		height = width = 0;
+		is_right = true;
+		car_pX = 0;
+		car_pY = 0;
+		entity.clear();
 	}
-	SHORT getLimitofHeight() const override
+	Car(float posX, float posY)
 	{
-		return carLmtRight->getHeight();
+		//Dinosuar = new Dinosuar("Dinosuar-Left.txt");
+		car_pX = posX;
+		car_pY = posY;
+		//Dinosuar->setXY(posX, posY);
+		//Dinosuar->setXY(getX(), getY());
 	}
-
-	SHORT getLimitofWidth() const override
+	//Entity* getBird() const
+	//{
+	//	/*Dinosuar->setXY(getX(), getY());
+	//	Entity temp=*Dinosuar;*/
+	//	return Dinosuar;
+	//}
+	Car(const char* file)
 	{
-		return carLmtRight->getWidth();
+
+		ifstream fileInput(file, ios::in);
+		if (fileInput.is_open())
+		{
+			int height, width;
+			fileInput >> height;
+			fileInput.ignore();
+			fileInput >> width;
+			fileInput.ignore();
+
+			while (!fileInput.eof())
+			{
+				for (int i = 0; i < height; ++i)
+				{
+					vector<char> tmp;
+					for (int j = 0; j < width; ++j)
+					{
+						char c;
+						fileInput.get(c);
+						tmp.push_back(c);
+					}
+					fileInput.ignore();
+					entity.push_back(tmp);
+				}
+				fileInput.close();
+				/*height = sprt.size();
+				width = sprt[0].size();*/
+				this->height = height;
+				this->width = width;
+			}
+		}
+	}
+	void left(float speed, float dt,int lv) override
+	{
+		car_pX -= speed * dt;
+	}
+	void right(float speed, float dt) override {
+		car_pX += speed * dt;
+	}
+	float getX() const override
+	{
+		return car_pX;
+	}
+	float getY() const override
+	{
+		return car_pY;
+	}
+	float getHalfX() const override
+	{
+		return car_half_X;
+	}
+	float getHalfY()const override
+	{
+		return car_half_Y;
+	}
+	float getDP()
+	{
+		return car_dp;
+	}
+	bool Right()
+	{
+		return is_right;
 	}
 };
-
 class Truck : public Vehicle
 {
 private:
-	static Limits* truckLmtRight;
-	static Limits* truckLmtLeft;
-
+	float truck_dp;//van toc
+	int height, width;
+	bool is_right;
+	float truck_half_X, truck_half_Y;
+	float truck_pX, truck_pY;
+protected:
+	vector<vector<char>> entity;
 public:
-	Truck(int x, int y);
-
-	~Truck();
-
-	Limits getLimits(bool isRight = 0) const override
+	Truck()
 	{
-		return (isRight) ? *truckLmtRight : *truckLmtLeft;
+		truck_dp = 0;
+		height = width = 0;
+		is_right = true;
+		truck_pX = 0;
+		truck_pY = 0;
+		entity.clear();
 	}
-	SHORT  getLimitofHeight() const override
+	Truck(float posX, float posY)
 	{
-		return truckLmtRight->getHeight();
+		truck_pX = posX;
+		truck_pY = posY;
+
 	}
 
-	SHORT  getLimitofWidth()  const override
+
+	void left(float speed, float dt, int lv) override
 	{
-		return truckLmtRight->getWidth();
+		truck_pX -= speed * dt *0.1* lv;
+	}
+	void right(float speed, float dt) override {
+		truck_pX += speed * dt;
+	}
+	float getX() const override
+	{
+		return truck_pX;
+	}
+	float getY() const override
+	{
+		return truck_pY;
+	}
+	float getHalfX() const override
+	{
+		return truck_half_X;
+	}
+	float getHalfY()const override
+	{
+		return truck_half_Y;
+	}
+	float getDP()
+	{
+		return truck_dp;
+	}
+	bool Right()
+	{
+		return is_right;
 	}
 };
-
-#endif // _VEHICLE

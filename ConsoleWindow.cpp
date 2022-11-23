@@ -1,163 +1,245 @@
+#pragma once
 #include "ConsoleWindow.h"
 
-void FixConsoleWindow()
-{
-	HWND consoleWindow = GetConsoleWindow();
-	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
-	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
-	SetWindowLong(consoleWindow, GWL_STYLE, style);
-}
+LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	LRESULT result = 0;
 
-void GotoXY(SHORT x, SHORT y)
-{
-	COORD coord;
-	coord.X = x;
-	coord.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
+	switch (uMsg) {
+	case WM_CLOSE:
+	case WM_DESTROY: {
+		running = false;
+	} break;
 
-void SetTextColor(SHORT color)
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
+	case WM_SIZE: {
+		RECT rect;
+		GetClientRect(hwnd, &rect);
+		render_state.width = rect.right - rect.left;
+		render_state.height = rect.bottom - rect.top;
 
-void GetWindowBufferSize(SHORT& row, SHORT& col)
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
+		int size = render_state.width * render_state.height * sizeof(unsigned int);
 
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	col = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-	row = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-}
+		if (render_state.memory) VirtualFree(render_state.memory, 0, MEM_RELEASE);
+		render_state.memory = VirtualAlloc(0, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 
-void ShowConsoleCursor(bool showFlag)
-{
-	CONSOLE_CURSOR_INFO cursorInfo;
+		render_state.bitmap_info.bmiHeader.biSize = sizeof(render_state.bitmap_info.bmiHeader);
+		render_state.bitmap_info.bmiHeader.biWidth = render_state.width;
+		render_state.bitmap_info.bmiHeader.biHeight = render_state.height;
+		render_state.bitmap_info.bmiHeader.biPlanes = 1;
+		render_state.bitmap_info.bmiHeader.biBitCount = 32;
+		render_state.bitmap_info.bmiHeader.biCompression = BI_RGB;
 
-	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-	cursorInfo.bVisible = showFlag;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-}
+	} break;
 
-void ClearConsoleScreen()
-{
-	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	COORD topLeft = { 0, 0 };
-
-	std::cout.flush();
-
-	if (!GetConsoleScreenBufferInfo(hOut, &csbi))
-	{
-		abort();
+	default: {
+		result = DefWindowProc(hwnd, uMsg, wParam, lParam);
 	}
-	DWORD length = csbi.dwSize.X * csbi.dwSize.Y;
-
-	DWORD written;
-
-	FillConsoleOutputCharacter(hOut, TEXT(' '), length, topLeft, &written);
-	FillConsoleOutputAttribute(hOut, csbi.wAttributes, length, topLeft, &written);
-	SetConsoleCursorPosition(hOut, topLeft);
+	}
+	return result;
 }
 
-void ResizeWindow()
-{
-	HWND console = GetConsoleWindow();
-	RECT r;
+HWND winMain() {
+	HINSTANCE hInstance = nullptr; HINSTANCE hPrevInstance = nullptr; LPSTR lpCmdLine = nullptr; int nShowCmd = 0;
+	ShowCursor(FALSE);
 
-	GetWindowRect(console, &r);
+	// Create Window Class
+	const WCHAR className[] = L"Crossing Game";
+	WNDCLASS window_class = {};
+	window_class.style = CS_HREDRAW | CS_VREDRAW;
+	window_class.lpszClassName = className;
+	window_class.lpfnWndProc = window_callback;
+	window_class.lpfnWndProc = window_callback;
 
-	CONSOLE_FONT_INFO font;
-	GetCurrentConsoleFont(GetStdHandle(STD_OUTPUT_HANDLE), 0, &font);
+	// Register Class
+	RegisterClass(&window_class);
 
-	MoveWindow(console, r.left, r.top, font.dwFontSize.X * 150, (font.dwFontSize.Y + 2) * 30, TRUE);
-}
-
-void setConsoleFontSize()
-{
-	CONSOLE_FONT_INFO OrigFont;
-	GetCurrentConsoleFont(GetStdHandle(STD_OUTPUT_HANDLE), 0, &OrigFont);
-
-	PCONSOLE_FONT_INFOEX NewFont = new CONSOLE_FONT_INFOEX();
-
-	COORD FontSize = { 9, 18 };
-
-	NewFont->cbSize = sizeof(CONSOLE_FONT_INFOEX);
-	NewFont->nFont = OrigFont.nFont; // apparently this is Lucida Console (no consts are provided [3])
-	NewFont->dwFontSize = FontSize;
-	NewFont->FontWeight = FW_NORMAL; // = 400, but should use predefined consts
-	NewFont->FontFamily = FF_DONTCARE; // FF_ROMAN didn't work for me
-
-	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), 0, NewFont);
-
-	delete NewFont;
-}
-
-void SetConsoleColor(unsigned char color)
-{
-	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	std::cout.flush();
-	SetConsoleTextAttribute(hOut, color);
-}
-
-void SetColor(int backgound_color, int text_color)
-{
-	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	int color_code = backgound_color * 16 + text_color;
-	SetConsoleTextAttribute(hStdout, color_code);
-}
-void noCursorType()
-{
-	CONSOLE_CURSOR_INFO info;
-	info.bVisible = FALSE;
-	info.dwSize = 20;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-}
-
-void noScrollbar() {
-	// get handle to the console window
-	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	// retrieve screen buffer info
-	CONSOLE_SCREEN_BUFFER_INFO scrBufferInfo;
-	GetConsoleScreenBufferInfo(hOut, &scrBufferInfo);
-
-	// current window size
-	short winWidth = scrBufferInfo.srWindow.Right - scrBufferInfo.srWindow.Left + 1;
-	short winHeight = scrBufferInfo.srWindow.Bottom - scrBufferInfo.srWindow.Top + 1;
-
-	// current screen buffer size
-	short scrBufferWidth = scrBufferInfo.dwSize.X;
-	short scrBufferHeight = scrBufferInfo.dwSize.Y;
-
-	// to remove the scrollbar, make sure the window height matches the screen buffer height
-	COORD newSize;
-	newSize.X = scrBufferWidth;
-	newSize.Y = winHeight;
-
-	// set the new screen buffer dimensions
-	int Status = SetConsoleScreenBufferSize(hOut, newSize);
-	//if (Status == 0)
+	// Create Window
+	HWND window = CreateWindowEx(0, className, L"CrossingGame", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
 	//{
-	//	cout << "SetConsoleScreenBufferSize() failed! Reason : " << GetLastError() << endl;
-	//	exit(Status);
+	//	//Fullscreen
+	//	SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
+	//	MONITORINFO mi = { sizeof(mi) };
+	//	GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
+	//	SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
 	//}
-
-	// print the current screen buffer dimensions
-	GetConsoleScreenBufferInfo(hOut, &scrBufferInfo);
-	//cout << "Screen Buffer Size : " << scrBufferInfo.dwSize.X << " x " << scrBufferInfo.dwSize.Y << endl;
-
+	return window;
 }
-
-BOOL WINAPI SetConsoleTitle(
-	_In_ LPCTSTR lpConsoleTitle
-);
-
-void DisableSelection()
+void messageInput(Input&input,MSG &message,HWND &window)
 {
-	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+	for (int i = 0; i < BUTTON_COUNT; i++) {
+		input.buttons[i].changed = false;
+	}
 
-	SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
+	while (PeekMessage(&message, window, 0, 0, PM_REMOVE)) {
+
+		switch (message.message) {
+		case WM_KEYUP:
+		case WM_KEYDOWN: {
+			u32 vk_code = (u32)message.wParam;
+			bool is_down = ((message.lParam & (1 << 31)) == 0);
+
+			//Hamf xu li chung ( genenal function ): xu li phim nhan
+#define process_button(b, vk)\
+case vk: {\
+input.buttons[b].changed = is_down != input.buttons[b].is_down;\
+input.buttons[b].is_down = is_down;\
+} break;
+
+					//Xu li phim nhan
+			switch (vk_code) {
+				process_button(BUTTON_UP, VK_UP);
+				process_button(BUTTON_DOWN, VK_DOWN);
+				process_button(BUTTON_W, 'W');
+				process_button(BUTTON_S, 'S');
+				process_button(BUTTON_A, 'A');
+				process_button(BUTTON_D, 'D');
+				process_button(BUTTON_LEFT, VK_LEFT);
+				process_button(BUTTON_RIGHT, VK_RIGHT);
+				process_button(BUTTON_ENTER, VK_RETURN);
+			}
+		} break;
+		default: {
+			TranslateMessage(&message);
+			DispatchMessage(&message);
+		}
+		}
+	}
 }
+Render_State getRender()
+{
+	return render_state;
+}
+//global_variable Render_State render_state;
+////global_variable Game g;
+//#include"Game.h"
+//#include"Renderer.cpp"
+//
+//
+////HWND winMain()
+////{
+////	HINSTANCE hInstance = nullptr; HINSTANCE hPrevInstance = nullptr; LPSTR lpCmdLine = nullptr; int nShowCmd = 0;
+////
+////	ShowCursor(FALSE);
+////
+////	// Create Window Class
+////	WNDCLASS window_class = {};
+////	window_class.style = CS_HREDRAW | CS_VREDRAW;
+////
+////	const WCHAR className[] = L"Crossing Game";
+////	window_class.lpszClassName = className;
+////	const WCHAR windowName[] = L"Crossing Game";
+////	window_class.lpszMenuName = className;
+////	window_class.lpfnWndProc = window_callback;
+////	// Register Class
+////	RegisterClass(&window_class);
+////
+////	// Create Window
+////
+////	HWND window = CreateWindow(window_class.lpszClassName, window_class.lpszMenuName, WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
+////	{
+////		//Fullscreen
+////		SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
+////		MONITORINFO mi = { sizeof(mi) };
+////		GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
+////		SetWindowPos(window, HWND_TOP, mi.rcMonitor.left , mi.rcMonitor.top , mi.rcMonitor.right - mi.rcMonitor.left , mi.rcMonitor.bottom - mi.rcMonitor.top , SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+////	}
+////	//HBITMAP hImage = (HBITMAP)LoadImage(NULL, (LPCSTR)file, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_LOADTRANSPARENT);
+////
+////	HDC hdc = GetDC(window);
+////
+////	Input input = {};
+////
+////	//Time giua 2 Frame
+////	float delta_time = 0.016666f;
+////
+////	//Thoi gian Frame begin -> thoi gian Frame end
+////	LARGE_INTEGER frame_begin_time;
+////	QueryPerformanceCounter(&frame_begin_time);
+////
+////	//Tan so hieu suat truy van
+////	float performance_frequency;
+////	{
+////		LARGE_INTEGER perf;
+////		QueryPerformanceFrequency(&perf);
+////		performance_frequency = (float)perf.QuadPart;
+////	}
+////
+////	while (running) {
+////		// Input
+////		MSG message;
+////
+////		for (int i = 0; i < BUTTON_COUNT; i++) {
+////			input.buttons[i].changed = false;
+////		}
+////
+////		while (PeekMessage(&message, window, 0, 0, PM_REMOVE)) {
+////			ProcessButton(message, input);
+////		}
+////
+////		// Simulate
+////		//simulate_game(&input, delta_time);
+////		//simulate_game(&input, delta_time);
+////
+////		// Render
+////		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+////
+////		//Thoi gian Frame end
+////		LARGE_INTEGER frame_end_time;
+////		QueryPerformanceCounter(&frame_end_time);
+////
+////		//FPS ( time theo CPU )
+////		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
+////		frame_begin_time = frame_end_time;
+////
+////	}
+////	return window;
+////}
+//
+//WNDCLASS createWindowClass(WNDCLASS window_class)
+//{
+//	window_class.style = CS_HREDRAW | CS_VREDRAW;
+//
+//	const WCHAR className[] = L"Crossing Game";
+//	window_class.lpszClassName = className;
+//	const WCHAR windowName[] = L"Crossing Game";
+//	window_class.lpszMenuName = className;
+//	window_class.lpfnWndProc = window_callback;
+//	return window_class;
+//}
+//
+//
+//void ProcessButton(MSG& message, Input& input)
+//{
+//	switch (message.message) {
+//	case WM_KEYUP:
+//	case WM_KEYDOWN: {
+//		u32 vk_code = (u32)message.wParam;
+//		bool is_down = ((message.lParam & (1 << 31)) == 0);
+//
+//		//Hamf xu li chung ( genenal function ): xu li phim nhan
+//#define process_button(b, vk)\
+//case vk: {\
+//input.buttons[b].changed = is_down != input.buttons[b].is_down;\
+//input.buttons[b].is_down = is_down;\
+//} break;
+//
+//					//Xu li phim nhan
+//		switch (vk_code) {
+//			process_button(BUTTON_UP, VK_UP);
+//			process_button(BUTTON_DOWN, VK_DOWN);
+//			process_button(BUTTON_W, 'W');
+//			process_button(BUTTON_S, 'S');
+//			process_button(BUTTON_A, 'A');
+//			process_button(BUTTON_D, 'D');
+//			process_button(BUTTON_LEFT, VK_LEFT);
+//			process_button(BUTTON_RIGHT, VK_RIGHT);
+//			process_button(BUTTON_ENTER, VK_RETURN);
+//		}
+//	} break;
+//
+//	default: {
+//		TranslateMessage(&message);
+//		DispatchMessage(&message);
+//	}
+//	}
+//}
+//
