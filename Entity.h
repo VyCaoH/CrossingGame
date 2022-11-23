@@ -28,10 +28,10 @@ public:
 		return entity_half_y;
 	}
 	virtual void left(float speed, float dt,int lv) {
-		//entity_pX -= speed * dt*0.1*lv;
+		entity_pX -= speed * dt*0.1*lv;
 	}
-	virtual void right(float speed, float dt,int lv){
-		//entity_pX += speed * dt;
+	virtual void right(float speed, float dt){
+		entity_pX += speed * dt;
 	}
 };
 //#pragma once

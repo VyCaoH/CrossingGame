@@ -12,7 +12,7 @@ class Game
 {
 	Player player;
 	std::vector<Threat*> threat;
-	//Bird bird;
+	Bird bird;
 	//vector<Row*> row;
 public:
 	Game() 
@@ -33,7 +33,6 @@ public:
 	void checkWall_player(Player &player);
 	//void birdMove(float dt, float speed,int lv);
 	void updatePosThreat();
-	void playerCollision();
 	void threatMove(float dt, float speed);
 	//char* vvChar_to_CharPtr(vector<vector<char>> src)
 	//{
