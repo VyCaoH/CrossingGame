@@ -37,52 +37,12 @@ public:
 		//Dinosuar->setXY(posX, posY);
 		//Dinosuar->setXY(getX(), getY());
 	}
-	//Entity* getBird() const
-	//{
-	//	/*Dinosuar->setXY(getX(), getY());
-	//	Entity temp=*Dinosuar;*/
-	//	return Dinosuar;
-	//}
-	Car(const char* file)
-	{
-
-		ifstream fileInput(file, ios::in);
-		if (fileInput.is_open())
-		{
-			int height, width;
-			fileInput >> height;
-			fileInput.ignore();
-			fileInput >> width;
-			fileInput.ignore();
-
-			while (!fileInput.eof())
-			{
-				for (int i = 0; i < height; ++i)
-				{
-					vector<char> tmp;
-					for (int j = 0; j < width; ++j)
-					{
-						char c;
-						fileInput.get(c);
-						tmp.push_back(c);
-					}
-					fileInput.ignore();
-					entity.push_back(tmp);
-				}
-				fileInput.close();
-				/*height = sprt.size();
-				width = sprt[0].size();*/
-				this->height = height;
-				this->width = width;
-			}
-		}
-	}
 	void left(float speed, float dt,int lv) override
 	{
-		car_pX -= speed * dt;
+		car_pX -= speed * dt * lv * .2f;
 	}
-	void right(float speed, float dt) override {
-		car_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		car_pX += speed * dt * lv * .2f;
 	}
 	float getX() const override
 	{
@@ -141,8 +101,8 @@ public:
 	{
 		truck_pX -= speed * dt *0.1* lv;
 	}
-	void right(float speed, float dt) override {
-		truck_pX += speed * dt;
+	void right(float speed, float dt, int lv) override {
+		truck_pX += speed * dt * lv * .2f;;
 	}
 	float getX() const override
 	{

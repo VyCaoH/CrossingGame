@@ -25,7 +25,7 @@ public:
 		player_ddp = 0;
 		//height = width = 0;
 		player_pX = 0;
-		player_pY= 0;
+		player_pY= -100;
 		entity.clear();
 		player_half_X = 2.5;
 		player_half_Y = 5;
