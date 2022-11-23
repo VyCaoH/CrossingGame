@@ -5,15 +5,8 @@
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
-float player_1_p, player_1_dp, player_2_p, player_2_dp;
-float arena_half_size_x = 85, arena_half_size_y = 45;
-float player_half_size_x = 2.5, player_half_size_y = 12;
-float ball_p_x, ball_p_y, ball_dp_x = 130, ball_dp_y, ball_half_size = 1;
+float arena_half_size_x = 85, arena_half_size_y = 45;;
 
-int player_1_score, player_2_score;
-
-float player_pos_x = 0.f;
-float player_pos_y = 0.f;
 
 
 void Game::mainBoard()
@@ -76,6 +69,7 @@ void Game::simulate_game(Input* input, float dt)
 	//draw_rect(0, 0, 85, 45, 0xff55ff);
 	float speed = 50.f;
 	playerMove(input, dt, speed);
+	playerCollision();
 	updatePosThreat();
 	threatMove(dt, speed);
 }
@@ -85,7 +79,6 @@ bool Game::quit(Input* input)
 		return false;
 	return true;
 }
-
 void Game::checkWall_player(Player &player)
 {
 	if (player.getX() + player.getHalfX() > arena_half_size_x)
@@ -141,27 +134,10 @@ void Game::playerMove(Input* input, float dt, float speed)
 		player.right(speed, dt);
 	}
 	checkWall_player(player);
-	
 	draw_truck(player.getX(), player.getY(), player.getHalfX(), player.getHalfY());
 	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 	return;
-	//draw_rect(player.getX(), player.getY()+40, 1, 10, 0x00ff22);
-	//draw_rect(player.getX(), player.getY(), 1.4, 3, 0x00ff22);
-	//draw_rect(player.getX(), player.getY()-40, 1, 10, 0x00ff22);
-	//draw_rect(player.getX(), player.getY()-25, 10, 5, 0x1820FF);
-	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xaaaaaa);
-	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xbbbbbb);
-	//draw_rect(player.getX(), player.getY()-28, 1, 1, 0xbbbbbb);
 }
-//void Game::birdMove( float dt, float speed,int lv)
-//{
-//	if (!bird.Right())
-//		bird.left(speed, dt,lv);
-//	if (bird.Right())
-//		bird.right(speed, dt);
-//	draw_rect(bird.getX(), 20, 1, 1, 0x00ff22);
-//}
-
 void Game::threatMove(float dt, float speed)
 {
 	for (auto x : threat)
@@ -174,17 +150,45 @@ void Game::updatePosThreat()
 {
 	if (threat.empty())
 	{
-		threat.push_back(new Threat(-20));
-		threat.push_back(new Threat(-5));
+		threat.push_back(new Threat(-30));
+		threat.push_back(new Threat(-10));
 		threat.push_back(new Threat(10));
-		threat.push_back(new Threat(25));
+		threat.push_back(new Threat(30));
 	}
+	draw_lane(-30, render_state.width, 0.2, 0xEEEEE);
+	draw_lane(-10, render_state.width, 0.2, 0xEEEEE);
+	draw_lane(10, render_state.width, 0.2, 0xEEEEE);
+
+	draw_lane(30, render_state.width, 0.2, 0xEEEEE);
+
 	for (auto x : threat)
 	{
 		//int randomType = 3;
 		int randomType = 0 + rand() % (10 + 1)%4;
 		
 		x->setListEntity(randomType);
+	}
+}
+void Game::playerCollision()
+{
+	for (auto x : threat)
+	{
+		for (auto y : x->getThreatBird())
+		{
+			cout << y->getY() << endl << y->getHalfY() << endl;
+			/*if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX())
+				running = false;
+			if (player.getX() - player.getHalfX() > y->getX() - y->getHalfX())
+				running = false;*/
+
+			if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX()
+				&& player.getY() + player.getHalfY() > y->getY() - y->getHalfY()
+				&& player.getX() - player.getHalfX() < y->getX() + y->getHalfX()
+				&& player.getY() - player.getHalfY() < y->getY() + y->getHalfY())
+				running = false;
+			/*if (player.getY() - player.getHalfY() < y->getY() + y->getHalfY())
+				running = false;*/
+		}
 	}
 }
 

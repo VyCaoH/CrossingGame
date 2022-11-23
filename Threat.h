@@ -57,10 +57,10 @@ public:
 	{
 		return distance;
 	}
-	int getThreat(int type)
+	/*int getThreat(int type)
 	{
-		
-	}
+		return type;
+	}*/
 	vector<Entity*> getThreatBird()
 	{
 		return threat;
