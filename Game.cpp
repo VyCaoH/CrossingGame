@@ -67,6 +67,18 @@ void Game::mainBoard()
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
+	clear_screen(0xffffffff);
+	//draw_rect(0, 0, 100, 50, 0xaaaaaa);
+	//draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
+	//left_board
+	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
+	draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0xff55ff);
+	//draw_truck(0, 0, 5, 5);
+	//draw_rect(0, 0, 85, 45, 0xff55ff);
+	float speed = 1.f;
+	playerMove(input, dt, speed);
+	updatePosThreat();
+	threatMove(dt, speed);
 	cout << g_mode;
 	if (g_mode == GM_MENUGAME)
 	{
