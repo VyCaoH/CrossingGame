@@ -169,6 +169,132 @@ static void draw_dino(float x, float y, float half_size_x, float half_size_y)
 
 	//draw_rect_in_pixels((int)x0, (int)y0, (int)x1, (int)y1, 0x1820FF);
 }
+static void draw_bird(float x, float y, float half_size_x, float half_size_y)
+{
+	//nen black
+	draw_rect(x , y , 1.65, 3.25, 0x000000);
+	draw_rect(x + 2.6, y+ 0.1, 1.6, 1.4, 0x000000);
+	draw_rect(x - 1.55, y + 1.6, 1.2, 1.3, 0x000000);
+	draw_rect(x - 2.8, y - 0.9, 1.45, 1.2, 0x000000);
+	// cai canh 
+	draw_rect(x + 2.6, y + 0.7, 1.45, 0.35, 0xFFFFFFF);
+	draw_rect(x + 2.6, y , 1.2, 0.45, 0xFFFFFFF);
+	draw_rect(x + 2.75, y - 0.45, 1.2, 0.3, 0xFFD015);
+	//body
+	draw_rect(x + 0.65, y + 1.25 , 1.25, 0.6, 0xFFD015);
+	draw_rect(x , y + 2.25, 1.35, 0.5, 0xFFD015);
+	draw_rect(x +0.1 , y+0.5 , 1.3, 0.4, 0xFFD015);
+	draw_rect(x -0.35, y - 0.09, 1.3, 0.6, 0xFFD015);
+	draw_rect(x + 0.75, y - 1.35, 1.1, 0.6, 0xBD7119);
+	draw_rect(x , y - 1.95, 1.1, 0.8, 0xBD7119);
+	draw_rect(x - 0.75, y - 2, 1, 0.4, 0xBD7119);
+	 
+	// con mat
+	draw_rect(x -1.45, y + 1.7, 0.65, 0.75, 0xFFFFFF);
+	draw_rect(x - 1.75, y + 2.5, 0.2, 0.25, 0xFFFFFF);
+	draw_rect(x - 1.85, y + 1.35, 0.65, 0.75, 0xFFFFFF);
+	//trong den
+	draw_rect(x - 1.8, y + 1.45, 0.25, 0.45, 0x000000);
+	// cai mieng
+	draw_rect(x - 2.75, y - 0.4, 1.35, 0.3, 0xFF6000);
+	draw_rect(x - 1.2, y - 0.8, 0.3, 0.39, 0xFF6000);
+	draw_rect(x - 2.55, y - 1.35, 1.1, 0.3, 0xFF6000);
+	// cai chan 
+	draw_rect(x - 0.75, y - 2, 1, 0.4, 0xBD7119);
+}
+static void draw_titan(float x, float y, float half_size_x, float half_size_y)
+{
+	//nen black
+	draw_rect(x, y+1, 3, 3.3, 0x000000); // head
+	draw_rect(x , y - 3.3, 2.1, 3.2, 0x000000); //than
+	draw_rect(x, y - 3.75, 2.5, 1, 0x000000); //tay
+	draw_rect(x, y - 3.75, 2.9, 0.7, 0x000000); //tay
+	//nen trang
+	draw_rect(x, y - 6, 0.6, 0.4, 0xFFFFFF);
+	draw_rect(x + 3.1, y + 4.25, 0.7, 0.3, 0xFFFFFF);
+	draw_rect(x+3.4, y+3.7 , 0.7, 0.3, 0xFFFFFF);
+	draw_rect(x - 3.1, y + 4.25, 0.7, 0.3, 0xFFFFFF);
+	draw_rect(x - 3.4, y + 3.7, 0.7, 0.3, 0xFFFFFF);
+	//head
+	draw_rect(x, y + 0.85, 2.5, 2.85, 0xFCCCB5); //mau da trang
+	draw_rect(x, y + 0.85, 2, 3.2, 0xFCCCB5); //mau da trang
+	draw_rect(x - 2.1, y + 2.35, 0.35, 1.25, 0xF0B79D);//dau nau xam
+	draw_rect(x - 1.25, y + 3, 0.35, 1, 0xF0B79D);//dau nau xam
+	draw_rect(x - 0.25, y + 3.3, 0.35, 0.7, 0xF0B79D);//dau nau xam
+	draw_rect(x + 1, y + 3, 0.35, 1, 0xF0B79D);//dau nau xam
+	draw_rect(x , y + 3.8, 1.9, 0.2, 0xF0B79D);//dau nau xam
+	draw_rect(x + 2.1, y + 2.35, 0.35, 1.25, 0xF0B79D);//dau nau xam
+	
+	draw_rect(x + 2.15, y + 1.7, 0.35, 1, 0xCD3230);//do tuoi
+	draw_rect(x - 2.1, y + 1.8, 0.3, 0.35, 0x651919);//do tham
+	draw_rect(x + 2.1, y + 1.8, 0.4, 0.25, 0x651919);//do tham
+
+	draw_rect(x - 1.7, y + 1.5, 1, 0.3, 0xED8E71);//chan may
+	draw_rect(x + 1.1, y + 1.5, 1, 0.3, 0xED8E71);//chan may
+	draw_rect(x-0.4, y + 0.5, 0.35, 1, 0xF7AC84);//mui
+	//mat
+	draw_rect(x - 1.7, y + 0.7, 1, 0.6, 0x651919);//do tham
+	draw_rect(x + 1, y + 0.7, 1, 0.6, 0x651919);//do tham
+	draw_rect(x - 1.85, y + 1, 0.3, 0.3, 0xFFFFFF);//trang
+	draw_rect(x + 1.15, y + 1, 0.3, 0.3, 0xFFFFFF);//trang
+	draw_rect(x - 1.5, y , 0.6, 0.25, 0xA8302F);//mi duoi 
+	draw_rect(x + 1, y, 0.6, 0.25, 0xA8302F);//mi duoi 
+
+	//mieng
+	draw_rect(x , y - 0.75 , 2.6, 0.2, 0x962223);//moi tren
+	draw_rect(x-0.2, y - 1.5, 2.3, 0.16, 0x962223);//moi duoi
+	draw_rect(x + 1.8, y - 1.5, 0.3, 0.6, 0xA83B42);//mieng rach
+
+	draw_rect(x, y - 1.2, 2.6, 0.17, 0xFFFFFF);//Rang
+	draw_rect(x - 0.5, y - 1.2, 0.3, 0.17, 0xE7E3E2);//Rang
+	draw_rect(x + 0.5, y - 1.2, 0.3, 0.17, 0xE7E3E2);//Rang
+
+	draw_rect(x - 0.2, y - 2.2, 1.5, 0.15, 0x902424);//cam
+	draw_rect(x + 2.1, y - 1, 0.3, 0.6, 0xB83D6A);//mieng rach
+	draw_rect(x -1.8, y - 1.3, 0.2, 0.6, 0xB83D6A);//mieng rach
+	
+	draw_rect(x - 1.4, y - 1.3 , 0.25, 0.8, 0xF0B79D);//da mat 
+	draw_rect(x + 1.4, y - 1.3, 0.25, 0.8, 0xF0B79D);//da mat 
+	
+	//than 
+	draw_rect(x, y - 3.9, 1.8, 1.4, 0xBD1F1F); //than
+
+	draw_rect(x - 2.2, y - 3.8, 0.28, 0.7, 0xC92A27); // co tay
+	draw_rect(x - 2.2, y - 3.6, 0.28, 0.2, 0xEBBA9A); // co tay
+	draw_rect(x - 2.2, y - 4.3, 0.28, 0.2, 0x8E2931); // co tay
+	draw_rect(x + 2.2, y - 3.8, 0.28, 0.7, 0xC92A27); // co tay
+	draw_rect(x + 2.2, y - 3.6, 0.28, 0.2, 0xEBBA9A); // co tay
+	draw_rect(x + 2.2, y - 4.3, 0.28, 0.2, 0x8E2931); // co tay
+
+	draw_rect(x - 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
+	draw_rect(x - 1.35, y - 5.2, 0.4, 0.9, 0x711D1D); // co chan 
+	draw_rect(x - 1.35, y - 4.5, 0.4, 0.25, 0x8F520A); // giap
+	draw_rect(x - 1.35, y - 5.5, 0.4, 0.25, 0xF0B79D); // co chan 
+	draw_rect(x - 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
+	draw_rect(x - 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
+	draw_rect(x - 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
+	draw_rect(x -0.2, y - 3.5, 0.3, 0.8, 0xF4B594); //da
+	draw_rect(x - 0.2, y - 2.75, 0.32, 0.25, 0x93221E); //thit den
+	draw_rect(x - 0.2, y - 4.2, 0.32, 0.25, 0x8D2421); //thit den
+	draw_rect(x - 0.2, y - 4.6, 0.32, 0.25, 0xEB7778); //thit den
+	draw_rect(x - 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
+
+	draw_rect(x + 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
+	draw_rect(x + 1.35, y - 5.2, 0.4, 0.9, 0xAB141A); // co chan 
+	draw_rect(x + 1.35, y - 4.5, 0.4, 0.25, 0x820F14); // giap
+	draw_rect(x + 1.35, y - 5.5, 0.4, 0.25, 0xF0B79D); // co chan 
+	draw_rect(x + 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
+	draw_rect(x + 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
+	draw_rect(x + 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
+	draw_rect(x + 0.2, y - 3.5, 0.3, 0.8, 0xF4B594); //da
+	draw_rect(x + 0.2, y - 2.75, 0.32, 0.25, 0x93221E); //thit den
+	draw_rect(x + 0.2, y - 4.2, 0.32, 0.25, 0x8D2421); //thit den
+	draw_rect(x + 0.2, y - 4.6, 0.32, 0.25, 0xDB4039); //thit den
+	draw_rect(x + 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
+
+	//draw_rect(x, y - 3.75, 2.5, 0.4, 0xBD1F1F); //tay
+
+}
 static const char* letters[][7] = {
 	" 00",
 	"0  0",

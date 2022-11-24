@@ -220,7 +220,7 @@ public:
 				x->left(speed, dt, lv);
 				if (checkWall(x->getX()))
 				{
-					draw_rect(x->getX(), x->getY(), 1, 1, 0x00fffff);
+					draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				}
 				else
 					threat.erase(threat.begin());
@@ -233,7 +233,7 @@ public:
 				x->left(speed, dt,lv);
 				if (checkWall(x->getX()))
 				{
-					draw_rect(x->getX(), x->getY(), 1, 1, 0xaabb00000);
+					draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				}
 				else
 					threat.erase(threat.begin());
@@ -246,8 +246,7 @@ public:
 				x->left(speed, dt, lv);
 				if (checkWall(x->getX()))
 				{
-					draw_rect(x->getX(), x->getY(), 1, 1, 0x0000000);
-					draw_rect(x->getX()-3, x->getY()-3, 2, 2, 0x0000000);
+					draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				}
 				else
 					threat.erase(threat.begin());
