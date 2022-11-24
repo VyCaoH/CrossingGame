@@ -15,6 +15,7 @@ int player_1_score, player_2_score;
 float player_pos_x = 0.f;
 float player_pos_y = 0.f;
 static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
+static int hot_button = 0;
 
 
 void Game::mainBoard()
@@ -69,7 +70,7 @@ void Game::simulate_game(Input* input, float dt)
 	cout << g_mode;
 	if (g_mode == GM_MENUGAME)
 	{
-		int hot_button=0;
+
 		if (pressed(BUTTON_S))// || pressed(BUTTON_W))
 		{
 			hot_button++;
