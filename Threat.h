@@ -73,6 +73,10 @@ public:
 	//{
 	//	return threaten[index];
 	//}
+	void setLevel(int lv)
+	{
+		this->lv = 2*lv;
+	}
 	void setListEntity(int type)
 	{
 		int randDistance = random_int(0, distance);
@@ -213,7 +217,7 @@ public:
 		{
 			for (auto x : threat)
 			{
-				x->left(speed, dt,lv);
+				x->left(speed, dt, lv);
 				if (checkWall(x->getX()))
 				{
 					draw_rect(x->getX(), x->getY(), 1, 1, 0x00fffff);

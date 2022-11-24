@@ -6,7 +6,7 @@
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
-static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
+static gamemode g_mode = GM_PLAYGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
 static int hot_button = 0;
 
 
@@ -59,7 +59,6 @@ void Game::mainBoard()
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
-	cout << g_mode;
 	if (g_mode == GM_MENUGAME)
 	{
 
@@ -105,10 +104,30 @@ void Game::simulate_game(Input* input, float dt)
 		draw_rect(0, 0, 85, 45, 0xff55ff);
 		float speed = 50.f;
 		playerMove(input, dt, speed);
+		next_level();
 		updatePosThreat();
-		threatMove(dt, speed);
-		draw_entities(1, 0, 0, 0.5, 0xaaaaa);
+		threatMove(dt);
+		//draw_entities(1, 0, 0, 0.5, 0xaaaaa);
 	}
+}
+void Game::reset_game()
+{
+	player = Player();
+	threat.clear();
+}
+bool Game::next_level()
+{
+	//Bien tren Y
+	if (player.getY() == 40)
+	{
+		lv++;
+		for (auto x : threat)
+		{
+			x->setLevel(lv);
+		}
+		reset_game();
+	}
+	return false;
 }
 bool Game::quit(Input* input)
 {
@@ -167,11 +186,11 @@ void Game::playerMove(Input* input, float dt, float speed)
 }
 
 
-void Game::threatMove(float dt, float speed)
+void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-		x->move(dt, speed);
+		x->move(dt, x->getSpeed());
 	}
 	return;
 }
