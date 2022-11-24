@@ -5,15 +5,7 @@
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
-float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
-float player_half_size_x = 2.5, player_half_size_y = 12;
-float ball_p_x, ball_p_y, ball_dp_x = 130, ball_dp_y, ball_half_size = 1;
-
-int player_1_score, player_2_score;
-
-float player_pos_x = 0.f;
-float player_pos_y = 0.f;
 static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
 static int hot_button = 0;
 
@@ -85,12 +77,6 @@ void Game::simulate_game(Input* input, float dt)
 		case 0: //new game
 		{
 			/*doi mau menu*/
-
-			//draw_text("NEW GAME", x - 22, y + 15, 1, 0xFF7901);
-			//draw_text("LOAD GAME", x - 22, y + 2, 1, 0xFF7901);
-			//draw_text("SETTING", x - 22, y - 11, 1, 0xFF7901);
-			//draw_text("INTRODUCTION", x - 22, y - 24, 1, 0xFF7901);
-			//draw_text("EXIT", x - 22, y - 37, 1, 0xFF7901);
 			break;
 		}
 		case 1://load game
@@ -121,7 +107,6 @@ void Game::simulate_game(Input* input, float dt)
 		playerMove(input, dt, speed);
 		updatePosThreat();
 		threatMove(dt, speed);
-		//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
 		draw_entities(1, 0, 0, 0.5, 0xaaaaa);
 	}
 }
@@ -159,31 +144,19 @@ void Game::playerMove(Input* input, float dt, float speed)
 {
 	if (is_down(BUTTON_W))
 	{
-		//player.setDDP(player.getDDP() + 2000);
-		//player.setDP((player.getDP() + (player.getDDP() * dt)));
-		//player.setY(player.getY() + player.getDP() * dt + player.getDDP() * dt * dt*.5f);
 		player.up(speed, dt);
 	}
 	if (is_down(BUTTON_S))
 	{
-		//player.setDDP(player.getDDP() - 2000);
-		//player.setDP((player.getDP() + (player.getDDP() * dt)));
-		//player.setY(player.getY() + player.getDP() * dt + player.getDDP() * dt * dt*.5f);
 		player.down(speed, dt);
 	}
 
 	if (is_down(BUTTON_A))
 	{
-		/*player.setDDP(player.getDDP() - 2000);
-		player.setDP((player.getDP() + (player.getDDP() * dt)));
-		player.setX(player.getX() + player.getDP() * dt + player.getDDP() * dt * dt*.5f);*/
 		player.left(speed, dt);
 	}
 	if (is_down(BUTTON_D))
 	{
-		/*player.setDDP(player.getDDP() + 2000);
-		player.setDP((player.getDP() + (player.getDDP() * dt)));
-		player.setX(player.getX() + player.getDP() * dt + player.getDDP() * dt * dt * .5f);*/
 		player.right(speed, dt);
 	}
 	checkWall_player(player);
@@ -191,13 +164,6 @@ void Game::playerMove(Input* input, float dt, float speed)
 	draw_truck(player.getX(), player.getY(), player.getHalfX(), player.getHalfY());
 	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 	return;
-	//draw_rect(player.getX(), player.getY()+40, 1, 10, 0x00ff22);
-	//draw_rect(player.getX(), player.getY(), 1.4, 3, 0x00ff22);
-	//draw_rect(player.getX(), player.getY()-40, 1, 10, 0x00ff22);
-	//draw_rect(player.getX(), player.getY()-25, 10, 5, 0x1820FF);
-	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xaaaaaa);
-	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xbbbbbb);
-	//draw_rect(player.getX(), player.getY()-28, 1, 1, 0xbbbbbb);
 }
 
 
