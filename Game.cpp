@@ -66,14 +66,14 @@ void Game::simulate_game(Input* input, float dt)
 	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
 	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
 	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
-
-	draw_truck(0, 0, 5, 5);
-	draw_rect(0, 0, 85, 45, 0xff55ff);
+	draw_entities(7, 0, 0, 2, 0xff55ff);
+	/*draw_truck(0, 0, 5, 5);
+	draw_rect(0, 0, 85, 45, 0xff55ff);*/
 	float speed = 50.f;
-	playerMove(input, dt, speed);
+	/*playerMove(input, dt, speed);
 	playerCollision();
 	updatePosThreat();
-	threatMove(dt, speed);
+	threatMove(dt, speed);*/
 	//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
 }
 bool Game::quit(Input* input)
