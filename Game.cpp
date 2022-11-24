@@ -121,10 +121,10 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
-		for (auto x : threat)
+		/*for (auto x : threat)
 		{
 			x->setLevel(lv);
-		}
+		}*/
 		reset_game();
 	}
 	return false;
@@ -190,7 +190,7 @@ void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-		x->move(dt, x->getSpeed());
+		x->move(dt,2* lv);
 	}
 	return;
 }

@@ -49,10 +49,10 @@ public:
 	//}
 	void left(float speed,float dt,int lv) override
 	{
-		bird_pX -= speed * dt;
+		bird_pX -= speed * dt *lv;
 	}
-	void right(float speed, float dt) override {
-		bird_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		bird_pX += speed * dt*lv;
 	}
 	float getX() const override
 	{
@@ -115,10 +115,10 @@ public:
 	//}
 	void left(float speed, float dt,int lv) override
 	{
-		dinosaur_pX -= speed * dt;
+		dinosaur_pX -= speed * dt*lv;
 	}
-	void right(float speed, float dt) override {
-		dinosaur_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		dinosaur_pX += speed * dt*lv;
 	}
 	float getHalfX() const override
 	{

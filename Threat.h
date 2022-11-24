@@ -73,10 +73,6 @@ public:
 	//{
 	//	return threaten[index];
 	//}
-	void setLevel(int lv)
-	{
-		this->lv = 2*lv;
-	}
 	void setListEntity(int type)
 	{
 		int randDistance = random_int(0, distance);

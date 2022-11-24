@@ -79,10 +79,10 @@ public:
 	}
 	void left(float speed, float dt,int lv) override
 	{
-		car_pX -= speed * dt;
+		car_pX -= speed * dt  *lv;
 	}
-	void right(float speed, float dt) override {
-		car_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		car_pX += speed * dt*lv;
 	}
 	float getX() const override
 	{
@@ -139,10 +139,10 @@ public:
 
 	void left(float speed, float dt, int lv) override
 	{
-		truck_pX -= speed * dt *0.1* lv;
+		truck_pX -= speed * dt * lv;
 	}
-	void right(float speed, float dt) override {
-		truck_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		truck_pX += speed * dt*lv;
 	}
 	float getX() const override
 	{
