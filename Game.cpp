@@ -104,6 +104,7 @@ void Game::simulate_game(Input* input, float dt)
 		draw_rect(0, 0, 85, 45, 0xff55ff);
 		float speed = 50.f;
 		playerMove(input, dt, speed);
+		playerCollision();
 		next_level();
 		updatePosThreat();
 		threatMove(dt);
@@ -135,7 +136,28 @@ bool Game::quit(Input* input)
 		return false;
 	return true;
 }
+void Game::playerCollision()
+{
+	for (auto x : threat)
+	{
+		for (auto y : x->getThreatBird())
+		{
+			cout << y->getY() << endl << y->getHalfY() << endl;
+			/*if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX())
+				running = false;
+			if (player.getX() - player.getHalfX() > y->getX() - y->getHalfX())
+				running = false;*/
 
+			if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX()
+				&& player.getY() + player.getHalfY() > y->getY() - y->getHalfY()
+				&& player.getX() - player.getHalfX() < y->getX() + y->getHalfX()
+				&& player.getY() - player.getHalfY() < y->getY() + y->getHalfY())
+				running = false;
+			/*if (player.getY() - player.getHalfY() < y->getY() + y->getHalfY())
+				running = false;*/
+		}
+	}
+}
 void Game::checkWall_player(Player &player)
 {
 	if (player.getX() + player.getHalfX() > arena_half_size_x)
@@ -184,7 +206,6 @@ void Game::playerMove(Input* input, float dt, float speed)
 	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 	return;
 }
-
 
 void Game::threatMove(float dt)
 {

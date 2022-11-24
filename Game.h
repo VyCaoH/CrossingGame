@@ -34,6 +34,7 @@ public:
 	void reset_game();
 	bool next_level();
 	bool quit(Input* input);
+	void playerCollision();
 	void playerMove(Input* input, float dt, float speed);
 	void checkWall_player(Player &player);
 	void threatMove(float dt);

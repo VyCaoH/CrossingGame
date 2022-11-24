@@ -40,7 +40,7 @@ public:
 	}
 	void up(float speed, float dt)
 	{
-		player_pY += speed*dt;
+		player_pY += speed * dt;
 	}
 	void down(float speed, float dt) {
 		player_pY -= speed * dt;
