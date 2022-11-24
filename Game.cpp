@@ -74,7 +74,7 @@ void Game::simulate_game(Input* input, float dt)
 	draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0xff55ff);
 	//draw_truck(0, 0, 5, 5);
 	//draw_rect(0, 0, 85, 45, 0xff55ff);
-	float speed = 50.f;
+	float speed = 1.f;
 	playerMove(input, dt, speed);
 	updatePosThreat();
 	threatMove(dt, speed);
