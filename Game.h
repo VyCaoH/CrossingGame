@@ -6,8 +6,9 @@
 #include"Animal.h"
 #include"Threat.h"
 //#include"Renderer.h"
+static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
-static bool g_menu = true;
+
 class Game
 {
 	Player player;
@@ -18,6 +19,7 @@ public:
 	Game() 
 	{
 		player = Player();
+		
 		//player = Player("People.txt");
 		//bird = Bird("People.txt");
 	/*	threat.push_back(new Threat(7));
@@ -25,7 +27,7 @@ public:
 		threat.push_back(new Threat(19));
 		threat.push_back(new Threat(25));*/
 	};
-	enum gamemode{ GM_MENUGAME,GM_PLAYGAME};
+
 	void mainBoard();
 	virtual void simulate_game(Input* input, float dt);
 	bool quit(Input* input);

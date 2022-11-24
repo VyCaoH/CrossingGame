@@ -14,6 +14,7 @@ int player_1_score, player_2_score;
 
 float player_pos_x = 0.f;
 float player_pos_y = 0.f;
+static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
 
 
 void Game::mainBoard()
@@ -59,28 +60,69 @@ void Game::mainBoard()
 		//FPS ( time theo CPU ),
 		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
 		frame_begin_time = frame_end_time;
-
 	}
 }
 
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
-	clear_screen(0xffffffff);
-	//draw_rect(0, 0, 100, 50, 0xaaaaaa);
-	//draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	//left_board
-	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
-	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
+	cout << g_mode;
+	if (g_mode == GM_MENUGAME)
+	{
+		int hot_button=0;
+		if (pressed(BUTTON_S))// || pressed(BUTTON_W))
+		{
+			hot_button++;
+			if (hot_button > 3)hot_button = 3;
+		}
+		if(pressed(BUTTON_W)) {
+			hot_button--;
+			if (hot_button < 0)hot_button = 0;
+		}
+		switch (hot_button)
+		{
+		case 0: //new game
+		{
+			/*doi mau menu*/
 
-	draw_truck(0, 0, 5, 5);
-	draw_rect(0, 0, 85, 45, 0xff55ff);
-	float speed = 50.f;
-	playerMove(input, dt, speed);
-	updatePosThreat();
-	threatMove(dt, speed);
-	//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
+			//draw_text("NEW GAME", x - 22, y + 15, 1, 0xFF7901);
+			//draw_text("LOAD GAME", x - 22, y + 2, 1, 0xFF7901);
+			//draw_text("SETTING", x - 22, y - 11, 1, 0xFF7901);
+			//draw_text("INTRODUCTION", x - 22, y - 24, 1, 0xFF7901);
+			//draw_text("EXIT", x - 22, y - 37, 1, 0xFF7901);
+			break;
+		}
+		case 1://load game
+		{
+			break;
+		}
+		case 2://setting
+		{
+			break;
+		}
+		case 3:
+		{
+			break;
+		}
+		}
+
+		/*Do something in menu*/;
+
+		draw_Menu(0, 0, 50, 50);
+	}
+	else if (g_mode == GM_PLAYGAME)
+	{
+		clear_screen(0xffffffff);
+
+		draw_truck(0, 0, 5, 5);
+		draw_rect(0, 0, 85, 45, 0xff55ff);
+		float speed = 50.f;
+		playerMove(input, dt, speed);
+		updatePosThreat();
+		threatMove(dt, speed);
+		//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
+		draw_entities(1, 0, 0, 0.5, 0xaaaaa);
+	}
 }
 bool Game::quit(Input* input)
 {
@@ -156,14 +198,7 @@ void Game::playerMove(Input* input, float dt, float speed)
 	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xbbbbbb);
 	//draw_rect(player.getX(), player.getY()-28, 1, 1, 0xbbbbbb);
 }
-//void Game::birdMove( float dt, float speed,int lv)
-//{
-//	if (!bird.Right())
-//		bird.left(speed, dt,lv);
-//	if (bird.Right())
-//		bird.right(speed, dt);
-//	draw_rect(bird.getX(), 20, 1, 1, 0x00ff22);
-//}
+
 
 void Game::threatMove(float dt, float speed)
 {
