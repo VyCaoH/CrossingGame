@@ -66,7 +66,9 @@ void Game::simulate_game(Input* input, float dt)
 	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
 	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
 	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
-	draw_entities(7, 0, 0, 2, 0xff55ff);
+	/*draw_entities(7, 0, 0, 1, 0xff55ff);
+	draw_entities(1 ,3, 3, 1, 0xff55ff);
+	draw_entities(2,6, 10, 1, 0xff55ff);*/
 	/*draw_truck(0, 0, 5, 5);
 	draw_rect(0, 0, 85, 45, 0xff55ff);*/
 	float speed = 50.f;
@@ -115,9 +117,8 @@ void Game::simulate_game(Input* input, float dt)
 	else if (g_mode == GM_PLAYGAME)
 	{
 		clear_screen(0xffffffff);
-
-		draw_truck(0, 0, 5, 5);
-		draw_rect(0, 0, 85, 45, 0xff55ff);
+		/*draw_truck(0, 0, 5, 5);
+		draw_rect(0, 0, 85, 45, 0xff55ff);*/
 		float speed = 50.f;
 		playerMove(input, dt, speed);
 		playerCollision();
@@ -156,7 +157,7 @@ void Game::playerCollision()
 {
 	for (auto x : threat)
 	{
-		for (auto y : x->getThreatBird())
+		for (auto y : x->getThreat())
 		{
 			cout << y->getY() << endl << y->getHalfY() << endl;
 			/*if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX())
@@ -243,9 +244,13 @@ void Game::updatePosThreat()
 	for (auto x : threat)
 	{
 		//int randomType = 3;
-		int randomType = 0 + rand() % (10 + 1)%4;
-		
-		x->setListEntity(randomType);
+		int randomType;
+		do {
+			randomType = 0 + rand() % 10;
+		}
+		while (randomType == 7 || randomType == 6);
+		int randomDir = 0 + rand() % 2;
+		x->setListEntity((TYPE)randomType,randomDir);
 	}
 }
 
