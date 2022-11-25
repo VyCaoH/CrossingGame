@@ -14,6 +14,7 @@ class Game
 	Player player;
 	int lv;
 	int score;
+	//int time;
 	std::vector<Threat*> threat;
 	//vector<Row*> row;
 public:

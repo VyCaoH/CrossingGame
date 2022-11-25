@@ -32,10 +32,13 @@ void Game::mainBoard()
 	}
 	while (running) {
 		// Input
+		//clock_t start,end,time;
+
 		MSG message;
 
 		messageInput(input, message, window);
 
+		//start = clock();
 		running = quit(&input);
 
 		//Simulate
@@ -44,6 +47,9 @@ void Game::mainBoard()
 
 		//Render
 		render_state = getRender();
+		//end = clock();
+		////time = (end - start);// / CLOCKS_PER_SEC;
+		//cout << time<<endl;
 		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
 
 		//Thoi gian Frame end
@@ -77,56 +83,74 @@ void Game::simulate_game(Input* input, float dt)
 	updatePosThreat();
 	threatMove(dt, speed);*/
 	//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
-	if (g_mode == GM_MENUGAME)
+
+	time_t now = time(0);
+	tm* temp=new tm;
+	localtime_s(temp, &now);
+	int prev_sec =0, present = 0;
+
+	if (prev_sec < temp->tm_sec)
 	{
-
-		if (pressed(BUTTON_S))// || pressed(BUTTON_W))
-		{
-			hot_button++;
-			if (hot_button > 3)hot_button = 3;
-		}
-		if(pressed(BUTTON_W)) {
-			hot_button--;
-			if (hot_button < 0)hot_button = 0;
-		}
-		switch (hot_button)
-		{
-		case 0: //new game
-		{
-			/*doi mau menu*/
-			break;
-		}
-		case 1://load game
-		{
-			break;
-		}
-		case 2://setting
-		{
-			break;
-		}
-		case 3:
-		{
-			break;
-		}
-		}
-
-		/*Do something in menu*/;
-
-		draw_Menu(0, 0, 50, 50);
+		cout << present<<endl;
+		prev_sec = temp->tm_sec;
+		present++;
 	}
-	else if (g_mode == GM_PLAYGAME)
-	{
-		clear_screen(0xffffffff);
-		/*draw_truck(0, 0, 5, 5);
-		draw_rect(0, 0, 85, 45, 0xff55ff);*/
-		float speed = 50.f;
-		playerMove(input, dt, speed);
-		playerCollision();
-		next_level();
-		updatePosThreat();
-		threatMove(dt);
-		//draw_entities(1, 0, 0, 0.5, 0xaaaaa);
-	}
+	//char* dt = asctime(temp);
+
+	//localtime_s(tm, time(0));
+	cout << temp->tm_sec << endl;
+
+
+	//if (g_mode == GM_MENUGAME)
+	//{
+
+	//	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
+	//	{
+	//		hot_button++;
+	//		if (hot_button > 3)hot_button = 3;
+	//	}
+	//	if(pressed(BUTTON_W)) {
+	//		hot_button--;
+	//		if (hot_button < 0)hot_button = 0;
+	//	}
+	//	switch (hot_button)
+	//	{
+	//	case 0: //new game
+	//	{
+	//		/*doi mau menu*/
+	//		break;
+	//	}
+	//	case 1://load game
+	//	{
+	//		break;
+	//	}
+	//	case 2://setting
+	//	{
+	//		break;
+	//	}
+	//	case 3:
+	//	{
+	//		break;
+	//	}
+	//	}
+
+	//	/*Do something in menu*/;
+
+	//	draw_Menu(0, 0, 50, 50);
+	//}
+	//else if (g_mode == GM_PLAYGAME)
+	//{
+	//	clear_screen(0xffffffff);
+	//	/*draw_truck(0, 0, 5, 5);
+	//	draw_rect(0, 0, 85, 45, 0xff55ff);*/
+	//	float speed = 50.f;
+	//	playerMove(input, dt, speed);
+	//	playerCollision();
+	//	next_level();
+	//	updatePosThreat();
+	//	threatMove(dt);
+	//	//draw_entities(1, 0, 0, 0.5, 0xaaaaa);
+	//}
 }
 void Game::reset_game()
 {
@@ -159,7 +183,7 @@ void Game::playerCollision()
 	{
 		for (auto y : x->getThreat())
 		{
-			cout << y->getY() << endl << y->getHalfY() << endl;
+			//cout << y->getY() << endl << y->getHalfY() << endl;
 			/*if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX())
 				running = false;
 			if (player.getX() - player.getHalfX() > y->getX() - y->getHalfX())
@@ -219,7 +243,7 @@ void Game::playerMove(Input* input, float dt, float speed)
 	}
 	checkWall_player(player);
 	
-	draw_truck(player.getX(), player.getY(), player.getHalfX(), player.getHalfY());
+	draw_player(player.getX(), player.getY(), player.getHalfX(), player.getHalfY());
 	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 	return;
 }
@@ -236,10 +260,10 @@ void Game::updatePosThreat()
 {
 	if (threat.empty())
 	{
-		threat.push_back(new Threat(-20));
-		threat.push_back(new Threat(-5));
+		threat.push_back(new Threat(-30));
+		threat.push_back(new Threat(-10));
 		threat.push_back(new Threat(10));
-		threat.push_back(new Threat(25));
+		threat.push_back(new Threat(30));
 	}
 	for (auto x : threat)
 	{

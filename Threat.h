@@ -24,7 +24,7 @@ public:
 	std::random_device gen;
 	Threat(int posY):y_coord(posY)
 	{
-		std::uniform_int_distribution <int> randType(0, 3);
+		//std::uniform_int_distribution <int> randType(0, 3);
 		//type = randType(gen);
 		//pos_row = posY;
 		time = 0;
@@ -353,7 +353,8 @@ public:
 
 					x->left(speed, dt, lv);
 					if (checkWall_left(x->getX()))
-						draw_entities(BIRD, x->getX(), x->getY(), .5f, 0xFFFFF);					else
+						draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					else
 						threat.erase(threat.end());
 				}break;
 			}
@@ -363,7 +364,9 @@ public:
 				{
 						x->left(speed, dt, lv);
 						if (checkWall_left(x->getX()))
-							draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);						else
+							//draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);
+							draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+						else
 							threat.erase(threat.end());
 				}break;
 			}
@@ -374,12 +377,12 @@ public:
 					x->left(speed, dt, lv);
 					if (checkWall_left(x->getX()))
 					{
-						if (type == CAR_RIGHT)
+						/*if (type 
 							draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-						else draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-						/*(type == CAR_LEFT)
+						else draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
+						(type == CAR_LEFT)
 							? draw_entities(CAR_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF)
-							: draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
+							: draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 					}
 					else
 						threat.erase(threat.end());
@@ -412,7 +415,8 @@ public:
 				{
 					x->right(speed, dt, lv);
 					if (checkWall_right(x->getX()))
-						draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
+						//draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
+						draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 					else
 						threat.erase(threat.end());
 
@@ -424,19 +428,21 @@ public:
 				{
 					x->right(speed, dt, lv);
 					if (checkWall_right(x->getX()))
-						draw_entities(DINOSAUR,x->getX(), x->getY(), .5f,0xFFFFF);
+						//draw_entities(DINOSAUR,x->getX(), x->getY(), .5f,0xFFFFF);
+						draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+
 					else
 						threat.erase(threat.end());
 
 				}break;
 			}
-			case CAR_LEFT||CAR2_LEFT:
+			case CAR_RIGHT|CAR2_RIGHT:
 			{
 				for (auto x : threat)
 				{
 					x->right(speed, dt, lv);
 					if (checkWall_right(x->getX()))
-						(type == CAR_LEFT)
+						(type == CAR_RIGHT)
 						? draw_entities(CAR_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF)
 						: draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 					else
