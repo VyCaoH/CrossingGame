@@ -243,7 +243,8 @@ void Game::playerMove(Input* input, float dt, float speed)
 	}
 	checkWall_player(player);
 	
-	draw_player(player.getX(), player.getY(), player.getHalfX(), player.getHalfY());
+	draw_titan(player.getX(), player.getY(),player.getHalfX(),player.getHalfY());
+	return;
 	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 	return;
 }
