@@ -1,10 +1,10 @@
 #pragma once
 //#include<fstream>
-#include<fstream>
-#include<string>
+//#include<string>
 #include <vector>
 #include<iostream>
 
+#include "Threat.h"
 using namespace std;
 
 class Player //:public Entity
@@ -84,6 +84,15 @@ public:
 		return player_ddp;
 	}
 
+	bool isImpact(vector<Threat*> threat);
+	void setIsDead(bool type)
+	{
+		isDead = type;
+	}
+	bool getIsDead()
+	{
+		return isDead;
+	}
 };
 	//void setHeight(int height);
 	//void setWidth(int width);

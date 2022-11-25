@@ -1,6 +1,7 @@
 #pragma once
 #include"Animal.h"
 #include"Vehicle.h"
+#include"ConsoleWindow.h"
 #include<ctime>
 #include<cmath>
 #include<random>
@@ -326,7 +327,7 @@ public:
 	{
 		x *= render_state.height * render_scale;
 		x += render_state.width / 2.f;
-		if (x > 0)
+		if (x > -render_state.width)
 			return true;
 		return false;
 	}
@@ -340,6 +341,7 @@ public:
 	}
 	void move(float speed, float dt)
 	{
+		render_state = getRender();
 		switch (dir)
 		{
 		case LEFT:
@@ -355,7 +357,7 @@ public:
 					if (checkWall_left(x->getX()))
 						draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 				}break;
 			}
 			case DINOSAUR:
@@ -367,7 +369,7 @@ public:
 							//draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);
 							draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 						else
-							threat.erase(threat.end());
+							threat.erase(threat.begin());
 				}break;
 			}
 			case CAR_LEFT||CAR2_LEFT:
@@ -385,7 +387,7 @@ public:
 							: draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 					}
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 				}break;
 			}
 			case BUS_LEFT:
@@ -399,7 +401,7 @@ public:
 						draw_entities(BUS_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 					}
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 				}break;
 			}
 			}
@@ -418,7 +420,7 @@ public:
 						//draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
 						draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 
 				}break;
 			}
@@ -432,7 +434,7 @@ public:
 						draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 
 				}break;
 			}
@@ -446,7 +448,7 @@ public:
 						? draw_entities(CAR_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF)
 						: draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 
 				}break;
 			}
@@ -458,7 +460,7 @@ public:
 					if (checkWall_right(x->getX()))
 						draw_entities(BUS_RIGHT,x->getX(), x->getY(), .5f,0xFFFFF);
 					else
-						threat.erase(threat.end());
+						threat.erase(threat.begin());
 
 				}break;
 			}

@@ -1,13 +1,15 @@
 #pragma once
 //#include<vector>
-#include"ConsoleWindow.h"
+#include<Thread>
 //#include"Renderer.h"
 #include"Player.h"
 #include"Animal.h"
 #include"Threat.h"
+#include"ConsoleWindow.h"
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
+static bool g_pause = false;
 
 class Game
 {
@@ -29,16 +31,23 @@ public:
 		for (auto x : threat)
 			delete x;
 	}
-
+	Player getPlayer();
+	int getLv();
+	int getScore();
+	vector<Threat*> getThreat();
+	void startGame();
+	void getInput(Input* input);
 	void mainBoard();
 	virtual void simulate_game(Input* input, float dt);
 	void reset_game();
 	bool next_level();
 	bool quit(Input* input);
-	void playerCollision();
-	void playerMove(Input* input, float dt, float speed);
 	void checkWall_player(Player &player);
+	void playerMove(Input* input, float dt, float speed);
 	void threatMove(float dt);
 	void updatePosThreat();
+	void exitGame(HANDLE hd);
+	void pauseGame(HANDLE hd);
+	void resumeGame(HANDLE hd);
 };
 

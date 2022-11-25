@@ -92,6 +92,10 @@ input.buttons[b].is_down = is_down;\
 				process_button(BUTTON_S, 'S');
 				process_button(BUTTON_A, 'A');
 				process_button(BUTTON_D, 'D');
+
+				process_button(BUTTON_Y, 'Y');
+				process_button(BUTTON_P, 'P');
+				process_button(BUTTON_ESC, 27);
 				process_button(BUTTON_LEFT, VK_LEFT);
 				process_button(BUTTON_RIGHT, VK_RIGHT);
 				process_button(BUTTON_ENTER, VK_RETURN);
