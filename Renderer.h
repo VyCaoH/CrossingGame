@@ -293,7 +293,175 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x + 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
 
 	//draw_rect(x, y - 3.75, 2.5, 0.4, 0xBD1F1F); //tay
+}
+static void draw_turtle(float x, float y, float half_size_x, float half_size_y)
+{
+	//nen black
+	draw_rect(x, y + 2.8, 1.5, 0.3, 0x000000);
+	draw_rect(x - 1.2, y + 2.5, 1.4, 0.3, 0x000000);
+	draw_rect(x + 0.9, y + 2.5, 1.4, 0.3, 0x000000);
+	draw_rect(x - 1.7, y + 2.2, 1.3, 0.3, 0x000000);
+	draw_rect(x + 1.2, y + 2.2, 1.3, 0.3, 0x000000);
+	draw_rect(x - 1.9, y + 1.9, 1.3, 0.3, 0x000000);
+	draw_rect(x + 1.4, y + 1.9, 1.3, 0.3, 0x000000);
+	draw_rect(x - 2.3, y + 1.4, 1.4, 0.3, 0x000000);
+	draw_rect(x + 1.6, y + 1.4, 1.3, 0.3, 0x000000);
+	draw_rect(x - 2.6, y + 1, 1.3, 0.3, 0x000000);
+	draw_rect(x - 2.7, y + 0.7, 1.3, 0.3, 0x000000);
+	draw_rect(x - 3, y + 0.2, 1.4, 0.4, 0x000000);
+	draw_rect(x - 2.7, y - 0.5, 1.3, 0.4, 0x000000);
 
+
+	draw_rect(x + 1.6, y + 1.2, 1.2, 0.3, 0x000000);
+	draw_rect(x + 3.2, y, 1, 1, 0x000000); // dau 
+	draw_rect(x + 3.5, y - 0.2, 1, 0.8, 0x000000); // dau 
+	draw_rect(x + 2, y - 1, 1, 0.8, 0x000000);
+	draw_rect(x - 2, y - 1, 1, 0.8, 0x000000);
+	draw_rect(x + 1, y - 1.5, 1, 0.8, 0x000000);
+	draw_rect(x - 1, y - 1.5, 1, 0.8, 0x000000);
+	draw_rect(x + 1.75, y - 2.2, 0.8, 0.5, 0x000000);// chan
+	draw_rect(x - 1.75, y - 2.2, 0.8, 0.5, 0x000000);
+	draw_rect(x + 2, y - 2, 0.8, 0.8, 0x000000);
+	draw_rect(x - 2, y - 2, 0.8, 0.8, 0x000000);
+	//mai rua
+	draw_rect(x, y + 2.5, 1, 0.3, 0xB6D53C);
+	draw_rect(x - 0.3, y + 2.5, 1, 0.3, 0xB6D53C);
+	draw_rect(x + 0.3, y + 2.5, 1, 0.3, 0xB6D53C);
+	draw_rect(x - 1.4, y + 2.2, 1.2, 0.3, 0xB6D53C);
+
+	draw_rect(x, y - 1, 1.4, 1, 0x3A5753);
+	draw_rect(x - 1.9, y - 1.8, 0.6, 0.8, 0x3A5753);
+	draw_rect(x + 1.9, y - 1.8, 0.6, 0.8, 0x3A5753);
+
+	draw_rect(x, y + 0.2, 2.6, 1.2, 0xB6D53C);
+	draw_rect(x + 0.8, y + 2.2, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 1.6, y + 1.9, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 1, y + 1.9, 1.5, 0.4, 0xB6D53C);
+	draw_rect(x + 1.1, y + 1.9, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 2, y + 1.4, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 1.3, y + 1.4, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 2.3, y + 1, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 2.5, y + 0.7, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 2.8, y + 0.2, 1.2, 0.4, 0xB6D53C);
+	draw_rect(x - 2.2, y - 0.3, 1, 0.3, 0xB6D53C);
+
+	//van rua
+	draw_rect(x - 0.3, y + 1.5, 1, 0.25, 0x6CA333);
+	draw_rect(x - 1.9, y + 1.8, 1, 0.25, 0x6CA333);
+	draw_rect(x + 1.4, y + 1.8, 1, 0.25, 0x6CA333);
+
+	draw_rect(x - 0.3, y + 0.4, 1.2, 0.3, 0x71AA35);
+	draw_rect(x - 2.2, y + 0.8, 1.5, 0.25, 0x71AA35);
+	draw_rect(x + 1.7, y - 0.1, 1, 0.25, 0x71AA35);
+
+	draw_rect(x + 2, y + 0.5, 1, 0.3, 0x397841);
+
+	draw_rect(x - 0.3, y + 1.2, 1, 0.3, 0x71AA35);
+	draw_rect(x - 2.5, y - 0.4, 1, 0.3, 0x71AA35);
+	draw_rect(x - 2.7, y + 0.18, 1.2, 0.27, 0x397841);
+
+
+	// cai dau
+	draw_rect(x + 3.5, y - 0.2, 0.75, 0.5, 0xB3D63A);
+	draw_rect(x + 3.1, y + 0.2, 0.75, 0.5, 0xB3D63A);
+	draw_rect(x + 3.35, y - 0.45, 0.75, 0.25, 0x71AA37);
+	// con mat 
+	draw_rect(x + 3.25, y + 0.2, 0.2, 0.2, 0x000000);
+
+	draw_rect(x - 2.25, y - 2.4, 0.9, 0.7, 0x000000);// chan
+	draw_rect(x + 2.25, y - 2.4, 0.9, 0.7, 0x000000);
+	draw_rect(x - 2.15, y - 2.25, 0.7, 0.5, 0xB6D53C);// chan xanh 
+	draw_rect(x + 2.15, y - 2.25, 0.7, 0.5, 0xB6D53C);
+	draw_rect(x - 2, y - 2.1, 0.7, 0.5, 0x64962F);// chan xanh 
+	draw_rect(x + 2, y - 2.1, 0.7, 0.5, 0x64962F);
+	draw_rect(x - 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);// chan xanh 
+	draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
+}
+
+static void draw_turtleR(float x, float y, float half_size_x, float half_size_y)
+{
+	//nen black
+	draw_rect(x, y + 2.8, 1.5, 0.3, 0x000000);
+	draw_rect(x + 1.2, y + 2.5, 1.4, 0.3, 0x000000);
+	draw_rect(x - 0.9, y + 2.5, 1.4, 0.3, 0x000000);
+	draw_rect(x + 1.7, y + 2.2, 1.3, 0.3, 0x000000);
+	draw_rect(x - 1.2, y + 2.2, 1.3, 0.3, 0x000000);
+	draw_rect(x + 1.9, y + 1.9, 1.3, 0.3, 0x000000);
+	draw_rect(x - 1.5, y + 1.9, 1.4, 0.3, 0x000000);
+	draw_rect(x + 2.3, y + 1.4, 1.4, 0.3, 0x000000);
+	draw_rect(x - 1.7, y + 1.4, 1.5, 0.4, 0x000000);
+	draw_rect(x + 2.6, y + 1, 1.3, 0.3, 0x000000);
+	draw_rect(x + 2.7, y + 0.7, 1.3, 0.3, 0x000000);
+	draw_rect(x + 3, y + 0.2, 1.4, 0.4, 0x000000);
+	draw_rect(x + 2.7, y - 0.5, 1.3, 0.4, 0x000000);
+
+
+	draw_rect(x - 1.6, y + 1.2, 1.2, 0.3, 0x000000);
+	draw_rect(x - 3.3, y, 1, 1, 0x000000); // dau 
+	draw_rect(x - 3.5, y - 0.2, 1, 0.8, 0x000000); // dau 
+	draw_rect(x - 2, y - 1, 1, 0.8, 0x000000);
+	draw_rect(x + 2, y - 1, 1, 0.8, 0x000000);
+	draw_rect(x - 1, y - 1.5, 1, 0.8, 0x000000);
+	draw_rect(x + 1, y - 1.5, 1, 0.8, 0x000000);
+	draw_rect(x - 1.75, y - 2.2, 0.8, 0.5, 0x000000);// chan
+	draw_rect(x + 1.75, y - 2.2, 0.8, 0.5, 0x000000);
+
+	draw_rect(x - 2, y - 2, 0.8, 0.8, 0x000000);
+	draw_rect(x + 2, y - 2, 0.8, 0.8, 0x000000);
+	//mai rua
+	draw_rect(x, y + 2.5, 1, 0.3, 0xB6D53C);
+	draw_rect(x + 0.3, y + 2.5, 1, 0.3, 0xB6D53C);
+	draw_rect(x - 0.3, y + 2.5, 1, 0.3, 0xB6D53C);
+	draw_rect(x + 1.4, y + 2.2, 1.2, 0.3, 0xB6D53C);
+
+	draw_rect(x, y - 1, 1.4, 1, 0x3A5753);
+	draw_rect(x + 1.9, y - 1.8, 0.6, 0.8, 0x3A5753);
+	draw_rect(x - 1.9, y - 1.8, 0.6, 0.8, 0x3A5753);
+
+	draw_rect(x, y + 0.2, 2.6, 1.2, 0xB6D53C);
+	draw_rect(x - 0.8, y + 2.2, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 1.6, y + 1.9, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 1, y + 1.9, 1.5, 0.4, 0xB6D53C);
+	draw_rect(x - 1.1, y + 1.9, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 2, y + 1.4, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x - 1.3, y + 1.4, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 2.3, y + 1, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 2.5, y + 0.7, 1.2, 0.3, 0xB6D53C);
+	draw_rect(x + 2.8, y + 0.2, 1.2, 0.4, 0xB6D53C);
+	draw_rect(x + 2.2, y - 0.3, 1, 0.3, 0xB6D53C);
+
+
+	//van rua
+	draw_rect(x + 0.3, y + 1.5, 1, 0.25, 0x6CA333);
+	draw_rect(x + 1.9, y + 1.8, 1, 0.25, 0x6CA333);
+	draw_rect(x - 1.4, y + 1.8, 1, 0.25, 0x6CA333);
+
+	draw_rect(x + 0.3, y + 0.4, 1.2, 0.3, 0x71AA35);
+	draw_rect(x + 2.2, y + 0.8, 1.5, 0.25, 0x71AA35);
+	draw_rect(x - 1.7, y - 0.1, 1, 0.25, 0x71AA35);
+
+	draw_rect(x - 2, y + 0.5, 1, 0.3, 0x397841);
+
+	draw_rect(x + 0.3, y + 1.2, 1, 0.3, 0x71AA35);
+	draw_rect(x + 2.5, y - 0.4, 1, 0.3, 0x71AA35);
+	draw_rect(x + 2.7, y + 0.18, 1.2, 0.27, 0x397841);
+
+
+	// cai dau
+	draw_rect(x - 3.5, y - 0.2, 0.75, 0.5, 0xB3D63A);
+	draw_rect(x - 3.1, y + 0.2, 0.75, 0.5, 0xB3D63A);
+	draw_rect(x - 3.35, y - 0.45, 0.75, 0.25, 0x71AA37);
+	// con mat 
+	draw_rect(x - 3.25, y + 0.2, 0.2, 0.2, 0x000000);
+
+	draw_rect(x - 2.25, y - 2.4, 0.9, 0.7, 0x000000);// chan
+	draw_rect(x + 2.25, y - 2.4, 0.9, 0.7, 0x000000);
+	draw_rect(x - 2.15, y - 2.25, 0.7, 0.5, 0xB6D53C);// chan xanh 
+	draw_rect(x + 2.15, y - 2.25, 0.7, 0.5, 0xB6D53C);
+	draw_rect(x - 2, y - 2.1, 0.7, 0.5, 0x64962F);// chan xanh 
+	draw_rect(x + 2, y - 2.1, 0.7, 0.5, 0x64962F);
+	draw_rect(x - 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);// chan xanh 
+	draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
 }
 static const char* letters[][7] = {
 	" 00",
