@@ -1019,7 +1019,34 @@ static void draw_player(float x, float y, float half_size_x, float half_size_y) 
 	draw_rect(x + 4, y + 2, 1, 0.5, 0x363636);
 
 }
+static void draw_apple(int x, int y)
+{
+	// tao do 
+	draw_rect(x, y, 1.3, 1.3, 0xC42732);
+	draw_rect(x, y, 0.9, 0.9, 0xF4303E);
+	draw_rect(x + 0.7, y + 1.2, 1, 0.4, 0x868F26); // la
+	draw_rect(x+0.2, y + 0.4, 0.8, 0.7, 0xD9614D);
+}
+static void draw_plant(int x, int y)
+{
+	//bui cay 
+	draw_rect(x , y-0.1 , 3.9, 4.9, 0x000000);
+	draw_rect(x, y, 3.5, 4.6, 0x9FAF4D);
 
+	draw_rect(x - 5, y - 2.2, 3.4, 2.8, 0x000000);
+	draw_rect(x - 5, y - 2.2, 3.1, 2.4, 0x5F692D);
+	draw_rect(x - 5.7, y - 2.4, 2.4, 2.1, 0x213C11);
+
+	draw_rect(x + 5, y - 2.7, 2.7, 2.3, 0x000000);
+	draw_rect(x + 5, y - 2.7, 2.3, 2, 0x5F692D);
+	draw_rect(x + 5.2, y - 3.4, 2, 1.3, 0x213C11);
+
+	draw_apple(x+0.5 , y + 4);
+	draw_apple(x - 2.7, y );
+	draw_apple(x - 8, y-2.7);
+	draw_apple(x + 3.5, y - 1.8);
+
+}
 static void draw_Background(float x, float y, float max_size_x, float max_size_y)
 {
 	//Khung 
@@ -1051,6 +1078,10 @@ static void draw_Background(float x, float y, float max_size_x, float max_size_y
 	draw_rect(x - 18.5, y - 24.5, 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y - 37, 71.5, 0.5, 0xA06A12);
 
-	//bui cay 
-	draw_rect(x - 85, y - 35, 4, 7, 0x000000);
+	for (int i = 0; i < 121; i += 40) {
+		draw_plant(x - 80 + i, y - 43.2); // draw plant
+	}
+	for (int i = 0; i < 121; i += 40) {
+		draw_plant(x - 80 + i, y + 8); // draw plant
+	}
 }
