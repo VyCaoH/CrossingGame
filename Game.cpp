@@ -47,93 +47,18 @@ void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
 	clear_screen(0xffffffff);
-	//draw_rect(0, 0, 100, 50, 0xaaaaaa);
-	//draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	//left_board
-	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
-	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
-	/*draw_entities(7, 0, 0, 1, 0xff55ff);
-	draw_entities(1 ,3, 3, 1, 0xff55ff);
-	draw_entities(2,6, 10, 1, 0xff55ff);*/
-	/*draw_truck(0, 0, 5, 5);
-	draw_rect(0, 0, 85, 45, 0xff55ff);*/
 	float speed = 50.f;
-	/*playerMove(input, dt, speed);
-	playerCollision();
+	playerMove(input, dt, speed);
+	player.isImpact(threat);
+	g_running = !player.getIsDead();
+	//g_running = false;
 	updatePosThreat();
-	threatMove(dt, speed);*/
-	//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
+	threatMove(dt);
+	next_level();
+	// 
+	// 
+	//draw_entities(CAR2_RIGHT, 0, 0, 0.5,0xfffff);
 
-	//time_t now = time(0);
-	//tm* temp=new tm;
-	//localtime_s(temp, &now);
-	//int prev_sec =0, present = 0;
-
-	//if (prev_sec < temp->tm_sec)
-	//{
-	//	cout << present<<endl;
-	//	prev_sec = temp->tm_sec;
-	//	present++;
-	//}
-	////char* dt = asctime(temp);
-
-	////localtime_s(tm, time(0));
-	//cout << temp->tm_sec << endl;
-
-
-	//if (g_mode == GM_MENUGAME)
-	//{
-
-	//	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
-	//	{
-	//		hot_button++;
-	//		if (hot_button > 3)hot_button = 3;
-	//	}
-	//	if(pressed(BUTTON_W)) {
-	//		hot_button--;
-	//		if (hot_button < 0)hot_button = 0;
-	//	}
-	//	switch (hot_button)
-	//	{
-	//	case 0: //new game
-	//	{
-	//		/*doi mau menu*/
-	//		break;
-	//	}
-	//	case 1://load game
-	//	{
-	//		break;
-	//	}
-	//	case 2://setting
-	//	{
-	//		break;
-	//	}
-	//	case 3:
-	//	{
-	//		break;
-	//	}
-	//	}
-
-	//	/*Do something in menu*/;
-
-	//	draw_Menu(0, 0, 50, 50);
-	//}
-	//else if (g_mode == GM_PLAYGAME)
-	{
-		/*draw_truck(0, 0, 5, 5);
-		draw_rect(0, 0, 85, 45, 0xff55ff);*/
-		float speed = 50.f;
-		playerMove(input, dt, speed);
-		player.isImpact(threat);
-		g_running = !player.getIsDead();
-		//g_running = false;
-		updatePosThreat();
-		threatMove(dt);
-		next_level();
-
-		//draw_entities(1, 0, 0, 0.5, 0xaaaaa);
-	}
 }
 void Game::reset_game()
 {
@@ -146,10 +71,6 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
-		/*for (auto x : threat)
-		{
-			x->setLevel(lv);
-		}*/
 		reset_game();
 	}
 	return false;
@@ -229,13 +150,22 @@ void Game::updatePosThreat()
 	for (auto x : threat)
 	{
 		//int randomType = 3;
+		int randomDir = 0 + rand() % 2;
 		int randomType;
 		do {
 			randomType = 0 + rand() % 10;
+			if (randomType % 2 == randomDir)
+			{
+				if (randomType == 7)
+					continue;
+				if (randomType == 6)
+					continue;
+				break;
+			}
 		}
-		while (randomType == 7 || randomType == 6);
-		int randomDir = 0 + rand() % 2;
+		while (true);
 		x->setListEntity((TYPE)randomType,randomDir);
+		//x->setListEntity(CAR2_LEFT, 1);
 	}
 }
 
@@ -255,4 +185,3 @@ void Game::resumeGame(HANDLE hd)
 	//g_pause = false;
 	ResumeThread(hd);
 }
-

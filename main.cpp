@@ -6,7 +6,6 @@ Game game;
 void subThread(HWND window)
 {
 	HDC hdc = GetDC(window);
-		//clear_screen(0xffffffff);
 	while (g_running)
 	{
 		game.simulate_game(&MOVING, 0.016f);
@@ -16,7 +15,6 @@ void subThread(HWND window)
 }
 int main()
 {
-
 //	game.startGame();
 
 	HWND window = winMain();
@@ -42,12 +40,8 @@ int main()
 
 	thread t1(subThread,window);
 	while (g_running) {
-		// Input
 		MSG message;
 		messageInput(input, message, window);
-		//start = clock();
-		//game.getInput(&input);
-		//g_running = game.quit(&input);
 
 		if (g_pause == true)
 		{
@@ -55,11 +49,11 @@ int main()
 		}
 		if (!game.getPlayer().getIsDead())
 		{
-			if (input.buttons[BUTTON_ESC].is_down && input.buttons[BUTTON_ESC].changed)
+			if (input.buttons[BUTTON_ESC].is_down )//&& input.buttons[BUTTON_ESC].changed)
 			{
 				game.exitGame(t1.native_handle());
 			}
-			else if (input.buttons[BUTTON_P].is_down && !input.buttons[BUTTON_P].changed)
+			else if (input.buttons[BUTTON_P].is_down )//&& !input.buttons[BUTTON_P].changed)
 			{
 				g_pause = true;
 				game.pauseGame(t1.native_handle());
@@ -86,20 +80,6 @@ int main()
 				return 0;
 			}
 		}
-
-		//Render
-		//game.simulate_game(&input, 0.016f);
-		/*for (int i = 0; i < 1000; i++)
-		{
-			cout << i << endl;
-		}*/
-		//t1.join();
-		//end = clock();
-		////time = (end - start);// / CLOCKS_PER_SEC;
-		//cout << time<<endl;
-		//render_state = getRender();
-		//StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
-
 		//Thoi gian Frame end
 		LARGE_INTEGER frame_end_time;
 		QueryPerformanceCounter(&frame_end_time);
@@ -108,7 +88,6 @@ int main()
 		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
 		frame_begin_time = frame_end_time;
 	}
-	//game.mainBoard();
 
 	return 0;
 }
