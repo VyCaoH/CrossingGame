@@ -6,7 +6,7 @@
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
-static gamemode g_mode = GM_PLAYGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
+static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
 static int hot_button = 0;
 
 
@@ -65,36 +65,14 @@ void Game::simulate_game(Input* input, float dt)
 		if (pressed(BUTTON_S))// || pressed(BUTTON_W))
 		{
 			hot_button++;
-			if (hot_button > 3)hot_button = 3;
+			if (hot_button > 4)hot_button = 4;
 		}
 		if(pressed(BUTTON_W)) {
 			hot_button--;
 			if (hot_button < 0)hot_button = 0;
 		}
-		switch (hot_button)
-		{
-		case 0: //new game
-		{
-			/*doi mau menu*/
-			break;
-		}
-		case 1://load game
-		{
-			break;
-		}
-		case 2://setting
-		{
-			break;
-		}
-		case 3:
-		{
-			break;
-		}
-		}
-
 		/*Do something in menu*/;
-
-		draw_Menu(0, 0, 50, 50);
+		draw_Menu(0, 0, 50, 50, hot_button);
 	}
 	else if (g_mode == GM_PLAYGAME)
 	{
