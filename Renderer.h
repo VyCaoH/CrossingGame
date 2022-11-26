@@ -1,8 +1,8 @@
 typedef int s32;
 typedef unsigned int u32;
 enum TYPE {
-	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_LEFT, CAR2_RIGHT, BALLOON_LEFT, BALLOON_RIGHT, TRAFFIC, BEE_RIGHT,
-	BEE_LEFT, PIG_LEFT, PIG_RIGHT, CAT_RIGHT, CAT_LEFT, TEXT_GAME_OVER, BIRD, DINOSAUR, CLOUD, GRASS
+	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
+	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT,TURTLE_RIGHT,TURTLE_LEFT,BIRD_RIGHT,BIRD_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
 };
 
 
@@ -144,36 +144,6 @@ static void draw_truck(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x + 2, y + 1, 2.5, 3, 0x1820FF);
 	draw_rect(x + 2, y + 1, 3, 2.5, 0x1820FF);
 	//draw_rect(x + 3, y, 2, 0.5, 0x1820FF);
-}
-static void draw_dino(float x, float y, float half_size_x, float half_size_y)
-{
-	draw_rect(x + 3, y + 0.7, 2, 0.2, 0x000000);
-	draw_rect(x, y - 3, 7 + 0.2, 1.5 + 0.2, 0x000000);
-
-	draw_rect(x, y - 4.5, 2 + 0.2, 2 + 0.2, 0x000000);
-	draw_rect(x + 1, y - 4.5 - 2, 2 + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 2, y - 4.5 - 3, 2 + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 3, y - 4.5 - 4, 1.5 + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 4, y - 4.5 - 5, 1. + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 4.5, y - 4.5 - 5.5, 0.9 + 0.2, 0.1 + 0.5, 0x000000);
-
-
-	draw_rect(x + 3, y, 2, 0.5, 0x1820FF);
-	draw_rect(x + 2, y - 1, 2, 0.5, 0x1820FF);
-	draw_rect(x + 1, y - 2, 2, 0.5, 0x1820FF);
-	draw_rect(x, y - 3, 2, 0.5, 0x1820FF);
-
-	draw_rect(x, y - 3, 7, 1.5, 0x1820FF);
-
-
-	draw_rect(x, y - 4.5, 2, 2, 0x1820FF);
-	draw_rect(x + 1, y - 4.5 - 2, 2, 0.5, 0x1820FF);
-	draw_rect(x + 2, y - 4.5 - 3, 2, 0.5, 0x1820FF);
-	draw_rect(x + 3, y - 4.5 - 4, 1.5, 0.5, 0x1820FF);
-	draw_rect(x + 4, y - 4.5 - 5, 1., 0.5, 0x1820FF);
-	draw_rect(x + 4.5, y - 4.5 - 5.5, 0.9, 0.1, 0x1820FF);
-
-	//draw_rect_in_pixels((int)x0, (int)y0, (int)x1, (int)y1, 0x1820FF);
 }
 static void draw_birdL(float x, float y, float half_size_x, float half_size_y) //chieu dai
 {
@@ -413,7 +383,6 @@ static void draw_turtleR(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x - 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);// chan xanh 
 	draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
 }
-
 static void draw_turtleL(float x, float y, float half_size_x, float half_size_y)
 {
 	//nen black
@@ -903,6 +872,7 @@ static const char* entities[][14] = {
 	"",
 	"",
 	"",
+	"",
 
 	//bee-right
 	"9999999009999999",
@@ -999,58 +969,21 @@ static const char* entities[][14] = {
 	"9903030003030999",
 	"9990999999909999",
 	"",
-
-	
-	//bird
-	"0000000000111111110",
-	"0000000001111111111",
-	"0000000001111111111",
-	"0000002221111111111",
-	"0000023331111111111",
-	"0000233331111111111",
-	"0000233331111111111",
-	"0444444441111111111",
-	"4444444441111111111",
-	"5544424441111121111",
-	"4444222440111222110",
-	"0002262200002262200",
-	"0000222000000222000",
-	"0000020000000020000",
-
-	//dino
-	"0000000000111111110",
-	"0000000001111111111",
-	"0000000001111111111",
-	"0000002221111111111",
-	"0000023331111111111",
-	"0000233331111111111",
-	"0000233331111111111",
-	"0444444441111111111",
-	"4444444441111111111",
-	"5544424441111121111",
-	"4444222440111222110",
-	"0002262200002262200",
-	"0000222000000222000",
-	"0000020000000020000",
-
-
-
-
 };
 
 
 static void draw_entities(int number, float x, float y, float size, u32 color)
 {
 	float half_size = size * .5f;
-	float original_y = y-7;
+	float original_y = y;
 	switch (number)
 	{
 	case CAR_RIGHT:
 	{
-		x -= 9.f;
-		const char** entity;
+		//x -= 9.f;
 		x -= 7;
 		y += 4;
+		const char** entity;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1194,8 +1127,8 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BUS_RIGHT:
 	{
 		const char** entity;
-		x -= 6;
-		y += 3;
+		x -= 5.5;
+		y += 3.;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1260,7 +1193,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BUS_LEFT:
 	{
 		const char** entity;
-		x -= 6;
+		x -= 5.5;
 		y += 3;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
@@ -1453,7 +1386,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BALLOON_LEFT:
 	{
 		const char** entity;
-		x -= 2.25;
+		x -= 2;
 		y += 3;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
@@ -1715,8 +1648,8 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case PIG_LEFT:
 	{
 		const char** entity;
-		x -= 5;
-		y += 3.5;
+		x -= 5.;
+		y += 3.;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1772,7 +1705,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	{
 		const char** entity;
 		x -= 5;
-		y += 3.5;
+		y += 3;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1828,7 +1761,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	{
 		const char** entity;
 		x -= 4;
-		y += 3.25;
+		y += 3.5;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1879,7 +1812,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	{
 		const char** entity;
 		x -= 4;
-		y += 3.25;
+		y += 3.5;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1925,16 +1858,6 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 			x = original_x;
 		}
 		break;
-	}
-	case BIRD:
-	{
-		break;
-
-	}
-	case DINOSAUR:
-	{
-		break;
-
 	}
 	}
 	

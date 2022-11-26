@@ -43,36 +43,38 @@ int main()
 
 		if (!game.getPlayer().getIsDead())
 		{
-			if (input.buttons[BUTTON_ESC].is_down )
+			if (input.buttons[BUTTON_ESC].is_down)
 			{
+				//Code cua sub_Menu
+
+				//break;
 				g_running = false;
 				//game.exitGame(t1);
 			}
-			else if (input.buttons[BUTTON_P].is_down )
+			else if (input.buttons[BUTTON_P].is_down)
 			{
-				g_pause = true;
+				//g_pause = true;
 				game.pauseGame(t1.native_handle());
+			}
+			if (input.buttons[BUTTON_Y].is_down)
+			{
+				//g_pause = false;
+				game.resumeGame((HANDLE)t1.native_handle());
 			}
 			else
 			{
-				if (input.buttons[BUTTON_Y].is_down)
-				{
-					g_pause = false;
-					game.resumeGame((HANDLE)t1.native_handle());
-				}
-				MOVING = input;;
+				MOVING = input;
 			}
 		}
 		else
 		{
-			if (input.buttons[BUTTON_Y].is_down)
+			if (input.buttons[BUTTON_Y].is_down&&MOVING.buttons[BUTTON_Y].changed)
 			{
 				game.startGame();
 			}
 			else
 			{
 				g_running = false;
-
 			}
 		}
 		//Thoi gian Frame end

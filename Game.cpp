@@ -30,12 +30,10 @@ Player Game::getPlayer()
 }
 void Game::startGame()
 {
-	//Menu
-}
-
-void Game::getInput(Input* input)
-{
-	playerMove(input, 0.1f, 50.f);
+	player = Player();
+	threat.clear();
+	lv = 1;
+	score = 0;
 }
 
 void Game::mainBoard()
@@ -48,10 +46,11 @@ void Game::simulate_game(Input* input, float dt)
 	render_state = getRender();
 	clear_screen(0xffffffff);
 	float speed = 50.f;
-	draw_Background(0, 0, 73, 45);
-	//draw_rect(0, 0, 7.f, 3.f,0xdddd);
+	//draw_Background(0, 0, 73, 45);
+	//draw_rect(0, 0, 6.f, 4.f,0xdddd);
 	//draw_turtleL(0, 0, 1, 1);
-	playerMove(input, dt, speed);
+	player.move(*&input, dt, speed);
+	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
 	player.isImpact(threat);
 	g_running = !player.getIsDead();
 	g_running = false;
@@ -60,7 +59,7 @@ void Game::simulate_game(Input* input, float dt)
 	next_level();
 	// 
 	// 
-	//draw_entities(CAR_RIGHT, 0, 0, 0.5,0xfffff);
+	//draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
 
 }
 void Game::reset_game()
@@ -83,54 +82,6 @@ bool Game::quit(Input* input)
 	if (is_down(BUTTON_ESC))
 		return false;
 	return true;
-}
-void Game::checkWall_player(Player &player)
-{
-	if (player.getX() + player.getHalfX() > arena_half_size_x)
-	{
-		player.setX(arena_half_size_x - player.getHalfX());
-		player.setDP(0);
-	}
-	if (player.getY() + player.getHalfY() > arena_half_size_y)
-	{
-		player.setY(arena_half_size_y - player.getHalfY());
-		player.setDP(0);
-	}
-	if (player.getX() - player.getHalfX() < -arena_half_size_x)
-	{
-		player.setX(-arena_half_size_x + player.getHalfX());
-		player.setDP(0);
-	}
-	if (player.getY() - player.getHalfY() < -arena_half_size_y)
-	{
-		player.setY(-arena_half_size_y + player.getHalfY());
-		player.setDP(0);
-	}
-}
-void Game::playerMove(Input* input, float dt, float speed)
-{
-	if (is_down(BUTTON_W))
-	{
-		player.up(speed, dt);
-	}
-	if (is_down(BUTTON_S))
-	{
-		player.down(speed, dt);
-	}
-
-	if (is_down(BUTTON_A))
-	{
-		player.left(speed, dt);
-	}
-	if (is_down(BUTTON_D))
-	{
-		player.right(speed, dt);
-	}
-	checkWall_player(player);
-	
-	draw_titan(player.getX(), player.getY(),player.getHalfX(),player.getHalfY());
-	return;
-	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 }
 
 void Game::threatMove(float dt)

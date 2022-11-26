@@ -91,6 +91,54 @@ bool Player::isImpact(vector<Threat*>threat)
 	}
 	return false;
 }
+void Player::move(Input* input, float dt, float speed)
+{
+	{
+		if (is_down(BUTTON_W))
+		{
+			up(speed, dt);
+		}
+		if (is_down(BUTTON_S))
+		{
+			down(speed, dt);
+		}
+		if (is_down(BUTTON_A))
+		{
+			left(speed, dt);
+		}
+		if (is_down(BUTTON_D))
+		{
+			right(speed, dt);
+		}
+		//checkWall()
+		render_state = getRender();
+		draw_titan(getX(), getY(), getHalfX(), getHalfY());
+		return;
+	}
+}
+void Player::checkWall(float x, float y, float half_x, float half_y)
+{
+	if (player_pX + player_half_X > half_x + x)
+	{
+		setX(half_x + x - player_half_X);
+		setDP(0);
+	}
+	if (player_pY + player_half_Y > half_y + y)
+	{
+		setY(half_y + y - player_half_Y);
+		setDP(0);
+	}
+	if (player_pX - player_half_X < -half_x - x)
+	{
+		setX(-half_x - x + player_half_X);
+		setDP(0);
+	}
+	if (player_pY - player_half_Y < -half_y - y)
+	{
+		setY(-half_y - y + player_half_Y);
+		setDP(0);
+	}
+}
 
 //}
 ////void Player::Player:: setHeiPlayer:: ght(int heiPlayer:: ght)
