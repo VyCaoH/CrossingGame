@@ -1,8 +1,8 @@
 #pragma once
 #include<Windows.h>
 #define is_down(b) input->buttons[b].is_down
-//#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
-//#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
+#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
+#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
 
 //#define global_variable static
@@ -32,9 +32,11 @@ enum {
 	BUTTON_S,
 	BUTTON_A,
 	BUTTON_D,
+	BUTTON_P,
+	BUTTON_Y,
 	BUTTON_LEFT,
 	BUTTON_RIGHT,
-	BUTTON_ENTER,
+	BUTTON_ESC,
 
 	BUTTON_COUNT, // Should be the last item
 };

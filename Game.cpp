@@ -1,8 +1,8 @@
 #include "Game.h"
 
-#define is_down(b) input->buttons[b].is_down
-#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
-#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
+//#define is_down(b) input->buttons[b].is_down
+//#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
+//#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
@@ -10,148 +10,58 @@ static gamemode g_mode = GM_PLAYGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
 static int hot_button = 0;
 
 
+int Game::getLv()
+{
+	return lv;
+}
+
+int Game::getScore()
+{
+	return score;
+}
+
+vector<Threat*> Game::getThreat()
+{
+	return threat;
+}
+Player Game::getPlayer()
+{
+	return player;
+}
+void Game::startGame()
+{
+	//Menu
+}
+
+void Game::getInput(Input* input)
+{
+	playerMove(input, 0.1f, 50.f);
+}
+
 void Game::mainBoard()
 {
-	HWND window = winMain();
-	HDC hdc = GetDC(window);
-	Input input = {};
 
-	//Time giua 2 Frame
-	float delta_time = 0.016666f;
-
-	//Thoi gian Frame begin -> thoi gian Frame end
-	LARGE_INTEGER frame_begin_time;
-	QueryPerformanceCounter(&frame_begin_time);
-
-	//Tan so hieu suat truy van
-	float performance_frequency;
-	{
-		LARGE_INTEGER perf;
-		QueryPerformanceFrequency(&perf);
-		performance_frequency = (float)perf.QuadPart;
-	}
-	while (running) {
-		// Input
-		//clock_t start,end,time;
-
-		MSG message;
-
-		messageInput(input, message, window);
-
-		//start = clock();
-		running = quit(&input);
-
-		//Simulate
-
-		simulate_game(&input, delta_time);
-
-		//Render
-		render_state = getRender();
-		//end = clock();
-		////time = (end - start);// / CLOCKS_PER_SEC;
-		//cout << time<<endl;
-		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
-
-		//Thoi gian Frame end
-		LARGE_INTEGER frame_end_time;
-		QueryPerformanceCounter(&frame_end_time);
-
-		//FPS ( time theo CPU ),
-		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
-		frame_begin_time = frame_end_time;
-	}
 }
 
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
 	clear_screen(0xffffffff);
-	//draw_rect(0, 0, 100, 50, 0xaaaaaa);
-	//draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	//left_board
-	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
-	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
-	/*draw_entities(7, 0, 0, 1, 0xff55ff);
-	draw_entities(1 ,3, 3, 1, 0xff55ff);*/
-	//draw_entities(7, 6, 10, 1, 0xff55ff);
-	/*draw_truck(0, 0, 5, 5);*/
-	draw_rect(0, 0, 4, 3.25, 0x945305);
-	draw_entities(13, 0, 0, 0.5f, 0xffffffff);
-	//float speed = 50.f;
-	/*playerMove(input, dt, speed);
-	playerCollision();
+	float speed = 50.f;
+	draw_Background(0, 0, 73, 45);
+	//draw_rect(0, 0, 7.f, 3.f,0xdddd);
+	//draw_turtleL(0, 0, 1, 1);
+	playerMove(input, dt, speed);
+	player.isImpact(threat);
+	g_running = !player.getIsDead();
+	g_running = false;
 	updatePosThreat();
-	threatMove(dt, speed);*/
-	//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
+	threatMove(dt);
+	next_level();
+	// 
+	// 
+	//draw_entities(CAR_RIGHT, 0, 0, 0.5,0xfffff);
 
-	time_t now = time(0);
-	tm* temp=new tm;
-	localtime_s(temp, &now);
-	int prev_sec =0, present = 0;
-
-	if (prev_sec < temp->tm_sec)
-	{
-		cout << present<<endl;
-		prev_sec = temp->tm_sec;
-		present++;
-	}
-	//char* dt = asctime(temp);
-
-	//localtime_s(tm, time(0));
-	cout << temp->tm_sec << endl;
-
-
-	//if (g_mode == GM_MENUGAME)
-	//{
-
-	//	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
-	//	{
-	//		hot_button++;
-	//		if (hot_button > 3)hot_button = 3;
-	//	}
-	//	if(pressed(BUTTON_W)) {
-	//		hot_button--;
-	//		if (hot_button < 0)hot_button = 0;
-	//	}
-	//	switch (hot_button)
-	//	{
-	//	case 0: //new game
-	//	{
-	//		/*doi mau menu*/
-	//		break;
-	//	}
-	//	case 1://load game
-	//	{
-	//		break;
-	//	}
-	//	case 2://setting
-	//	{
-	//		break;
-	//	}
-	//	case 3:
-	//	{
-	//		break;
-	//	}
-	//	}
-
-	//	/*Do something in menu*/;
-
-	//	draw_Menu(0, 0, 50, 50);
-	//}
-	//else if (g_mode == GM_PLAYGAME)
-	//{
-	//	clear_screen(0xffffffff);
-	//	/*draw_truck(0, 0, 5, 5);
-	//	draw_rect(0, 0, 85, 45, 0xff55ff);*/
-	//	float speed = 50.f;
-	//	playerMove(input, dt, speed);
-	//	playerCollision();
-	//	next_level();
-	//	updatePosThreat();
-	//	threatMove(dt);
-	//	//draw_entities(1, 0, 0, 0.5, 0xaaaaa);
-	//}
 }
 void Game::reset_game()
 {
@@ -164,41 +74,15 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
-		/*for (auto x : threat)
-		{
-			x->setLevel(lv);
-		}*/
 		reset_game();
 	}
 	return false;
 }
 bool Game::quit(Input* input)
 {
-	if (is_down(BUTTON_ENTER))
+	if (is_down(BUTTON_ESC))
 		return false;
 	return true;
-}
-void Game::playerCollision()
-{
-	for (auto x : threat)
-	{
-		for (auto y : x->getThreat())
-		{
-			//cout << y->getY() << endl << y->getHalfY() << endl;
-			/*if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX())
-				running = false;
-			if (player.getX() - player.getHalfX() > y->getX() - y->getHalfX())
-				running = false;*/
-
-			if (player.getX() + player.getHalfX() > y->getX() - y->getHalfX()
-				&& player.getY() + player.getHalfY() > y->getY() - y->getHalfY()
-				&& player.getX() - player.getHalfX() < y->getX() + y->getHalfX()
-				&& player.getY() - player.getHalfY() < y->getY() + y->getHalfY())
-				running = false;
-			/*if (player.getY() - player.getHalfY() < y->getY() + y->getHalfY())
-				running = false;*/
-		}
-	}
 }
 void Game::checkWall_player(Player &player)
 {
@@ -247,7 +131,6 @@ void Game::playerMove(Input* input, float dt, float speed)
 	draw_titan(player.getX(), player.getY(),player.getHalfX(),player.getHalfY());
 	return;
 	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
-	return;
 }
 
 void Game::threatMove(float dt)
@@ -270,13 +153,61 @@ void Game::updatePosThreat()
 	for (auto x : threat)
 	{
 		//int randomType = 3;
-		int randomType;
-		do {
-			randomType = 0 + rand() % 10;
-		}
-		while (randomType == 7 || randomType == 6);
 		int randomDir = 0 + rand() % 2;
+		int randomType;
+		if (lv == 1)
+		{
+			while (true)
+			{
+				randomType = 0 + rand() % 8;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		if (lv == 2)
+		{
+			while (true)
+			{
+				randomType = 8 + rand() % 4;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		if (lv > 2)
+		{
+			while (true)
+			{
+				randomType = 0 + rand() % 11;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+
 		x->setListEntity((TYPE)randomType,randomDir);
+	//x->setListEntity(TURTLE_LEFT, 1);
 	}
 }
 
+bool Game::exitGame(thread &t1)
+{
+	t1.join();
+	return true;
+}
+
+void Game::pauseGame(HANDLE hd)
+{
+	//g_pause = true;
+	SuspendThread(hd);
+}
+
+void Game::resumeGame(HANDLE hd)
+{
+	//g_pause = false;
+	ResumeThread(hd);
+}
