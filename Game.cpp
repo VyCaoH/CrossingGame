@@ -73,11 +73,12 @@ void Game::simulate_game(Input* input, float dt)
 	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
 	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
 	/*draw_entities(7, 0, 0, 1, 0xff55ff);
-	draw_entities(1 ,3, 3, 1, 0xff55ff);
-	draw_entities(2,6, 10, 1, 0xff55ff);*/
-	/*draw_truck(0, 0, 5, 5);
-	draw_rect(0, 0, 85, 45, 0xff55ff);*/
-	float speed = 50.f;
+	draw_entities(1 ,3, 3, 1, 0xff55ff);*/
+	//draw_entities(7, 6, 10, 1, 0xff55ff);
+	/*draw_truck(0, 0, 5, 5);*/
+	draw_rect(0, 0, 4, 3.25, 0x945305);
+	draw_entities(13, 0, 0, 0.5f, 0xffffffff);
+	//float speed = 50.f;
 	/*playerMove(input, dt, speed);
 	playerCollision();
 	updatePosThreat();
