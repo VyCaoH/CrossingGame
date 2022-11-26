@@ -145,6 +145,30 @@ void Threat::setListEntity(TYPE type, int dir)
 				}
 			}break;
 		}
+		case TYPE::BALLOON_LEFT:
+		{
+			while (threat.size() < numEnemyInRow)
+			{
+				if (threat.empty())
+				{
+					//threaten.push_back(new Truck(randDistance(gen) - 30, pos_row));
+					threat.push_back((new Truck((float)randDistance_left + 30, (float)y_coord)));
+				}
+				else if (threat.size() < numEnemyInRow)
+				{
+					/*int prevCoordX = threaten.back()->getX();
+					Truck* temp = new Truck(randExDistance(gen) + prevCoordX + 30, pos_row);
+					threaten.push_back(temp->getBird());
+					delete temp;*/
+					float prevCoordX = threat.back()->getX();
+					float distance_temp = +randExDistance + prevCoordX + 20;
+					if (distance_temp < 80)
+					{
+						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
+					}
+				}
+			}break;
+		}
 		case TYPE::BIRD:
 		{
 			while (threat.size() < numEnemyInRow)
@@ -195,6 +219,31 @@ void Threat::setListEntity(TYPE type, int dir)
 			}
 			break;
 		}
+		case TYPE::TURTLE_LEFT:
+		{
+			while (threat.size() < numEnemyInRow)
+			{
+				if (threat.empty())
+				{
+					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
+					threat.push_back((new Dinosaur((float)randDistance_left + 30, (float)y_coord)));
+				}
+				else if (threat.size() < numEnemyInRow)
+				{
+					/*int prevCoordX = threaten.back()->getX();
+					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 30, pos_row);
+					threaten.push_back(temp->getBird());
+					delete temp;*/
+					float prevCoordX = threat.back()->getX();
+					float distance_temp = +randExDistance + prevCoordX + 20;
+					if (distance_temp < 80)
+					{
+						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
+					}
+				}
+			}
+			break;
+		}
 		}
 
 		break;
@@ -222,13 +271,14 @@ void Threat::setListEntity(TYPE type, int dir)
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
 					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					if (distance_temp > -140)
 					{
 						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
 
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
 				}
+				
 			}break;
 		}
 		case TYPE::CAR2_RIGHT:
@@ -249,7 +299,7 @@ void Threat::setListEntity(TYPE type, int dir)
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
 					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					if (distance_temp > -140)
 					{
 						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
 
@@ -259,6 +309,33 @@ void Threat::setListEntity(TYPE type, int dir)
 			}break;
 		}
 		case TYPE::BUS_RIGHT:
+		{
+			while (threat.size() < numEnemyInRow)
+			{
+				if (threat.empty())
+				{
+
+					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
+					threat.push_back(new Truck((float)randDistance_right - 30, (float)y_coord));
+				}
+				else if (threat.size() < numEnemyInRow)
+				{
+					/*int prevCoordX = threaten.back()->getX();
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					threaten.push_back(temp->getBird());
+					delete temp;*/
+					float prevCoordX = threat.back()->getX();
+					float distance_temp = -randExDistance + prevCoordX - 20;
+					if (distance_temp > -140)
+					{
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+
+						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
+					}
+				}
+			}break;
+		}
+		case TYPE::BALLOON_RIGHT:
 		{
 			while (threat.size() < numEnemyInRow)
 			{
@@ -340,6 +417,35 @@ void Threat::setListEntity(TYPE type, int dir)
 			}
 			break;
 		}
+		case TYPE::TURTLE_RIGHT:
+		{
+			while (threat.size() < numEnemyInRow)
+			{
+				if (threat.empty())
+				{
+
+					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
+					threat.push_back(new Dinosaur((float)randDistance_right - 30, (float)y_coord));
+				}
+				else if (threat.size() < numEnemyInRow)
+				{
+					/*int prevCoordX = threaten.back()->getX();
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					threaten.push_back(temp->getBird());
+					delete temp;*/
+					float prevCoordX = threat.back()->getX();
+					float distance_temp = -randExDistance + prevCoordX - 20;
+					if (distance_temp > -130)
+					{
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+
+						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
+					}
+				}
+				break;
+			}
+			break;
+		}
 		}
 		break;
 		}
@@ -381,8 +487,9 @@ void Threat::move(float speed, float dt)
 			{
 
 				x->left(speed, dt, lv);
+				x->setHalf(4.5f, 3.25f);
 				if (checkWall_left(x->getX()))
-					draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					draw_birdL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 			}break;
@@ -438,6 +545,7 @@ void Threat::move(float speed, float dt)
 			for (auto x : threat)
 			{
 				x->left(speed, dt, lv);
+				x->setHalf(3.5f, 5.f);
 				if (checkWall_left(x->getX()))
 				{
 					//draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
@@ -445,6 +553,33 @@ void Threat::move(float speed, float dt)
 				}
 				else
 					threat.erase(threat.begin());
+			}break;
+		}
+		case BALLOON_LEFT:
+		{
+			for (auto x : threat)
+			{
+				x->left(speed, dt, lv);
+				x->setHalf(3.5f, 5.f);
+				if (checkWall_left(x->getX()))
+				{
+					//draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
+					draw_entities(BALLOON_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+				}
+				else
+					threat.erase(threat.begin());
+			}break;
+		}
+		case TURTLE_LEFT:
+		{
+			for (auto x : threat)
+			{
+				x->left(speed, dt, lv);
+				if (checkWall_left(x->getX()))
+					draw_turtleL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+				else
+					threat.erase(threat.begin());
+
 			}break;
 		}
 		}
@@ -459,9 +594,10 @@ void Threat::move(float speed, float dt)
 			for (auto x : threat)
 			{
 				x->right(speed, dt, lv);
+				x->setHalf(4.5f, 3.25f);
 				if (checkWall_right(x->getX()))
 					//draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
-					draw_bird(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					draw_birdR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 
@@ -513,6 +649,30 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				if (checkWall_right(x->getX()))
 					draw_entities(BUS_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+				else
+					threat.erase(threat.begin());
+
+			}break;
+		}
+		case BALLOON_RIGHT:
+		{
+			for (auto x : threat)
+			{
+				x->right(speed, dt, lv);
+				if (checkWall_right(x->getX()))
+					draw_entities(BALLOON_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+				else
+					threat.erase(threat.begin());
+
+			}break;
+		}
+		case TURTLE_RIGHT:
+		{
+			for (auto x : threat)
+			{
+				x->right(speed, dt, lv);
+				if (checkWall_right(x->getX()))
+					draw_turtleR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 

@@ -108,6 +108,11 @@ public:
 	{
 		return is_right;
 	}
+	void setHalf(float x, float y) override
+	{
+		car_half_X = x;
+		car_half_Y = y;
+	}
 };
 class Truck : public Vehicle
 {
@@ -167,5 +172,10 @@ public:
 	bool Right()
 	{
 		return is_right;
+	}
+	void setHalf(float x, float y) override
+	{
+		truck_half_X = x;
+		truck_half_Y = y;
 	}
 };

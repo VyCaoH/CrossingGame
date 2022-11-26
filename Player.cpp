@@ -9,7 +9,7 @@ Player::Player()
 	player_pX = 0;
 	player_pY = -40;
 	entity.clear();
-	player_half_X = 2.5;
+	player_half_X = 3;
 	player_half_Y = 5;
 }
 float Player:: getHalfX()
@@ -83,9 +83,10 @@ bool Player::isImpact(vector<Threat*>threat)
 				&& player_pY + player_half_Y > y->getY() - y->getHalfY()
 				&& player_pX - player_half_X < y->getX() + y->getHalfX()
 				&& player_pY - player_half_Y < y->getY() + y->getHalfY())
-
+			{
 				setIsDead(true);
 				return true;
+			}
 		}
 	}
 	return false;

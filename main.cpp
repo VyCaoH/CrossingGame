@@ -34,26 +34,21 @@ int main()
 		LARGE_INTEGER perf;
 		QueryPerformanceFrequency(&perf);
 		performance_frequency = (float)perf.QuadPart;
-		
 	}
-
-
 	thread t1(subThread,window);
 	while (g_running) {
 		MSG message;
 		messageInput(input, message, window);
 
-		if (g_pause == true)
-		{
-			game.pauseGame(t1.native_handle());
-		}
+
 		if (!game.getPlayer().getIsDead())
 		{
-			if (input.buttons[BUTTON_ESC].is_down )//&& input.buttons[BUTTON_ESC].changed)
+			if (input.buttons[BUTTON_ESC].is_down )
 			{
-				game.exitGame(t1.native_handle());
+				g_running = false;
+				//game.exitGame(t1);
 			}
-			else if (input.buttons[BUTTON_P].is_down )//&& !input.buttons[BUTTON_P].changed)
+			else if (input.buttons[BUTTON_P].is_down )
 			{
 				g_pause = true;
 				game.pauseGame(t1.native_handle());
@@ -76,8 +71,8 @@ int main()
 			}
 			else
 			{
-				game.exitGame(t1.native_handle());
-				return 0;
+				g_running = false;
+
 			}
 		}
 		//Thoi gian Frame end
@@ -88,6 +83,6 @@ int main()
 		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
 		frame_begin_time = frame_end_time;
 	}
-
+	game.exitGame(t1);
 	return 0;
 }

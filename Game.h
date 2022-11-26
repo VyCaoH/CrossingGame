@@ -30,6 +30,7 @@ public:
 	{
 		for (auto x : threat)
 			delete x;
+		threat.clear();
 	}
 	Player getPlayer();
 	int getLv();
@@ -46,7 +47,7 @@ public:
 	void playerMove(Input* input, float dt, float speed);
 	void threatMove(float dt);
 	void updatePosThreat();
-	void exitGame(HANDLE hd);
+	bool exitGame(thread&t1);
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
 };

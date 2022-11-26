@@ -48,16 +48,19 @@ void Game::simulate_game(Input* input, float dt)
 	render_state = getRender();
 	clear_screen(0xffffffff);
 	float speed = 50.f;
+	draw_Background(0, 0, 73, 45);
+	//draw_rect(0, 0, 7.f, 3.f,0xdddd);
+	//draw_turtleL(0, 0, 1, 1);
 	playerMove(input, dt, speed);
 	player.isImpact(threat);
 	g_running = !player.getIsDead();
-	//g_running = false;
+	g_running = false;
 	updatePosThreat();
 	threatMove(dt);
 	next_level();
 	// 
 	// 
-	//draw_entities(CAR2_RIGHT, 0, 0, 0.5,0xfffff);
+	//draw_entities(CAR_RIGHT, 0, 0, 0.5,0xfffff);
 
 }
 void Game::reset_game()
@@ -77,7 +80,7 @@ bool Game::next_level()
 }
 bool Game::quit(Input* input)
 {
-	if (is_down(BUTTON_ENTER))
+	if (is_down(BUTTON_ESC))
 		return false;
 	return true;
 }
@@ -152,26 +155,49 @@ void Game::updatePosThreat()
 		//int randomType = 3;
 		int randomDir = 0 + rand() % 2;
 		int randomType;
-		do {
-			randomType = 0 + rand() % 10;
-			if (randomType % 2 == randomDir)
+		if (lv == 1)
+		{
+			while (true)
 			{
-				if (randomType == 7)
-					continue;
-				if (randomType == 6)
-					continue;
-				break;
+				randomType = 0 + rand() % 8;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
 			}
 		}
-		while (true);
+		if (lv == 2)
+		{
+			while (true)
+			{
+				randomType = 8 + rand() % 4;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		if (lv > 2)
+		{
+			while (true)
+			{
+				randomType = 0 + rand() % 11;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+
 		x->setListEntity((TYPE)randomType,randomDir);
-		//x->setListEntity(CAR2_LEFT, 1);
+	//x->setListEntity(TURTLE_LEFT, 1);
 	}
 }
 
-void Game::exitGame(HANDLE hd)
+bool Game::exitGame(thread &t1)
 {
-	ExitThread((DWORD)hd);
+	t1.join();
+	return true;
 }
 
 void Game::pauseGame(HANDLE hd)

@@ -1,6 +1,6 @@
 typedef int s32;
 typedef unsigned int u32;
-enum TYPE { CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_LEFT, CAR2_RIGHT, BALLOON_LEFT, BALLOON_RIGHT, BIRD, DINOSAUR, CLOUD, GRASS};
+enum TYPE { CAR_RIGHT, CAR_LEFT, CAR2_RIGHT, CAR2_LEFT, BUS_RIGHT, BUS_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BIRD, DINOSAUR,  TURTLE_RIGHT,TURTLE_LEFT};
 
 inline int clamp(int min, int val, int max)
 {
@@ -171,7 +171,7 @@ static void draw_dino(float x, float y, float half_size_x, float half_size_y)
 
 	//draw_rect_in_pixels((int)x0, (int)y0, (int)x1, (int)y1, 0x1820FF);
 }
-static void draw_bird(float x, float y, float half_size_x, float half_size_y) //chieu dai
+static void draw_birdL(float x, float y, float half_size_x, float half_size_y) //chieu dai
 {
 	//nen black
 	draw_rect(x , y , 1.65, 3.25, 0x000000);
@@ -326,7 +326,7 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 
 	//draw_rect(x, y - 3.75, 2.5, 0.4, 0xBD1F1F); //tay
 }
-static void draw_turtle(float x, float y, float half_size_x, float half_size_y)
+static void draw_turtleR(float x, float y, float half_size_x, float half_size_y)
 {
 	//nen black
 	draw_rect(x, y + 2.8, 1.5, 0.3, 0x000000);
@@ -410,7 +410,7 @@ static void draw_turtle(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
 }
 
-static void draw_turtleR(float x, float y, float half_size_x, float half_size_y)
+static void draw_turtleL(float x, float y, float half_size_x, float half_size_y)
 {
 	//nen black
 	draw_rect(x, y + 2.8, 1.5, 0.3, 0x000000);
@@ -760,7 +760,7 @@ static const char* entities[][14] = {
 	"99999999999999999993333333999999999999999999",
 	"99999999999999999993888888339999999999999999",
 	"99999999999999999993888888339999999999999999",
-	"9999973333333333340388888833338999999999999",
+	"99999733333333333403888888333389999999999999",
 	"99999733333333333433433333433333899999999999",
 	"99999333333333333433433333433333399999999999",
 	"99999222311132222422422223431112249999999999",
@@ -831,7 +831,7 @@ static const char* entities[][14] = {
 	"933566533333335665333",
 	"999955999999999559999",
 	"",
-	"",
+
 	"",
 	"",
 	//car2_right
@@ -922,11 +922,12 @@ static const char* entities[][14] = {
 static void draw_entities(int number, float x, float y, float size, u32 color)
 {
 	float half_size = size * .5f;
-	float original_y = y;
+	float original_y = y-7;
 	switch (number)
 	{
 	case CAR_RIGHT:
 	{
+		x -= 9.f;
 		const char** entity;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
@@ -1432,78 +1433,78 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 		break;
 
 	}
-	case CLOUD:
-	{
-		const char** entity;
-		entity = entities[number];
-		float original_x = x;
+	//case CLOUD:
+	//{
+	//	const char** entity;
+	//	entity = entities[number];
+	//	float original_x = x;
 
-		for (int i = 0; i <= 13; i++) {
-			const char* row = entity[i];
-			while (*row) {
-				switch (*row)
-				{
-				case '0':
-				{
-					draw_rect(x, y, half_size, half_size, 0xFFFFFF);
-					break;
-				}
-				case '1':
-				{
-					draw_rect(x, y, half_size, half_size, 0x3366CC);
-					break;
-				}
-				/*case '3':
-				{
-					draw_rect(x, y, half_size, half_size, 0x01C4FF);
-				}*/
-				}
-				x += size;
-				row++;
-			}
-			y -= size;
-			x = original_x;
-		}
-		break;
-	}
-	case GRASS:
-	{
-		const char** entity;
-		entity = entities[number];
-		float original_x = x;
+	//	for (int i = 0; i <= 13; i++) {
+	//		const char* row = entity[i];
+	//		while (*row) {
+	//			switch (*row)
+	//			{
+	//			case '0':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0xFFFFFF);
+	//				break;
+	//			}
+	//			case '1':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0x3366CC);
+	//				break;
+	//			}
+	//			/*case '3':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0x01C4FF);
+	//			}*/
+	//			}
+	//			x += size;
+	//			row++;
+	//		}
+	//		y -= size;
+	//		x = original_x;
+	//	}
+	//	break;
+	//}
+	//case GRASS:
+	//{
+	//	const char** entity;
+	//	entity = entities[number];
+	//	float original_x = x;
 
-		for (int i = 0; i <= 13; i++) {
-			const char* row = entity[i];
-			while (*row) {
-				switch (*row)
-				{
-				case '0':
-				{
-					draw_rect(x, y, half_size, half_size, 0xA56802);
-					break;
-				}
-				case '1':
-				{
-					draw_rect(x, y, half_size, half_size, 0x8B5304);
-					break;
-				}
-				case '2':
-				{
-					draw_rect(x, y, half_size, half_size, 0x00FF80);
-				}
-				case '3':
-				{
-					draw_rect(x, y, half_size, half_size, 0x02DD5A);
-				}
-				}
-				x += size;
-				row++;
-			}
-			y -= size;
-			x = original_x;
-		}
-		break;
-	}
+	//	for (int i = 0; i <= 13; i++) {
+	//		const char* row = entity[i];
+	//		while (*row) {
+	//			switch (*row)
+	//			{
+	//			case '0':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0xA56802);
+	//				break;
+	//			}
+	//			case '1':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0x8B5304);
+	//				break;
+	//			}
+	//			case '2':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0x00FF80);
+	//			}
+	//			case '3':
+	//			{
+	//				draw_rect(x, y, half_size, half_size, 0x02DD5A);
+	//			}
+	//			}
+	//			x += size;
+	//			row++;
+	//		}
+	//		y -= size;
+	//		x = original_x;
+	//	}
+	//	break;
+	//}
 	}
 }
 static void draw_number(int number, float x, float y, float size, u32 color) {
