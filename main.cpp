@@ -10,7 +10,10 @@ void subThread(HWND window)
 	while (g_running)
 	{
 		//MOVING = input;
-		game.simulate_game(&MOVING, 0.016f);
+		if (!game.getPlayer().getIsDead())
+			game.simulate_game(&MOVING, 0.016f);
+		else
+			g_running = false;
 		//game.menu_game(&MOVING);
 		render_state = getRender();
 		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
@@ -38,7 +41,8 @@ int main()
 		QueryPerformanceFrequency(&perf);
 		performance_frequency = (float)perf.QuadPart;
 	}
-	thread t1(subThread,window);
+	thread t1(subThread, window);
+	game.pauseGame(t1.native_handle());
 	while (g_running) {
 
 		MSG message;
@@ -46,56 +50,55 @@ int main()
 
 		if (g_menu)
 		{
-			if (g_pause)
-			{
-				game.pauseGame(t1.native_handle());
-			}
-			game.menu_game(&MOVING);
+			render_state = getRender();
+			StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+
+			g_pause = g_menu = game.menu_game(&MOVING);
 			if (!g_pause)
 				game.resumeGame(t1.native_handle());
-
 		}
 		else
 		{
-			if(g_pause)
 			if (!game.getPlayer().getIsDead())
 			{
+				if (!g_pause)
+				{
 
-				if (MOVING.buttons[BUTTON_ESC].is_down)
-				{
-					//Code cua sub_Menu
+					if (MOVING.buttons[BUTTON_ESC].is_down)
+					{
+						//Code cua sub_Menu
 
-					//break;
-					g_running = false;
-					//game.exitGame(t1);
-				}
-				else if (MOVING.buttons[BUTTON_P].is_down)
-				{
-					//g_pause = true;
-					game.pauseGame(t1.native_handle());
-				}
-				if (MOVING.buttons[BUTTON_Y].is_down)
-				{
-					//g_pause = false;
-					game.resumeGame((HANDLE)t1.native_handle());
-				}
-			}
-		
-			/*else
-			{
-				if (MOVING.buttons[BUTTON_Y].is_down && MOVING.buttons[BUTTON_Y].changed)
-				{
-					game.startGame();
+						//break;
+						g_running = false;
+						//game.exitGame(t1);
+					}
+					else if (MOVING.buttons[BUTTON_P].is_down)
+					{
+						g_pause = true;
+						game.pauseGame(t1.native_handle());
+					}
+					if (MOVING.buttons[BUTTON_Y].is_down)
+					{
+						//g_pause = false;
+						game.resumeGame((HANDLE)t1.native_handle());
+					}
 				}
 				else
 				{
-					g_running = false;
+					if (MOVING.buttons[BUTTON_ESC].is_down)
+					{
+						g_running = false;
+						game.resumeGame((HANDLE)t1.native_handle());
+					}
+					if (MOVING.buttons[BUTTON_Y].is_down)
+					{
+						g_pause = false;
+						game.resumeGame((HANDLE)t1.native_handle());
+					}
 				}
-			}*/
+			}
+			else {}
 		}
-		render_state = getRender();
-		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
-
 		//Thoi gian Frame end
 		LARGE_INTEGER frame_end_time;
 		QueryPerformanceCounter(&frame_end_time);

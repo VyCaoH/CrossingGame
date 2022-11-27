@@ -43,7 +43,6 @@ void Game::simulate_game(Input* input, float dt)
 	clear_screen(0xffffffff);
 	float speed = 50.f;
 	//draw_Background(0, 0, 73, 45);
-	//draw_rect(0, 0, 6.f, 4.f,0xdddd);
 	//draw_turtleL(0, 0, 1, 1);
 	player.move(*&input, dt, speed);
 	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
@@ -60,7 +59,7 @@ void Game::simulate_game(Input* input, float dt)
 	//if (is_down(BUTTON_A)) player.left(speed, dt);
 	//draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
 }
-void Game::menu_game(Input* input) {
+bool Game::menu_game(Input* input) {
 	render_state = getRender();
 	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
 	{
@@ -77,17 +76,22 @@ void Game::menu_game(Input* input) {
 	{
 		switch (hot_button)
 		{
-		case 0:
-			g_menu = !g_menu;
-			g_pause = !g_pause;
-		}
+		case 0:	//NEW GAME
+			return false;
+		case 1:		//LOAD GAME
+			break;
+		case 2:
+			break;
+
+		}//==hot_button;
 	}
 	//draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
+	return true;
 
 }
 void Game::reset_game()
 {
-	player = Player();
+	player.setY(-45);
 	threat.clear();
 }
 bool Game::next_level()
@@ -144,7 +148,7 @@ void Game::updatePosThreat()
 		{
 			while (true)
 			{
-				randomType = 8 + rand() % 4;
+				randomType = 8 + rand() % 10;
 				if (randomType % 2 == randomDir)
 				{
 					break;
@@ -155,7 +159,7 @@ void Game::updatePosThreat()
 		{
 			while (true)
 			{
-				randomType = 0 + rand() % 11;
+				randomType = 0 + rand() % 18;
 				if (randomType % 2 == randomDir)
 				{
 					break;
@@ -164,7 +168,6 @@ void Game::updatePosThreat()
 		}
 
 		x->setListEntity((TYPE)randomType,randomDir);
-	//x->setListEntity(TURTLE_LEFT, 1);
 	}
 }
 
