@@ -37,6 +37,7 @@ enum {
 	BUTTON_LEFT,
 	BUTTON_RIGHT,
 	BUTTON_ESC,
+	BUTTON_ENTER,
 
 	BUTTON_COUNT, // Should be the last item
 };

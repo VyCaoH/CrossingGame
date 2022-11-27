@@ -9,8 +9,9 @@
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
-static bool g_pause = false;
-
+static bool g_pause=true;
+static bool g_menu=true;
+static int hot_button = 0;
 class Game
 {
 	Player player;

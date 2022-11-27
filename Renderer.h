@@ -2113,7 +2113,8 @@ static void draw_title(float x, float y, float size, u32 color) {
 }
 static void draw_Button(int number, float x, float y, float size, u32 color, int isHotButton) {
 	float half_size = size * .5f;
-	float original_y = y;const char** button;
+	float original_y = y;
+	const char** button;
 	float original_x = x;
 
 	button = buttons[number];

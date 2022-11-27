@@ -1,13 +1,9 @@
 #include "Game.h"
 
-//#define is_down(b) input->buttons[b].is_down
-//#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
-//#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
-static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
-static int hot_button = 0;
+
 
 
 int Game::getLv()
@@ -45,7 +41,7 @@ void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
 	clear_screen(0xffffffff);
-	float speed = 50.f;
+	float speed = 5.f;
 	//draw_Background(0, 0, 73, 45);
 	//draw_rect(0, 0, 6.f, 4.f,0xdddd);
 	//draw_turtleL(0, 0, 1, 1);
@@ -57,22 +53,35 @@ void Game::simulate_game(Input* input, float dt)
 	updatePosThreat();
 	threatMove(dt);
 	next_level();
-	// 
-	// 
-	//draw_entities(CAR2_RIGHT, 0, 0, 0.5,0xfffff);
+
+	//if (is_down(BUTTON_W)) player.up(speed, dt);
+	//if (is_down(BUTTON_S)) player.down(speed, dt);
+	//if (is_down(BUTTON_D)) player.right(speed, dt);
+	//if (is_down(BUTTON_A)) player.left(speed, dt);
+	//draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
 }
 void Game::menu_game(Input* input) {
-	if (is_down(BUTTON_S))// || pressed(BUTTON_W))
+	render_state = getRender();
+	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
 	{
 		hot_button++;
 		if (hot_button > 4)hot_button = 4;
 	}
-	if (is_down(BUTTON_W)) {
+	if (pressed(BUTTON_W)) {
 		hot_button--;
 		if (hot_button < 0)hot_button = 0;
 	}
 	/*Do something in menu*/;
 	draw_Menu(0, 0, 50, 50, hot_button);
+	if (pressed(BUTTON_ENTER))
+	{
+		switch (hot_button)
+		{
+		case 0:
+			g_menu = !g_menu;
+			g_pause = !g_pause;
+		}
+	}
 	//draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
 
 }
