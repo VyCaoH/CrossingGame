@@ -58,7 +58,19 @@ void Game::simulate_game(Input* input, float dt)
 	// 
 	// 
 	//draw_entities(CAR2_RIGHT, 0, 0, 0.5,0xfffff);
-
+}
+void Game::menu_game(Input* input) {
+	if (is_down(BUTTON_S))// || pressed(BUTTON_W))
+	{
+		hot_button++;
+		if (hot_button > 4)hot_button = 4;
+	}
+	if (is_down(BUTTON_W)) {
+		hot_button--;
+		if (hot_button < 0)hot_button = 0;
+	}
+	/*Do something in menu*/;
+	draw_Menu(0, 0, 50, 50, hot_button);
 }
 void Game::reset_game()
 {

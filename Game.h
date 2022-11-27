@@ -39,6 +39,7 @@ public:
 	void getInput(Input* input);
 	void mainBoard();
 	virtual void simulate_game(Input* input, float dt);
+	void menu_game(Input* input);
 	void reset_game();
 	bool next_level();
 	bool quit(Input* input);
