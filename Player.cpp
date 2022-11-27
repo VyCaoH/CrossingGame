@@ -7,7 +7,7 @@ Player::Player()
 	player_ddp = 0;
 	//heiPlayer:: ght = width = 0;
 	player_pX = 0;
-	player_pY = -40;
+	player_pY = 0;
 	entity.clear();
 	player_half_X = 3;
 	player_half_Y = 5;
@@ -22,16 +22,16 @@ float Player:: getHalfY()
 }
 void Player:: up(float speed, float dt)
 {
-	player_pY += speed * dt;
+	player_pY += speed;
 }
 void Player::down(float speed, float dt) {
-	player_pY -= speed * dt;
+	player_pY -= speed;
 }
 void Player::left(float speed, float dt) {
-	player_pX -= speed * dt;
+	player_pX -= speed;
 }
 void Player::right(float speed, float dt) {
-	player_pX += speed * dt;
+	player_pX += speed;
 }
 float Player:: getX()
 {
