@@ -36,7 +36,6 @@ enum {
 	BUTTON_Y,
 	BUTTON_LEFT,
 	BUTTON_RIGHT,
-	BUTTON_ENTER,
 	BUTTON_ESC,
 
 	BUTTON_COUNT, // Should be the last item

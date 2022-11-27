@@ -16,6 +16,11 @@
 {
 	entity_pY = src;
 }
+ void Entity::setHalf(float x, float y)
+ {
+	 entity_half_x = x;
+	 entity_half_y = y;
+ }
 float Entity::getX() const
 {
 	return entity_pX;

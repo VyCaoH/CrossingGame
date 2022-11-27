@@ -78,6 +78,11 @@ public:
 	{
 		return is_right;
 	}
+	void setHalf(float x, float y) override
+	{
+		bird_half_X = x;
+		bird_half_Y = y;
+	}
 };
 class Dinosaur : public Animal
 {
@@ -151,6 +156,11 @@ public:
 	bool Right()
 	{
 		return is_right;
+	}
+	void setHalf(float x, float y) override
+	{
+		dinosaur_half_X = x;
+		dinosaur_half_Y = y;
 	}
 };
 //	~Bird();

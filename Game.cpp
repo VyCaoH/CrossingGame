@@ -30,12 +30,10 @@ Player Game::getPlayer()
 }
 void Game::startGame()
 {
-	//Menu
-}
-
-void Game::getInput(Input* input)
-{
-	playerMove(input, 0.1f, 50.f);
+	player = Player();
+	threat.clear();
+	lv = 1;
+	score = 0;
 }
 
 void Game::mainBoard()
@@ -48,10 +46,14 @@ void Game::simulate_game(Input* input, float dt)
 	render_state = getRender();
 	clear_screen(0xffffffff);
 	float speed = 50.f;
-	playerMove(input, dt, speed);
+	//draw_Background(0, 0, 73, 45);
+	//draw_rect(0, 0, 6.f, 4.f,0xdddd);
+	//draw_turtleL(0, 0, 1, 1);
+	player.move(*&input, dt, speed);
+	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
 	player.isImpact(threat);
 	g_running = !player.getIsDead();
-	//g_running = false;
+	g_running = false;
 	updatePosThreat();
 	threatMove(dt);
 	next_level();
@@ -71,6 +73,8 @@ void Game::menu_game(Input* input) {
 	}
 	/*Do something in menu*/;
 	draw_Menu(0, 0, 50, 50, hot_button);
+	//draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
+
 }
 void Game::reset_game()
 {
@@ -89,57 +93,9 @@ bool Game::next_level()
 }
 bool Game::quit(Input* input)
 {
-	if (is_down(BUTTON_ENTER))
+	if (is_down(BUTTON_ESC))
 		return false;
 	return true;
-}
-void Game::checkWall_player(Player &player)
-{
-	if (player.getX() + player.getHalfX() > arena_half_size_x)
-	{
-		player.setX(arena_half_size_x - player.getHalfX());
-		player.setDP(0);
-	}
-	if (player.getY() + player.getHalfY() > arena_half_size_y)
-	{
-		player.setY(arena_half_size_y - player.getHalfY());
-		player.setDP(0);
-	}
-	if (player.getX() - player.getHalfX() < -arena_half_size_x)
-	{
-		player.setX(-arena_half_size_x + player.getHalfX());
-		player.setDP(0);
-	}
-	if (player.getY() - player.getHalfY() < -arena_half_size_y)
-	{
-		player.setY(-arena_half_size_y + player.getHalfY());
-		player.setDP(0);
-	}
-}
-void Game::playerMove(Input* input, float dt, float speed)
-{
-	if (is_down(BUTTON_W))
-	{
-		player.up(speed, dt);
-	}
-	if (is_down(BUTTON_S))
-	{
-		player.down(speed, dt);
-	}
-
-	if (is_down(BUTTON_A))
-	{
-		player.left(speed, dt);
-	}
-	if (is_down(BUTTON_D))
-	{
-		player.right(speed, dt);
-	}
-	checkWall_player(player);
-	
-	draw_titan(player.getX(), player.getY(),player.getHalfX(),player.getHalfY());
-	return;
-	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
 }
 
 void Game::threatMove(float dt)
@@ -164,26 +120,49 @@ void Game::updatePosThreat()
 		//int randomType = 3;
 		int randomDir = 0 + rand() % 2;
 		int randomType;
-		do {
-			randomType = 0 + rand() % 10;
-			if (randomType % 2 == randomDir)
+		if (lv == 1)
+		{
+			while (true)
 			{
-				if (randomType == 7)
-					continue;
-				if (randomType == 6)
-					continue;
-				break;
+				randomType = 0 + rand() % 8;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
 			}
 		}
-		while (true);
+		if (lv == 2)
+		{
+			while (true)
+			{
+				randomType = 8 + rand() % 4;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		if (lv > 2)
+		{
+			while (true)
+			{
+				randomType = 0 + rand() % 11;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+
 		x->setListEntity((TYPE)randomType,randomDir);
-		//x->setListEntity(CAR2_LEFT, 1);
+	//x->setListEntity(TURTLE_LEFT, 1);
 	}
 }
 
-void Game::exitGame(HANDLE hd)
+bool Game::exitGame(thread &t1)
 {
-	ExitThread((DWORD)hd);
+	t1.join();
+	return true;
 }
 
 void Game::pauseGame(HANDLE hd)

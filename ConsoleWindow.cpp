@@ -54,13 +54,13 @@ HWND winMain() {
 
 	// Create Window
 	HWND window = CreateWindowEx(0, className, L"CrossingGame", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
-	//{
-	//	//Fullscreen
-	//	SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
-	//	MONITORINFO mi = { sizeof(mi) };
-	//	GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
-	//	SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
-	//}
+	{
+		//Fullscreen
+		SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
+		MONITORINFO mi = { sizeof(mi) };
+		GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
+		SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	}
 	return window;
 }
 void messageInput(Input&input,MSG &message,HWND &window)
@@ -98,7 +98,7 @@ input.buttons[b].is_down = is_down;\
 				process_button(BUTTON_ESC, 27);
 				process_button(BUTTON_LEFT, VK_LEFT);
 				process_button(BUTTON_RIGHT, VK_RIGHT);
-				process_button(BUTTON_ENTER, VK_RETURN);
+				//process_button(BUTTON_ENTER, VK_RETURN);
 			}
 		} break;
 		default: {

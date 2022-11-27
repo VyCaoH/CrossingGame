@@ -12,6 +12,7 @@ public:
 	virtual float getY() const;
 	virtual void setX(float src);
 	virtual void setY(float src);
+	virtual void setHalf(float x, float y);
 	virtual float getHalfX() const;
 	virtual float getHalfY() const;
 	virtual void left(float speed, float dt,int lv);

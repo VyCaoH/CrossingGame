@@ -1,6 +1,9 @@
 typedef int s32;
 typedef unsigned int u32;
-enum TYPE { CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_LEFT, CAR2_RIGHT, BALLOON_LEFT, BALLOON_RIGHT, BIRD, DINOSAUR, CLOUD, GRASS };
+enum TYPE {
+	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
+	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT,TURTLE_RIGHT,TURTLE_LEFT,BIRD_RIGHT,BIRD_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
+};
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT };
 
 inline int clamp(int min, int val, int max)
@@ -142,37 +145,7 @@ static void draw_truck(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x + 2, y + 1, 3, 2.5, 0x1820FF);
 	//draw_rect(x + 3, y, 2, 0.5, 0x1820FF);
 }
-static void draw_dino(float x, float y, float half_size_x, float half_size_y)
-{
-	draw_rect(x + 3, y + 0.7, 2, 0.2, 0x000000);
-	draw_rect(x, y - 3, 7 + 0.2, 1.5 + 0.2, 0x000000);
-
-	draw_rect(x, y - 4.5, 2 + 0.2, 2 + 0.2, 0x000000);
-	draw_rect(x + 1, y - 4.5 - 2, 2 + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 2, y - 4.5 - 3, 2 + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 3, y - 4.5 - 4, 1.5 + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 4, y - 4.5 - 5, 1. + 0.2, 0.5 + 0.2, 0x000000);
-	draw_rect(x + 4.5, y - 4.5 - 5.5, 0.9 + 0.2, 0.1 + 0.5, 0x000000);
-
-
-	draw_rect(x + 3, y, 2, 0.5, 0x1820FF);
-	draw_rect(x + 2, y - 1, 2, 0.5, 0x1820FF);
-	draw_rect(x + 1, y - 2, 2, 0.5, 0x1820FF);
-	draw_rect(x, y - 3, 2, 0.5, 0x1820FF);
-
-	draw_rect(x, y - 3, 7, 1.5, 0x1820FF);
-
-
-	draw_rect(x, y - 4.5, 2, 2, 0x1820FF);
-	draw_rect(x + 1, y - 4.5 - 2, 2, 0.5, 0x1820FF);
-	draw_rect(x + 2, y - 4.5 - 3, 2, 0.5, 0x1820FF);
-	draw_rect(x + 3, y - 4.5 - 4, 1.5, 0.5, 0x1820FF);
-	draw_rect(x + 4, y - 4.5 - 5, 1., 0.5, 0x1820FF);
-	draw_rect(x + 4.5, y - 4.5 - 5.5, 0.9, 0.1, 0x1820FF);
-
-	//draw_rect_in_pixels((int)x0, (int)y0, (int)x1, (int)y1, 0x1820FF);
-}
-static void draw_bird(float x, float y, float half_size_x, float half_size_y) //chieu dai
+static void draw_birdL(float x, float y, float half_size_x, float half_size_y) //chieu dai
 {
 	//nen black
 	draw_rect(x , y , 1.65, 3.25, 0x000000);
@@ -327,7 +300,7 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 
 	//draw_rect(x, y - 3.75, 2.5, 0.4, 0xBD1F1F); //tay
 }
-static void draw_turtle(float x, float y, float half_size_x, float half_size_y)
+static void draw_turtleR(float x, float y, float half_size_x, float half_size_y)
 {
 	//nen black
 	draw_rect(x, y + 2.8, 1.5, 0.3, 0x000000);
@@ -410,8 +383,7 @@ static void draw_turtle(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x - 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);// chan xanh 
 	draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
 }
-
-static void draw_turtleR(float x, float y, float half_size_x, float half_size_y)
+static void draw_turtleL(float x, float y, float half_size_x, float half_size_y)
 {
 	//nen black
 	draw_rect(x, y + 2.8, 1.5, 0.3, 0x000000);
@@ -758,33 +730,33 @@ static const char* entities[][14] = {
 	"",
 	"",
 	"",
-	"99999999999999999993333333999999999999999999",
-	"99999999999999999993888888339999999999999999",
-	"99999999999999999993888888339999999999999999",
-	"9999973333333333340388888833338999999999999",
-	"99999733333333333433433333433333899999999999",
-	"99999333333333333433433333433333399999999999",
-	"99999222311132222422422223431112249999999999",
-	"99999223166613222422422222316661229999999999",
-	"99999923165613222422422222316561999999999999",
-	"99999999166619999999999999916661999999999999",
-	"99999999911199999999999999991119999999999999",
+	"99999999999999333333399999999",
+	"99999999999999388888833999999",
+	"99999999999999388888833999999",
+	"73333333333340388888833338999",
+	"73333333333343343333343333389",
+	"33333333333343343333343333339",
+	"22231113222242242222343111224",
+	"22316661322242242222231666122",
+	"92316561322242242222231656199",
+	"99916661999999999999991666199",
+	"99991119999999999999999111999",
 
 	//car_left
 	"",
 	"",
 	"",
-	"99999999999999999933333339999999999999999999",
-	"99999999999999993388888839999999999999999999",
-	"99999999999999993388888839999999999999999999",
-	"99999999999998333388888830433333333333799999",
-	"99999999999833333433333433433333333333799999",
-	"99999999999333333433333433433333333333399999",
-	"99999999994221113432222422422223111322299999",
-	"99999999992216661322222422422231666132299999",
-	"99999999999916561322222422422231656132999999",
-	"99999999999916661999999999999991666199999999",
-	"99999999999991119999999999999999111999999999",
+	"9999999933333339999999999999999999",
+	"9999993388888839999999999999999999",
+	"9999993388888839999999999999999999",
+	"9998333388888830433333333333799999",
+	"9833333433333433433333333333799999",
+	"9333333433333433433333333333399999",
+	"4221113432222422422223111322299999",
+	"2216661322222422422231666132299999",
+	"9916561322222422422231656132999999",
+	"9916661999999999999991666199999999",
+	"9991119999999999999999111999999999",
 
 
 	//bus_right
@@ -832,7 +804,7 @@ static const char* entities[][14] = {
 	"933566533333335665333",
 	"999955999999999559999",
 	"",
-	"",
+
 	"",
 	"",
 	//car2_right
@@ -882,41 +854,121 @@ static const char* entities[][14] = {
 	"999949999",
 	"999499999",
 	"994999999",
-	//bird
-	"0000000000111111110",
-	"0000000001111111111",
-	"0000000001111111111",
-	"0000002221111111111",
-	"0000023331111111111",
-	"0000233331111111111",
-	"0000233331111111111",
-	"0444444441111111111",
-	"4444444441111111111",
-	"5544424441111121111",
-	"4444222440111222110",
-	"0002262200002262200",
-	"0000222000000222000",
-	"0000020000000020000",
-
-	//dino
-	"0000000000111111110",
-	"0000000001111111111",
-	"0000000001111111111",
-	"0000002221111111111",
-	"0000023331111111111",
-	"0000233331111111111",
-	"0000233331111111111",
-	"0444444441111111111",
-	"4444444441111111111",
-	"5544424441111121111",
-	"4444222440111222110",
-	"0002262200002262200",
-	"0000222000000222000",
-	"0000020000000020000",
 
 
 
+	//Trafficlight
+	"11",
+    "11",
+	"22",
+	"22",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
 
+	//bee-right
+	"9999999009999999",
+	"9900090120999999",
+	"9021101222099999",
+	"9022110221090999",
+	"9012210221099090",
+	"9901211110000009",
+	"9900043043555099",
+	"9040430435905509",
+	"0440430435005509",
+	"9040430435555509",
+	"9900043043555099",
+	"9990004000000999",
+	"9990990999999999",
+	"9909909999999999",
+	
+	//bee-left
+	"9999999009999999",
+	"9999990210900099",
+	"9999902221011209",
+	"9990901220112209",
+	"0909901220122109",
+	"9000000111121099",
+	"9905553403400099",
+	"9055095340340409",
+	"9055005340340440",
+	"9055555340340409",
+	"9905553403400099",
+	"9990000004000999",
+	"9999999990990999",
+	"9999999999099099",
+
+	//pig-l
+	"990009900900000099990",
+	"901230012045444409900",
+	"990345455555555540009",
+	"904504554555555554099",
+	"012405455555555555409",
+	"020155555555555555409",
+	"032255555555555555409",
+	"903555555544555555409",
+	"990455554554444555409",
+	"990444555555555554099",
+	"990440440000404440999",
+	"999020209990200209999",
+	"999030309903090309999",
+	"999909099990999099999",
+
+	//pig-r
+	"099990000009009900099",
+	"009904444540210032109",
+	"900045555555554543099",
+	"990455555555455405409",
+	"904555555555554504210",
+	"904555555555555551020",
+	"904555555555555552230",
+	"904555555445555555309",
+	"904555444455455554099",
+	"990455555555555444099",
+	"999044404000044044099",
+	"999902002099902020999",
+	"999903090309903030999",
+	"999990999099990909999",
+
+
+	//cat_right
+	"9999990099999009",
+	"9999990209990109",
+	"9999990220001109",
+	"9009902222331110",
+	"0309902223333110",
+	"0209903334333430",
+	"0230903333333330",
+	"9033000333333309",
+	"9901113000000099",
+	"9990133322233099",
+	"9990333333333099",
+	"9990303000303099",
+	"9999099999990999",
+	"",
+	//cat-l
+	"9009999900999999",
+	"9010999020999999",
+	"9011000220999999",
+	"0111332222099009",
+	"0113333222099030",
+	"0343334333099020",
+	"0333333333090320",
+	"9033333330003309",
+	"9900000003111099",
+	"9903322233310999",
+	"9903333333330999",
+	"9903030003030999",
+	"9990999999909999",
+	"",
 };
 
 
@@ -928,6 +980,9 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	{
 	case CAR_RIGHT:
 	{
+		//x -= 9.f;
+		x -= 7;
+		y += 4;
 		const char** entity;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
@@ -998,7 +1053,10 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	}
 	case CAR_LEFT:
 	{
+		
 		const char** entity;
+		x -= 7;
+		y += 4;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1069,6 +1127,8 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BUS_RIGHT:
 	{
 		const char** entity;
+		x -= 5.5;
+		y += 3.;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1091,7 +1151,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 				}
 				case '2':
 				{
-					
+
 					break;
 				}
 				case '3':
@@ -1133,6 +1193,8 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BUS_LEFT:
 	{
 		const char** entity;
+		x -= 5.5;
+		y += 3;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1181,7 +1243,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 				case '7':
 				{
 					draw_rect(x, y, half_size, half_size, color);
-					break;					
+					break;
 				}
 				}
 
@@ -1196,6 +1258,8 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case CAR2_LEFT:
 	{
 		const char** entity;
+		x -= 5;
+		y += 2;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1242,7 +1306,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 				}
 				case '7':
 				{
-					draw_rect(x, y, half_size, half_size, 0x67D7E3);
+					draw_rect(x, y, half_size, half_size, 0x000478);
 					break;
 				}
 				}
@@ -1257,7 +1321,9 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	}
 	case CAR2_RIGHT:
 	{
-		const char** entity;
+		const char** entity; 
+		x -= 5;
+		y += 2;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1304,7 +1370,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 				}
 				case '7':
 				{
-					draw_rect(x, y, half_size, half_size, 0x67D7E3);
+					draw_rect(x, y, half_size, half_size, 0x000478);
 					break;
 				}
 				}
@@ -1320,6 +1386,8 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BALLOON_LEFT:
 	{
 		const char** entity;
+		x -= 2;
+		y += 3;
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1359,7 +1427,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 					draw_rect(x, y, half_size, half_size, 0xFAD2CF);
 					break;
 				}
-				
+
 				}
 
 				x += size;
@@ -1373,6 +1441,9 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	case BALLOON_RIGHT:
 	{
 		const char** entity;
+		x -= 2.25;
+		y += 3;
+	
 		/*if (*text == 47) entity = entities[27];
 		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
@@ -1423,19 +1494,11 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 		}
 		break;
 	}
-	case BIRD:
-	{
-		break;
-
-	}
-	case DINOSAUR:
-	{
-		break;
-
-	}
-	case CLOUD:
+	case TRAFFIC:
 	{
 		const char** entity;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
 		entity = entities[number];
 		float original_x = x;
 
@@ -1446,57 +1509,348 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 				{
 				case '0':
 				{
-					draw_rect(x, y, half_size, half_size, 0xFFFFFF);
+					draw_rect(x, y, half_size, half_size, 0x000000);
 					break;
 				}
 				case '1':
 				{
-					draw_rect(x, y, half_size, half_size, 0x3366CC);
-					break;
-				}
-				/*case '3':
-				{
-					draw_rect(x, y, half_size, half_size, 0x01C4FF);
-				}*/
-				}
-				x += size;
-				row++;
-			}
-			y -= size;
-			x = original_x;
-		}
-		break;
-	}
-	case GRASS:
-	{
-		const char** entity;
-		entity = entities[number];
-		float original_x = x;
-
-		for (int i = 0; i <= 13; i++) {
-			const char* row = entity[i];
-			while (*row) {
-				switch (*row)
-				{
-				case '0':
-				{
-					draw_rect(x, y, half_size, half_size, 0xA56802);
-					break;
-				}
-				case '1':
-				{
-					draw_rect(x, y, half_size, half_size, 0x8B5304);
+					draw_rect(x, y, half_size, half_size, 0xED1C24);
 					break;
 				}
 				case '2':
 				{
-					draw_rect(x, y, half_size, half_size, 0x00FF80);
+					draw_rect(x, y, half_size, half_size, 0x22B14C);
+					break;
+				}
+
+				}
+
+				x += size;
+				row++;
+			}
+			y -= size;
+			x = original_x;
+		}
+		break;
+	}
+	case BEE_RIGHT:
+	{
+		const char** entity;
+		x -= 3.5;
+		y += 3.5;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
+		entity = entities[number];
+		float original_x = x;
+
+		for (int i = 0; i <= 13; i++) {
+			const char* row = entity[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '0':
+				{
+					draw_rect(x, y, half_size, half_size, 0x000000);
+					break;
+				}
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0xABD9D6);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xD9E9E9);
+					break;
 				}
 				case '3':
 				{
-					draw_rect(x, y, half_size, half_size, 0x02DD5A);
+					draw_rect(x, y, half_size, half_size, 0xF9DD24);
+					break;
 				}
+				case '4':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF7A209);
+					break;
 				}
+				case '5':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF8ECBA);
+					break;
+				}
+
+				}
+
+				x += size;
+				row++;
+			}
+			y -= size;
+			x = original_x;
+		}
+		break;
+	}
+	case BEE_LEFT:
+	{
+		const char** entity;
+		x -= 3.5;
+		y += 3.5;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
+		entity = entities[number];
+		float original_x = x;
+
+		for (int i = 0; i <= 13; i++) {
+			const char* row = entity[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '0':
+				{
+					draw_rect(x, y, half_size, half_size, 0x000000);
+					break;
+				}
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0xABD9D6);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xD9E9E9);
+					break;
+				}
+				case '3':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF9DD24);
+					break;
+				}
+				case '4':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF7A209);
+					break;
+				}
+				case '5':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF8ECBA);
+					break;
+				}
+
+				}
+
+				x += size;
+				row++;
+			}
+			y -= size;
+			x = original_x;
+		}
+		break;
+	}
+	case PIG_LEFT:
+	{
+		const char** entity;
+		x -= 5.;
+		y += 3.;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
+		entity = entities[number];
+		float original_x = x;
+
+		for (int i = 0; i <= 13; i++) {
+			const char* row = entity[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '0':
+				{
+					draw_rect(x, y, half_size, half_size, 0x2A1E30);
+					break;
+				}
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0xEF929D);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xD5608E);
+					break;
+				}
+				case '3':
+				{
+					draw_rect(x, y, half_size, half_size, 0xB44F8D);
+					break;
+				}
+				case '4':
+				{
+					draw_rect(x, y, half_size, half_size, 0xD98B73);
+					break;
+				}
+				case '5':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF3B497);
+					break;
+				}
+
+				}
+
+				x += size;
+				row++;
+			}
+			y -= size;
+			x = original_x;
+		}
+		break;
+	}
+	case PIG_RIGHT:
+	{
+		const char** entity;
+		x -= 5;
+		y += 3;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
+		entity = entities[number];
+		float original_x = x;
+
+		for (int i = 0; i <= 13; i++) {
+			const char* row = entity[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '0':
+				{
+					draw_rect(x, y, half_size, half_size, 0x2A1E30);
+					break;
+				}
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0xEF929D);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xD5608E);
+					break;
+				}
+				case '3':
+				{
+					draw_rect(x, y, half_size, half_size, 0xB44F8D);
+					break;
+				}
+				case '4':
+				{
+					draw_rect(x, y, half_size, half_size, 0xD98B73);
+					break;
+				}
+				case '5':
+				{
+					draw_rect(x, y, half_size, half_size, 0xF3B497);
+					break;
+				}
+
+				}
+
+				x += size;
+				row++;
+			}
+			y -= size;
+			x = original_x;
+		}
+		break;
+	}
+	case CAT_RIGHT:
+	{
+		const char** entity;
+		x -= 4;
+		y += 3.5;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
+		entity = entities[number];
+		float original_x = x;
+
+		for (int i = 0; i <= 13; i++) {
+			const char* row = entity[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '0':
+				{
+					draw_rect(x, y, half_size, half_size, 0x000000);
+					break;
+				}
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0x878883);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xDD7436);
+					break;
+				}
+				case '3':
+				{
+					draw_rect(x, y, half_size, half_size, 0xFEFEF3);
+					break;
+				}
+				case '4':
+				{
+					draw_rect(x, y, half_size, half_size, 0x41433F);
+					break;
+				}
+
+				}
+
+				x += size;
+				row++;
+			}
+			y -= size;
+			x = original_x;
+		}
+		break;
+	}
+	case CAT_LEFT:
+	{
+		const char** entity;
+		x -= 4;
+		y += 3.5;
+		/*if (*text == 47) entity = entities[27];
+		else if (*text == 46) entity = entities[26];*/
+		entity = entities[number];
+		float original_x = x;
+
+		for (int i = 0; i <= 13; i++) {
+			const char* row = entity[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '0':
+				{
+					draw_rect(x, y, half_size, half_size, 0x000000);
+					break;
+				}
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0x878883);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xDD7436);
+					break;
+				}
+				case '3':
+				{
+					draw_rect(x, y, half_size, half_size, 0xFEFEF3);
+					break;
+				}
+				case '4':
+				{
+					draw_rect(x, y, half_size, half_size, 0x41433F);
+					break;
+				}
+
+				}
+
 				x += size;
 				row++;
 			}
@@ -1506,6 +1860,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 		break;
 	}
 	}
+	
 }
 static void draw_number(int number, float x, float y, float size, u32 color) {
 	float half_size = size;// *.5f;
@@ -1835,7 +2190,34 @@ static void draw_player(float x, float y, float half_size_x, float half_size_y) 
 	draw_rect(x + 4, y + 2, 1, 0.5, 0x363636);
 
 }
+static void draw_apple(int x, int y)
+{
+	// tao do 
+	draw_rect(x, y, 1.3, 1.3, 0xC42732);
+	draw_rect(x, y, 0.9, 0.9, 0xF4303E);
+	draw_rect(x + 0.7, y + 1.2, 1, 0.4, 0x868F26); // la
+	draw_rect(x+0.2, y + 0.4, 0.8, 0.7, 0xD9614D);
+}
+static void draw_plant(int x, int y)
+{
+	//bui cay 
+	draw_rect(x , y-0.1 , 3.9, 4.9, 0x000000);
+	draw_rect(x, y, 3.5, 4.6, 0x9FAF4D);
 
+	draw_rect(x - 5, y - 2.2, 3.4, 2.8, 0x000000);
+	draw_rect(x - 5, y - 2.2, 3.1, 2.4, 0x5F692D);
+	draw_rect(x - 5.7, y - 2.4, 2.4, 2.1, 0x213C11);
+
+	draw_rect(x + 5, y - 2.7, 2.7, 2.3, 0x000000);
+	draw_rect(x + 5, y - 2.7, 2.3, 2, 0x5F692D);
+	draw_rect(x + 5.2, y - 3.4, 2, 1.3, 0x213C11);
+
+	draw_apple(x+0.5 , y + 4);
+	draw_apple(x - 2.7, y );
+	draw_apple(x - 8, y-2.7);
+	draw_apple(x + 3.5, y - 1.8);
+
+}
 static void draw_Background(float x, float y, float max_size_x, float max_size_y)
 {
 	//Khung 
@@ -1867,6 +2249,10 @@ static void draw_Background(float x, float y, float max_size_x, float max_size_y
 	draw_rect(x - 18.5, y - 24.5, 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y - 37, 71.5, 0.5, 0xA06A12);
 
-	//bui cay 
-	draw_rect(x - 85, y - 35, 4, 7, 0x000000);
+	for (int i = 0; i < 121; i += 40) {
+		draw_plant(x - 80 + i, y - 43.2); // draw plant
+	}
+	for (int i = 0; i < 121; i += 40) {
+		draw_plant(x - 80 + i, y + 8); // draw plant
+	}
 }
