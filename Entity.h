@@ -3,7 +3,6 @@ class Entity
 {
 private:
 	int height, width;
-	bool is_right;
 	float entity_half_x, entity_half_y;
 	float entity_pX, entity_pY;
 protected:
@@ -11,28 +10,12 @@ protected:
 public:
 	virtual float getX() const;
 	virtual float getY() const;
-	virtual void setX(float src)
-	{
-		entity_pX = src;
-	}
-	virtual void setY(float src)
-	{
-		entity_pY = src;
-	}
-	virtual float getHalfX() const
-	{
-		return entity_half_x;
-	}
-	virtual float getHalfY() const
-	{
-		return entity_half_y;
-	}
-	virtual void left(float speed, float dt,int lv) {
-		entity_pX -= speed * dt*lv;
-	}
-	virtual void right(float speed, float dt,int lv){
-		entity_pX += speed * dt*lv;
-	}
+	virtual void setX(float src);
+	virtual void setY(float src);
+	virtual float getHalfX() const;
+	virtual float getHalfY() const;
+	virtual void left(float speed, float dt,int lv);
+	virtual void right(float speed, float dt, int lv);
 };
 //#pragma once
 //#include<vector>
