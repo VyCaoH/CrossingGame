@@ -9,8 +9,9 @@
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
-static bool g_pause = false;
-
+static bool g_pause=true;
+static bool g_menu=true;
+static int hot_button = 0;
 class Game
 {
 	Player player;
@@ -39,14 +40,12 @@ public:
 	void ScoreChange();
 	vector<Threat*> getThreat();
 	void startGame();
-	void getInput(Input* input);
 	void mainBoard();
 	virtual void simulate_game(Input* input, float dt);
+	bool menu_game(Input* input);
 	void reset_game();
 	bool next_level();
 	bool quit(Input* input);
-	void checkWall_player(Player &player);
-	void playerMove(Input* input, float dt, float speed);
 	void threatMove(float dt);
 	void updatePosThreat();
 	bool exitGame(thread&t1);
