@@ -45,14 +45,7 @@ vector<Entity*>Threat::getThreat()
 {
 	return threat;
 }
-//vector<Entity*> getListEntity()
-//{
-//	return threaten;
-//}
-//Entity* getEntity(int index)
-//{
-//	return threaten[index];
-//}
+
 void Threat::setListEntity(TYPE type, int dir)
 {
 	//143->max, min=(43,-100)
