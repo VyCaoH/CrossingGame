@@ -15,6 +15,18 @@ int Game::getScore()
 {
 	return score;
 }
+void Game::setScore()
+{
+
+	if (lv > 1)
+		score = (lv - 1) * 100;
+}
+void Game::ScoreChange()
+{
+	setScore();
+	draw_text("SCORE", 58.5, 44, 1.1, 0xFF3131);
+	draw_number(score, 78, 31, 1.3, 0xFF3131);
+}
 
 vector<Threat*> Game::getThreat()
 {
@@ -101,6 +113,7 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
+		setScore();
 		reset_game();
 	}
 	return false;
