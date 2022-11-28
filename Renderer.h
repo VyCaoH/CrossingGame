@@ -2248,38 +2248,55 @@ static void draw_plant(int x, int y)
 static void draw_Background(float x, float y, float max_size_x, float max_size_y)
 {
 	//Khung 
-	draw_arena_borders(x, y, 90, 49, 0x2D9929);
-	draw_rect(x, y, 90, 49, 0x8DC740);//nen khung 
+	draw_arena_borders(x, y, 90, 47, 0x2D9929);
+	draw_rect(x, y, 90, 47, 0x8DC740);//nen khung 
 	draw_rect(x+55, y, 2, 49, 0x2D9929); 
 	draw_rect(x + 74, y+24, 18, 1.7, 0x2D9929);
 	// lane 
-	draw_rect(x - 18.5, y, 71.5, 49, 0xEDA16D);//nen duong
-	for (int j = 0; j < 90; j += 8)
+	draw_rect(x - 18.5, y, 71.5, 47, 0x484D5C);//nen duong
+	draw_rect(x - 18.5, y + 40, 71.5, 7, 0xC3FF5F);//bai co 
+	draw_rect(x - 18.5, y +34, 71.5, 1, 0x81AD3A);//bai co darker
+	draw_rect(x - 18.5, y, 71.5, 6.5, 0xC3FF5F);//bai co 
+	draw_rect(x - 18.5, y -6, 71.5, 1, 0x81AD3A);//bai co darker
+	draw_rect(x - 18.5, y-40, 71.5, 6.5, 0xC3FF5F);//bai co 
+	draw_rect(x - 18.5, y - 46, 71.5, 1, 0x81AD3A);//bai co darker
+	for (int i = 0; i < 140; i += 25)
 	{
-		for (int i = 0; i < 160; i += 18) //dom duong 
-		{
-			draw_rect(x - 103 + i, y + 47- j, 1.5, 0.8, 0xEEB395);
-			draw_rect(x - 105 + i, y + 48- j, 1.5, 0.7, 0xC68164);
-		}
-		for (int i = 0; i < 130; i += 18) //dom duong 
-		{
-			draw_rect(x - 77 + i, y + 42 - j, 1.5, 0.8, 0xC68164);
-			draw_rect(x - 75+ i, y + 43 - j, 1.5, 0.7, 0xC7684D);
-		}
+		draw_rect(x - 80 + i, y - 20, 6, 1, 0x7E8397);//lane line darker	
+		draw_rect(x - 80 + i, y + 20, 6, 1, 0x7E8397);//lane line darker
 	}
+	
+	
+	
+
+	//for (int j = 0; j < 90; j += 8)
+	//{
+	//	for (int i = 0; i < 160; i += 18) //dom duong 
+	//	{
+	//		draw_rect(x - 103 + i, y + 47- j, 1.5, 0.8, 0xEEB395);
+	//		draw_rect(x - 105 + i, y + 48- j, 1.5, 0.7, 0xC68164);
+	//	}
+	//	for (int i = 0; i < 130; i += 18) //dom duong 
+	//	{
+	//		draw_rect(x - 77 + i, y + 42 - j, 1.5, 0.8, 0xC68164);
+	//		draw_rect(x - 75+ i, y + 43 - j, 1.5, 0.7, 0xC7684D);
+	//	}
+	//}
 	//soc dat
-	draw_rect(x - 18.5, y + 38, 71.5, 0.5, 0xA06A12);
+	/*draw_rect(x - 18.5, y + 38, 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y + 26, 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y + 13, 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y + 1.5 , 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y -11.5, 71.5, 0.5, 0xA06A12);
 	draw_rect(x - 18.5, y - 24.5, 71.5, 0.5, 0xA06A12);
-	draw_rect(x - 18.5, y - 37, 71.5, 0.5, 0xA06A12);
+	draw_rect(x - 18.5, y - 37, 71.5, 0.5, 0xA06A12);*/
 
-	for (int i = 0; i < 121; i += 40) {
-		draw_plant(x - 80 + i, y - 43.2); // draw plant
-	}
-	for (int i = 0; i < 121; i += 40) {
-		draw_plant(x - 80 + i, y + 8); // draw plant
-	}
+	//for (int i = 0; i < 121; i += 40) {
+	//	draw_plant(x - 80 + i, y - 43.2); // draw plant
+	//}
+	//for (int i = 0; i < 121; i += 40) {
+	//	draw_plant(x - 80 + i, y + 8); // draw plant
+	//}
+
+
 }
