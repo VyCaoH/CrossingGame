@@ -42,7 +42,7 @@ void Game::simulate_game(Input* input, float dt)
 	render_state = getRender();
 	clear_screen(0xffffffff);
 	float speed = 50.f;
-	//draw_Background(0, 0, 73, 45);
+	draw_Background(0, 0, 0, 0);
 	//draw_turtleL(0, 0, 1, 1);
 	player.move(*&input, dt, speed);
 	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);

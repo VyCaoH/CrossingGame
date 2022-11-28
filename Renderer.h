@@ -5,7 +5,7 @@ enum TYPE {
 	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT,BIRD_RIGHT,BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
 };
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT };
-
+enum THINGS { CLOUD1, CLOUD2, GRASS1,ROCK1, ROCK2, ROCK3, ROCK4};
 
 inline int clamp(int min, int val, int max)
 {
@@ -970,8 +970,6 @@ static const char* entities[][14] = {
 	"",
 	"",
 };
-
-
 static void draw_entities(int number, float x, float y, float size, u32 color)
 {
 	float half_size = size * .5f;
@@ -2027,22 +2025,6 @@ static const char* buttons[][12] = {
 "000333333333333333333333333333333333333333333333333333333333333000",
 };
 
-//static void draw_GameOver(float x, float y, float half_size_x, float half_size_y) {
-//
-//}
-//static void draw_Menu(float x, float y, float half_size_x, float half_size_y) {
-//	clear_screen(0x01C4FF);
-//	draw_text("THE CROSSING GAME", x - 72, y + 45, 1.5, 0xE61409);
-//	draw_text("A PROJECT BY GROUP THREE", x - 67, y + 30, 1, 0xFFE501);
-//	draw_text("NEW GAME", x - 22, y + 15, 0.75, 0xFF7901);
-//	draw_text("LOAD GAME", x - 22, y + 4, 0.75, 0xFF7901);
-//	draw_text("SETTING", x - 22, y - 9, 0.75, 0xFF7901);
-//	draw_text("INTRODUCTION", x - 22, y - 22, 0.75, 0xFF7901);
-//	draw_text("EXIT", x - 22, y - 35, 0.75, 0xFF7901);
-//	draw_entities(4, x - 72, y + 20, 1, 0xE61409);
-//	draw_entities(4, x + 50, y + 20, 1, 0xE61409);
-//	draw_entities(5, x - 95, y - 45, 1, 0xE61409);
-//};
 static const char* title[29] = {
 	"00000111111111111000000001111111111111111100000000000001111111111110000000000000111111111111111110000000011111111111111111000111111111111111110001111111111000011111110000001111111111111111111000000000000000000000011111111111111111110000000011111111111100000000111111111110000011111111111000111111111111111111111000",
 	"00000133333333331000000001333333333333333100000000000001333333333310000000000000133333333333333310000000013333333333333331000133333333333333310001333333331000013333310000001333333333333333331000000000000000000000013333333333333333310000000013333333333100000000133333333311000113333333331000133333333333333333331000",
@@ -2156,7 +2138,7 @@ static void draw_title(float x, float y, float size, u32 color) {
 			}
 			case '2':
 			{
-				draw_rect(x, y, half_size, half_size, 0x663931);
+				draw_rect(x, y, half_size, half_size, 0x2675a6);
 				break;
 			}
 			case '3':
@@ -2233,15 +2215,6 @@ static void draw_Button(int number, float x, float y, float size, u32 color, int
 		y -= size;
 		x = original_x;
 	}
-}
-static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {
-	clear_screen(0x01C4FF);
-	draw_title(x - 83, y + 45, 0.5, 0xE61409);
-	draw_Button(NEW_GAME, x - 25, y + 15, 0.7, 0x000000, hot_button);
-	draw_Button(LOAD_GAME, x - 25, y + 2, 0.7, 0x000000, hot_button);
-	draw_Button(SETTINGS, x - 25, y - 11, 0.7, 0x000000, hot_button);
-	draw_Button(INTRODUCTION, x - 25, y - 24, 0.7, 0x000000, hot_button);
-	draw_Button(EXIT, x - 25, y - 37, 0.7, 0x000000, hot_button);
 }
 static void draw_Menu_Introduction(float x, float y, float half_size_x, float half_size_y) {
 
@@ -2368,4 +2341,143 @@ static void draw_Background(float x, float y, float max_size_x, float max_size_y
 	//}
 
 
+}
+static const char* things[][11] = {
+	//CLOUD1
+	"000000000011111100000000",
+	"0000000011111111100000000",
+	"0000000111111111111000000",
+	"000000111111111111110000",
+	"00000001111111111110000",
+	"0000011111111111111000",
+	"0000111111111111111110000000",
+	"0011111111111111111111100000",
+	"0011111111111111111111111000",
+	"111111111111111111111111111",
+	"000011111111111111111111",
+	//CLOUD2
+	"00000000000111111110000000",
+	"00000000011111111111000",
+	"000000001111111111111100000",
+	"0000000111111111111111110000",
+	"0000001111111111111111111",
+	"000000011111111111111111000",
+	"00011111111111111111111111000000",
+	"0011111111111111111111111110000",
+	"001111111111111111111111111100",
+	"0011111111111101111111111111",
+	"00001111111100001111111111",
+	//GRASS1
+	"33333333333333333333333",
+	"33333333303333333333333",
+	"03333333000333333333330",
+	"03333333000033333333300",
+	"00333330000033333333300",
+	"00333330000033333333300",
+	"000333000000003333300",
+	"0000300000000033333000",
+	"0000000000000003330",
+	"00000000000000033300",
+	"0000000000000000300",
+	//ROCK1
+	"22222",
+	"22222",
+	"22222",
+	"22222",
+	"22222",
+	"0000022222",
+	"0000022222",
+	"0000022222",
+	"0000022222",
+	"0000022222",
+	"0000000000",
+	//ROCK2
+	"22222",
+	"22222",
+	"22222",
+	"22222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000000000000000000",
+	"00000000000000000000",
+	//ROCK3
+	"0000222222222222",
+	"0000222222222222",
+	"0000222222222222",
+	"00000002222222222222222",
+	"00000002222222222222222",
+	"00000002222222222222222",
+	"2222222222222000022222",
+	"2222222222222000022222",
+	"00022222222000022222222222",
+	"00022222222000022222222222",
+	"00022222222",
+};
+static void draw_things(int number, float x, float y, float size) {
+	float half_size = size * .5f;
+	float original_y = y;
+	const char** button;
+	float original_x = x;
+
+	button = things[number];
+	for (int i = 0; i <= 10; i++) {
+		const char* row = button[i];
+		while (*row) {
+			switch (*row)
+			{
+			case '1':
+			{
+				draw_rect(x, y, half_size, half_size, 0xffffff);
+				break;
+			}
+			case '2':
+			{
+				draw_rect(x, y, half_size, half_size, 0xa67564);
+				break;
+			}
+			case '3':
+			{
+				draw_rect(x, y, half_size, half_size, 0x63b15d);
+				break;
+			}
+			}
+			x += size;
+			row++;
+			
+		}
+		y -= size;
+		x = original_x;
+	}
+}
+static void draw_Background2(float x, float y, float max_size_x, float max_size_y)
+{
+	//Khung 
+	draw_rect(x, y-40, 120, 15, 0x784937);
+	draw_things(CLOUD1, x - 50, y + 40, 1.5);
+	draw_things(CLOUD1, x + 30, y + 60, 1.3);
+	draw_things(CLOUD2, x + 50, y + 20, 1);
+	draw_things(CLOUD2, x - 90, y + 25, 1.2);
+	for (int i = 0; i <= 50; i++) {
+		draw_things(GRASS1, x - 120+i*10, y - 25, .4);
+	}
+	for (int i = 0; i <= 10; i++) {
+		draw_things(ROCK3, x - 120 + i * 20, y - 30, .3);
+		draw_things(ROCK2, x - 120 + i * 20 + 10, y - 40, .2);
+		draw_things(ROCK1, x - 120 + i * 20+15, y - 45, .2);
+	}
+}
+
+static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {
+	clear_screen(0x01C4FF);
+
+	draw_Background2(0, 0, 0, 0);
+	draw_title(x - 83, y + 45, 0.5, 0xE61409);
+	draw_Button(NEW_GAME, x - 25, y + 15, 0.7, 0x000000, hot_button);
+	draw_Button(LOAD_GAME, x - 25, y + 2, 0.7, 0x000000, hot_button);
+	draw_Button(SETTINGS, x - 25, y - 11, 0.7, 0x000000, hot_button);
+	draw_Button(INTRODUCTION, x - 25, y - 24, 0.7, 0x000000, hot_button);
+	draw_Button(EXIT, x - 25, y - 37, 0.7, 0x000000, hot_button);
 }
