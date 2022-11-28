@@ -2,7 +2,6 @@
 class Sound
 {
 public:
-	turnOn();
-	turnOff();
+	
 };
 
