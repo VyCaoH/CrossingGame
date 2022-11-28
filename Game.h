@@ -1,45 +1,54 @@
 #pragma once
 //#include<vector>
-#include"ConsoleWindow.h"
+#include<Thread>
 //#include"Renderer.h"
 #include"Player.h"
 #include"Animal.h"
 #include"Threat.h"
+#include"ConsoleWindow.h"
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
+static bool g_pause = false;
 
 class Game
 {
 	Player player;
+	int lv;
+	int score;
+	//int time;
 	std::vector<Threat*> threat;
-	Bird bird;
 	//vector<Row*> row;
 public:
 	Game() 
 	{
 		player = Player();
-		
-		//player = Player("People.txt");
-		//bird = Bird("People.txt");
-	/*	threat.push_back(new Threat(7));
-		threat.push_back(new Threat(13));
-		threat.push_back(new Threat(19));
-		threat.push_back(new Threat(25));*/
+		lv = 1;
+		score = 0;
 	};
-
+	~Game()
+	{
+		for (auto x : threat)
+			delete x;
+		threat.clear();
+	}
+	Player getPlayer();
+	int getLv();
+	int getScore();
+	vector<Threat*> getThreat();
+	void startGame();
+	void getInput(Input* input);
 	void mainBoard();
 	virtual void simulate_game(Input* input, float dt);
+	void reset_game();
+	bool next_level();
 	bool quit(Input* input);
-	void playerMove(Input* input, float dt, float speed);
 	void checkWall_player(Player &player);
-	//void birdMove(float dt, float speed,int lv);
+	void playerMove(Input* input, float dt, float speed);
+	void threatMove(float dt);
 	void updatePosThreat();
-	void threatMove(float dt, float speed);
-	//char* vvChar_to_CharPtr(vector<vector<char>> src)
-	//{
-	//	const int n = src.size();
-	//	const int m = src[0].size();
-	//}
+	bool exitGame(thread&t1);
+	void pauseGame(HANDLE hd);
+	void resumeGame(HANDLE hd);
 };
 
