@@ -19,6 +19,18 @@ int Game::getScore()
 {
 	return score;
 }
+void Game::setScore()
+{
+
+	if (lv > 1)
+		score = (lv - 1) * 100;
+}
+void Game::ScoreChange()
+{
+	setScore();
+	draw_text("SCORE", 58.5, 44, 1.1, 0xFF3131);
+	draw_number(score, 78, 31, 1.3, 0xFF3131);
+}
 
 vector<Threat*> Game::getThreat()
 {
@@ -47,7 +59,7 @@ void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
 	clear_screen(0xffffffff);
-	float speed = 50.f;
+	float speed = 25.f;
 	draw_Background(0, 0, 73, 45);
 	//draw_rect(0, 0, 7.f, 3.f,0xdddd);
 	//draw_turtleL(0, 0, 1, 1);
@@ -57,6 +69,7 @@ void Game::simulate_game(Input* input, float dt)
 	g_running = false;
 	updatePosThreat();
 	threatMove(dt);
+	ScoreChange();
 	next_level();
 	// 
 	// 
@@ -74,6 +87,7 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
+		setScore();
 		reset_game();
 	}
 	return false;

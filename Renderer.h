@@ -245,7 +245,7 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x, y - 3.75, 2.5, 1, 0x000000); //tay
 	draw_rect(x, y - 3.75, 2.9, 0.7, 0x000000); //tay
 	//nen trang
-	draw_rect(x, y - 6, 0.6, 0.4, 0xFFFFFF);
+	//draw_rect(x, y - 6, 0.6, 0.4, 0xFFFFFF);
 
 	//head
 	draw_rect(x, y + 0.85, 2.5, 2.85, 0xFCCCB5); //mau da trang
@@ -301,7 +301,7 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x - 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
 	draw_rect(x - 1.35, y - 5.2, 0.4, 0.9, 0x711D1D); // co chan 
 	draw_rect(x - 1.35, y - 4.5, 0.4, 0.25, 0x8F520A); // giap
-	draw_rect(x - 1.35, y - 5.5, 0.4, 0.25, 0xF0B79D); // co chan 
+	draw_rect(x - 1.35, y - 5.7, 0.5, 0.5, 0xF0B79D); // co chan 
 	draw_rect(x - 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
 	draw_rect(x - 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
 	draw_rect(x - 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
@@ -314,7 +314,7 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 	draw_rect(x + 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
 	draw_rect(x + 1.35, y - 5.2, 0.4, 0.9, 0xAB141A); // co chan 
 	draw_rect(x + 1.35, y - 4.5, 0.4, 0.25, 0x820F14); // giap
-	draw_rect(x + 1.35, y - 5.5, 0.4, 0.25, 0xF0B79D); // co chan 
+	draw_rect(x + 1.35, y - 5.7, 0.5, 0.5, 0xF0B79D); // co chan 
 	draw_rect(x + 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
 	draw_rect(x + 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
 	draw_rect(x + 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
@@ -721,6 +721,7 @@ static const char* letters[][7] = {
 	"0",
 };
 
+
 static void draw_text(const char* text, float x, float y, float size, u32 color) {
 	float half_size = size * .5f;
 	float original_y = y;
@@ -751,6 +752,36 @@ static void draw_text(const char* text, float x, float y, float size, u32 color)
 		y = original_y;
 	}
 }
+//static void draw_Number(const char* text, float x, float y, float size, u32 color) {
+//	float half_size = size * .5f;
+//	float original_y = y;
+//
+//	while (*text) {
+//		if (*text != 32) {
+//			const char** letter;
+//			if (*text == 47) letter = letters[27];
+//			else if (*text == 46) letter = letters[26];
+//			else letter = letters[*text - 'A'];
+//			float original_x = x;
+//
+//			for (int i = 0; i < 7; i++) {
+//				const char* row = letter[i];
+//				while (*row) {
+//					if (*row == '0') {
+//						draw_rect(x, y, half_size, half_size, color);
+//					}
+//					x += size;
+//					row++;
+//				}
+//				y -= size;
+//				x = original_x;
+//			}
+//		}
+//		text++;
+//		x += size * 6.f;
+//		y = original_y;
+//	}
+//}
 static const char* entities[][14] = {
 	//1:black, 0:none, 2: yellow dam, 3: yellow nhat, 4: nau
 	//car_right
@@ -1508,7 +1539,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 	}
 }
 static void draw_number(int number, float x, float y, float size, u32 color) {
-	float half_size = size;// *.5f;
+	float half_size = size *.5f;
 
 	bool drew_number = false;
 	while (number || !drew_number) {
