@@ -38,6 +38,8 @@ public:
 	Player getPlayer();
 	int getLv();
 	int getScore();
+	void setScore();
+	void ScoreChange();
 	vector<Threat*> getThreat();
 	void startGame();
 	void mainBoard();

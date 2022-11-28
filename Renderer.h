@@ -789,28 +789,28 @@ public:
 		draw_rect(x, y - 1.95, 1.1, 0.8, 0xBD7119);
 		draw_rect(x + 0.75, y - 2, 1, 0.4, 0xBD7119);
 
-		// con mat
-		draw_rect(x + 1.45, y + 1.7, 0.65, 0.75, 0xFFFFFF);
-		draw_rect(x + 1.75, y + 2.5, 0.2, 0.25, 0xFFFFFF);
-		draw_rect(x + 1.85, y + 1.35, 0.65, 0.75, 0xFFFFFF);
-		//trong den
-		draw_rect(x + 1.8, y + 1.45, 0.25, 0.45, 0x000000);
-		// cai mieng
-		draw_rect(x + 2.75, y - 0.4, 1.35, 0.3, 0xFF6000);
-		draw_rect(x + 1.2, y - 0.8, 0.3, 0.39, 0xFF6000);
-		draw_rect(x + 2.55, y - 1.35, 1.1, 0.3, 0xFF6000);
-		// cai chan 
-		draw_rect(x + 0.75, y - 2, 1, 0.4, 0xBD7119);
-	}
-	static void draw_titan(float x, float y, float half_size_x, float half_size_y)
-	{
-		//nen black
-		draw_rect(x, y + 1, 3, 3.3, 0x000000); // head
-		draw_rect(x, y - 3.3, 2.1, 3.2, 0x000000); //than
-		draw_rect(x, y - 3.75, 2.5, 1, 0x000000); //tay
-		draw_rect(x, y - 3.75, 2.9, 0.7, 0x000000); //tay
-		//nen trang
-		draw_rect(x, y - 6, 0.6, 0.4, 0xFFFFFF);
+	// con mat
+	draw_rect(x + 1.45, y + 1.7, 0.65, 0.75, 0xFFFFFF);
+	draw_rect(x + 1.75, y + 2.5, 0.2, 0.25, 0xFFFFFF);
+	draw_rect(x + 1.85, y + 1.35, 0.65, 0.75, 0xFFFFFF);
+	//trong den
+	draw_rect(x + 1.8, y + 1.45, 0.25, 0.45, 0x000000);
+	// cai mieng
+	draw_rect(x + 2.75, y - 0.4, 1.35, 0.3, 0xFF6000);
+	draw_rect(x + 1.2, y - 0.8, 0.3, 0.39, 0xFF6000);
+	draw_rect(x + 2.55, y - 1.35, 1.1, 0.3, 0xFF6000);
+	// cai chan 
+	draw_rect(x + 0.75, y - 2, 1, 0.4, 0xBD7119);
+}
+static void draw_titan(float x, float y, float half_size_x, float half_size_y)
+{
+	//nen black
+	draw_rect(x, y+1, 3, 3.3, 0x000000); // head
+	draw_rect(x , y - 3.3, 2.1, 3.2, 0x000000); //than
+	draw_rect(x, y - 3.75, 2.5, 1, 0x000000); //tay
+	draw_rect(x, y - 3.75, 2.9, 0.7, 0x000000); //tay
+	//nen trang
+	//draw_rect(x, y - 6, 0.6, 0.4, 0xFFFFFF);
 
 		//head
 		draw_rect(x, y + 0.85, 2.5, 2.85, 0xFCCCB5); //mau da trang
@@ -863,31 +863,31 @@ public:
 		draw_rect(x + 2.2, y - 3.6, 0.28, 0.2, 0xEBBA9A); // co tay
 		draw_rect(x + 2.2, y - 4.3, 0.28, 0.2, 0x8E2931); // co tay
 
-		draw_rect(x - 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
-		draw_rect(x - 1.35, y - 5.2, 0.4, 0.9, 0x711D1D); // co chan 
-		draw_rect(x - 1.35, y - 4.5, 0.4, 0.25, 0x8F520A); // giap
-		draw_rect(x - 1.35, y - 5.5, 0.4, 0.25, 0xF0B79D); // co chan 
-		draw_rect(x - 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
-		draw_rect(x - 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
-		draw_rect(x - 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
-		draw_rect(x - 0.2, y - 3.5, 0.3, 0.8, 0xF4B594); //da
-		draw_rect(x - 0.2, y - 2.75, 0.32, 0.25, 0x93221E); //thit den
-		draw_rect(x - 0.2, y - 4.2, 0.32, 0.25, 0x8D2421); //thit den
-		draw_rect(x - 0.2, y - 4.6, 0.32, 0.25, 0xEB7778); //thit den
-		draw_rect(x - 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
+	draw_rect(x - 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
+	draw_rect(x - 1.35, y - 5.2, 0.4, 0.9, 0x711D1D); // co chan 
+	draw_rect(x - 1.35, y - 4.5, 0.4, 0.25, 0x8F520A); // giap
+	draw_rect(x - 1.35, y - 5.7, 0.5, 0.5, 0xF0B79D); // co chan 
+	draw_rect(x - 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
+	draw_rect(x - 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
+	draw_rect(x - 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
+	draw_rect(x -0.2, y - 3.5, 0.3, 0.8, 0xF4B594); //da
+	draw_rect(x - 0.2, y - 2.75, 0.32, 0.25, 0x93221E); //thit den
+	draw_rect(x - 0.2, y - 4.2, 0.32, 0.25, 0x8D2421); //thit den
+	draw_rect(x - 0.2, y - 4.6, 0.32, 0.25, 0xEB7778); //thit den
+	draw_rect(x - 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
 
-		draw_rect(x + 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
-		draw_rect(x + 1.35, y - 5.2, 0.4, 0.9, 0xAB141A); // co chan 
-		draw_rect(x + 1.35, y - 4.5, 0.4, 0.25, 0x820F14); // giap
-		draw_rect(x + 1.35, y - 5.5, 0.4, 0.25, 0xF0B79D); // co chan 
-		draw_rect(x + 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
-		draw_rect(x + 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
-		draw_rect(x + 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
-		draw_rect(x + 0.2, y - 3.5, 0.3, 0.8, 0xF4B594); //da
-		draw_rect(x + 0.2, y - 2.75, 0.32, 0.25, 0x93221E); //thit den
-		draw_rect(x + 0.2, y - 4.2, 0.32, 0.25, 0x8D2421); //thit den
-		draw_rect(x + 0.2, y - 4.6, 0.32, 0.25, 0xDB4039); //thit den
-		draw_rect(x + 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
+	draw_rect(x + 1.36, y - 3.2, 0.35, 0.75, 0xF0B79D); // co bung
+	draw_rect(x + 1.35, y - 5.2, 0.4, 0.9, 0xAB141A); // co chan 
+	draw_rect(x + 1.35, y - 4.5, 0.4, 0.25, 0x820F14); // giap
+	draw_rect(x + 1.35, y - 5.7, 0.5, 0.5, 0xF0B79D); // co chan 
+	draw_rect(x + 0.8, y - 3, 0.32, 0.3, 0xF4B594); //da
+	draw_rect(x + 0.8, y - 4.1, 0.32, 0.3, 0xD4876C); //co bung
+	draw_rect(x + 0.8, y - 4.8, 0.32, 0.45, 0xFFB6A2); //da
+	draw_rect(x + 0.2, y - 3.5, 0.3, 0.8, 0xF4B594); //da
+	draw_rect(x + 0.2, y - 2.75, 0.32, 0.25, 0x93221E); //thit den
+	draw_rect(x + 0.2, y - 4.2, 0.32, 0.25, 0x8D2421); //thit den
+	draw_rect(x + 0.2, y - 4.6, 0.32, 0.25, 0xDB4039); //thit den
+	draw_rect(x + 0.2, y - 5, 0.32, 0.2, 0x8D2421); //thit den
 
 		//draw_rect(x, y - 3.75, 2.5, 0.4, 0xBD1F1F); //tay
 	}
@@ -1060,9 +1060,10 @@ public:
 		draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
 	}
 
-	static void draw_text(const char* text, float x, float y, float size, u32 color) {
-		float half_size = size * .5f;
-		float original_y = y;
+
+static void draw_text(const char* text, float x, float y, float size, u32 color) {
+	float half_size = size * .5f;
+	float original_y = y;
 
 		while (*text) {
 			if (*text != 32) {
@@ -2013,19 +2014,19 @@ public:
 
 					}
 
-					x += size;
-					row++;
-				}
-				y -= size;
-				x = original_x;
+				x += size;
+				row++;
 			}
-			break;
+			y -= size;
+			x = original_x;
 		}
-		}
-
+		break;
 	}
-	static void draw_number(int number, float x, float y, float size, u32 color) {
-		float half_size = size;// *.5f;
+	}
+	
+}
+static void draw_number(int number, float x, float y, float size, u32 color) {
+	float half_size = size *.5f;
 
 		bool drew_number = false;
 		while (number || !drew_number) {
