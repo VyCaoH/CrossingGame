@@ -1,10 +1,8 @@
 #include "Game.h"
-
+#include "Sound.h"
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
-
-
 
 int Game::getLv()
 {
@@ -55,6 +53,7 @@ void Game::simulate_game(Input* input, float dt)
 	Renderer::clear_screen(0xffffffff);
 
 	float speed = 25.f;
+
 	Renderer::draw_Background(0, 0, 73, 45);
 	//Renderer::draw_turtleL(0, 0, 1, 1);
 	player.move(input, dt, speed);
@@ -76,31 +75,40 @@ void Game::simulate_game(Input* input, float dt)
 }
 bool Game::menu_game(Input* input) {
 	render_state = getRender();
-	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
+	g_music_menu = Sound::audioMenu();
+	if (g_music_menu)
 	{
-		hot_button++;
-		if (hot_button > 4)hot_button = 4;
-	}
-	if (pressed(BUTTON_W)) {
-		hot_button--;
-		if (hot_button < 0)hot_button = 0;
-	}
-	/*Do something in menu*/;
-	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
-	if (pressed(BUTTON_ENTER))
-	{
-		switch (hot_button)
+		if (pressed(BUTTON_S))// || pressed(BUTTON_W))
 		{
-		case 0:	//NEW GAME
-			return false;
-		case 1:		//LOAD GAME
-			break;
-		case 2:
-			break;
+			g_music_button = Sound::audioButton();
+			hot_button++;
+			if (hot_button > 4)hot_button = 4;
+		}
+		if (pressed(BUTTON_W)) {
+			g_music_button = Sound::audioButton();
+			hot_button--;
+			//Sound::audioButton();
+			if (hot_button < 0)hot_button = 0;
+			//Sound::audioButton();
 
-		}//==hot_button;
+		}
+		/*Do something in menu*/;
+		Renderer::draw_Menu(0, 0, 50, 50, hot_button);
+		if (pressed(BUTTON_ENTER))
+		{
+			switch (hot_button)
+			{
+			case 0:	//NEW GAME
+				return false;
+			case 1:		//LOAD GAME
+				break;
+			case 2:
+				break;
+
+			}//==hot_button;
+		}
+		//Renderer::draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
 	}
-	//Renderer::draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
 	return true;
 
 }
