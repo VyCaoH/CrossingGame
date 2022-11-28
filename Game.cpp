@@ -47,17 +47,19 @@ void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
 	clear_screen(0xffffffff);
-	float speed = 50.f;
-	draw_Background(0, 0, 73, 45);
-	//draw_rect(0, 0, 7.f, 3.f,0xdddd);
-	//draw_turtleL(0, 0, 1, 1);
-	playerMove(input, dt, speed);
-	player.isImpact(threat);
-	g_running = !player.getIsDead();
-	g_running = false;
-	updatePosThreat();
-	threatMove(dt);
-	next_level();
+	draw_rect(0, 0, 2, 2, 0x6A531F);
+	draw_tree(0, 0, 0.5f, 0x6A531F);
+	//float speed = 50.f;
+	//draw_Background(0, 0, 73, 45);
+	////draw_rect(0, 0, 7.f, 3.f,0xdddd);
+	////draw_turtleL(0, 0, 1, 1);
+	//playerMove(input, dt, speed);
+	//player.isImpact(threat);
+	//g_running = !player.getIsDead();
+	//g_running = false;
+	//updatePosThreat();
+	//threatMove(dt);
+	//next_level();
 	// 
 	// 
 	//draw_entities(CAR_RIGHT, 0, 0, 0.5,0xfffff);

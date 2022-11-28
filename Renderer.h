@@ -751,6 +751,62 @@ static void draw_text(const char* text, float x, float y, float size, u32 color)
 		y = original_y;
 	}
 }
+static const char* tree[13] = {
+	"00411100",
+	"01112140",
+	"41341111",
+	"44112434",
+	"04211444",
+	"00444440",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+};
+static void draw_tree(float x, float y, float size, u32 color) {
+	float half_size = size * .5f;
+	float original_y = y;
+
+	y += 1;
+	x -=2;
+	for (int i = 0; i < 13; i++) {
+		const char* row = tree[i];
+		float original_x = x;
+		while (*row) {
+			switch (*row)
+			{
+			case '1':
+			{
+				draw_rect(x, y, half_size, half_size, 0x56B74E);
+				break;
+			}
+			case '2':
+			{
+				draw_rect(x, y, half_size, half_size, 0xE51E21);
+				break;
+			}
+			case '3':
+			{
+				draw_rect(x, y, half_size, half_size, 0xEEEF4B);
+				break;
+			}
+			case '4':
+			{
+				draw_rect(x, y, half_size, half_size, 0xF8530);
+				break;
+			}
+			}
+
+			x += size;
+			row++;
+		}
+		y -= size;
+		x = original_x;
+	}
+}
 static const char* entities[][14] = {
 	//1:black, 0:none, 2: yellow dam, 3: yellow nhat, 4: nau
 	//car_right
@@ -1433,78 +1489,7 @@ static void draw_entities(int number, float x, float y, float size, u32 color)
 		break;
 
 	}
-	//case CLOUD:
-	//{
-	//	const char** entity;
-	//	entity = entities[number];
-	//	float original_x = x;
-
-	//	for (int i = 0; i <= 13; i++) {
-	//		const char* row = entity[i];
-	//		while (*row) {
-	//			switch (*row)
-	//			{
-	//			case '0':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0xFFFFFF);
-	//				break;
-	//			}
-	//			case '1':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0x3366CC);
-	//				break;
-	//			}
-	//			/*case '3':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0x01C4FF);
-	//			}*/
-	//			}
-	//			x += size;
-	//			row++;
-	//		}
-	//		y -= size;
-	//		x = original_x;
-	//	}
-	//	break;
-	//}
-	//case GRASS:
-	//{
-	//	const char** entity;
-	//	entity = entities[number];
-	//	float original_x = x;
-
-	//	for (int i = 0; i <= 13; i++) {
-	//		const char* row = entity[i];
-	//		while (*row) {
-	//			switch (*row)
-	//			{
-	//			case '0':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0xA56802);
-	//				break;
-	//			}
-	//			case '1':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0x8B5304);
-	//				break;
-	//			}
-	//			case '2':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0x00FF80);
-	//			}
-	//			case '3':
-	//			{
-	//				draw_rect(x, y, half_size, half_size, 0x02DD5A);
-	//			}
-	//			}
-	//			x += size;
-	//			row++;
-	//		}
-	//		y -= size;
-	//		x = original_x;
-	//	}
-	//	break;
-	//}
+	
 	}
 }
 static void draw_number(int number, float x, float y, float size, u32 color) {
