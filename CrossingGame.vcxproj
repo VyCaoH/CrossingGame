@@ -188,6 +188,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Threat.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
@@ -200,6 +201,7 @@
     <ClInclude Include="Renderer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Threat.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>

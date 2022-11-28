@@ -1,13 +1,9 @@
 #include "Game.h"
 
-//#define is_down(b) input->buttons[b].is_down
-//#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
-//#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
-static gamemode g_mode = GM_MENUGAME;//=GM_PLAYGAME;//; = gamemode::GM_MENUGAME;
-static int hot_button = 0;
+
 
 
 int Game::getLv()
@@ -47,38 +43,55 @@ void Game::simulate_game(Input* input, float dt)
 	clear_screen(0xffffffff);
 	float speed = 50.f;
 	//draw_Background(0, 0, 73, 45);
-	//draw_rect(0, 0, 6.f, 4.f,0xdddd);
 	//draw_turtleL(0, 0, 1, 1);
 	player.move(*&input, dt, speed);
 	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
 	player.isImpact(threat);
 	g_running = !player.getIsDead();
-	g_running = false;
+	//g_running = false;
 	updatePosThreat();
 	threatMove(dt);
 	next_level();
-	// 
-	// 
-	//draw_entities(CAR2_RIGHT, 0, 0, 0.5,0xfffff);
+
+	//if (is_down(BUTTON_W)) player.up(speed, dt);
+	//if (is_down(BUTTON_S)) player.down(speed, dt);
+	//if (is_down(BUTTON_D)) player.right(speed, dt);
+	//if (is_down(BUTTON_A)) player.left(speed, dt);
+	//draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
 }
-void Game::menu_game(Input* input) {
-	if (is_down(BUTTON_S))// || pressed(BUTTON_W))
+bool Game::menu_game(Input* input) {
+	render_state = getRender();
+	if (pressed(BUTTON_S))// || pressed(BUTTON_W))
 	{
 		hot_button++;
 		if (hot_button > 4)hot_button = 4;
 	}
-	if (is_down(BUTTON_W)) {
+	if (pressed(BUTTON_W)) {
 		hot_button--;
 		if (hot_button < 0)hot_button = 0;
 	}
 	/*Do something in menu*/;
 	draw_Menu(0, 0, 50, 50, hot_button);
+	if (pressed(BUTTON_ENTER))
+	{
+		switch (hot_button)
+		{
+		case 0:	//NEW GAME
+			return false;
+		case 1:		//LOAD GAME
+			break;
+		case 2:
+			break;
+
+		}//==hot_button;
+	}
 	//draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
+	return true;
 
 }
 void Game::reset_game()
 {
-	player = Player();
+	player.setY(-45);
 	threat.clear();
 }
 bool Game::next_level()
@@ -135,7 +148,7 @@ void Game::updatePosThreat()
 		{
 			while (true)
 			{
-				randomType = 8 + rand() % 4;
+				randomType = 8 + rand() % 10;
 				if (randomType % 2 == randomDir)
 				{
 					break;
@@ -146,7 +159,7 @@ void Game::updatePosThreat()
 		{
 			while (true)
 			{
-				randomType = 0 + rand() % 11;
+				randomType = 0 + rand() % 18;
 				if (randomType % 2 == randomDir)
 				{
 					break;
@@ -155,7 +168,6 @@ void Game::updatePosThreat()
 		}
 
 		x->setListEntity((TYPE)randomType,randomDir);
-	//x->setListEntity(TURTLE_LEFT, 1);
 	}
 }
 
