@@ -40,25 +40,25 @@ void Game::mainBoard()
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
-	clear_screen(0xffffffff);
+	Renderer::clear_screen(0xffffffff);
 
 	float speed = 50.f;
-	//draw_Background(0, 0, 73, 45);
-	//draw_turtleL(0, 0, 1, 1);
-	player.move(*&input, dt, speed);
-	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
-	player.isImpact(threat);
-	g_running = !player.getIsDead();
-	//g_running = false;
-	updatePosThreat();
-	threatMove(dt);
-	next_level();
+	Renderer::draw_Background(0, 0, 73, 45);
+	//Renderer::draw_turtleL(0, 0, 1, 1);
+	//player.move(input, dt, speed);
+	//player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
+	//player.isImpact(threat);
+	//g_running = !player.getIsDead();
+	////g_running = false;
+	//updatePosThreat();
+	//threatMove(dt);
+	//next_level();
 
-	//if (is_down(BUTTON_W)) player.up(speed, dt);
-	//if (is_down(BUTTON_S)) player.down(speed, dt);
-	//if (is_down(BUTTON_D)) player.right(speed, dt);
-	//if (is_down(BUTTON_A)) player.left(speed, dt);
-	//draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
+	if (pressed(BUTTON_W)) player.up(speed, dt);
+	if (is_down(BUTTON_S)) player.down(speed, dt);
+	if (is_down(BUTTON_D)) player.right(speed, dt);
+	if (is_down(BUTTON_A)) player.left(speed, dt);
+	Renderer::draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
 }
 bool Game::menu_game(Input* input) {
 	render_state = getRender();
@@ -72,7 +72,7 @@ bool Game::menu_game(Input* input) {
 		if (hot_button < 0)hot_button = 0;
 	}
 	/*Do something in menu*/;
-	draw_Menu(0, 0, 50, 50, hot_button);
+	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
 	if (pressed(BUTTON_ENTER))
 	{
 		switch (hot_button)
@@ -86,7 +86,7 @@ bool Game::menu_game(Input* input) {
 
 		}//==hot_button;
 	}
-	//draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
+	//Renderer::draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
 	return true;
 
 }
@@ -167,7 +167,6 @@ void Game::updatePosThreat()
 				}
 			}
 		}
-
 		x->setListEntity((TYPE)randomType,randomDir);
 	}
 }
