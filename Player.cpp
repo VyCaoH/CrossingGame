@@ -22,7 +22,7 @@ float Player:: getHalfY()
 }
 void Player::up(float speed, float dt)
 {
-	player_pY += speed * dt;
+	player_pY += 5;
 }
 void Player::down(float speed, float dt) {
 	player_pY -= speed * dt;
@@ -112,7 +112,7 @@ void Player::move(Input* input, float dt, float speed)
 		}
 		//checkWall()
 		render_state = getRender();
-		draw_titan(getX(), getY(), getHalfX(), getHalfY());
+		Renderer::Renderer::draw_titan(getX(), getY(), getHalfX(), getHalfY());
 		return;
 	}
 }

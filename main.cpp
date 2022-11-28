@@ -11,7 +11,11 @@ void subThread(HWND window)
 	{
 		//MOVING = input;
 		if (!game.getPlayer().getIsDead())
+		{
+			g_pause = true;
 			game.simulate_game(&MOVING, 0.016f);
+			g_pause = false;
+		}
 		else
 			g_running = false;
 		//game.menu_game(&MOVING);
