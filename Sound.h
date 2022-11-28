@@ -2,7 +2,7 @@
 class Sound
 {
 public:
-	turnOn();
-	turnOff();
+	void turnOn();
+	void turnOff();
 };
 
