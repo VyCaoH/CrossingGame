@@ -11,9 +11,15 @@ bool Sound::audioUpScore()
 }
 bool Sound::audioButton()
 {
-	return PlaySound(TEXT("Music\\Button.wav"), NULL, SND_ASYNC);
+	return PlaySound(TEXT("Music\\Button.wav"), NULL,SND_NOSTOP|SND_ASYNC);
+	//eturn PlaySound(TEXT(""), NULL, SND_NOSTOP|SND_SYNC);
 }
 bool Sound::audioDie()
 {
 	return PlaySound(TEXT("Music\\Die.wav"), NULL, SND_ASYNC);
+}
+
+void Sound::audioStop()
+{
+	PlaySound(NULL, 0, 0);
 }
