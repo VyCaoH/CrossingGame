@@ -144,6 +144,7 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
+		Sound::audioUpScore();
 		score.setScore(lv);
 		reset_game();
 	}
