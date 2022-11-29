@@ -124,6 +124,10 @@ void Game::reset_game()
 	player.setY(-45);
 	threat.clear();
 }
+void Game::restartGame()
+{
+	startGame();
+}
 bool Game::next_level()
 {
 	//Bien tren Y
@@ -134,6 +138,15 @@ bool Game::next_level()
 		reset_game();
 	}
 	return false;
+}
+int Game::overGame(Input* input)
+{
+	Renderer::draw_rect(0, 0, 20, 10, 0xFFFA);
+	if (pressed(BUTTON_Y))	//restart game
+		return 1;
+	if (pressed(BUTTON_ESC))
+		return -1;
+	return 0;
 }
 bool Game::quit(Input* input)
 {

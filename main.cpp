@@ -19,7 +19,8 @@ void subThread(HWND window)
 			game.simulate_game(&MOVING, 0.016f);
 		}
 		else
-			g_running = false;
+			//g_running = false;
+			g_pause=true;
 		//game.menu_game(&MOVING);
 		render_state = getRender();
 		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
@@ -105,7 +106,24 @@ int main()
 					}
 				}
 			}
-			else {}
+			else
+			{
+				if(g_pause)
+					game.pauseGame(t1.native_handle());
+				StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+				if (game.overGame(&MOVING) == 1)
+				{
+					g_pause = false;
+					game.restartGame();
+					game.resumeGame((HANDLE)t1.native_handle());
+				}
+				else if(game.overGame(&MOVING) == -1)
+				{
+					g_pause = false;
+					g_running = false;
+					game.resumeGame((HANDLE)t1.native_handle());
+				}
+			}
 		}
 		if (MOVING.buttons[BUTTON_ESC].is_down)
 		{

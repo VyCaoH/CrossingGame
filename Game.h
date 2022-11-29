@@ -30,6 +30,7 @@ public:
 		player = Player();
 		lv = 1;
 		score = 0;
+		threat.clear();
 	};
 	~Game()
 	{
@@ -47,7 +48,9 @@ public:
 	void simulate_game(Input* input, float dt);
 	bool menu_game(Input* input);
 	void reset_game();
+	void restartGame();
 	bool next_level();
+	int overGame(Input* input);
 	bool quit(Input* input);
 	void threatMove(float dt);
 	void updatePosThreat();
