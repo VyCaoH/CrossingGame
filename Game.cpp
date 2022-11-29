@@ -109,7 +109,10 @@ bool Game::menu_game(Input* input) {
 			return false;
 		case 1:		//LOAD GAME
 			break;
-		case 2:
+		case 2: //SETTINGS
+			break;
+		case 3:
+			//draw_Menu_Introduction(0, 0, 50, 50);
 			break;
 
 		}//==hot_button;

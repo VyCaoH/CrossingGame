@@ -5,6 +5,7 @@ enum TYPE {
 	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
 };
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT };
+enum THINGS { CLOUD1, CLOUD2, GRASS1,ROCK1, ROCK2, ROCK3, ROCK4};
 static float render_scale = 0.01f;
 static const char* tree[13] = {
 	"00411100",
@@ -266,7 +267,6 @@ static const char* entities[][14] = {
 "",
 "",
 };
-
 static const char* buttons_draw[][12] = {
 	//NEW_GAME
 	"000111111111111111111111111111111111111111111111111111111111111000",
@@ -369,7 +369,6 @@ static const char* title[29] = {
 	"00000000222222222222000000002222222000000002222222000000002222222222220000000022222222222222222000000002222222222222222200000000222222222222222220002222222000000022222220000002222222222222200000000000000000000000000022222222222222000000002222222000000002222222000222222200000000000002222222000222222222222222222222",
 	"00000000222222222222000000002222222000000002222222000000002222222222220000000022222222222222222000000002222222222222222200000000222222222222222220002222222000000022222220000002222222222222200000000000000000000000000022222222222222000000002222222000000002222222000222222200000000000002222222000222222222222222222222",
 };
-
 static const char* letters[][7] = {
 	" 00",
 	"0  0",
@@ -595,7 +594,80 @@ static const char* letters[][7] = {
 	"0",
 	"0",
 };
-
+static const char* things[][11] = {
+	//CLOUD1
+	"000000000011111100000000",
+	"0000000011111111100000000",
+	"0000000111111111111000000",
+	"000000111111111111110000",
+	"00000001111111111110000",
+	"0000011111111111111000",
+	"0000111111111111111110000000",
+	"0011111111111111111111100000",
+	"0011111111111111111111111000",
+	"111111111111111111111111111",
+	"000011111111111111111111",
+	//CLOUD2
+	"00000000000111111110000000",
+	"00000000011111111111000",
+	"000000001111111111111100000",
+	"0000000111111111111111110000",
+	"0000001111111111111111111",
+	"000000011111111111111111000",
+	"00011111111111111111111111000000",
+	"0011111111111111111111111110000",
+	"001111111111111111111111111100",
+	"0011111111111101111111111111",
+	"00001111111100001111111111",
+	//GRASS1
+	"33333333333333333333333",
+	"33333333303333333333333",
+	"03333333000333333333330",
+	"03333333000033333333300",
+	"00333330000033333333300",
+	"00333330000033333333300",
+	"000333000000003333300",
+	"0000300000000033333000",
+	"0000000000000003330",
+	"00000000000000033300",
+	"0000000000000000300",
+	//ROCK1
+	"22222",
+	"22222",
+	"22222",
+	"22222",
+	"22222",
+	"0000022222",
+	"0000022222",
+	"0000022222",
+	"0000022222",
+	"0000022222",
+	"0000000000",
+	//ROCK2
+	"22222",
+	"22222",
+	"22222",
+	"22222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000222222222222222",
+	"00000000000000000000",
+	"00000000000000000000",
+	//ROCK3
+	"0000222222222222",
+	"0000222222222222",
+	"0000222222222222",
+	"00000002222222222222222",
+	"00000002222222222222222",
+	"00000002222222222222222",
+	"2222222222222000022222",
+	"2222222222222000022222",
+	"00022222222000022222222222",
+	"00022222222000022222222222",
+	"00022222222",
+};
 class Renderer
 {
 public:
@@ -605,8 +677,7 @@ public:
 		if (val > max) return max;
 		return val;
 	}
-	static void
-		clear_screen(u32 color) {
+	static void clear_screen(u32 color) {
 		unsigned int* pixel = (u32*)render_state.memory;
 		for (int y = 0; y < render_state.height; y++) {
 			for (int x = 0; x < render_state.width; x++) {
@@ -614,9 +685,7 @@ public:
 			}
 		}
 	}
-
-	static void
-		draw_rect_in_pixels(int x0, int y0, int x1, int y1, u32 color) {
+	static void draw_rect_in_pixels(int x0, int y0, int x1, int y1, u32 color) {
 
 		x0 = clamp(0, x0, render_state.width);
 		x1 = clamp(0, x1, render_state.width);
@@ -630,9 +699,7 @@ public:
 			}
 		}
 	}
-
-	static void
-		draw_arena_borders(float x, float y, float arena_x, float arena_y, u32 color) {
+	static void draw_arena_borders(float x, float y, float arena_x, float arena_y, u32 color) {
 		x *= render_state.height * render_scale;
 		y *= render_state.height * render_scale;
 		arena_x *= render_state.height * render_scale;
@@ -655,9 +722,7 @@ public:
 		//draw_rect_in_pixels(x0, y1, render_state.width, render_state.height, color);
 		//draw_rect_in_pixels(x1, y0, render_state.width, render_state.height, color);
 	}
-
-	static void
-		draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
+	static void draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 
 		//int temp = render_state.height * render_scale;
 		x *= render_state.height * render_scale;
@@ -676,8 +741,7 @@ public:
 
 		draw_rect_in_pixels((int)x0, (int)y0, (int)x1, (int)y1, color);
 	}
-	static void
-		draw_borders(float x1, float y1, float half_size_x1, float half_size_y1, float x2, float y2, float half_size_x2, float half_size_y2, u32 color) {
+	static void draw_borders(float x1, float y1, float half_size_x1, float half_size_y1, float x2, float y2, float half_size_x2, float half_size_y2, u32 color) {
 		x1 *= render_state.height * render_scale;
 		y1 *= render_state.height * render_scale;
 		x1 += render_state.width / 2.f;
@@ -703,7 +767,6 @@ public:
 		draw_rect_in_pixels((int)x_1, (int)y_1, (int)x_2, (int)y_2, color);
 		draw_rect_in_pixels((int)x_3, (int)y_3, (int)x_4, (int)y_4, 0xffffffff);
 	}
-
 	static bool checkWall(float x)
 	{
 		x *= render_state.height * render_scale;
@@ -802,7 +865,7 @@ public:
 	// cai chan 
 	draw_rect(x + 0.75, y - 2, 1, 0.4, 0xBD7119);
 }
-static void draw_titan(float x, float y, float half_size_x, float half_size_y)
+	static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 {
 	//nen black
 	draw_rect(x, y+1, 3, 3.3, 0x000000); // head
@@ -1059,8 +1122,7 @@ static void draw_titan(float x, float y, float half_size_x, float half_size_y)
 		draw_rect(x - 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);// chan xanh 
 		draw_rect(x + 1.8, y - 1.9, 0.7, 0.35, 0x446B4C);
 	}
-
-static void draw_text(const char* text, float x, float y, float size, u32 color) {
+	static void draw_text(const char* text, float x, float y, float size, u32 color) {
 	float half_size = size * .5f;
 	float original_y = y;
 
@@ -1131,8 +1193,6 @@ static void draw_text(const char* text, float x, float y, float size, u32 color)
 			x = original_x;
 		}
 	}
-
-
 	static void draw_entities(int number, float x, float y, float size, u32 color)
 	{
 		float half_size = size * .5f;
@@ -2013,19 +2073,19 @@ static void draw_text(const char* text, float x, float y, float size, u32 color)
 
 					}
 
-				x += size;
-				row++;
+					x += size;
+					row++;
+				}
+				y -= size;
+				x = original_x;
 			}
-			y -= size;
-			x = original_x;
+			break;
 		}
-		break;
+		}
+
 	}
-	}
-	
-}
-static void draw_number(int number, float x, float y, float size, u32 color) {
-	float half_size = size *.5f;
+	static void draw_number(int number, float x, float y, float size, u32 color) {
+		float half_size = size * .5f;
 
 		bool drew_number = false;
 		while (number || !drew_number) {
@@ -2117,24 +2177,6 @@ static void draw_number(int number, float x, float y, float size, u32 color) {
 
 		}
 	}
-	
-
-	//static void draw_GameOver(float x, float y, float half_size_x, float half_size_y) {
-	//
-	//}
-	//static void draw_Menu(float x, float y, float half_size_x, float half_size_y) {
-	//	clear_screen(0x01C4FF);
-	//	draw_text("THE CROSSING GAME", x - 72, y + 45, 1.5, 0xE61409);
-	//	draw_text("A PROJECT BY GROUP THREE", x - 67, y + 30, 1, 0xFFE501);
-	//	draw_text("NEW GAME", x - 22, y + 15, 0.75, 0xFF7901);
-	//	draw_text("LOAD GAME", x - 22, y + 4, 0.75, 0xFF7901);
-	//	draw_text("SETTING", x - 22, y - 9, 0.75, 0xFF7901);
-	//	draw_text("INTRODUCTION", x - 22, y - 22, 0.75, 0xFF7901);
-	//	draw_text("EXIT", x - 22, y - 35, 0.75, 0xFF7901);
-	//	draw_entities(4, x - 72, y + 20, 1, 0xE61409);
-	//	draw_entities(4, x + 50, y + 20, 1, 0xE61409);
-	//	draw_entities(5, x - 95, y - 45, 1, 0xE61409);
-	//};
 	static void draw_title(float x, float y, float size, u32 color) {
 		float half_size = size * .5f;
 		float original_y = y;
@@ -2232,6 +2274,7 @@ static void draw_number(int number, float x, float y, float size, u32 color) {
 	}
 	static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {
 		clear_screen(0x01C4FF);
+		draw_Background2(0, 0, 0, 0);
 		draw_title(x - 83, y + 45, 0.5, 0xE61409);
 		draw_Button(NEW_GAME, x - 25, y + 15, 0.7, 0x000000, hot_button);
 		draw_Button(LOAD_GAME, x - 25, y + 2, 0.7, 0x000000, hot_button);
@@ -2327,12 +2370,94 @@ static void draw_number(int number, float x, float y, float size, u32 color) {
 			draw_rect(x - 80 + i, y + 20, 6, 1, 0x7E8397);//lane line darker
 		}
 
-		//SCore
-		draw_text("SCORE", 58.5, 44, 1.1, 0xFF3131);
-		
+
+
+
+		//for (int j = 0; j < 90; j += 8)
+		//{
+		//	for (int i = 0; i < 160; i += 18) //dom duong 
+		//	{
+		//		draw_rect(x - 103 + i, y + 47- j, 1.5, 0.8, 0xEEB395);
+		//		draw_rect(x - 105 + i, y + 48- j, 1.5, 0.7, 0xC68164);
+		//	}
+		//	for (int i = 0; i < 130; i += 18) //dom duong 
+		//	{
+		//		draw_rect(x - 77 + i, y + 42 - j, 1.5, 0.8, 0xC68164);
+		//		draw_rect(x - 75+ i, y + 43 - j, 1.5, 0.7, 0xC7684D);
+		//	}
+		//}
+		//soc dat
+		/*draw_rect(x - 18.5, y + 38, 71.5, 0.5, 0xA06A12);
+		draw_rect(x - 18.5, y + 26, 71.5, 0.5, 0xA06A12);
+		draw_rect(x - 18.5, y + 13, 71.5, 0.5, 0xA06A12);
+		draw_rect(x - 18.5, y + 1.5 , 71.5, 0.5, 0xA06A12);
+		draw_rect(x - 18.5, y -11.5, 71.5, 0.5, 0xA06A12);
+		draw_rect(x - 18.5, y - 24.5, 71.5, 0.5, 0xA06A12);
+		draw_rect(x - 18.5, y - 37, 71.5, 0.5, 0xA06A12);*/
+
+		//for (int i = 0; i < 121; i += 40) {
+		//	draw_plant(x - 80 + i, y - 43.2); // draw plant
+		//}
+		//for (int i = 0; i < 121; i += 40) {
+		//	draw_plant(x - 80 + i, y + 8); // draw plant
+		//}
+
+
 	}
-	//plant 
-	void static draw_trees(int x , int y ) {
+	static void draw_things(int number, float x, float y, float size) {
+		float half_size = size * .5f;
+		float original_y = y;
+		const char** button;
+		float original_x = x;
+
+		button = things[number];
+		for (int i = 0; i <= 10; i++) {
+			const char* row = button[i];
+			while (*row) {
+				switch (*row)
+				{
+				case '1':
+				{
+					draw_rect(x, y, half_size, half_size, 0xffffff);
+					break;
+				}
+				case '2':
+				{
+					draw_rect(x, y, half_size, half_size, 0xa67564);
+					break;
+				}
+				case '3':
+				{
+					draw_rect(x, y, half_size, half_size, 0x63b15d);
+					break;
+				}
+				}
+				x += size;
+				row++;
+
+			}
+			y -= size;
+			x = original_x;
+		}
+	}
+	static void draw_Background2(float x, float y, float max_size_x, float max_size_y)
+	{
+		//Khung 
+		draw_rect(x, y - 40, 120, 15, 0x784937);
+		draw_things(CLOUD1, x - 50, y + 40, 1.5);
+		draw_things(CLOUD1, x + 30, y + 60, 1.3);
+		draw_things(CLOUD2, x + 50, y + 20, 1);
+		draw_things(CLOUD2, x - 90, y + 25, 1.2);
+		for (int i = 0; i <= 50; i++) {
+			draw_things(GRASS1, x - 120 + i * 10, y - 25, .4);
+		}
+		for (int i = 0; i <= 10; i++) {
+			draw_things(ROCK3, x - 120 + i * 20, y - 30, .3);
+			draw_things(ROCK2, x - 120 + i * 20 + 10, y - 40, .2);
+			draw_things(ROCK1, x - 120 + i * 20 + 15, y - 45, .2);
+		}
+	}
+	static void draw_trees(int x, int y) {
 		for (int i = 0; i < 140; i += 30)
 		{
 			draw_tree(x - 80 + i, y + 44, 1.7, 0xC3FF5F);
@@ -2341,3 +2466,4 @@ static void draw_number(int number, float x, float y, float size, u32 color) {
 		}
 	}
 };
+
