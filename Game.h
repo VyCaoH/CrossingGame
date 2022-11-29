@@ -7,6 +7,7 @@
 #include"Threat.h"
 #include"Sound.h"
 #include"ConsoleWindow.h"
+#include"Score.h"
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
@@ -15,12 +16,12 @@ static gamemode g_mode = GM_MENUGAME;
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = false;
-static int hot_button = 0;
+static BUTTON hot_button = NEW_GAME;
 class Game
 {
 	Player player;
 	int lv;
-	int score;
+	Score score;
 	//int time;
 	std::vector<Threat*> threat;
 	//vector<Row*> row;
@@ -29,7 +30,8 @@ public:
 	{
 		player = Player();
 		lv = 1;
-		score = 0;
+		score.readHighScore();
+		threat.clear();
 	};
 	~Game()
 	{
@@ -39,15 +41,15 @@ public:
 	}
 	Player getPlayer();
 	int getLv();
-	int getScore();
-	void setScore();
-	void scoreChange();
+	void setHighScore();
 	vector<Threat*> getThreat();
 	void startGame();
 	void simulate_game(Input* input, float dt);
-	bool menu_game(Input* input);
+	BUTTON menu_game(Input* input);
 	void reset_game();
+	void restartGame();
 	bool next_level();
+	int overGame(Input* input);
 	bool quit(Input* input);
 	void threatMove(float dt);
 	void updatePosThreat();
