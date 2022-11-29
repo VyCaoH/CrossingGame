@@ -60,9 +60,13 @@ int main()
 			case NEW_GAME:
 				g_pause = false;
 				g_mode = GM_PLAYGAME;
+				game.restartGame();
 				game.resumeGame(t1.native_handle());
 				break;
 			case LOAD_GAME:
+				g_pause = false;
+				g_mode = GM_PLAYGAME;
+				game.resumeGame(t1.native_handle());
 				break;
 			case SETTINGS:
 				break;
