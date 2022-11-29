@@ -10,7 +10,6 @@ public:
 	static bool audioUpScore();
 	static bool audioButton();
 	static bool audioDie();
-
 	static void audioStop();
 
 };

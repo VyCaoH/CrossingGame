@@ -66,7 +66,6 @@ void Game::simulate_game(Input* input, float dt)
 	if (is_down(BUTTON_S)) player.down(speed, dt);
 	if (is_down(BUTTON_D)) player.right(speed, dt);
 	if (is_down(BUTTON_A)) player.left(speed, dt);
-	Renderer::draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
 }
 bool Game::menu_game(Input* input) {
 	render_state = getRender();
