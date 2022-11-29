@@ -11,5 +11,7 @@ public:
 	static bool audioButton();
 	static bool audioDie();
 	static void audioStop();
+	static bool audioEnter();
+	static bool audioGamePlay();
 
 };

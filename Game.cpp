@@ -44,6 +44,7 @@ void Game::startGame()
 
 void Game::simulate_game(Input* input, float dt)
 {
+	//Sound::audioGamePlay();
 	render_state = getRender();
 	Renderer::clear_screen(0xffffffff);
 
@@ -103,15 +104,20 @@ bool Game::menu_game(Input* input) {
 	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
 	if (pressed(BUTTON_ENTER))
 	{
+		
 		switch (hot_button)
 		{
 		case 0:	//NEW GAME
+			Sound::audioEnter();
 			return false;
 		case 1:		//LOAD GAME
+			Sound::audioEnter();
 			break;
 		case 2: //SETTINGS
+			Sound::audioEnter();
 			break;
 		case 3:
+			Sound::audioEnter();
 			//draw_Menu_Introduction(0, 0, 50, 50);
 			break;
 
@@ -130,6 +136,7 @@ bool Game::next_level()
 	if (player.getY() == 40)
 	{
 		lv++;
+		Sound::audioUpScore();
 		setScore();
 		reset_game();
 	}
