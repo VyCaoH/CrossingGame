@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Sound.h"
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
 float arena_half_size_x = 85, arena_half_size_y = 45;
@@ -41,8 +40,6 @@ void Game::startGame()
 	score.readHighScore();
 }
 
-void Game::mainBoard()
-{
 
 }
 void Game::setHighScore()
@@ -73,51 +70,67 @@ void Game::simulate_game(Input* input, float dt)
 	if (is_down(BUTTON_S)) player.down(speed, dt);
 	if (is_down(BUTTON_D)) player.right(speed, dt);
 	if (is_down(BUTTON_A)) player.left(speed, dt);
-	Renderer::draw_rect(player.getX(), player.getY(), 1, 1, 0xddd);
 }
 bool Game::menu_game(Input* input) {
 	render_state = getRender();
-	g_music_menu = Sound::audioMenu();
-	if (g_music_menu)
+	if (released(BUTTON_UP))
 	{
-		if (pressed(BUTTON_S))// || pressed(BUTTON_W))
+		g_music_menu = !g_music_menu;
+		if (g_music_menu)
+			Sound::audioMenu();
+		else
+			Sound::audioStop();
+	}
+	if (pressed(BUTTON_S))
+	{
+		g_music_button = !g_music_button;
+		if (g_music_button)
 		{
-			g_music_button = Sound::audioButton();
-			hot_button++;
-			if (hot_button > 4)hot_button = 4;
+			Sound::audioButton();
 		}
-		if (pressed(BUTTON_W)) {
-			g_music_button = Sound::audioButton();
-			hot_button--;
-			//Sound::audioButton();
-			if (hot_button < 0)hot_button = 0;
-			//Sound::audioButton();
-
-		}
-		/*Do something in menu*/;
-		Renderer::draw_Menu(0, 0, 50, 50, hot_button);
-		if (pressed(BUTTON_ENTER))
+		g_music_button = !g_music_button;
+		hot_button++;
+		if (hot_button > 4)hot_button = 4;
+	}
+	if (pressed(BUTTON_W)) {
+		g_music_button = !g_music_button;
+		if (g_music_button)
 		{
-			switch (hot_button)
-			{
-			case 0:	//NEW GAME
-				return false;
-			case 1:		//LOAD GAME
-				break;
-			case 2:
-				break;
-
-			}//==hot_button;
+			Sound::audioButton();
 		}
-		//Renderer::draw_entities(BUS_RI, 0, 0, 0.5,0xfffff);
+		g_music_button = !g_music_button;
+		hot_button--;
+		if (hot_button < 0)hot_button = 0;
+
+	}
+	/*Do something in menu*/;
+	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
+	if (pressed(BUTTON_ENTER))
+	{
+		switch (hot_button)
+		{
+		case 0:	//NEW GAME
+			return false;
+		case 1:		//LOAD GAME
+			break;
+		case 2: //SETTINGS
+			break;
+		case 3:
+			//draw_Menu_Introduction(0, 0, 50, 50);
+			break;
+
+		}//==hot_button;
 	}
 	return true;
-
 }
 void Game::reset_game()
 {
 	player.setY(-45);
 	threat.clear();
+}
+void Game::restartGame()
+{
+	startGame();
 }
 bool Game::next_level()
 {
@@ -129,6 +142,15 @@ bool Game::next_level()
 		reset_game();
 	}
 	return false;
+}
+int Game::overGame(Input* input)
+{
+	Renderer::draw_rect(0, 0, 20, 10, 0xFFFA);
+	if (pressed(BUTTON_Y))	//restart game
+		return 1;
+	if (pressed(BUTTON_ESC))
+		return -1;
+	return 0;
 }
 bool Game::quit(Input* input)
 {

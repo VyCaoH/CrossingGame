@@ -5,15 +5,17 @@
 #include"Player.h"
 #include"Animal.h"
 #include"Threat.h"
+#include"Sound.h"
 #include"ConsoleWindow.h"
 #include"Score.h"
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
-static bool g_menu=true;
+static gamemode g_mode = GM_MENUGAME;
+static bool g_sound = true;
 static bool g_music_button = false;
-static bool g_music_menu = true;
+static bool g_music_menu = false;
 static int hot_button = 0;
 class Game
 {
@@ -29,6 +31,8 @@ public:
 		player = Player();
 		lv = 1;
 		score.readHighScore();
+		score = 0;
+		threat.clear();
 	};
 	~Game()
 	{
@@ -41,11 +45,12 @@ public:
 	void setHighScore();
 	vector<Threat*> getThreat();
 	void startGame();
-	void mainBoard();
-	virtual void simulate_game(Input* input, float dt);
+	void simulate_game(Input* input, float dt);
 	bool menu_game(Input* input);
 	void reset_game();
+	void restartGame();
 	bool next_level();
+	int overGame(Input* input);
 	bool quit(Input* input);
 	void threatMove(float dt);
 	void updatePosThreat();
