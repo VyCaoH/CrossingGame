@@ -31,7 +31,6 @@ public:
 		player = Player();
 		lv = 1;
 		score.readHighScore();
-		score = 0;
 		threat.clear();
 	};
 	~Game()

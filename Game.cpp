@@ -40,8 +40,6 @@ void Game::startGame()
 	score.readHighScore();
 }
 
-
-}
 void Game::setHighScore()
 {
 	score.writeHighScore();
