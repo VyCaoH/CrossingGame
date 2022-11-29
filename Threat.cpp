@@ -45,14 +45,7 @@ vector<Entity*>Threat::getThreat()
 {
 	return threat;
 }
-//vector<Entity*> getListEntity()
-//{
-//	return threaten;
-//}
-//Entity* getEntity(int index)
-//{
-//	return threaten[index];
-//}
+
 void Threat::setListEntity(TYPE type, int dir)
 {
 	//143->max, min=(43,-100)
@@ -591,7 +584,7 @@ void Threat::move(float speed, float dt)
 				x->left(speed, dt, lv);
 				x->setHalf(4.5f, 3.25f);
 				if (checkWall_left(x->getX()))
-					draw_birdL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					Renderer::draw_birdL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 			}break;
@@ -602,8 +595,8 @@ void Threat::move(float speed, float dt)
 		//	{
 		//		x->left(speed, dt, lv);
 		//		if (checkWall_left(x->getX()))
-		//			//draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);
-		//			draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+		//			//Renderer::draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);
+		//			Renderer::draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 		//		else
 		//			threat.erase(threat.begin());
 		//	}break;
@@ -617,9 +610,9 @@ void Threat::move(float speed, float dt)
 				if (checkWall_left(x->getX()))
 				{
 					/*if (type
-						draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-					else draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
-						draw_entities(CAR_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
+						Renderer::draw_entities(CAR_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 					
 
 				}
@@ -636,9 +629,9 @@ void Threat::move(float speed, float dt)
 				if (checkWall_left(x->getX()))
 				
 					/*if (type
-						draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-					else draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
-					draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
+					Renderer::draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				
 				else
 					threat.erase(threat.begin());
@@ -652,8 +645,8 @@ void Threat::move(float speed, float dt)
 				x->setHalf(5.5f, 3.5f);
 				if (checkWall_left(x->getX()))
 				{
-					//draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
-					draw_entities(BUS_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					//Renderer::draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
+					Renderer::draw_entities(BUS_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				}
 				else
 					threat.erase(threat.begin());
@@ -667,8 +660,8 @@ void Threat::move(float speed, float dt)
 				x->setHalf(2.25f, 3.5f);
 				if (checkWall_left(x->getX()))
 				{
-					//draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
-					draw_entities(BALLOON_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					//Renderer::draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
+					Renderer::draw_entities(BALLOON_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				}
 				else
 					threat.erase(threat.begin());
@@ -682,7 +675,7 @@ void Threat::move(float speed, float dt)
 				x->setHalf(4.f, 3.f);
 
 				if (checkWall_left(x->getX()))
-					draw_turtleL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					Renderer::draw_turtleL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 
@@ -695,7 +688,7 @@ void Threat::move(float speed, float dt)
 				x->left(speed, dt, lv);
 				x->setHalf(4.f, 3.5f);
 				if (checkWall_left(x->getX()))
-					draw_entities(BEE_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(BEE_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -708,7 +701,7 @@ void Threat::move(float speed, float dt)
 				x->left(speed, dt, lv);
 				x->setHalf(5.f, 3.5f);
 				if (checkWall_left(x->getX()))
-					draw_entities(PIG_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(PIG_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -721,7 +714,7 @@ void Threat::move(float speed, float dt)
 				x->left(speed, dt, lv);
 				x->setHalf(4.f, 3.f);
 				if (checkWall_left(x->getX()))
-					draw_entities(CAT_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(CAT_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -741,8 +734,8 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(4.5f, 3.25f);
 				if (checkWall_right(x->getX()))
-					//draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
-					draw_birdR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					//Renderer::draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
+					Renderer::draw_birdR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 
@@ -754,8 +747,8 @@ void Threat::move(float speed, float dt)
 		//	{
 		//		x->right(speed, dt, lv);
 		//		if (checkWall_right(x->getX()))
-		//			//draw_entities(DINOSAUR,x->getX(), x->getY(), .5f,0xFFFFF);
-		//			draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+		//			//Renderer::draw_entities(DINOSAUR,x->getX(), x->getY(), .5f,0xFFFFF);
+		//			Renderer::draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 
 		//		else
 		//			threat.erase(threat.begin());
@@ -769,7 +762,7 @@ void Threat::move(float speed, float dt)
 				x->setHalf(7.f, 2.25f);
 				x->right(speed, dt, lv);
 				if (checkWall_right(x->getX()))
-						draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 
 				else
 					threat.erase(threat.begin());
@@ -783,7 +776,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(5.5f, 2.25f);
 				if (checkWall_right(x->getX()))
-					 draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					 Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -796,7 +789,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(5.5f, 3.5f);
 				if (checkWall_right(x->getX()))
-					draw_entities(BUS_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(BUS_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -809,7 +802,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(2.25f, 3.5f);
 				if (checkWall_right(x->getX()))
-					draw_entities(BALLOON_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(BALLOON_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -822,7 +815,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(4.f, 3.f);
 				if (checkWall_right(x->getX()))
-					draw_turtleR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					Renderer::draw_turtleR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
 				else
 					threat.erase(threat.begin());
 
@@ -835,7 +828,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(4.f, 3.5f);
 				if (checkWall_right(x->getX()))
-					draw_entities(BEE_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(BEE_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -848,7 +841,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(5.f, 3.5f);
 				if (checkWall_right(x->getX()))
-					draw_entities(PIG_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(PIG_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
@@ -861,7 +854,7 @@ void Threat::move(float speed, float dt)
 				x->right(speed, dt, lv);
 				x->setHalf(4.f, 3.f);
 				if (checkWall_right(x->getX()))
-					draw_entities(CAT_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					Renderer::draw_entities(CAT_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 				else
 					threat.erase(threat.begin());
 
