@@ -67,7 +67,7 @@ void Game::simulate_game(Input* input, float dt)
 	if (is_down(BUTTON_D)) player.right(speed, dt);
 	if (is_down(BUTTON_A)) player.left(speed, dt);
 }
-bool Game::menu_game(Input* input) {
+BUTTON Game::menu_game(Input* input) {
 	render_state = getRender();
 	if (released(BUTTON_UP))
 	{
@@ -85,8 +85,8 @@ bool Game::menu_game(Input* input) {
 			Sound::audioButton();
 		}
 		g_music_button = !g_music_button;
-		hot_button++;
-		if (hot_button > 4)hot_button = 4;
+		hot_button = (BUTTON)(hot_button + 1);
+		if (hot_button > 4)hot_button = EXIT;
 	}
 	if (pressed(BUTTON_W)) {
 		g_music_button = !g_music_button;
@@ -95,9 +95,8 @@ bool Game::menu_game(Input* input) {
 			Sound::audioButton();
 		}
 		g_music_button = !g_music_button;
-		hot_button--;
-		if (hot_button < 0)hot_button = 0;
-
+		hot_button = (BUTTON)(hot_button - 1);
+		if (hot_button < 0)hot_button = NEW_GAME;
 	}
 	/*Do something in menu*/;
 	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
@@ -105,19 +104,26 @@ bool Game::menu_game(Input* input) {
 	{
 		switch (hot_button)
 		{
-		case 0:	//NEW GAME
-			return false;
-		case 1:		//LOAD GAME
-			break;
-		case 2: //SETTINGS
-			break;
-		case 3:
-			//draw_Menu_Introduction(0, 0, 50, 50);
-			break;
+		case NEW_GAME:	//NEW GAME
+			return hot_button;
 
-		}//==hot_button;
+		case LOAD_GAME:		//LOAD GAME
+			return hot_button;
+
+		case SETTINGS: //SETTINGS
+			return hot_button;
+
+		case INTRODUCTION:
+			Renderer::clear_screen(0xFFFFFF);
+
+			//Draw Introduction in here.
+
+			return hot_button;
+		case EXIT:
+			return hot_button;
+		}
 	}
-	return true;
+	return BUTTON( - 1);
 }
 void Game::reset_game()
 {
