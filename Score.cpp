@@ -12,7 +12,7 @@ void Score::setScore(int x)
 }
 void Score::DisplayScore()
 {
-	Renderer::draw_number(getScore(), 78, 31, 1.3, 0xFF3131);
+	Renderer::draw_number(getScore(), 78, 31, 1.3, 0x0002D9);
 }
 void Score::readHighScore()
 {
@@ -49,5 +49,5 @@ void Score::writeHighScore()
 }
 void Score::DisplayHighScore()
 {
-    Renderer::draw_number(highscore[0], 78, 0, 1, 0xFF3131);
+    Renderer::draw_number(highscore[0], 77, 10.5, 0.9, 0xE30000);
 }
