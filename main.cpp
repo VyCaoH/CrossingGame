@@ -23,6 +23,7 @@ void subThread(HWND window)
 		render_state = getRender();
 		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
 	}
+	game.setHighScore();
 }
 int main()
 {
