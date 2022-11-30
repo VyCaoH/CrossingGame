@@ -178,10 +178,10 @@ void Game::updatePosThreat()
 {
 	if (threat.empty())
 	{
-		threat.push_back(new Threat(-30));
-		threat.push_back(new Threat(-10));
-		threat.push_back(new Threat(10));
-		threat.push_back(new Threat(30));
+		threat.push_back(new Threat(-25));
+		threat.push_back(new Threat(-13));
+		threat.push_back(new Threat(15));
+		threat.push_back(new Threat(28));
 	}
 	for (auto x : threat)
 	{

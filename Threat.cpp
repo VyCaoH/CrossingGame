@@ -15,7 +15,7 @@ Threat::Threat(int posY) :y_coord(posY)
 	type = TYPE(-1);
 	dir = -1;
 }
-enum DIRECTION { RIGHT, LEFT };
+enum DIRECTION { RIGHT, LEFT }; 
 //enum TYPE { CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_LEFT, CAR2_RIGHT, BIRD, DINOSAUR};
 int Threat::getNumEnemyInRow()
 {
@@ -26,7 +26,7 @@ unsigned int Threat:: getLv()
 	return lv;
 }
 int Threat::getType()
-{
+{	
 	return type;
 }
 float Threat::getSpeed()
@@ -268,7 +268,7 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Dinosaur((float)randDistance_left + 30, (float)y_coord)));
+					threat.push_back((new Dinosaur((float)randDistance_left + 40, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
