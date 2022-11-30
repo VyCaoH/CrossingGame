@@ -67,12 +67,11 @@ void Threat::setListEntity(TYPE type, int dir)
 		{
 		case TYPE::CAR_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Car((float)randDistance_left + 30, (float)y_coord)));
+					threat.push_back((new Car((float)randDistance_left, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
@@ -87,12 +86,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::CAR2_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+		
 				if (threat.empty())
 				{
 					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
@@ -111,12 +109,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::BUS_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 					//threaten.push_back(new Truck(randDistance(gen) - 30, pos_row));
@@ -135,12 +132,10 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::BALLOON_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
 				if (threat.empty())
 				{
 					//threaten.push_back(new Truck(randDistance(gen) - 30, pos_row));
@@ -159,12 +154,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::BIRD_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 					//threaten.push_back(new Bird(randDistance(gen) - 30, pos_row));
@@ -183,13 +177,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
 			break;
 		}
 		case TYPE::BEE_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 					//threaten.push_back(new Bird(randDistance(gen) - 30, pos_row));
@@ -208,13 +200,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
 			break;
 		}
 		case TYPE::CAT_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
@@ -233,13 +223,12 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
+			
 			break;
 		}
 		case TYPE::PIG_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
@@ -258,13 +247,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
 			break;
 		}
 		case TYPE::TURTLE_LEFT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+
 				if (threat.empty())
 				{
 					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
@@ -283,7 +270,7 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
+			
 			break;
 		}
 		}
@@ -297,8 +284,6 @@ void Threat::setListEntity(TYPE type, int dir)
 		{
 		case TYPE::CAR_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
 				if (threat.empty())
 				{
 
@@ -321,12 +306,11 @@ void Threat::setListEntity(TYPE type, int dir)
 					}
 				}
 
-			}break;
+			break;
 		}
 		case TYPE::CAR2_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -348,12 +332,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::BUS_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -375,12 +358,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::BALLOON_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -402,12 +384,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
 				}
-			}break;
+			break;
 		}
 		case TYPE::BIRD_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -429,13 +410,11 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
 			break;
 		}
 		case TYPE::BEE_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -457,14 +436,13 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
+			
 		}
 		break;
 		}
 		case TYPE::CAT_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -486,13 +464,12 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
+			
 			break;
 		}
 		case TYPE::PIG_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -514,13 +491,12 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
+			
 			break;
 		}
 		case TYPE::TURTLE_RIGHT:
 		{
-			while (threat.size() < numEnemyInRow)
-			{
+			
 				if (threat.empty())
 				{
 
@@ -542,7 +518,7 @@ void Threat::setListEntity(TYPE type, int dir)
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
 				}
-			}
+	
 			break;
 		}
 		}
@@ -556,7 +532,7 @@ bool Threat::checkWall_left(float x)
 {
 	//x *= render_state.height * render_scale;
 	//x += render_state.width / 2.f;
-	if (x < - 105)
+	if (x < -85)
 		return false;
 	return true;
 }
@@ -564,7 +540,7 @@ bool Threat::checkWall_right(float x)
 {
 	//x *= render_state.height * render_scale;
 	//x += render_state.width / 2.f;
-	if (x > 50)
+	if (x > 45)
 		return false;
 	return true;
 }
