@@ -1,34 +1,38 @@
 #include"ConsoleWindow.h"
 #include"Game.h"
 #include<thread>
-Input MOVING = {};
+char MOVING;
 Game game;
 
 void subThread(HWND window)
 {
 	HDC hdc = GetDC(window);
+	float delta_time=0.1f;
+
 	while (g_running)
 	{
-		//MOVING = input;
+		//input = input;
 		if (g_mode==GM_MENUGAME)
 		{
 			continue;
 		}
 		if (!game.getPlayer().getIsDead())
 		{
-			game.simulate_game(&MOVING, 0.016f);
+			game.simulate_game(MOVING, delta_time);
+		//MOVING = ' ';
 		}
 		else
 			continue;
 		render_state = getRender();
 		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+		cout << MOVING << endl;
+
 	}
 	game.setHighScore();
 }
 int main()
 {
 //	game.startGame();
-
 	HWND window = winMain();
 	HDC hdc = GetDC(window);
 	//Input input = {};
@@ -47,15 +51,19 @@ int main()
 		QueryPerformanceFrequency(&perf);
 		performance_frequency = (float)perf.QuadPart;
 	}
+
+	Input input = {};
 	thread t1(subThread, window);
 	while (g_running) {
 
 		MSG message;
-		messageInput(MOVING, message, window);
+		MOVING=messageInput(input, message, window);
 
+		//if (MOVING == 'W')
+			//cout << 1 << endl;
 		if (g_mode==GM_MENUGAME)
 		{
-			switch (game.menu_game(&MOVING))
+			switch (game.menu_game(&input))
 			{
 			case NEW_GAME:
 				g_pause = false;
@@ -86,20 +94,18 @@ int main()
 			{
 				if (!g_pause)
 				{
-					if (MOVING.buttons[BUTTON_ESC].is_down)
+					if (input.buttons[BUTTON_ESC].is_down)
 					{
-						//Code cua sub_Menu
 						g_running = false;
 					}
-					else if (MOVING.buttons[BUTTON_P].is_down)
+					else if (input.buttons[BUTTON_P].is_down)
 					{
 						g_pause = true;
 						game.pauseGame(t1.native_handle());
 						continue;
 					}
-					if (MOVING.buttons[BUTTON_Y].is_down)
+					if (input.buttons[BUTTON_Y].is_down)
 					{
-						//g_pause = false;
 						game.resumeGame((HANDLE)t1.native_handle());
 						continue;
 					}
@@ -108,30 +114,31 @@ int main()
 				{
 					g_mode = GM_MENUGAME;
 					continue;
-					if (MOVING.buttons[BUTTON_ESC].is_down)
+					if (input.buttons[BUTTON_ESC].is_down)
 					{
 						g_running = false;
 						game.resumeGame((HANDLE)t1.native_handle());
 					}
-					if (MOVING.buttons[BUTTON_Y].is_down)
+					if (input.buttons[BUTTON_Y].is_down)
 					{
 						g_pause = false;
 						game.resumeGame((HANDLE)t1.native_handle());
 					}
 				}
+				MOVING;
 			}
 			else
 			{
 				if(g_pause)
 					game.pauseGame(t1.native_handle());
 				StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
-				if (game.overGame(&MOVING) == 1)
+				if (game.overGame(&input) == 1)
 				{
 					g_pause = false;
 					game.restartGame();
 					game.resumeGame((HANDLE)t1.native_handle());
 				}
-				else if(game.overGame(&MOVING) == -1)
+				else if(game.overGame(&input) == -1)
 				{
 					//g_pause = false;
 					g_running = false;
@@ -139,7 +146,7 @@ int main()
 				}
 			}
 		}
-		if (MOVING.buttons[BUTTON_ESC].is_down)
+		if (input.buttons[BUTTON_ESC].is_down)
 		{
 			g_running = false;
 			game.resumeGame((HANDLE)t1.native_handle());
@@ -150,6 +157,8 @@ int main()
 
 		//FPS ( time theo CPU ),
 		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
+		cout <<"Delta time = "<< delta_time << endl;
+		Sleep(25);
 		frame_begin_time = frame_end_time;
 	}
 	game.exitGame(t1);

@@ -34,6 +34,7 @@ public:
 	int getThreat(int type);
 	vector<Entity*> getThreat();
 	void setListEntity(TYPE type, int dir);
+	void setThreatInRow(int lv);
 	int random_int(int min, int max);
 	bool checkWall_left(float x);
 	bool checkWall_right(float x);

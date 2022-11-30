@@ -44,17 +44,17 @@ void Game::setHighScore()
 {
 	score.writeHighScore();
 }
-void Game::simulate_game(Input* input, float dt)
+void Game::simulate_game(char MOVING, float dt)
 {
 	//Sound::audioGamePlay();
 	render_state = getRender();
-	Renderer::	clear_screen(0xffffffff);
+	//Renderer::	clear_screen(0xffffffff);
 
 	float speed = 25.f;
 
 	Renderer::draw_Background(0, 0, 73, 45);
 	//Renderer::draw_turtleL(0, 0, 1, 1);
-	player.move(input, dt, speed);
+	player.move(MOVING, dt, speed);
 	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
 	player.isImpact(threat);
 	Renderer::draw_trees(0, 0);
@@ -64,11 +64,6 @@ void Game::simulate_game(Input* input, float dt)
 	score.DisplayHighScore();
 	next_level();
 
-
-	if (pressed(BUTTON_W)) player.up(speed, dt);
-	if (is_down(BUTTON_S)) player.down(speed, dt);
-	if (is_down(BUTTON_D)) player.right(speed, dt);
-	if (is_down(BUTTON_A)) player.left(speed, dt);
 }
 BUTTON Game::menu_game(Input* input) {
 	render_state = getRender();
@@ -178,10 +173,10 @@ void Game::updatePosThreat()
 {
 	if (threat.empty())
 	{
-		threat.push_back(new Threat(-30));
-		threat.push_back(new Threat(-10));
-		threat.push_back(new Threat(10));
-		threat.push_back(new Threat(30));
+		threat.push_back(new Threat(-28));
+		threat.push_back(new Threat(-13));
+		threat.push_back(new Threat(13));
+		threat.push_back(new Threat(28));
 	}
 	for (auto x : threat)
 	{

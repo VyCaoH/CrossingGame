@@ -46,7 +46,7 @@ struct Input {
 };
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 HWND winMain();
-void messageInput(Input& input,MSG &message, HWND &window);
+char messageInput(Input& input,MSG &message, HWND &window);
 Render_State getRender();
 //LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 ////HWND winMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);

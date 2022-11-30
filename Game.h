@@ -15,7 +15,7 @@ static bool g_pause=true;
 static gamemode g_mode = GM_MENUGAME;
 static bool g_sound = true;
 static bool g_music_button = false;
-static bool g_music_menu = false;
+static bool g_music_menu = true;
 static BUTTON hot_button = NEW_GAME;
 class Game
 {
@@ -44,7 +44,7 @@ public:
 	void setHighScore();
 	vector<Threat*> getThreat();
 	void startGame();
-	void simulate_game(Input* input, float dt);
+	void simulate_game(char MOVING, float dt);
 	BUTTON menu_game(Input* input);
 	void reset_game();
 	void restartGame();

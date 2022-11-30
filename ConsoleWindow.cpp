@@ -63,7 +63,7 @@ HWND winMain() {
 	//}
 	return window;
 }
-void messageInput(Input&input,MSG &message,HWND &window)
+char messageInput(Input&input,MSG &message,HWND &window)
 {
 	for (int i = 0; i < BUTTON_COUNT; i++) {
 		input.buttons[i].changed = false;
@@ -102,6 +102,7 @@ input.buttons[b].is_down = is_down;\
 				process_button(BUTTON_RIGHT, VK_RIGHT);
 				//process_button(BUTTON_ENTER, VK_RETURN);
 			}
+			return (char)vk_code;
 		} break;
 		default: {
 			TranslateMessage(&message);
@@ -109,6 +110,7 @@ input.buttons[b].is_down = is_down;\
 		}
 		}
 	}
+	return ' ';
 }
 Render_State getRender()
 {

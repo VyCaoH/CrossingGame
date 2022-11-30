@@ -22,16 +22,16 @@ float Player:: getHalfY()
 }
 void Player::up(float speed, float dt)
 {
-	player_pY += 5;
+	player_pY += 7;
 }
 void Player::down(float speed, float dt) {
-	player_pY -= speed * dt;
+	player_pY -= 7;
 }
 void Player::left(float speed, float dt) {
-	player_pX -= speed * dt;
+	player_pX -= 7;
 }
 void Player::right(float speed, float dt) {
-	player_pX += speed * dt;
+	player_pX += 7;
 }
 float Player:: getX()
 {
@@ -91,22 +91,22 @@ bool Player::isImpact(vector<Threat*>threat)
 	}
 	return false;
 }
-void Player::move(Input* input, float dt, float speed)
+void Player::move(char MOVING, float dt, float speed)
 {
 	{
-		if (is_down(BUTTON_W))
+		if (MOVING=='W')
 		{
 			up(speed, dt);
 		}
-		if (is_down(BUTTON_S))
+		if (MOVING == 'S')
 		{
 			down(speed, dt);
 		}
-		if (is_down(BUTTON_A))
+		if (MOVING == 'A')
 		{
 			left(speed, dt);
 		}
-		if (is_down(BUTTON_D))
+		if (MOVING == 'D')
 		{
 			right(speed, dt);
 		}
