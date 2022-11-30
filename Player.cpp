@@ -22,16 +22,16 @@ float Player:: getHalfY()
 }
 void Player::up(float speed, float dt)
 {
-	player_pY += 7;
+	player_pY += 14;
 }
 void Player::down(float speed, float dt) {
-	player_pY -= 7;
+	player_pY -= 14;
 }
 void Player::left(float speed, float dt) {
-	player_pX -= 7;
+	player_pX -= 5;
 }
 void Player::right(float speed, float dt) {
-	player_pX += 7;
+	player_pX += 5;
 }
 float Player:: getX()
 {
@@ -91,22 +91,22 @@ bool Player::isImpact(vector<Threat*>threat)
 	}
 	return false;
 }
-void Player::move(char MOVING, float dt, float speed)
+void Player::move(Input* input, float dt, float speed)
 {
 	{
-		if (MOVING=='W')
+		if (pressed(BUTTON_W))
 		{
 			up(speed, dt);
 		}
-		if (MOVING == 'S')
+		if (pressed(BUTTON_S))
 		{
 			down(speed, dt);
 		}
-		if (MOVING == 'A')
+		if (pressed(BUTTON_A))
 		{
 			left(speed, dt);
 		}
-		if (MOVING == 'D')
+		if (pressed(BUTTON_D))
 		{
 			right(speed, dt);
 		}
@@ -118,25 +118,25 @@ void Player::move(char MOVING, float dt, float speed)
 }
 void Player::checkWall(float x, float y, float half_x, float half_y)
 {
-	if (player_pX + player_half_X > half_x + x)
+	if (player_pX + player_half_X > 50)
 	{
-		setX(half_x + x - player_half_X);
+		setX(50);
 		setDP(0);
 	}
 	if (player_pY + player_half_Y > half_y + y)
 	{
-		setY(half_y + y - player_half_Y);
+		setY(40);
 		setDP(0);
 	}
-	if (player_pX - player_half_X < -half_x - x)
+	if (player_pX - player_half_X < -90)
 	{
 		setX(-half_x - x + player_half_X);
-		setDP(0);
+		setDP(-90);
 	}
 	if (player_pY - player_half_Y < -half_y - y)
 	{
 		setY(-half_y - y + player_half_Y);
-		setDP(0);
+		setDP(-40);
 	}
 }
 

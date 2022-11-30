@@ -44,7 +44,7 @@ void Game::setHighScore()
 {
 	score.writeHighScore();
 }
-void Game::simulate_game(char MOVING, float dt)
+void Game::simulate_game(Input *input, float dt)
 {
 	//Sound::audioGamePlay();
 	render_state = getRender();
@@ -54,8 +54,8 @@ void Game::simulate_game(char MOVING, float dt)
 
 	Renderer::draw_Background(0, 0, 73, 45);
 	//Renderer::draw_turtleL(0, 0, 1, 1);
-	player.move(MOVING, dt, speed);
-	player.checkWall(0, 0, arena_half_size_x, arena_half_size_y);
+	player.move(input, dt, speed);
+	player.checkWall(-28.5, 0, 71.5, 45);
 	player.isImpact(threat);
 	Renderer::draw_trees(0, 0);
 	updatePosThreat();
@@ -180,7 +180,7 @@ void Game::updatePosThreat()
 	}
 	for (auto x : threat)
 	{
-		//int randomType = 3;
+		x->setThreatInRow(lv);
 		int randomDir = 0 + rand() % 2;
 		int randomType;
 		if (lv == 1)

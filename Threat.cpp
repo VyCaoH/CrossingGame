@@ -45,14 +45,20 @@ vector<Entity*>Threat::getThreat()
 {
 	return threat;
 }
+void Threat::setThreatInRow(int lv)
+{
+	if (lv % 5 == 0)
+	{
+		numEnemyInRow++;
+	}
+}
 
 void Threat::setListEntity(TYPE type, int dir)
 {
 	//143->max, min=(43,-100)
 	int randDistance_left = random_int(-100, -70),
 		randDistance_right = random_int(15, 43);
-	int randExDistance = random_int(0, 20);
-	int randomDistance = random_int(20, 30);
+	int randExDistance = random_int(30, 50);
 
 	if (this->dir == -1)
 		this->dir = dir;
@@ -70,18 +76,18 @@ void Threat::setListEntity(TYPE type, int dir)
 			
 				if (threat.empty())
 				{
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
 					threat.push_back((new Car((float)randDistance_left, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = randExDistance + prevCoordX + 20;
-					if (distance_temp < 80)
+					float distance_temp = randExDistance + prevCoordX + 10;
+					if (distance_temp < 50)
 					{
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
@@ -93,18 +99,18 @@ void Threat::setListEntity(TYPE type, int dir)
 		
 				if (threat.empty())
 				{
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Car((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back((new Car((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = randExDistance + prevCoordX + 20;
-					if (distance_temp < 80)
+					float distance_temp = randExDistance + prevCoordX + 10;
+					if (distance_temp < 50)
 					{
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
@@ -116,18 +122,18 @@ void Threat::setListEntity(TYPE type, int dir)
 			
 				if (threat.empty())
 				{
-					//threaten.push_back(new Truck(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Truck((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Truck(randDistance(gen) -15, pos_row));
+					threat.push_back((new Truck((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Truck* temp = new Truck(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Truck* temp = new Truck(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp <80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp <50)
 					{
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
@@ -138,18 +144,18 @@ void Threat::setListEntity(TYPE type, int dir)
 		{
 				if (threat.empty())
 				{
-					//threaten.push_back(new Truck(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Truck((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Truck(randDistance(gen) -15, pos_row));
+					threat.push_back((new Truck((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Truck* temp = new Truck(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Truck* temp = new Truck(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp < 80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp < 50)
 					{
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
@@ -161,18 +167,18 @@ void Threat::setListEntity(TYPE type, int dir)
 			
 				if (threat.empty())
 				{
-					//threaten.push_back(new Bird(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Bird((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Bird(randDistance(gen) -15, pos_row));
+					threat.push_back((new Bird((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Bird* temp = new Bird(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Bird* temp = new Bird(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp <80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp <50)
 					{
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
@@ -184,18 +190,18 @@ void Threat::setListEntity(TYPE type, int dir)
 			
 				if (threat.empty())
 				{
-					//threaten.push_back(new Bird(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Bird((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Bird(randDistance(gen) -15, pos_row));
+					threat.push_back((new Bird((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Bird* temp = new Bird(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Bird* temp = new Bird(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp < 80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp < 50)
 					{
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
@@ -207,18 +213,18 @@ void Threat::setListEntity(TYPE type, int dir)
 			
 				if (threat.empty())
 				{
-					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Dinosaur((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Dinosuar(randDistance(gen) -15, pos_row));
+					threat.push_back((new Dinosaur((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp < 80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp < 50)
 					{
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
@@ -231,18 +237,18 @@ void Threat::setListEntity(TYPE type, int dir)
 			
 				if (threat.empty())
 				{
-					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
-					threat.push_back((new Dinosaur((float)randDistance_left + 30, (float)y_coord)));
+					//threaten.push_back(new Dinosuar(randDistance(gen) -15, pos_row));
+					threat.push_back((new Dinosaur((float)randDistance_left + 15, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp <80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp <50)
 					{
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
@@ -254,18 +260,18 @@ void Threat::setListEntity(TYPE type, int dir)
 
 				if (threat.empty())
 				{
-					//threaten.push_back(new Dinosuar(randDistance(gen) - 30, pos_row));
+					//threaten.push_back(new Dinosuar(randDistance(gen) -15, pos_row));
 					threat.push_back((new Dinosaur((float)randDistance_left + 40, (float)y_coord)));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Dinosuar* temp = new Dinosuar(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = +randExDistance + prevCoordX + 20;
-					if (distance_temp < 80)
+					float distance_temp = +randExDistance + prevCoordX + 10;
+					if (distance_temp < 50)
 					{
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
@@ -287,20 +293,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Car((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Car((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
+					float distance_temp = -randExDistance + prevCoordX - 10;
 					if (distance_temp > -140)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
@@ -314,20 +320,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Car((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Car((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
+					float distance_temp = -randExDistance + prevCoordX - 10;
 					if (distance_temp > -140)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Car((float)distance_temp, (float)y_coord));
 					}
@@ -340,20 +346,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Truck((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Truck((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
+					float distance_temp = -randExDistance + prevCoordX - 10;
 					if (distance_temp > -140)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
@@ -366,20 +372,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Truck((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Truck((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					float distance_temp = -randExDistance + prevCoordX - 10;
+					if (distance_temp > -100)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Truck((float)distance_temp, (float)y_coord));
 					}
@@ -392,20 +398,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Bird((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Bird((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					float distance_temp = -randExDistance + prevCoordX - 10;
+					if (distance_temp > -100)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
@@ -418,20 +424,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Bird((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Bird((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					float distance_temp = -randExDistance + prevCoordX - 10;
+					if (distance_temp > -100)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Bird((float)distance_temp, (float)y_coord));
 					}
@@ -446,20 +452,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Dinosaur((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Dinosaur((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					float distance_temp = -randExDistance + prevCoordX - 10;
+					if (distance_temp > -100)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
@@ -473,20 +479,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Dinosaur((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Dinosaur((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					float distance_temp = -randExDistance + prevCoordX - 10;
+					if (distance_temp > -100)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}
@@ -500,20 +506,20 @@ void Threat::setListEntity(TYPE type, int dir)
 				if (threat.empty())
 				{
 
-					//threaten.push_back(new Car(randDistance(gen) - 30, pos_row));
-					threat.push_back(new Dinosaur((float)randDistance_right - 30, (float)y_coord));
+					//threaten.push_back(new Car(randDistance(gen) -15, pos_row));
+					threat.push_back(new Dinosaur((float)randDistance_right -15, (float)y_coord));
 				}
 				else if (threat.size() < numEnemyInRow)
 				{
 					/*int prevCoordX = threaten.back()->getX();
-					Car* temp = new Car(randExDistance(gen) + prevCoordX + 30, pos_row);
+					Car* temp = new Car(randExDistance(gen) + prevCoordX + 15, pos_row);
 					threaten.push_back(temp->getBird());
 					delete temp;*/
 					float prevCoordX = threat.back()->getX();
-					float distance_temp = -randExDistance + prevCoordX - 20;
-					if (distance_temp > -130)
+					float distance_temp = -randExDistance + prevCoordX - 10;
+					if (distance_temp > -100)
 					{
-						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 30, (float)y_coord)));
+						//threat.insert(threat.begin(), (new Car((float)randDistance_right + 15, (float)y_coord)));
 
 						threat.push_back(new Dinosaur((float)distance_temp, (float)y_coord));
 					}

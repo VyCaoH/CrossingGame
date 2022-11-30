@@ -36,7 +36,7 @@ public:
 	bool isImpact(vector<Threat*> threat);
 	void setIsDead(bool type);
 	bool getIsDead();
-	void move(char MOVING, float dt, float speed);
+	void move(Input *input, float dt, float speed);
 	void checkWall(float x, float y, float half_x, float half_y);
 };
 	//void setHeight(int height);
