@@ -386,13 +386,13 @@ static const char* letters[][7] = {
 	"0  0",
 	"000",
 
-	" 000",
+	"0000",
 	"0",
 	"0",
 	"0",
 	"0",
 	"0",
-	" 000",
+	"0000",
 
 	"000",
 	"0  0",
@@ -418,13 +418,13 @@ static const char* letters[][7] = {
 	"0",
 	"0",
 
-	" 000",
+	"0000",
 	"0",
 	"0",
 	"0 00",
 	"0  0",
 	"0  0",
-	" 000",
+	"0000",
 
 	"0  0",
 	"0  0",
@@ -490,10 +490,10 @@ static const char* letters[][7] = {
 	"0  0",
 	"0000",
 
-	" 000",
+	"0000",
 	"0  0",
 	"0  0",
-	"000",
+	"0000",
 	"0",
 	"0",
 	"0",
@@ -506,7 +506,7 @@ static const char* letters[][7] = {
 	"0  0 ",
 	" 00 0",
 
-	"000",
+	"0000",
 	"0  0",
 	"0  0",
 	"000",
@@ -517,10 +517,10 @@ static const char* letters[][7] = {
 	" 000",
 	"0",
 	"0 ",
-	" 00",
+	"000",
 	"   0",
 	"   0",
-	"000 ",
+	"000",
 
 	"000",
 	" 0",
@@ -570,13 +570,20 @@ static const char* letters[][7] = {
 	"  0",
 	"  0",
 
-	"0000",
+	"00",
+	"00",
+	"",
+	"",
+	"",
+	"00",
+	"00",
+	/*"0000",
 	"   0",
 	"  0",
 	" 0",
 	"0",
 	"0",
-	"0000",
+	"0000",*/
 
 	"",
 	"",
@@ -2369,40 +2376,16 @@ public:
 			draw_rect(x - 80 + i, y - 20, 6, 1, 0x7E8397);//lane line darker	
 			draw_rect(x - 80 + i, y + 20, 6, 1, 0x7E8397);//lane line darker
 		}
-
-
-
-
-		//for (int j = 0; j < 90; j += 8)
-		//{
-		//	for (int i = 0; i < 160; i += 18) //dom duong 
-		//	{
-		//		draw_rect(x - 103 + i, y + 47- j, 1.5, 0.8, 0xEEB395);
-		//		draw_rect(x - 105 + i, y + 48- j, 1.5, 0.7, 0xC68164);
-		//	}
-		//	for (int i = 0; i < 130; i += 18) //dom duong 
-		//	{
-		//		draw_rect(x - 77 + i, y + 42 - j, 1.5, 0.8, 0xC68164);
-		//		draw_rect(x - 75+ i, y + 43 - j, 1.5, 0.7, 0xC7684D);
-		//	}
-		//}
-		//soc dat
-		/*draw_rect(x - 18.5, y + 38, 71.5, 0.5, 0xA06A12);
-		draw_rect(x - 18.5, y + 26, 71.5, 0.5, 0xA06A12);
-		draw_rect(x - 18.5, y + 13, 71.5, 0.5, 0xA06A12);
-		draw_rect(x - 18.5, y + 1.5 , 71.5, 0.5, 0xA06A12);
-		draw_rect(x - 18.5, y -11.5, 71.5, 0.5, 0xA06A12);
-		draw_rect(x - 18.5, y - 24.5, 71.5, 0.5, 0xA06A12);
-		draw_rect(x - 18.5, y - 37, 71.5, 0.5, 0xA06A12);*/
-
-		//for (int i = 0; i < 121; i += 40) {
-		//	draw_plant(x - 80 + i, y - 43.2); // draw plant
-		//}
-		//for (int i = 0; i < 121; i += 40) {
-		//	draw_plant(x - 80 + i, y + 8); // draw plant
-		//}
-
-
+		//Score
+		draw_text("SCORE", x + 58.5, y + 44, 1.1, 0x0002D9);
+		draw_text("HIGHSCORE", x + 58, y + 19, 0.6, 0xE30000);
+		draw_text("ESCZ EXIT", x + 58, y , 0.5, 0x0000);
+		draw_text("PZ PAUSE", x + 60, y - 5, 0.5, 0x000000);
+		draw_text("SZ SAVE", x + 60, y - 10, 0.5, 0x0000);
+		draw_text("WZ UP", x + 60, y -20 , 0.5, 0x0000);
+		draw_text("SZ DOWN", x + 60, y - 25, 0.5, 0x0000);
+		draw_text("AZ LEFT", x + 60, y - 30, 0.5, 0x0000);
+		draw_text("DZ RIGHT", x + 60, y - 35, 0.5, 0x0000);
 	}
 	static void draw_things(int number, float x, float y, float size) {
 		float half_size = size * .5f;
