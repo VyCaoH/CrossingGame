@@ -192,6 +192,7 @@
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Threat.cpp" />
+    <ClCompile Include="TrafficLight.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +207,7 @@
     <ClInclude Include="Score.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Threat.h" />
+    <ClInclude Include="TrafficLight.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
