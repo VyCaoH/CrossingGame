@@ -5,6 +5,10 @@
 #include"Player.h"
 #include"Animal.h"
 #include"Threat.h"
+#include"Sound.h"
+#include"ConsoleWindow.h"
+#include"MenuGame.h"
+#include"Score.h"
 //#include"Renderer.h"
 static bool g_running = true;
 static bool g_menu = true;
@@ -15,19 +19,32 @@ class Game
 	Bird bird;
 	//vector<Row*> row;
 public:
+	MenuGame menu;
 	Game() 
 	{
 		player = Player();
-		//player = Player("People.txt");
-		//bird = Bird("People.txt");
-	/*	threat.push_back(new Threat(7));
-		threat.push_back(new Threat(13));
-		threat.push_back(new Threat(19));
-		threat.push_back(new Threat(25));*/
+		menu = MenuGame();
+		lv = 1;
+		score.readHighScore();
+		threat.clear();
 	};
-	enum gamemode{ GM_MENUGAME,GM_PLAYGAME};
-	void mainBoard();
-	virtual void simulate_game(Input* input, float dt);
+	~Game()
+	{
+		for (auto x : threat)
+			delete x;
+		threat.clear();
+	}
+	Player getPlayer();
+	int getLv();
+	void setHighScore();
+	void simulate_game(Input* input, float dt);
+	vector<Threat*> getThreat();
+	void startGame();
+	//BUTTON menu_game(Input* input);
+	void reset_game();
+	void restartGame();
+	bool next_level();
+	int overGame(Input* input);
 	bool quit(Input* input);
 	void playerMove(Input* input, float dt, float speed);
 	void checkWall_player(Player &player);

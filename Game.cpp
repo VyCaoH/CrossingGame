@@ -29,107 +29,77 @@ void Game::mainBoard()
 	LARGE_INTEGER frame_begin_time;
 	QueryPerformanceCounter(&frame_begin_time);
 
-	//Tan so hieu suat truy van
-	float performance_frequency;
-	{
-		LARGE_INTEGER perf;
-		QueryPerformanceFrequency(&perf);
-		performance_frequency = (float)perf.QuadPart;
-	}
-	while (running) {
-		// Input
-		MSG message;
-
-		messageInput(input, message, window);
-
-		running = quit(&input);
-
-		//Simulate
-
-		simulate_game(&input, delta_time);
-
-		//Render
-		render_state = getRender();
-		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
-
-		//Thoi gian Frame end
-		LARGE_INTEGER frame_end_time;
-		QueryPerformanceCounter(&frame_end_time);
-
-		//FPS ( time theo CPU ),
-		delta_time = (float)(frame_end_time.QuadPart - frame_begin_time.QuadPart) / performance_frequency;
-		frame_begin_time = frame_end_time;
-
-	}
 }
-
-void Game::simulate_game(Input* input, float dt)
+//BUTTON Game::menu_game(Input* input) {
+//	render_state = getRender();
+//	if (released(BUTTON_UP))
+//	{
+//		g_music_menu = !g_music_menu;
+//		if (g_music_menu)
+//			Sound::audioMenu();
+//		else
+//			Sound::audioStop();
+//	}
+//	if (pressed(BUTTON_S))
+//	{
+//		g_music_button = !g_music_button;
+//		if (g_music_button)
+//		{
+//			Sound::audioButton();
+//		}
+//		g_music_button = !g_music_button;
+//		hot_button = (BUTTON)(hot_button + 1);
+//		if (hot_button > 4)hot_button = EXIT;
+//	}
+//	if (pressed(BUTTON_W)) {
+//		g_music_button = !g_music_button;
+//		if (g_music_button)
+//		{
+//			Sound::audioButton();
+//		}
+//		g_music_button = !g_music_button;
+//		hot_button = (BUTTON)(hot_button - 1);
+//		if (hot_button < 0)hot_button = NEW_GAME;
+//	}
+//	/*Do something in menu*/;
+//	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
+//	if (pressed(BUTTON_ENTER))
+//	{
+//		
+//		switch (hot_button)
+//		{
+//		case NEW_GAME:	//NEW GAME
+//			return hot_button;
+//
+//		case LOAD_GAME:		//LOAD GAME
+//			return hot_button;
+//
+//		case SETTINGS: //SETTINGS
+//			return hot_button;
+//
+//		case INTRODUCTION:
+//			//Draw Introduction in here.
+//
+//			return hot_button;
+//		case EXIT:
+//			return hot_button;
+//		}
+//	}
+//	return BUTTON( - 1);
+//}
+void Game::reset_game()
 {
-	render_state = getRender();
-	clear_screen(0xffffffff);
-	//draw_rect(0, 0, 100, 50, 0xaaaaaa);
-	//draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	//left_board
-	//draw_rect(-(75.f / 2.f +5.f)+, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	/*draw_arena_borders(0,0,arena_half_size_x, arena_half_size_y, 0x945305);
-	draw_player(0, 0, arena_half_size_x, arena_half_size_y);*/
-
-	draw_truck(0, 0, 5, 5);
-	draw_rect(0, 0, 85, 45, 0xff55ff);
-	float speed = 50.f;
-	playerMove(input, dt, speed);
-	updatePosThreat();
-	threatMove(dt, speed);
-	//draw_Menu(0, 0, render_state.width / 2, render_state.height / 2);
+	player.setY(-45);
+	threat.clear();
 }
-bool Game::quit(Input* input)
+void Game::restartGame()
 {
-	if (is_down(BUTTON_ENTER))
-		return false;
-	return true;
+	startGame();
 }
-
-void Game::checkWall_player(Player &player)
+bool Game::next_level()
 {
-	if (player.getX() + player.getHalfX() > arena_half_size_x)
-	{
-		player.setX(arena_half_size_x - player.getHalfX());
-		player.setDP(0);
-	}
-	if (player.getY() + player.getHalfY() > arena_half_size_y)
-	{
-		player.setY(arena_half_size_y - player.getHalfY());
-		player.setDP(0);
-	}
-	if (player.getX() - player.getHalfX() < -arena_half_size_x)
-	{
-		player.setX(-arena_half_size_x + player.getHalfX());
-		player.setDP(0);
-	}
-	if (player.getY() - player.getHalfY() < -arena_half_size_y)
-	{
-		player.setY(-arena_half_size_y + player.getHalfY());
-		player.setDP(0);
-	}
-}
-void Game::playerMove(Input* input, float dt, float speed)
-{
-	if (is_down(BUTTON_W))
-	{
-		//player.setDDP(player.getDDP() + 2000);
-		//player.setDP((player.getDP() + (player.getDDP() * dt)));
-		//player.setY(player.getY() + player.getDP() * dt + player.getDDP() * dt * dt*.5f);
-		player.up(speed, dt);
-	}
-	if (is_down(BUTTON_S))
-	{
-		//player.setDDP(player.getDDP() - 2000);
-		//player.setDP((player.getDP() + (player.getDDP() * dt)));
-		//player.setY(player.getY() + player.getDP() * dt + player.getDDP() * dt * dt*.5f);
-		player.down(speed, dt);
-	}
-
-	if (is_down(BUTTON_A))
+	//Bien tren Y
+	if (player.getY() == 40)
 	{
 		/*player.setDDP(player.getDDP() - 2000);
 		player.setDP((player.getDP() + (player.getDDP() * dt)));
