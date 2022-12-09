@@ -7,6 +7,7 @@
 #include"Threat.h"
 #include"Sound.h"
 #include"ConsoleWindow.h"
+#include"MenuGame.h"
 #include"Score.h"
 //#include"Renderer.h"
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
@@ -16,7 +17,7 @@ static gamemode g_mode = GM_MENUGAME;
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
-static BUTTON hot_button = NEW_GAME;
+static BUTTON hot_button = (BUTTON) NEW_GAME;
 class Game
 {
 	Player player;
@@ -26,9 +27,11 @@ class Game
 	std::vector<Threat*> threat;
 	//vector<Row*> row;
 public:
+	MenuGame menu;
 	Game() 
 	{
 		player = Player();
+		menu = MenuGame();
 		lv = 1;
 		score.readHighScore();
 		threat.clear();
@@ -45,7 +48,7 @@ public:
 	void simulate_game(Input* input, float dt);
 	vector<Threat*> getThreat();
 	void startGame();
-	BUTTON menu_game(Input* input);
+	//BUTTON menu_game(Input* input);
 	void reset_game();
 	void restartGame();
 	bool next_level();

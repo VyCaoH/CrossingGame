@@ -44,7 +44,7 @@ void Game::setHighScore()
 {
 	score.writeHighScore();
 }
-void Game::simulate_game(Input *input, float dt)
+void Game::simulate_game(Input* input, float dt)
 {
 	//Sound::audioGamePlay();
 	render_state = getRender();
@@ -65,65 +65,65 @@ void Game::simulate_game(Input *input, float dt)
 	next_level();
 
 }
-BUTTON Game::menu_game(Input* input) {
-	render_state = getRender();
-	if (released(BUTTON_UP))
-	{
-		g_music_menu = !g_music_menu;
-		if (g_music_menu)
-			Sound::audioMenu();
-		else
-			Sound::audioStop();
-	}
-	if (pressed(BUTTON_S))
-	{
-		g_music_button = !g_music_button;
-		if (g_music_button)
-		{
-			Sound::audioButton();
-		}
-		g_music_button = !g_music_button;
-		hot_button = (BUTTON)(hot_button + 1);
-		if (hot_button > 4)hot_button = EXIT;
-	}
-	if (pressed(BUTTON_W)) {
-		g_music_button = !g_music_button;
-		if (g_music_button)
-		{
-			Sound::audioButton();
-		}
-		g_music_button = !g_music_button;
-		hot_button = (BUTTON)(hot_button - 1);
-		if (hot_button < 0)hot_button = NEW_GAME;
-	}
-	/*Do something in menu*/;
-	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
-	if (pressed(BUTTON_ENTER))
-	{
-		
-		switch (hot_button)
-		{
-		case NEW_GAME:	//NEW GAME
-			return hot_button;
-
-		case LOAD_GAME:		//LOAD GAME
-			return hot_button;
-
-		case SETTINGS: //SETTINGS
-			return hot_button;
-
-		case INTRODUCTION:
-			Renderer::clear_screen(0xFFFFFF);
-
-			//Draw Introduction in here.
-
-			return hot_button;
-		case EXIT:
-			return hot_button;
-		}
-	}
-	return BUTTON( - 1);
-}
+//BUTTON Game::menu_game(Input* input) {
+//	render_state = getRender();
+//	if (released(BUTTON_UP))
+//	{
+//		g_music_menu = !g_music_menu;
+//		if (g_music_menu)
+//			Sound::audioMenu();
+//		else
+//			Sound::audioStop();
+//	}
+//	if (pressed(BUTTON_S))
+//	{
+//		g_music_button = !g_music_button;
+//		if (g_music_button)
+//		{
+//			Sound::audioButton();
+//		}
+//		g_music_button = !g_music_button;
+//		hot_button = (BUTTON)(hot_button + 1);
+//		if (hot_button > 4)hot_button = EXIT;
+//	}
+//	if (pressed(BUTTON_W)) {
+//		g_music_button = !g_music_button;
+//		if (g_music_button)
+//		{
+//			Sound::audioButton();
+//		}
+//		g_music_button = !g_music_button;
+//		hot_button = (BUTTON)(hot_button - 1);
+//		if (hot_button < 0)hot_button = NEW_GAME;
+//	}
+//	/*Do something in menu*/;
+//	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
+//	if (pressed(BUTTON_ENTER))
+//	{
+//
+//		switch (hot_button)
+//		{
+//		case NEW_GAME:	//NEW GAME
+//			return hot_button;
+//
+//		case LOAD_GAME:		//LOAD GAME
+//			return hot_button;
+//
+//		case SETTINGS: //SETTINGS
+//			return hot_button;
+//
+//		case INTRODUCTION:
+//			Renderer::clear_screen(0xFFFFFF);
+//
+//			//Draw Introduction in here.
+//
+//			return hot_button;
+//		case EXIT:
+//			return hot_button;
+//		}
+//	}
+//	return BUTTON(-1);
+//}
 void Game::reset_game()
 {
 	player.setY(-45);
@@ -165,7 +165,7 @@ void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-		x->move(dt,2* lv);
+		x->move(dt, 2 * lv);
 	}
 	return;
 }
@@ -216,11 +216,11 @@ void Game::updatePosThreat()
 				}
 			}
 		}
-		x->setListEntity((TYPE)randomType,randomDir);
+		x->setListEntity((TYPE)randomType, randomDir);
 	}
 }
 
-bool Game::exitGame(thread &t1)
+bool Game::exitGame(thread& t1)
 {
 	t1.join();
 	return true;
