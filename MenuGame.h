@@ -5,6 +5,7 @@ class MenuGame
 	BUTTON menuMode;
 	BUTTON hotButton;
 	bool running;
+public:
 	void loadSettings(Input* input) {
 		render_state = getRender();
 		Renderer::draw_Settings(0, 0, 0, 0);
@@ -19,10 +20,9 @@ class MenuGame
 			menuMode = MAIN;
 		}
 	}
-public:
 	MenuGame() {
-		menuMode = (BUTTON)MAIN;
-		hotButton = (BUTTON)NEW_GAME;
+		menuMode = MAIN;
+		hotButton = NEW_GAME;
 		running = true;
 	}
 	bool isRunning() {
@@ -66,11 +66,11 @@ public:
 			if (hotButton < 0)hotButton = NEW_GAME;
 		}
 		/*Do something in menu*/;
-		Renderer::draw_Menu(0, 0, 50, 50, hotButton);
 		if (pressed(BUTTON_ENTER))
 		{
 			menuMode = hotButton;
 		}
+		Renderer::draw_Menu(0, 0, 50, 50, hotButton);
 	}
 	void loadMenuGame(Input* input) {
 		render_state = getRender();

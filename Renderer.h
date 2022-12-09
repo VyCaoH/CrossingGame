@@ -2306,6 +2306,7 @@ public:
 	}
 	static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {
 		clear_screen(0x01C4FF);
+		//draw_plant(0, 0);
 		/*draw_Background2(0, 0, 0, 0);
 		draw_title(x - 83, y + 45, 0.5, 0xE61409);
 		draw_Button(NEW_GAME, x - 25, y + 15, 0.7, 0x000000, hot_button);
@@ -2313,6 +2314,7 @@ public:
 		draw_Button(SETTINGS, x - 25, y - 11, 0.7, 0x000000, hot_button);
 		draw_Button(INTRODUCTION, x - 25, y - 24, 0.7, 0x000000, hot_button);
 		draw_Button(EXIT, x - 25, y - 37, 0.7, 0x000000, hot_button);*/
+
 		draw_Background3(0, 0, 0, 0);
 		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
 		draw_Button(SETTINGS, x - 30, y +45, 1, 0x000000, hot_button);

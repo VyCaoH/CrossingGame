@@ -96,6 +96,7 @@ input.buttons[b].is_down = is_down;\
 
 				process_button(BUTTON_Y, 'Y');
 				process_button(BUTTON_P, 'P');
+				process_button(BUTTON_B, 'B');
 				process_button(BUTTON_ESC, 27);
 				process_button(BUTTON_ENTER,VK_RETURN)
 				process_button(BUTTON_LEFT, VK_LEFT);

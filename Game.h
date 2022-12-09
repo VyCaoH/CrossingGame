@@ -13,11 +13,11 @@
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
-static gamemode g_mode = GM_MENUGAME;
+//static gamemode g_mode = GM_MENUGAME;
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
-static BUTTON hot_button = (BUTTON) NEW_GAME;
+//static BUTTON hot_button = (BUTTON) NEW_GAME;
 class Game
 {
 	Player player;
