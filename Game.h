@@ -17,7 +17,7 @@ static gamemode g_mode = GM_MENUGAME;
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
-static BUTTON hot_button = NEW_GAME;
+static BUTTON hot_button = (BUTTON) NEW_GAME;
 class Game
 {
 	Player player;

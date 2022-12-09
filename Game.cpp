@@ -44,7 +44,7 @@ void Game::setHighScore()
 {
 	score.writeHighScore();
 }
-void Game::simulate_game(Input *input, float dt)
+void Game::simulate_game(Input* input, float dt)
 {
 	//Sound::audioGamePlay();
 	render_state = getRender();
@@ -100,7 +100,7 @@ void Game::simulate_game(Input *input, float dt)
 //	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
 //	if (pressed(BUTTON_ENTER))
 //	{
-//		
+//
 //		switch (hot_button)
 //		{
 //		case NEW_GAME:	//NEW GAME
@@ -113,6 +113,8 @@ void Game::simulate_game(Input *input, float dt)
 //			return hot_button;
 //
 //		case INTRODUCTION:
+//			Renderer::clear_screen(0xFFFFFF);
+//
 //			//Draw Introduction in here.
 //
 //			return hot_button;
@@ -120,54 +122,7 @@ void Game::simulate_game(Input *input, float dt)
 //			return hot_button;
 //		}
 //	}
-//	return BUTTON( - 1);
-//}
-void Game::reset_game()
-{
-	player.setY(-45);
-	threat.clear();
-}
-void Game::restartGame()
-{
-	startGame();
-}
-bool Game::next_level()
-{
-	//Bien tren Y
-	if (player.getY() == 40)
-	{
-		/*player.setDDP(player.getDDP() - 2000);
-		player.setDP((player.getDP() + (player.getDDP() * dt)));
-		player.setX(player.getX() + player.getDP() * dt + player.getDDP() * dt * dt*.5f);*/
-		player.left(speed, dt);
-	}
-	if (is_down(BUTTON_D))
-	{
-		/*player.setDDP(player.getDDP() + 2000);
-		player.setDP((player.getDP() + (player.getDDP() * dt)));
-		player.setX(player.getX() + player.getDP() * dt + player.getDDP() * dt * dt * .5f);*/
-		player.right(speed, dt);
-	}
-	checkWall_player(player);
-	
-	draw_truck(player.getX(), player.getY(), player.getHalfX(), player.getHalfY());
-	//draw_dino(player.getX(), player.getY() + 40, 1, 10);
-	return;
-	//draw_rect(player.getX(), player.getY()+40, 1, 10, 0x00ff22);
-	//draw_rect(player.getX(), player.getY(), 1.4, 3, 0x00ff22);
-	//draw_rect(player.getX(), player.getY()-40, 1, 10, 0x00ff22);
-	//draw_rect(player.getX(), player.getY()-25, 10, 5, 0x1820FF);
-	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xaaaaaa);
-	//draw_rect(player.getX(), player.getY()-25, 1, 1, 0xbbbbbb);
-	//draw_rect(player.getX(), player.getY()-28, 1, 1, 0xbbbbbb);
-}
-//void Game::birdMove( float dt, float speed,int lv)
-//{
-//	if (!bird.Right())
-//		bird.left(speed, dt,lv);
-//	if (bird.Right())
-//		bird.right(speed, dt);
-//	draw_rect(bird.getX(), 20, 1, 1, 0x00ff22);
+//	return BUTTON(-1);
 //}
 void Game::reset_game()
 {
@@ -205,11 +160,12 @@ bool Game::quit(Input* input)
 		return false;
 	return true;
 }
+
 void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-		x->move(dt,2* lv);
+		x->move(dt, 2 * lv);
 	}
 	return;
 }
@@ -260,11 +216,11 @@ void Game::updatePosThreat()
 				}
 			}
 		}
-		x->setListEntity((TYPE)randomType,randomDir);
+		x->setListEntity((TYPE)randomType, randomDir);
 	}
 }
 
-bool Game::exitGame(thread &t1)
+bool Game::exitGame(thread& t1)
 {
 	t1.join();
 	return true;
