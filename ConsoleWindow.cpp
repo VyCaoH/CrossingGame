@@ -63,7 +63,7 @@ HWND winMain() {
 	//}
 	return window;
 }
-void messageInput(Input&input,MSG &message,HWND &window)
+char messageInput(Input&input,MSG &message,HWND &window)
 {
 	for (int i = 0; i < BUTTON_COUNT; i++) {
 		input.buttons[i].changed = false;
@@ -73,6 +73,7 @@ void messageInput(Input&input,MSG &message,HWND &window)
 
 		switch (message.message) {
 		case WM_KEYUP:
+
 		case WM_KEYDOWN: {
 			u32 vk_code = (u32)message.wParam;
 			bool is_down = ((message.lParam & (1 << 31)) == 0);
@@ -80,7 +81,7 @@ void messageInput(Input&input,MSG &message,HWND &window)
 			//Hamf xu li chung ( genenal function ): xu li phim nhan
 #define process_button(b, vk)\
 case vk: {\
-input.buttons[b].changed = is_down != input.buttons[b].is_down;\
+input.buttons[b].changed = is_down!=input.buttons[b].is_down;\
 input.buttons[b].is_down = is_down;\
 } break;
 
@@ -92,10 +93,16 @@ input.buttons[b].is_down = is_down;\
 				process_button(BUTTON_S, 'S');
 				process_button(BUTTON_A, 'A');
 				process_button(BUTTON_D, 'D');
+
+				process_button(BUTTON_Y, 'Y');
+				process_button(BUTTON_P, 'P');
+				process_button(BUTTON_ESC, 27);
+				process_button(BUTTON_ENTER,VK_RETURN)
 				process_button(BUTTON_LEFT, VK_LEFT);
 				process_button(BUTTON_RIGHT, VK_RIGHT);
-				process_button(BUTTON_ENTER, VK_RETURN);
+				//process_button(BUTTON_ENTER, VK_RETURN);
 			}
+			return (char)vk_code;
 		} break;
 		default: {
 			TranslateMessage(&message);
@@ -103,6 +110,7 @@ input.buttons[b].is_down = is_down;\
 		}
 		}
 	}
+	return ' ';
 }
 Render_State getRender()
 {

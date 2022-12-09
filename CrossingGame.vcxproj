@@ -135,6 +135,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -189,6 +190,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuGame.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Threat.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -201,8 +205,16 @@
     <ClInclude Include="Renderer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Threat.h" />
     <ClInclude Include="Vehicle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Highscores.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="character.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,33 +1,68 @@
 #include "Game.h"
-
-#define is_down(b) input->buttons[b].is_down
-#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
-#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 //dp: derivative of position: Van toc
 //ddp:  derivative of derivative of positon: Gia toc
-float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
-float player_half_size_x = 2.5, player_half_size_y = 12;
-float ball_p_x, ball_p_y, ball_dp_x = 130, ball_dp_y, ball_half_size = 1;
 
-int player_1_score, player_2_score;
-
-float player_pos_x = 0.f;
-float player_pos_y = 0.f;
-
-
-void Game::mainBoard()
+int Game::getLv()
 {
-	HWND window = winMain();
-	HDC hdc = GetDC(window);
-	Input input = {};
+	return lv;
+}
 
-	//Time giua 2 Frame
-	float delta_time = 0.016666f;
+//int Game::getScore()
+//{
+//	return score;
+//}
+//void Game::setScore()
+//{
+//
+//	if (lv > 1)
+//		score = (lv - 1) * 100;
+//}
+//void Game::scoreChange()
+//{
+//	setScore();
+//	Renderer::draw_number(score, 78, 31, 1.3, 0xFF3131);
+//}
 
-	//Thoi gian Frame begin -> thoi gian Frame end
-	LARGE_INTEGER frame_begin_time;
-	QueryPerformanceCounter(&frame_begin_time);
+vector<Threat*> Game::getThreat()
+{
+	return threat;
+}
+Player Game::getPlayer()
+{
+	return player;
+}
+void Game::startGame()
+{
+	player = Player();
+	threat.clear();
+	lv = 1;
+	score.readHighScore();
+}
+
+void Game::setHighScore()
+{
+	score.writeHighScore();
+}
+void Game::simulate_game(Input *input, float dt)
+{
+	//Sound::audioGamePlay();
+	render_state = getRender();
+	//Renderer::	clear_screen(0xffffffff);
+
+	float speed = 25.f;
+
+	Renderer::draw_Background(0, 0, 73, 45);
+	//Renderer::draw_turtleL(0, 0, 1, 1);
+	player.move(input, dt, speed);
+	player.checkWall(-28.5, 0, 71.5, 45);
+	player.isImpact(threat);
+	Renderer::draw_trees(0, 0);
+	updatePosThreat();
+	threatMove(dt);
+	score.DisplayScore();
+	score.DisplayHighScore();
+	next_level();
 
 }
 //BUTTON Game::menu_game(Input* input) {
@@ -134,12 +169,47 @@ bool Game::next_level()
 //		bird.right(speed, dt);
 //	draw_rect(bird.getX(), 20, 1, 1, 0x00ff22);
 //}
-
-void Game::threatMove(float dt, float speed)
+void Game::reset_game()
+{
+	player.setY(-45);
+	threat.clear();
+}
+void Game::restartGame()
+{
+	startGame();
+}
+bool Game::next_level()
+{
+	//Bien tren Y
+	if (player.getY() == 40)
+	{
+		lv++;
+		Sound::audioUpScore();
+		score.setScore(lv);
+		reset_game();
+	}
+	return false;
+}
+int Game::overGame(Input* input)
+{
+	Renderer::draw_rect(0, 0, 20, 10, 0xFFFA);
+	if (pressed(BUTTON_Y))	//restart game
+		return 1;
+	if (pressed(BUTTON_ESC))
+		return -1;
+	return 0;
+}
+bool Game::quit(Input* input)
+{
+	if (is_down(BUTTON_ESC))
+		return false;
+	return true;
+}
+void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-		x->move(dt, speed);
+		x->move(dt,2* lv);
 	}
 	return;
 }
@@ -147,17 +217,67 @@ void Game::updatePosThreat()
 {
 	if (threat.empty())
 	{
-		threat.push_back(new Threat(-20));
-		threat.push_back(new Threat(-5));
-		threat.push_back(new Threat(10));
-		threat.push_back(new Threat(25));
+		threat.push_back(new Threat(-28));
+		threat.push_back(new Threat(-13));
+		threat.push_back(new Threat(13));
+		threat.push_back(new Threat(28));
 	}
 	for (auto x : threat)
 	{
-		//int randomType = 3;
-		int randomType = 0 + rand() % (10 + 1)%4;
-		
-		x->setListEntity(randomType);
+		x->setThreatInRow(lv);
+		int randomDir = 0 + rand() % 2;
+		int randomType;
+		if (lv == 1)
+		{
+			while (true)
+			{
+				randomType = 0 + rand() % 8;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		if (lv == 2)
+		{
+			while (true)
+			{
+				randomType = 8 + rand() % 10;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		if (lv > 2)
+		{
+			while (true)
+			{
+				randomType = 0 + rand() % 18;
+				if (randomType % 2 == randomDir)
+				{
+					break;
+				}
+			}
+		}
+		x->setListEntity((TYPE)randomType,randomDir);
 	}
 }
 
+bool Game::exitGame(thread &t1)
+{
+	t1.join();
+	return true;
+}
+
+void Game::pauseGame(HANDLE hd)
+{
+	//g_pause = true;
+	SuspendThread(hd);
+}
+
+void Game::resumeGame(HANDLE hd)
+{
+	//g_pause = false;
+	ResumeThread(hd);
+}

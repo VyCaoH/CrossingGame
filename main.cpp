@@ -1,10 +1,40 @@
-//#include"ConsoleWindow.h"
+#include"ConsoleWindow.h"
 #include"Game.h"
+#include<thread>
+Input MOVING;
 Game game;
+
+void subThread(HWND window)
+{
+	HDC hdc = GetDC(window);
+
+	float delta_time = .2f;
+	while (g_running)
+	{
+		//MOVING = MOVING;
+		if (g_mode==GM_MENUGAME)
+		{
+			continue;
+		}
+		if (!game.getPlayer().getIsDead())
+		{
+			game.simulate_game(&MOVING, delta_time);
+		}
+		else
+			continue;
+		//MOVING = ' ';
+		render_state = getRender();
+		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+	}
+	game.setHighScore();
+}
 int main()
 {
-	
-	game.mainBoard();
+//	game.startGame();
+	HWND window = winMain();
+	HDC hdc = GetDC(window);
+	//MOVING MOVING = {};
+
 
 	thread t1(subThread, window);
 	while (g_running) {

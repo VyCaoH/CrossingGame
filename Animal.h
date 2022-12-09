@@ -49,10 +49,10 @@ public:
 	//}
 	void left(float speed,float dt,int lv) override
 	{
-		bird_pX -= speed * dt;
+		bird_pX -= speed * dt *lv;
 	}
-	void right(float speed, float dt) override {
-		bird_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		bird_pX += speed * dt*lv;
 	}
 	float getX() const override
 	{
@@ -77,6 +77,11 @@ public:
 	bool Right()
 	{
 		return is_right;
+	}
+	void setHalf(float x, float y) override
+	{
+		bird_half_X = x;
+		bird_half_Y = y;
 	}
 };
 class Dinosaur : public Animal
@@ -115,10 +120,10 @@ public:
 	//}
 	void left(float speed, float dt,int lv) override
 	{
-		dinosaur_pX -= speed * dt;
+		dinosaur_pX -= speed * dt*lv;
 	}
-	void right(float speed, float dt) override {
-		dinosaur_pX += speed * dt;
+	void right(float speed, float dt,int lv) override {
+		dinosaur_pX += speed * dt*lv;
 	}
 	float getHalfX() const override
 	{
@@ -151,6 +156,11 @@ public:
 	bool Right()
 	{
 		return is_right;
+	}
+	void setHalf(float x, float y) override
+	{
+		dinosaur_half_X = x;
+		dinosaur_half_Y = y;
 	}
 };
 //	~Bird();

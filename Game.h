@@ -1,6 +1,6 @@
 #pragma once
 //#include<vector>
-#include"ConsoleWindow.h"
+#include<Thread>
 //#include"Renderer.h"
 #include"Player.h"
 #include"Animal.h"
@@ -10,13 +10,21 @@
 #include"MenuGame.h"
 #include"Score.h"
 //#include"Renderer.h"
+static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
-static bool g_menu = true;
+static bool g_pause=true;
+static gamemode g_mode = GM_MENUGAME;
+static bool g_sound = true;
+static bool g_music_button = false;
+static bool g_music_menu = true;
+static BUTTON hot_button = NEW_GAME;
 class Game
 {
 	Player player;
+	int lv;
+	Score score;
+	//int time;
 	std::vector<Threat*> threat;
-	Bird bird;
 	//vector<Row*> row;
 public:
 	MenuGame menu;
@@ -46,15 +54,10 @@ public:
 	bool next_level();
 	int overGame(Input* input);
 	bool quit(Input* input);
-	void playerMove(Input* input, float dt, float speed);
-	void checkWall_player(Player &player);
-	//void birdMove(float dt, float speed,int lv);
+	void threatMove(float dt);
 	void updatePosThreat();
-	void threatMove(float dt, float speed);
-	//char* vvChar_to_CharPtr(vector<vector<char>> src)
-	//{
-	//	const int n = src.size();
-	//	const int m = src[0].size();
-	//}
+	bool exitGame(thread&t1);
+	void pauseGame(HANDLE hd);
+	void resumeGame(HANDLE hd);
 };
 

@@ -1,8 +1,8 @@
 #pragma once
 #include<Windows.h>
 #define is_down(b) input->buttons[b].is_down
-//#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
-//#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
+#define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
+#define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
 
 //#define global_variable static
@@ -37,6 +37,7 @@ enum {
 	BUTTON_B,
 	BUTTON_LEFT,
 	BUTTON_RIGHT,
+	BUTTON_ESC,
 	BUTTON_ENTER,
 
 	BUTTON_COUNT, // Should be the last item
@@ -46,7 +47,7 @@ struct Input {
 };
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 HWND winMain();
-void messageInput(Input& input,MSG &message, HWND &window);
+char messageInput(Input& input,MSG &message, HWND &window);
 Render_State getRender();
 //LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 ////HWND winMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
