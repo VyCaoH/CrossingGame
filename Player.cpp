@@ -112,7 +112,7 @@ void Player::move(Input* input, float dt, float speed)
 		}
 		//checkWall()
 		render_state = getRender();
-		Renderer::Renderer::draw_titan(getX(), getY(), getHalfX(), getHalfY());
+		Renderer::draw_titan(getX(), getY(), getHalfX(), getHalfY());
 		return;
 	}
 }

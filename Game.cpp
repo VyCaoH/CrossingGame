@@ -38,18 +38,20 @@ void Game::startGame()
 	threat.clear();
 	lv = 1;
 	score.readHighScore();
+	//menu.setMenuMode(NEW_GAME);
 }
 
 void Game::setHighScore()
 {
 	score.writeHighScore();
 }
+void Game::simulate_menu(Input* input)
+{
+	menu.loadMenuGame(input);
+}
 void Game::simulate_game(Input* input, float dt)
 {
-	//Sound::audioGamePlay();
 	render_state = getRender();
-	//Renderer::	clear_screen(0xffffffff);
-
 	float speed = 25.f;
 
 	Renderer::draw_Background(0, 0, 73, 45);
