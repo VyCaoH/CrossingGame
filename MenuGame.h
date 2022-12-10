@@ -33,6 +33,7 @@ public:
 	}
 	void setMenuMode(BUTTON newNode) {
 		menuMode = newNode;
+		running = true;
 	}
 	void loadMainMenu(Input* input) {
 		render_state = getRender();

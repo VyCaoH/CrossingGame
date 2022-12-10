@@ -13,7 +13,7 @@
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
-//static gamemode g_mode = GM_MENUGAME;
+static gamemode g_mode = GM_MENUGAME;
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
@@ -46,6 +46,7 @@ public:
 	int getLv();
 	void setHighScore();
 	void simulate_game(Input* input, float dt);
+	void simulate_menu(Input* input);
 	vector<Threat*> getThreat();
 	void startGame();
 	//BUTTON menu_game(Input* input);

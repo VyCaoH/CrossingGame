@@ -12,7 +12,7 @@ void subThread(HWND window)
 	while (g_running)
 	{
 		//MOVING = MOVING;
-		if (g_mode==GM_MENUGAME)
+		if (game.menu.isRunning())
 		{
 			continue;
 		}
@@ -33,29 +33,24 @@ int main()
 //	game.startGame();
 	HWND window = winMain();
 	HDC hdc = GetDC(window);
-	//MOVING MOVING = {};
 
 
 	thread t1(subThread, window);
 	while (g_running) {
 
 		MSG message;
-		messageInput(MOVING, message, window);
-		if (g_mode==GM_MENUGAME)
+		char key = messageInput(MOVING, message, window);
+		if (game.menu.isRunning())
 		{
 			if (game.menu.isRunning()) {
 				game.menu.loadMenuGame(&MOVING);
-			}
-			else {
 				if (game.menu.getMenuMode() == NEW_GAME) {
 					g_pause = false;
-					g_mode = GM_PLAYGAME;
 					game.restartGame();
 					game.resumeGame(t1.native_handle());
 				}
 				else if (game.menu.getMenuMode() == LOAD_GAME) {
 					g_pause = false;
-					g_mode = GM_PLAYGAME;
 					game.resumeGame(t1.native_handle());
 				}
 			}
@@ -86,7 +81,7 @@ int main()
 				}
 				else
 				{
-					g_mode = GM_MENUGAME;
+					game.menu.setMenuMode(MAIN);
 					continue;
 					if (MOVING.buttons[BUTTON_ESC].is_down)
 					{

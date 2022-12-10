@@ -38,7 +38,7 @@ void Game::startGame()
 	threat.clear();
 	lv = 1;
 	score.readHighScore();
-	menu.setMenuMode(NEW_GAME);
+	//menu.setMenuMode(NEW_GAME);
 }
 
 void Game::setHighScore()
