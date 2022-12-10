@@ -73,7 +73,21 @@ char messageInput(Input&input,MSG &message,HWND &window)
 
 		switch (message.message) {
 		case WM_KEYUP:
-
+		{
+			u32 vk_code = (u32)message.wParam;
+			//bool is_down = ((message.lParam & (1 << 31)) == 0);
+			if ('A' <= vk_code	&& vk_code <= 'Z' 
+				&& vk_code != 'A'
+				&& vk_code != 'S'
+				&& vk_code != 'D'
+				&& vk_code != 'W'
+				&& vk_code != 'Y'
+				&& vk_code != 'P')
+			{
+				return (char)vk_code;
+				break;
+			}
+		}
 		case WM_KEYDOWN: {
 			u32 vk_code = (u32)message.wParam;
 			bool is_down = ((message.lParam & (1 << 31)) == 0);
@@ -86,6 +100,7 @@ input.buttons[b].is_down = is_down;\
 } break;
 
 					//Xu li phim nhan
+
 			switch (vk_code) {
 				process_button(BUTTON_UP, VK_UP);
 				process_button(BUTTON_DOWN, VK_DOWN);
