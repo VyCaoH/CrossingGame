@@ -39,11 +39,11 @@ float Entity::getHalfY() const
 }
 void Entity::left(float speed, float dt, int lv)
 {
-	entity_pX -= speed * dt * lv;
+	entity_pX -= speed  * lv;
 }
 
 void Entity::right(float speed, float dt, int lv) {
-	entity_pX += speed * dt * lv;
+	entity_pX += speed * lv;
 }
 
 //vector<vector<char>> Entity::getEntity() const

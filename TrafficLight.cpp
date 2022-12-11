@@ -1,17 +1,17 @@
 #include "TrafficLight.h"
 TrafficLight::TrafficLight()
 {
-	state = 1;
-	time = 40;
+	state = true;
+	time = 100;
 }
 
-TrafficLight::TrafficLight(int state, int time)
+TrafficLight::TrafficLight(int state, float time)
 {
 	this->state = state;
 	this->time = time;
 }
 
-int TrafficLight::getState()
+bool TrafficLight::getState()
 {
 	return state;
 }
@@ -24,20 +24,17 @@ void TrafficLight::setState(int state_)
 {
 	this->state = state_;
 }
-void TrafficLight::setTime(int time_)
+void TrafficLight::setTime(float time_)
 {
 	this->time = time_;
 }
 
-void TrafficLight::change(int newTime)
+void TrafficLight::change(float dt, float time_ )
 {
-	if (time == 0)
+	while (time < 0)
 	{
-		state = 1 - state;
-		time = (state ? newTime : newTime);
+		state = !state;
+		time = 100;
 	}
-	else
-	{
-		time--;
-	}
+	time = time - dt;
 }

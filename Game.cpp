@@ -50,7 +50,7 @@ void Game::simulate_game(Input *input, float dt)
 	render_state = getRender();
 	//Renderer::	clear_screen(0xffffffff);
 
-	float speed = 25.f;
+	float speed = 5.f;
 
 	Renderer::draw_Background(0, 0, 73, 45);
 	//Renderer::draw_turtleL(0, 0, 1, 1);
@@ -165,7 +165,7 @@ void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-		x->move(dt,2* lv);
+		x->move(0.5,dt);
 	}
 	return;
 }
@@ -218,6 +218,7 @@ void Game::updatePosThreat()
 		}
 		x->setListEntity((TYPE)randomType,randomDir);
 	}
+	// draw traffic light 
 }
 
 bool Game::exitGame(thread &t1)

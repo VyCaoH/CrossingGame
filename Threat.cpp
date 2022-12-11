@@ -4,13 +4,11 @@ Threat::Threat(int posY) :y_coord(posY)
 	//std::uniform_int_distribution <int> randType(0, 3);
 	//type = randType(gen);
 	//pos_row = posY;
-	time = 0;
-	numEnemyInRow = 4;
+	trafficlight.setTime(random_int(200, 500));
+	numEnemyInRow = 2;
 	lv = 1;
-	speed = 10;
+	speed = 50;
 	distance = 30;
-	redLightTime = 0;
-	trafficLight = false;
 	threat.resize(0);
 	type = TYPE(-1);
 	dir = -1;
@@ -530,6 +528,7 @@ void Threat::setListEntity(TYPE type, int dir)
 		}
 	}
 }
+
 int Threat::random_int(int min, int max)
 {
 	return min + rand() % (max + 1 - min);
@@ -552,301 +551,303 @@ bool Threat::checkWall_right(float x)
 }
 void Threat::move(float speed, float dt)
 {
-	render_state = getRender();
-	switch (dir)
-	{
-	case LEFT:
-	{
-		switch (type)
+	
+		render_state = getRender();
+		switch (dir)
 		{
-		case BIRD_LEFT:
+		case LEFT:
 		{
-			for (auto x : threat)
+			trafficlight.change(dt, 100);
+			switch (type)
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(4.5f, 3.25f);
-				if (checkWall_left(x->getX()))
-					Renderer::draw_birdL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
-				else
-					threat.erase(threat.begin());
-			}break;
-		}
-		//case DINOSAUR:
-		//{
-		//	for (auto x : threat)
-		//	{
-		//		x->left(speed, dt, lv);
-		//		if (checkWall_left(x->getX()))
-		//			//Renderer::draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);
-		//			Renderer::draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
-		//		else
-		//			threat.erase(threat.begin());
-		//	}break;
-		//}
-		case CAR_LEFT:
-		{
-			for (auto x : threat)
+			case BIRD_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(7.f, 2.25f);
-				if (checkWall_left(x->getX()))
+				for (auto x : threat )
 				{
-					/*if (type
-						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-					else Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(4.5f, 3.25f);
+					if (checkWall_left(x->getX()))
+						Renderer::draw_birdL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					else
+						threat.erase(threat.begin());
+				}break;
+			}
+			//case DINOSAUR:
+			//{
+			//	for (auto x : threat)
+			//	{
+			//		if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+			//		if (checkWall_left(x->getX()))
+			//			//Renderer::draw_entities(DINOSAUR, x->getX(), x->getY(), .5f, 0xFFFFF);
+			//			Renderer::draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+			//		else
+			//			threat.erase(threat.begin());
+			//	}break;
+			//}
+			case CAR_LEFT:
+			{
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(7.f, 2.25f);
+					if (checkWall_left(x->getX()))
+					{
+						/*if (type
+							Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+						else Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
 						Renderer::draw_entities(CAR_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-					
 
-				}
-				else
-					threat.erase(threat.begin());
-			}break;
-		}
-		case CAR2_LEFT:
-		{
-			for (auto x : threat)
+
+					}
+					else
+						threat.erase(threat.begin());
+				}break;
+			}
+			case CAR2_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(5.5f, 2.25f);
-				if (checkWall_left(x->getX()))
-				
-					/*if (type
-						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-					else Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
-					Renderer::draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				
-				else
-					threat.erase(threat.begin());
-			}break;
-		}
-		case BUS_LEFT:
-		{
-			for (auto x : threat)
-			{
-				x->left(speed, dt, lv);
-				x->setHalf(5.5f, 3.5f);
-				if (checkWall_left(x->getX()))
+				for (auto x : threat)
 				{
-					//Renderer::draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
-					Renderer::draw_entities(BUS_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				}
-				else
-					threat.erase(threat.begin());
-			}break;
-		}
-		case BALLOON_LEFT:
-		{
-			for (auto x : threat)
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(5.5f, 2.25f);
+					if (checkWall_left(x->getX()))
+
+						/*if (type
+							Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+						else Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);*/
+						Renderer::draw_entities(CAR2_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+
+					else
+						threat.erase(threat.begin());
+				}break;
+			}
+			case BUS_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(2.25f, 3.5f);
-				if (checkWall_left(x->getX()))
+				for (auto x : threat)
 				{
-					//Renderer::draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
-					Renderer::draw_entities(BALLOON_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				}
-				else
-					threat.erase(threat.begin());
-			}break;
-		}
-		case TURTLE_LEFT:
-		{
-			for (auto x : threat)
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(5.5f, 3.5f);
+					if (checkWall_left(x->getX()))
+					{
+						//Renderer::draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
+						Renderer::draw_entities(BUS_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					}
+					else
+						threat.erase(threat.begin());
+				}break;
+			}
+			case BALLOON_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(4.f, 3.f);
-
-				if (checkWall_left(x->getX()))
-					Renderer::draw_turtleL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
-				else
-					threat.erase(threat.begin());
-
-			}break;
-		}
-		case BEE_LEFT:
-		{
-			for (auto x : threat)
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(2.25f, 3.5f);
+					if (checkWall_left(x->getX()))
+					{
+						//Renderer::draw_rect(x->getX(), x->getY(), 1, 1, 0xccccccccccc);
+						Renderer::draw_entities(BALLOON_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					}
+					else
+						threat.erase(threat.begin());
+				}break;
+			}
+			case TURTLE_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(4.f, 3.5f);
-				if (checkWall_left(x->getX()))
-					Renderer::draw_entities(BEE_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(4.f, 3.f);
 
-			}break;
-		}
-		case PIG_LEFT:
-		{
-			for (auto x : threat)
+					if (checkWall_left(x->getX()))
+						Renderer::draw_turtleL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					else
+						threat.erase(threat.begin());
+
+				}break;
+			}
+			case BEE_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(5.f, 3.5f);
-				if (checkWall_left(x->getX()))
-					Renderer::draw_entities(PIG_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(4.f, 3.5f);
+					if (checkWall_left(x->getX()))
+						Renderer::draw_entities(BEE_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case CAT_LEFT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case PIG_LEFT:
 			{
-				x->left(speed, dt, lv);
-				x->setHalf(4.f, 3.f);
-				if (checkWall_left(x->getX()))
-					Renderer::draw_entities(CAT_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(5.f, 3.5f);
+					if (checkWall_left(x->getX()))
+						Renderer::draw_entities(PIG_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		}
-		break;
-	}
-	case RIGHT:
-	{
-		switch (type)
-		{
-		case BIRD_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case CAT_LEFT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(4.5f, 3.25f);
-				if (checkWall_right(x->getX()))
-					//Renderer::draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
-					Renderer::draw_birdR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					x->setHalf(4.f, 3.f);
+					if (checkWall_left(x->getX()))
+						Renderer::draw_entities(CAT_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
+				}break;
+			}
+			}
+			break;
 		}
-		//case DINOSAUR:
-		//{
-		//	for (auto x : threat)
-		//	{
-		//		x->right(speed, dt, lv);
-		//		if (checkWall_right(x->getX()))
-		//			//Renderer::draw_entities(DINOSAUR,x->getX(), x->getY(), .5f,0xFFFFF);
-		//			Renderer::draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
-
-		//		else
-		//			threat.erase(threat.begin());
-
-		//	}break;
-		//}
-		case CAR_RIGHT:
+		case RIGHT:
 		{
-			for (auto x : threat)
+			trafficlight.change(dt, 100);
+			switch (type)
 			{
-				x->setHalf(7.f, 2.25f);
-				x->right(speed, dt, lv);
-				if (checkWall_right(x->getX()))
+			case BIRD_RIGHT:
+			{
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);} 
+					x->setHalf(4.5f, 3.25f);
+					if (checkWall_right(x->getX()))
+						//Renderer::draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
+						Renderer::draw_birdR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					else
+						threat.erase(threat.begin());
+
+				}break;
+			}
+			//case DINOSAUR:
+			//{
+			//	for (auto x : threat)
+			//	{
+			//		if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+			//		if (checkWall_right(x->getX()))
+			//			//Renderer::draw_entities(DINOSAUR,x->getX(), x->getY(), .5f,0xFFFFF);
+			//			Renderer::draw_titan(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+
+			//		else
+			//			threat.erase(threat.begin());
+
+			//	}break;
+			//}
+			case CAR_RIGHT:
+			{
+				for (auto x : threat)
+				{
+					x->setHalf(7.f, 2.25f);
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 
-				else
-					threat.erase(threat.begin());
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-	case CAR2_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case CAR2_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(5.5f, 2.25f);
-				if (checkWall_right(x->getX()))
-					 Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(5.5f, 2.25f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case BUS_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case BUS_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(5.5f, 3.5f);
-				if (checkWall_right(x->getX()))
-					Renderer::draw_entities(BUS_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(5.5f, 3.5f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_entities(BUS_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case BALLOON_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case BALLOON_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(2.25f, 3.5f);
-				if (checkWall_right(x->getX()))
-					Renderer::draw_entities(BALLOON_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(2.25f, 3.5f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_entities(BALLOON_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case TURTLE_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case TURTLE_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(4.f, 3.f);
-				if (checkWall_right(x->getX()))
-					Renderer::draw_turtleR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(4.f, 3.f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_turtleR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case BEE_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case BEE_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(4.f, 3.5f);
-				if (checkWall_right(x->getX()))
-					Renderer::draw_entities(BEE_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(4.f, 3.5f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_entities(BEE_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case PIG_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case PIG_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(5.f, 3.5f);
-				if (checkWall_right(x->getX()))
-					Renderer::draw_entities(PIG_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(5.f, 3.5f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_entities(PIG_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
-		}
-		case CAT_RIGHT:
-		{
-			for (auto x : threat)
+				}break;
+			}
+			case CAT_RIGHT:
 			{
-				x->right(speed, dt, lv);
-				x->setHalf(4.f, 3.f);
-				if (checkWall_right(x->getX()))
-					Renderer::draw_entities(CAT_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
-				else
-					threat.erase(threat.begin());
+				for (auto x : threat)
+				{
+					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					x->setHalf(4.f, 3.f);
+					if (checkWall_right(x->getX()))
+						Renderer::draw_entities(CAT_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
+					else
+						threat.erase(threat.begin());
 
-			}break;
+				}break;
+			}
+			}
+			break;
 		}
 		}
-		break;
-	}
-	}
-
 }
 //	void lvIncrease()
 //	{

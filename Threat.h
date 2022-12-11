@@ -5,7 +5,7 @@
 #include<ctime>
 #include<cmath>
 #include<random>
-
+#include "TrafficLight.h"
 class Threat
 {
 	int y_coord;
@@ -14,11 +14,10 @@ class Threat
 	unsigned int lv;	//level
 	float speed;
 	int distance;	//distance of every Enemies in one row
-	clock_t time;
+
 	//vector<Entity*> threaten;	//Number of threaten 
 	vector<Entity*>threat;
-	int redLightTime;	//Redlight's time occur
-	bool trafficLight;	//true=red, false=green
+	TrafficLight trafficlight;
 	int dir;
 	TYPE type;
 public:
