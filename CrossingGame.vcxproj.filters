@@ -45,7 +45,12 @@
     <ClCompile Include="Score.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MenuGame.cpp">
+      <Filter>Source Files</Filter>
+     </ClCompile>
     <ClCompile Include="TrafficLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +85,12 @@
     <ClInclude Include="Score.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MenuGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TrafficLight.h">
+          <Filter>Header Files</Filter>
+      </ClInclude>
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

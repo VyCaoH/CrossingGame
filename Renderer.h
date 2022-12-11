@@ -4,9 +4,13 @@ enum TYPE {
 	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
 	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
 };
-//enum TRAFFIC_LIGHT{RED, GREEN};
+
+};
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT };
 enum THINGS { CLOUD1, CLOUD2, GRASS1,ROCK1, ROCK2, ROCK3, ROCK4};
+
+
+
 static float render_scale = 0.01f;
 static const char* tree[13] = {
 	"00411100",
@@ -675,6 +679,30 @@ static const char* things[][11] = {
 	"00022222222000022222222222",
 	"00022222222000022222222222",
 	"00022222222",
+	//MUTE
+	"2000000100",
+	"0200001100",
+	"0020011100",
+	"0002111100",
+	"0011211100",
+	"0011121100",
+	"0011112100",
+	"0000111200",
+	"0000011120",
+	"0000001102",
+	"00000001002",
+	//UMNUTE
+	"00000100",
+	"00001100",
+	"0001110000001",
+	"00111100001001",
+	"111111001001001",
+	"111111000101001",
+	"111111001001001",
+	"00111100001001",
+	"0001110000001",
+	"00001100",
+	"00000100",
 };
 class Renderer
 {
@@ -2289,35 +2317,53 @@ public:
 		draw_Button(SETTINGS, x - 25, y - 11, 0.7, 0x000000, hot_button);
 		draw_Button(INTRODUCTION, x - 25, y - 24, 0.7, 0x000000, hot_button);
 		draw_Button(EXIT, x - 25, y - 37, 0.7, 0x000000, hot_button);
+
+	/*	draw_Background3(0, 0, 0, 0);
+		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
+		draw_Button(SETTINGS, x - 30, y +45, 1, 0x000000, hot_button);
+		draw_things(MUTE, x - 30, y, 1);
+		draw_things(UNMUTE, x , y, 1);*/
+	}
+	static void draw_Settings(float x, float y, float half_size_x, float half_size_y) {
+		draw_Background3(0, 0, 0, 0);
+		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
+		draw_Button(SETTINGS, x - 30, y + 45, 1, 0x000000, MAIN);
+		draw_things(MUTE, x - 30, y, 1);
+		draw_things(UNMUTE, x, y, 1);
+	}
+	static void draw_Introduction(float x, float y, float half_size_x, float half_size_y) {
+		draw_Background3(0, 0, 0, 0);
+		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
+		draw_Button(INTRODUCTION, x - 30, y + 45, 1, 0x000000, MAIN);
 	}
 	static void draw_player(float x, float y, float half_size_x, float half_size_y) {
 
-		//toc
-		draw_rect(x, y, 5, 5, 0xF5B16D);
-		draw_rect(x, y + 5, 5, 2.5, 0x000000);
-		//face
-		draw_rect(x - 2, y + 0.25, 1, 1, 0x000000);
-		draw_rect(x + 2, y + 0.25, 1, 1, 0x000000);
-		//co
-		draw_rect(x, y - 6, 3.5, 2, 0xF5B16D);
-		//than
-		draw_rect(x, y - 17, 8, 9, 0xDF0029);
-		//chan
-		draw_rect(x, y - 33, 7, 9, 0x00676B);
-		//khoang cach quan
-		draw_rect(x, y - 34, 1, 8, 0x50A625);
-		//tay
-		draw_rect(x - 6.8, y - 19, 1.2, 7.5, 0xF5B16D);
-		draw_rect(x + 6.8, y - 19, 1.2, 7.5, 0xF5B16D);
-		//detail
-		//co
-		draw_rect(x, y - 9, 1.5, 1.5, 0xF5B16D);
-		//giay
-		draw_rect(x + 5, y - 41, 2.5, 1, 0xCAE5E8);
-		draw_rect(x - 5, y - 41, 2.5, 1, 0xCAE5E8);
-		//toccon
-		draw_rect(x - 4, y + 2, 1, 0.5, 0x363636);
-		draw_rect(x + 4, y + 2, 1, 0.5, 0x363636);
+	//toc
+	draw_rect(x, y, 5, 5, 0xF5B16D);
+	draw_rect(x, y + 5, 5, 2.5, 0x000000);
+	//face
+	draw_rect(x - 2, y + 0.25, 1, 1, 0x000000);
+	draw_rect(x + 2, y + 0.25, 1, 1, 0x000000);
+	//co
+	draw_rect(x, y - 6, 3.5, 2, 0xF5B16D);
+	//than
+	draw_rect(x, y - 17, 8, 9, 0xDF0029);
+	//chan
+	draw_rect(x, y - 33, 7, 9, 0x00676B);
+	//khoang cach quan
+	draw_rect(x, y - 34, 1, 8, 0x50A625);
+	//tay
+	draw_rect(x - 6.8, y - 19, 1.2, 7.5, 0xF5B16D);
+	draw_rect(x + 6.8, y - 19, 1.2, 7.5, 0xF5B16D);
+	//detail
+	//co
+	draw_rect(x, y - 9, 1.5, 1.5, 0xF5B16D);
+	//giay
+	draw_rect(x + 5, y - 41, 2.5, 1, 0xCAE5E8);
+	draw_rect(x - 5, y - 41, 2.5, 1, 0xCAE5E8);
+	//toccon
+	draw_rect(x - 4, y + 2, 1, 0.5, 0x363636);
+	draw_rect(x + 4, y + 2, 1, 0.5, 0x363636);
 
 	}
 	static void draw_apple(int x, int y)
@@ -2439,6 +2485,19 @@ public:
 			draw_things(ROCK3, x - 120 + i * 20, y - 30, .3);
 			draw_things(ROCK2, x - 120 + i * 20 + 10, y - 40, .2);
 			draw_things(ROCK1, x - 120 + i * 20 + 15, y - 45, .2);
+		}
+	}
+	static void draw_Background3(float x, float y, float max_size_x, float max_size_y)
+	{
+		//Khung 
+		draw_rect(x, y - 40, 120, 15, 0x784937);
+		for (int i = 0; i <= 50; i++) {
+			draw_things(GRASS1, x - 140 + i * 10, y - 25, .4);
+		}
+		for (int i = 0; i <= 10; i++) {
+			draw_things(ROCK3, x - 140 + i * 20, y - 30, .3);
+			draw_things(ROCK2, x - 140 + i * 20 + 10, y - 40, .2);
+			draw_things(ROCK1, x - 140 + i * 20 + 15, y - 45, .2);
 		}
 	}
 	static void draw_trees(int x, int y) {
