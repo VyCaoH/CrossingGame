@@ -1,6 +1,7 @@
 #pragma once
 //#include<vector>
 #include<Thread>
+#include <deque>
 //#include"Renderer.h"
 #include"Player.h"
 #include"Animal.h"
@@ -9,6 +10,7 @@
 #include"MenuGame.h"
 #include"Score.h"
 //#include"Renderer.h"
+static string name;
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
@@ -23,7 +25,15 @@ class Game
 	//int time;
 	std::vector<Threat*> threat;
 	//vector<Row*> row;
+	TrafficLight lights;
+	Truck *truck;
+	Car *car;
+	Bird *bird;
+	Dinosaur *dino;
+	int curVH, curAN;
+	
 public:
+	int playerScore = score.getScore();
 	MenuGame menu;
 	Game() 
 	{
@@ -50,12 +60,14 @@ public:
 	void reset_game();
 	void restartGame();
 	bool next_level();
-	int overGame(Input* input);
+	int overGame(char key);
 	bool quit(Input* input);
 	void threatMove(float dt);
 	void updatePosThreat();
 	bool exitGame(thread&t1);
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
+	void saveGame(char key);
+	void loadGame(char key);
 };
 
