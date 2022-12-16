@@ -83,6 +83,10 @@ public:
 		bird_half_X = x;
 		bird_half_Y = y;
 	}
+	void setDP(float dp)
+	{
+		bird_dp = dp;
+	}
 };
 class Dinosaur : public Animal
 {
@@ -162,47 +166,8 @@ public:
 		dinosaur_half_X = x;
 		dinosaur_half_Y = y;
 	}
+	void setDP(float dp)
+	{
+		dinosaur_dp = dp;
+	}
 };
-//	~Bird();
-//
-//	Limits getLimits(bool isRight = 0) const override
-//	{
-//		return (isRight) ? *birdLmtRight : *birdLmtLeft;
-//	}
-//
-//	SHORT getLimitofHeight()const override
-//	{
-//		return birdLmtRight->getHeight();
-//	}
-//
-//	SHORT getLimitofWidth() const override
-//	{
-//		return birdLmtRight->getWidth();
-//	}
-//};
-//
-//class Dinosaur : public Animal
-//{
-//private:
-//	static Limits* dinoLmtRight;
-//	static Limits* dinoLmtLeft;
-//public:
-//	Dinosaur(int x, int y);
-//
-//	~Dinosaur();
-//
-//	Limits getLimits(bool isRight = 0) const override
-//	{
-//		return (isRight) ? *dinoLmtRight : *dinoLmtLeft;
-//	}
-//	SHORT getLimitofHeight()const override
-//	{
-//		return dinoLmtRight->getHeight();
-//	}
-//
-//	SHORT getLimitofWidth() const override
-//	{
-//		return dinoLmtRight->getWidth();
-//	}
-//};
-//#endif // _ANIMAL
