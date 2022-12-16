@@ -10,7 +10,7 @@
 #include"MenuGame.h"
 #include"Score.h"
 //#include"Renderer.h"
-static string name;
+static string name="YOUR NAME IS ";
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
@@ -60,7 +60,7 @@ public:
 	void reset_game();
 	void restartGame();
 	bool next_level();
-	int overGame(char key);
+	int overGame(Input* input);
 	bool quit(Input* input);
 	void threatMove(float dt);
 	void updatePosThreat();

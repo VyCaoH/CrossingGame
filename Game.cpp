@@ -63,9 +63,9 @@ void Game::simulate_game(Input* input, float dt)
 void Game::saveGame(char key)
 {
 	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
-	Renderer::draw_text("YOUR NAME IS  ", -15, 0, 0.3f, 0xFFFFFF);
-	//Renderer::draw_text("Z", 15, 0, 0.3f, 0xFFFFFF);
-	name += key;
+	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
+	if(key>='A'&&key<='Z')
+		name += key; 
 	if (key == BUTTON_ENTER) {
 		string load = name + ".txt";
 		fstream file(load, ios::out);
@@ -183,19 +183,12 @@ bool Game::next_level()
 	}
 	return false;
 }
-int Game::overGame(char key)
+int Game::overGame(Input* input)
 {
-	if (key == 'L')
-	{
+	if (is_down(BUTTON_Y))
 		return 1;
-	}
-	//Renderer::draw_rect(0, 0, 20, 10, 0xFFFA);
-	//if (pressed(BUTTON_Y)) {
-	//	return 1;
-	//}	//restart game
-	//
-	//if (pressed(BUTTON_ESC))
-	//	return -1;
+	if (pressed(BUTTON_ESC))
+		return -1;
 	return 0;
 }
 bool Game::quit(Input* input)
