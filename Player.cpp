@@ -3,9 +3,6 @@
 Player::Player()
 {
 	isDead = false;
-	player_dp = 0;
-	player_ddp = 0;
-	//heiPlayer:: ght = width = 0;
 	player_pX = 0;
 	player_pY = -45;
 	entity.clear();
@@ -20,17 +17,17 @@ float Player:: getHalfY()
 {
 	return player_half_Y;
 }
-void Player::up(float speed, float dt)
+void Player::up()
 {
 	player_pY += 14;
 }
-void Player::down(float speed, float dt) {
+void Player::down() {
 	player_pY -= 14;
 }
-void Player::left(float speed, float dt) {
+void Player::left() {
 	player_pX -= 5;
 }
-void Player::right(float speed, float dt) {
+void Player::right() {
 	player_pX += 5;
 }
 float Player:: getX()
@@ -41,10 +38,6 @@ float Player::getY()
 {
 	return player_pY;
 }
-float Player:: getDP()
-{
-	return player_dp;
-}
 void Player:: setX(float src)
 {
 	player_pX = src;
@@ -52,18 +45,6 @@ void Player:: setX(float src)
 void Player:: setY(float src)
 {
 	player_pY = src;
-}
-void Player:: setDP(float src)
-{
-	player_dp = src;
-}
-void Player:: setDDP(float src)
-{
-	player_ddp = src;
-}
-float Player:: getDDP()
-{
-	return player_ddp;
 }
 void Player:: setIsDead(bool type)
 {
@@ -97,7 +78,7 @@ void Player::move(Input* input, float dt, float speed)
 		if (pressed(BUTTON_W))
 		{
 			up(speed, dt);
-		}
+	}
 		if (pressed(BUTTON_S))
 		{
 			down(speed, dt);
@@ -111,41 +92,27 @@ void Player::move(Input* input, float dt, float speed)
 			right(speed, dt);
 		}
 		//checkWall()
-		render_state = getRender();
-		Renderer::draw_titan(getX(), getY(), getHalfX(), getHalfY());
-		return;
-	}
+	render_state = getRender();
+	Renderer::draw_titan(getX(), getY(), getHalfX(), getHalfY());
+	return;
 }
 void Player::checkWall(float x, float y, float half_x, float half_y)
 {
 	if (player_pX + player_half_X > 50)
 	{
 		setX(50);
-		setDP(0);
 	}
 	if (player_pY + player_half_Y > half_y + y)
 	{
 		setY(40);
-		setDP(0);
 	}
 	if (player_pX - player_half_X < -90)
 	{
 		setX(-half_x - x + player_half_X);
-		setDP(-90);
 	}
 	if (player_pY - player_half_Y < -half_y - y)
 	{
 		setY(-half_y - y + player_half_Y);
-		setDP(-40);
 	}
 }
 
-//}
-////void Player::Player:: setHeiPlayer:: ght(int heiPlayer:: ght)
-////{
-////	thiPlayer:: s->heiPlayer:: ght = heiPlayer:: ght;
-////}
-////void Player::Player:: setWidth(int width)
-////{
-////	thiPlayer:: s->width = width;
-////}

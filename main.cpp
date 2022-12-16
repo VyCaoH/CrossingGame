@@ -73,7 +73,7 @@ int main()
 						game.pauseGame(t1.native_handle());
 						continue;
 					}
-					if (MOVING.buttons[BUTTON_Y].is_down)
+					else
 					{
 						game.resumeGame((HANDLE)t1.native_handle());
 						continue;
@@ -94,26 +94,31 @@ int main()
 						game.resumeGame((HANDLE)t1.native_handle());
 					}
 				}
-				MOVING;
+				Sleep(20);
 			}
 			else
 			{
 				if(g_pause)
 					game.pauseGame(t1.native_handle());
-				StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
-				if (game.overGame(key) == 1)
+				if (game.overGame(&MOVING) == 2)
 				{
 					game.saveGame(key);
-					g_pause = false;
-					//game.restartGame();
-					game.resumeGame((HANDLE)t1.native_handle());
+					//Sleep(500);
+					key = 0;
 				}
-				else if(game.overGame(key) == -1)
-				{
-					//g_pause = false;
-					g_running = false;
-					game.resumeGame((HANDLE)t1.native_handle());
-				}
+				//if (game.overGame(&MOVING) == 1)
+				//{
+				//	g_pause = false;
+				//	game.restartGame();
+				//	game.resumeGame((HANDLE)t1.native_handle());
+				//}
+				//else if (game.overGame(&MOVING) == -1)
+				//{
+				//	g_running = false;
+				//	game.resumeGame((HANDLE)t1.native_handle());
+				//}
+				StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
+
 			}
 		}
 		if (MOVING.buttons[BUTTON_ESC].is_down)
@@ -122,7 +127,7 @@ int main()
 			game.resumeGame((HANDLE)t1.native_handle());
 		}
 		//Thoi gian Frame end
-		Sleep(15);
+		//Sleep(500);
 	}
 	game.exitGame(t1);
 	return 0;

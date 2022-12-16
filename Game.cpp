@@ -36,20 +36,14 @@ void Game::simulate_menu(Input* input)
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
-
-	//Renderer::	clear_screen(0xffffffff);
-
-	float speed = 5.f;
-
-
-
-
 	Renderer::draw_Background(0, 0, 73, 45);
-	//Renderer::draw_turtleL(0, 0, 1, 1);
+
 	player.move(input, dt, speed);
 	player.checkWall(-28.5, 0, 71.5, 45);
 	player.isImpact(threat);
+
 	Renderer::draw_trees(0, 0);
+
 	updatePosThreat();
 	threatMove(dt);
 	score.DisplayScore();
@@ -58,20 +52,26 @@ void Game::simulate_game(Input* input, float dt)
 
 }
 
+void Game::save_load(char key)
+{
 
+}
 
 void Game::saveGame(char key)
 {
 	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
-	Renderer::draw_text("YOUR NAME IS  ", -15, 0, 0.3f, 0xFFFFFF);
-	//Renderer::draw_text("Z", 15, 0, 0.3f, 0xFFFFFF);
-	name += key;
+	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
+	if (key != 0)
+	{
+		Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
+		name += key;
+	}
 	if (key == BUTTON_ENTER) {
 		string load = name + ".txt";
 		fstream file(load, ios::out);
 		file << lights.getState() << " " << lights.getTime() << " " << lv << " " << playerScore << " "
 			<< player.getX() << " " << player.getY() << " "
-			<< player.getIsDead() << " " << player.getDP() << " ";
+			<< player.getIsDead() << " " ;
 		file << curVH << " ";
 		for (unsigned int i = 0; i < curVH; i++)
 		{
@@ -92,9 +92,6 @@ void Game::saveGame(char key)
 		}
 		file.close();
 	}
-	//cin >> name;
-
-	//system("cls");
 
 
 }
@@ -183,20 +180,13 @@ bool Game::next_level()
 	}
 	return false;
 }
-int Game::overGame(char key)
+int Game::overGame(Input* input)
 {
-	if (key == 'L')
-	{
+	if (pressed(BUTTON_Y))	//restart game
 		return 1;
-	}
-	//Renderer::draw_rect(0, 0, 20, 10, 0xFFFA);
-	//if (pressed(BUTTON_Y)) {
-	//	return 1;
-	//}	//restart game
-	//
-	//if (pressed(BUTTON_ESC))
-	//	return -1;
-	return 0;
+	if (pressed(BUTTON_ESC))
+		return -1;
+	return 2;
 }
 bool Game::quit(Input* input)
 {
@@ -208,11 +198,7 @@ bool Game::quit(Input* input)
 void Game::threatMove(float dt)
 {
 	for (auto x : threat)
-	{
-
-		x->move(0.5,dt);
-
-	}
+		x->move(0.5, lv * dt);
 	return;
 }
 void Game::updatePosThreat()
