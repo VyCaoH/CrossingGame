@@ -52,7 +52,7 @@ public:
 	Player getPlayer();
 	int getLv();
 	void setHighScore();
-	void simulate_game(char key, float dt);
+	void simulate_game(Input* input, float dt);
 	void simulate_menu(Input* input);
 	vector<Threat*> getThreat();
 	void startGame();
