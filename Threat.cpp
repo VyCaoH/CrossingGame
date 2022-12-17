@@ -4,7 +4,7 @@ Threat::Threat(int posY) :y_coord(posY)
 	//std::uniform_int_distribution <int> randType(0, 3);
 	//type = randType(gen);
 	//pos_row = posY;
-	trafficlight.setTime(random_int(200, 500));
+	trafficlight.setTime(random_int(100, 500));
 	numEnemyInRow = 2;
 	lv = 1;
 	speed = 50;
@@ -557,14 +557,21 @@ void Threat::move(float speed, float dt)
 		{
 		case LEFT:
 		{
-			trafficlight.change(dt, 100);
+			trafficlight.change(dt, random_int(100, 400));
 			switch (type)
 			{
 			case BIRD_LEFT:
 			{
 				for (auto x : threat )
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if(trafficlight.getState()== true){
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.5f, 3.25f);
 					if (checkWall_left(x->getX()))
 						Renderer::draw_birdL(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
@@ -588,7 +595,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(7.f, 2.25f);
 					if (checkWall_left(x->getX()))
 					{
@@ -607,7 +621,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(5.5f, 2.25f);
 					if (checkWall_left(x->getX()))
 
@@ -624,7 +645,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(5.5f, 3.5f);
 					if (checkWall_left(x->getX()))
 					{
@@ -639,7 +667,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(2.25f, 3.5f);
 					if (checkWall_left(x->getX()))
 					{
@@ -654,7 +689,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.f, 3.f);
 
 					if (checkWall_left(x->getX()))
@@ -668,7 +710,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.f, 3.5f);
 					if (checkWall_left(x->getX()))
 						Renderer::draw_entities(BEE_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -681,7 +730,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(5.f, 3.5f);
 					if (checkWall_left(x->getX()))
 						Renderer::draw_entities(PIG_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -694,7 +750,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->left(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->left(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.f, 3.f);
 					if (checkWall_left(x->getX()))
 						Renderer::draw_entities(CAT_LEFT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -708,14 +771,21 @@ void Threat::move(float speed, float dt)
 		}
 		case RIGHT:
 		{
-			trafficlight.change(dt, 100);
+			trafficlight.change(dt, random_int(100, 400));
 			switch (type)
 			{
 			case BIRD_RIGHT:
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);} 
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.5f, 3.25f);
 					if (checkWall_right(x->getX()))
 						//Renderer::draw_entities(BIRD,x->getX(), x->getY(),.5f,0xFFFFF);
@@ -743,8 +813,15 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(7.f, 2.25f);
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(CAR_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
 
@@ -757,7 +834,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(5.5f, 2.25f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(CAR2_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -770,7 +854,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(5.5f, 3.5f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(BUS_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -783,7 +874,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(2.25f, 3.5f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(BALLOON_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -796,7 +894,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.f, 3.f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_turtleR(x->getX(), x->getY(), x->getHalfX(), x->getHalfY());
@@ -809,7 +914,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.f, 3.5f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(BEE_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -822,7 +934,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(5.f, 3.5f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(PIG_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
@@ -835,7 +954,14 @@ void Threat::move(float speed, float dt)
 			{
 				for (auto x : threat)
 				{
-					if(trafficlight.getState()== true){x->right(speed, dt, lv);}
+					if (trafficlight.getState() == true) {
+						x->right(speed, dt, lv);
+						Renderer::draw_greenlight(50, x->getY());
+					}
+					else
+					{
+						Renderer::draw_redlight(50, x->getY());
+					}
 					x->setHalf(4.f, 3.f);
 					if (checkWall_right(x->getX()))
 						Renderer::draw_entities(CAT_RIGHT, x->getX(), x->getY(), .5f, 0xFFFFF);
