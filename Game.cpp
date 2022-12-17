@@ -8,22 +8,6 @@ int Game::getLv()
 	return lv;
 }
 
-//int Game::getScore()
-//{
-//	return score;
-//}
-//void Game::setScore()
-//{
-//
-//	if (lv > 1)
-//		score = (lv - 1) * 100;
-//}
-//void Game::scoreChange()
-//{
-//	setScore();
-//	Renderer::draw_number(score, 78, 31, 1.3, 0xFF3131);
-//}
-
 vector<Threat*> Game::getThreat()
 {
 	return threat;
@@ -73,65 +57,110 @@ void Game::simulate_game(Input* input, float dt)
 	next_level();
 
 }
-//BUTTON Game::menu_game(Input* input) {
-//	render_state = getRender();
-//	if (released(BUTTON_UP))
-//	{
-//		g_music_menu = !g_music_menu;
-//		if (g_music_menu)
-//			Sound::audioMenu();
-//		else
-//			Sound::audioStop();
-//	}
-//	if (pressed(BUTTON_S))
-//	{
-//		g_music_button = !g_music_button;
-//		if (g_music_button)
-//		{
-//			Sound::audioButton();
-//		}
-//		g_music_button = !g_music_button;
-//		hot_button = (BUTTON)(hot_button + 1);
-//		if (hot_button > 4)hot_button = EXIT;
-//	}
-//	if (pressed(BUTTON_W)) {
-//		g_music_button = !g_music_button;
-//		if (g_music_button)
-//		{
-//			Sound::audioButton();
-//		}
-//		g_music_button = !g_music_button;
-//		hot_button = (BUTTON)(hot_button - 1);
-//		if (hot_button < 0)hot_button = NEW_GAME;
-//	}
-//	/*Do something in menu*/;
-//	Renderer::draw_Menu(0, 0, 50, 50, hot_button);
-//	if (pressed(BUTTON_ENTER))
-//	{
-//
-//		switch (hot_button)
-//		{
-//		case NEW_GAME:	//NEW GAME
-//			return hot_button;
-//
-//		case LOAD_GAME:		//LOAD GAME
-//			return hot_button;
-//
-//		case SETTINGS: //SETTINGS
-//			return hot_button;
-//
-//		case INTRODUCTION:
-//			Renderer::clear_screen(0xFFFFFF);
-//
-//			//Draw Introduction in here.
-//
-//			return hot_button;
-//		case EXIT:
-//			return hot_button;
-//		}
-//	}
-//	return BUTTON(-1);
-//}
+
+
+
+void Game::saveGame(Input*input)
+{
+	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
+	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
+	for (int i = 4; i < 40; i++)
+		if (pressed(i))
+			name += (char)(i + 61);
+
+	if (pressed(BUTTON_ENTER)) {
+		string load = name.erase(0,12) + ".txt";
+		fstream file(load, ios::out);
+		file << lights.getState() << " " << lights.getTime() << " " << lv << " " << playerScore << " "
+			<< player.getX() << " " << player.getY() << " "
+			<< player.getIsDead() << " " << player.getDP() << " ";
+		file << curVH << " ";
+		for (unsigned int i = 0; i < curVH; i++)
+		{
+			file << truck[i].getX() << " " << truck[i].getY() << " " << truck[i].getDP() << " ";
+		}
+		for (unsigned int i = 0; i < curVH; i++)
+		{
+			file << car[i].getX() << " " << car[i].getY() << " " << car[i].getDP() << " ";
+		}
+		file << curAN << " ";
+		for (unsigned int i = 0; i < curAN; i++)
+		{
+			file << bird[i].getX() << " " << bird[i].getY() << " " << bird[i].getDP() << " ";
+		}
+		for (unsigned int i = 0; i < curAN; i++)
+		{
+			file << dino[i].getX() << " " << dino[i].getY() << " " << dino[i].getDP() << " ";
+		}
+		file.close();
+	}
+
+
+}
+
+void Game::loadGame(char key)
+{
+	system("cls");
+	string name;
+	Renderer::draw_text("INPUT NAME ", 5, 5, 5, 0xFF3333);
+	cin >> name;
+	//system("cls");
+	string load = name + ".txt";
+	fstream file(load, ios::in);
+	short x, y, s, t;
+	file >> x;
+	file >> y;
+	lights =  TrafficLight();
+	file >> lv;
+	file >> playerScore;
+	file >> x;
+	file >> y;
+	file >> s;
+	player = Player();
+	file >> curVH;
+	truck = new Truck[curVH]();
+	for (unsigned int i = 0; i < curVH; i++)
+	{
+		file >> x;
+		file >> y;
+		file >> s;
+		truck[i].setX(x);
+		truck[i].setY(y);
+		truck[i].setDP(s);
+	}
+	car = new Car[curVH]();
+	for (unsigned int i = 0; i < curVH; i++)
+	{
+		file >> x;
+		file >> y;
+		file >> s;
+		car[i].setX(x);
+		car[i].setY(y);
+		car[i].setDP(s);
+	}
+	file >> curAN;
+	bird = new Bird[curAN]();
+	for (unsigned int i = 0; i < curAN; i++)
+	{
+		file >> x;
+		file >> y;
+		file >> s;
+		bird[i].setX(x);
+		bird[i].setY(y);
+		bird[i].setDP(s);
+	}
+	dino = new Dinosaur[curAN]();
+	for (unsigned int i = 0; i < curAN; i++)
+	{
+		file >> x;
+		file >> y;
+		file >> s;
+		dino[i].setX(x);
+		dino[i].setY(y);
+		dino[i].setDP(s);
+	}
+	file.close();
+}
 void Game::reset_game()
 {
 	player.setY(-45);
@@ -155,11 +184,10 @@ bool Game::next_level()
 }
 int Game::overGame(Input* input)
 {
-	Renderer::draw_rect(0, 0, 20, 10, 0xFFFA);
-	if (pressed(BUTTON_Y))	//restart game
-		return 1;
-	if (pressed(BUTTON_ESC))
-		return -1;
+	//if (is_down(BUTTON_Y))
+	//	return 1;
+	//if (pressed(BUTTON_ESC))
+	//	return -1;
 	return 0;
 }
 bool Game::quit(Input* input)

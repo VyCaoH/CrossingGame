@@ -1,5 +1,9 @@
 #pragma once
 #include"ConsoleWindow.h"
+#include"Sound.h"
+static bool g_sound = true;
+static bool g_music_button = false;
+static bool g_music_menu = true;
 class MenuGame
 {
 	BUTTON menuMode;
@@ -39,30 +43,30 @@ public:
 		render_state = getRender();
 		if (released(BUTTON_UP))
 		{
-			/*g_music_menu = !g_music_menu;
+			g_music_menu = !g_music_menu;
 			if (g_music_menu)
 				Sound::audioMenu();
 			else
-				Sound::audioStop();*/
+				Sound::audioStop();
 		}
 		if (pressed(BUTTON_S))
 		{
-			/*g_music_button = !g_music_button;
+			g_music_button = !g_music_button;
 			if (g_music_button)
 			{
 				Sound::audioButton();
 			}
-			g_music_button = !g_music_button;*/
+			g_music_button = !g_music_button;
 			hotButton = (BUTTON)(hotButton + 1);
 			if (hotButton > 4)hotButton = EXIT;
 		}
 		if (pressed(BUTTON_W)) {
-			/*g_music_button = !g_music_button;
+			g_music_button = !g_music_button;
 			if (g_music_button)
 			{
 				Sound::audioButton();
 			}
-			g_music_button = !g_music_button;*/
+			g_music_button = !g_music_button;
 			hotButton = (BUTTON)(hotButton - 1);
 			if (hotButton < 0)hotButton = NEW_GAME;
 		}

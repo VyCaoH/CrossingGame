@@ -28,15 +28,44 @@ struct Button_State {
 enum {
 	BUTTON_UP,
 	BUTTON_DOWN,
-	BUTTON_W,
-	BUTTON_S,
-	BUTTON_A,
-	BUTTON_D,
-	BUTTON_P,
-	BUTTON_Y,
-	BUTTON_B,
 	BUTTON_LEFT,
 	BUTTON_RIGHT,
+	BUTTON_A,
+	BUTTON_B,
+	BUTTON_C,
+	BUTTON_D,
+	BUTTON_E,
+	BUTTON_F,
+	BUTTON_G,
+	BUTTON_H,
+	BUTTON_I,
+	BUTTON_J,
+	BUTTON_K,
+	BUTTON_L,
+	BUTTON_M,
+	BUTTON_N,
+	BUTTON_O,
+	BUTTON_P,
+	BUTTON_Q,
+	BUTTON_R,
+	BUTTON_S,
+	BUTTON_T,
+	BUTTON_U,
+	BUTTON_V,
+	BUTTON_W,
+	BUTTON_X,
+	BUTTON_Y,
+	BUTTON_Z,
+	BUTTON_1,
+	BUTTON_2,
+	BUTTON_3,
+	BUTTON_4,
+	BUTTON_5,
+	BUTTON_6,
+	BUTTON_7,
+	BUTTON_8,
+	BUTTON_9,
+	BUTTON_0,
 	BUTTON_ESC,
 	BUTTON_ENTER,
 
@@ -49,41 +78,3 @@ LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 HWND winMain();
 char messageInput(Input& input,MSG &message, HWND &window);
 Render_State getRender();
-//LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-////HWND winMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
-//WNDCLASS createWindowClass(WNDCLASS window_class);
-//void ProcessButton(MSG& message, Input& input);
-
-//public:
-//	ConsoleWindow();
-//	void setRenderHeight(int);
-//	void setRenderWidth(int);
-//	void setButton_Changed(bool);
-//	void setButton_isDown(bool);
-//	bool getButton_Changed()
-//	{
-//		return button_state.changed;
-//	}
-//	bool getButton_isDown()
-//	{
-//		return button_state.is_down;
-//	}
-//	int getRenderHeight()
-//	{
-//		return render_state.height;
-//	}
-//	int getRenderWidth()
-//	{
-//		return render_state.width;
-//	}
-//	void* getRenderMemory()
-//	{
-//		return render_state.memory;
-//	}
-//	BITMAPINFO getRenderBitmap()
-//	{
-//		render_state.bitmap_info;
-//	}
-
-
-

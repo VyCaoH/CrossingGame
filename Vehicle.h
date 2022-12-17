@@ -113,6 +113,9 @@ public:
 		car_half_X = x;
 		car_half_Y = y;
 	}
+	void setDP(float dp)  {
+		car_dp = dp;
+	}
 };
 class Truck : public Vehicle
 {
@@ -168,6 +171,9 @@ public:
 	float getDP()
 	{
 		return truck_dp;
+	}
+	void setDP(float dp)  {
+		truck_dp = dp;
 	}
 	bool Right()
 	{

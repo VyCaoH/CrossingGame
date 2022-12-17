@@ -5,8 +5,8 @@ enum TYPE {
 	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
 };
 
-enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT };
-enum THINGS { CLOUD1, CLOUD2, GRASS1,ROCK1, ROCK2, ROCK3, ROCK4};
+enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
+enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE };
 
 
 
@@ -574,20 +574,22 @@ static const char* letters[][7] = {
 	"  0",
 	"  0",
 
-	"00",
-	"00",
-	"",
-	"",
-	"",
-	"00",
-	"00",
-	/*"0000",
+	"0000",
 	"   0",
 	"  0",
 	" 0",
 	"0",
 	"0",
-	"0000",*/
+	"0000",
+
+	"00",
+	"00",
+	"",
+	"",
+	"",
+	"00",
+	"00",
+
 
 	"",
 	"",

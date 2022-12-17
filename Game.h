@@ -1,22 +1,21 @@
 #pragma once
 //#include<vector>
 #include<Thread>
+#include <deque>
 //#include"Renderer.h"
 #include"Player.h"
 #include"Animal.h"
 #include"Threat.h"
-#include"Sound.h"
 #include"ConsoleWindow.h"
 #include"MenuGame.h"
 #include"Score.h"
 //#include"Renderer.h"
+static string name="YOUR NAME IS ";
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
 static gamemode g_mode = GM_MENUGAME;
-static bool g_sound = true;
-static bool g_music_button = false;
-static bool g_music_menu = true;
+
 //static BUTTON hot_button = (BUTTON) NEW_GAME;
 class Game
 {
@@ -26,7 +25,15 @@ class Game
 	//int time;
 	std::vector<Threat*> threat;
 	//vector<Row*> row;
+	TrafficLight lights;
+	Truck *truck;
+	Car *car;
+	Bird *bird;
+	Dinosaur *dino;
+	int curVH, curAN;
+	
 public:
+	int playerScore = score.getScore();
 	MenuGame menu;
 	Game() 
 	{
@@ -60,5 +67,7 @@ public:
 	bool exitGame(thread&t1);
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
+	void saveGame(Input* input);
+	void loadGame(char key);
 };
 

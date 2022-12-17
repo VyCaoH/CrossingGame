@@ -94,7 +94,6 @@ int main()
 						game.resumeGame((HANDLE)t1.native_handle());
 					}
 				}
-				MOVING;
 			}
 			else
 			{
@@ -104,7 +103,7 @@ int main()
 				if (game.overGame(&MOVING) == 1)
 				{
 					g_pause = false;
-					game.restartGame();
+					//game.restartGame();
 					game.resumeGame((HANDLE)t1.native_handle());
 				}
 				else if(game.overGame(&MOVING) == -1)
@@ -113,6 +112,11 @@ int main()
 					g_running = false;
 					game.resumeGame((HANDLE)t1.native_handle());
 				}
+				else
+				{
+					game.saveGame(&MOVING);
+				}
+
 			}
 		}
 		if (MOVING.buttons[BUTTON_ESC].is_down)
@@ -121,7 +125,7 @@ int main()
 			game.resumeGame((HANDLE)t1.native_handle());
 		}
 		//Thoi gian Frame end
-		Sleep(15);
+		Sleep(20);
 	}
 	game.exitGame(t1);
 	return 0;

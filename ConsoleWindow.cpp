@@ -7,6 +7,7 @@ LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 	switch (uMsg) {
 	case WM_CLOSE:
 	case WM_DESTROY: {
+		PostQuitMessage(0);
 		running = false;
 	} break;
 
@@ -92,7 +93,6 @@ char messageInput(Input&input,MSG &message,HWND &window)
 			u32 vk_code = (u32)message.wParam;
 			bool is_down = ((message.lParam & (1 << 31)) == 0);
 
-			//Hamf xu li chung ( genenal function ): xu li phim nhan
 #define process_button(b, vk)\
 case vk: {\
 input.buttons[b].changed = is_down!=input.buttons[b].is_down;\
@@ -104,19 +104,46 @@ input.buttons[b].is_down = is_down;\
 			switch (vk_code) {
 				process_button(BUTTON_UP, VK_UP);
 				process_button(BUTTON_DOWN, VK_DOWN);
+				process_button(BUTTON_Q, 'Q');
 				process_button(BUTTON_W, 'W');
+				process_button(BUTTON_E, 'E'); 
+				process_button(BUTTON_R, 'R');
+				process_button(BUTTON_T, 'T');
+				process_button(BUTTON_Y, 'Y');
+				process_button(BUTTON_U, 'U');
+				process_button(BUTTON_I, 'I');
+				process_button(BUTTON_O, 'O');
+				process_button(BUTTON_P, 'P');
+				process_button(BUTTON_L, 'L');
+				process_button(BUTTON_K, 'K');
+				process_button(BUTTON_J, 'J');
+				process_button(BUTTON_H, 'H');
+				process_button(BUTTON_G, 'G');
+				process_button(BUTTON_F, 'F');
+				process_button(BUTTON_D, 'D');
 				process_button(BUTTON_S, 'S');
 				process_button(BUTTON_A, 'A');
-				process_button(BUTTON_D, 'D');
-
-				process_button(BUTTON_Y, 'Y');
-				process_button(BUTTON_P, 'P');
+				process_button(BUTTON_Z, 'Z');
+				process_button(BUTTON_X, 'X');
+				process_button(BUTTON_C, 'C');
+				process_button(BUTTON_V, 'V');
 				process_button(BUTTON_B, 'B');
-				process_button(BUTTON_ESC, 27);
+				process_button(BUTTON_N, 'N');
+				process_button(BUTTON_M, 'M');
+				process_button(BUTTON_1, '1');
+				process_button(BUTTON_2, '2');
+				process_button(BUTTON_3, '3');
+				process_button(BUTTON_4, '4');
+				process_button(BUTTON_5, '5');
+				process_button(BUTTON_6, '6');
+				process_button(BUTTON_7, '7');
+				process_button(BUTTON_8, '8');
+				process_button(BUTTON_9, '9');
+				process_button(BUTTON_0, '0');
+				process_button(BUTTON_ESC,27);
 				process_button(BUTTON_ENTER,VK_RETURN)
 				process_button(BUTTON_LEFT, VK_LEFT);
 				process_button(BUTTON_RIGHT, VK_RIGHT);
-				//process_button(BUTTON_ENTER, VK_RETURN);
 			}
 			return (char)vk_code;
 		} break;
