@@ -2,7 +2,7 @@ typedef int s32;
 typedef unsigned int u32;
 enum TYPE {
 	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
-	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
+	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC_Red,TRAFFIC_Green
 };
 
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
@@ -254,11 +254,28 @@ static const char* entities[][14] = {
 "9990999999909999",
 "",
 
-//Trafficlight
+//Traffic red
 "11",
 "11",
-"22",
-"22",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+
+//Traffic green
+"11",
+"11",
+"",
+"",
 "",
 "",
 "",
@@ -1752,7 +1769,7 @@ public:
 			}
 			break;
 		}
-		case TRAFFIC:
+		case TRAFFIC_Red:
 		{
 			const char** entity;
 			/*if (*text == 47) entity = entities[27];
@@ -1775,12 +1792,39 @@ public:
 						draw_rect(x, y, half_size, half_size, 0xED1C24);
 						break;
 					}
-					case '2':
+
+					}
+
+					x += size;
+					row++;
+				}
+				y -= size;
+				x = original_x;
+			}
+			break;
+		}
+		case TRAFFIC_Green:
+		{
+			const char** entity;
+			/*if (*text == 47) entity = entities[27];
+			else if (*text == 46) entity = entities[26];*/
+			entity = entities[number];
+			float original_x = x;
+
+			for (int i = 0; i <= 13; i++) {
+				const char* row = entity[i];
+				while (*row) {
+					switch (*row)
+					{
+					case '0':
+					{
+						draw_rect(x, y, half_size, half_size, 0x000000);
+						break;
+					}
+					case '1':
 					{
 						draw_rect(x, y, half_size, half_size, 0x22B14C);
 						break;
-					}
-
 					}
 
 					x += size;
