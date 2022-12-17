@@ -68,6 +68,6 @@ public:
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
 	void saveGame(Input* input);
-	void loadGame(char key);
+	void loadGame(Input* input);
 };
 

@@ -4,7 +4,7 @@
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
-class MenuGame
+class MenuGame 
 {
 	BUTTON menuMode;
 	BUTTON hotButton;
@@ -87,6 +87,7 @@ public:
 			running = false;
 			break;
 		case LOAD_GAME:
+			//loadGame(input);
 			running = false;
 			break;
 		case SETTINGS:
