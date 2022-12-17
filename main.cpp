@@ -114,8 +114,7 @@ int main()
 				}
 				else
 				{
-					game.saveGame(key);
-					Sleep(10);
+					game.saveGame(&MOVING);
 				}
 
 			}
@@ -126,7 +125,7 @@ int main()
 			game.resumeGame((HANDLE)t1.native_handle());
 		}
 		//Thoi gian Frame end
-		Sleep(15);
+		Sleep(20);
 	}
 	game.exitGame(t1);
 	return 0;

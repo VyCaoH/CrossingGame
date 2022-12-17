@@ -60,14 +60,16 @@ void Game::simulate_game(Input* input, float dt)
 
 
 
-void Game::saveGame(char key)
+void Game::saveGame(Input*input)
 {
 	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
 	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
-	if(key>='A'&&key<='Z')
-		name += key; 
-	if (key == BUTTON_ENTER) {
-		string load = name + ".txt";
+	for (int i = 4; i < 40; i++)
+		if (pressed(i))
+			name += (char)(i + 61);
+
+	if (pressed(BUTTON_ENTER)) {
+		string load = name.erase(0,12) + ".txt";
 		fstream file(load, ios::out);
 		file << lights.getState() << " " << lights.getTime() << " " << lv << " " << playerScore << " "
 			<< player.getX() << " " << player.getY() << " "
@@ -92,9 +94,6 @@ void Game::saveGame(char key)
 		}
 		file.close();
 	}
-	//cin >> name;
-
-	//system("cls");
 
 
 }
@@ -185,10 +184,10 @@ bool Game::next_level()
 }
 int Game::overGame(Input* input)
 {
-	if (is_down(BUTTON_Y))
-		return 1;
-	if (pressed(BUTTON_ESC))
-		return -1;
+	//if (is_down(BUTTON_Y))
+	//	return 1;
+	//if (pressed(BUTTON_ESC))
+	//	return -1;
 	return 0;
 }
 bool Game::quit(Input* input)

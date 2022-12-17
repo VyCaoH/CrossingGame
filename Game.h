@@ -67,7 +67,7 @@ public:
 	bool exitGame(thread&t1);
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
-	void saveGame(char key);
+	void saveGame(Input* input);
 	void loadGame(char key);
 };
 
