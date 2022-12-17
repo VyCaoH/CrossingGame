@@ -34,7 +34,7 @@ void TrafficLight::change(float dt, float time_ )
 	while (time < 0)
 	{
 		state = !state;
-		time = 100;
+		time = time_;
 	}
 	time = time - dt;
 }
