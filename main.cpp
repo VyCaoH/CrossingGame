@@ -53,6 +53,9 @@ int main()
 					g_pause = false;
 					game.resumeGame(t1.native_handle());
 				}
+				else if (game.menu.getMenuMode() == EXIT) {
+					goto exit_game;
+				}
 			}
 			render_state = getRender();
 			StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
@@ -127,6 +130,7 @@ int main()
 		//Thoi gian Frame end
 		Sleep(20);
 	}
+	exit_game:
 	game.exitGame(t1);
 	return 0;
 }
