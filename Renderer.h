@@ -6,7 +6,7 @@ enum TYPE {
 };
 
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
-enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE, MUTE_AVA, UNMUTE_AVA };
+enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE, MUTE_AVA, UNMUTE_AVA, NEXT, BACK };
 
 
 static float render_scale = 0.01f;
@@ -744,6 +744,30 @@ static const char* things[][11] = {
 	"0001110000001",
 	"00001100",
 	"00000100",
+	//NEXT
+	"1",
+	"11",
+	"111",
+	"1111",
+	"11111",
+	"111111",
+	"11111",
+	"1111",
+	"111",
+	"11",
+	"1",
+	//BACK
+	"000001",
+	"000011",
+	"000111",
+	"001111",
+	"011111",
+	"111111",
+	"011111",
+	"001111",
+	"000111",
+	"000011",
+	"000001",
 };
 class Renderer
 {
@@ -2319,7 +2343,7 @@ public:
 		draw_Button(INTRODUCTION, x - 25, y - 24, 0.7, 0x000000, hot_button);
 		draw_Button(EXIT, x - 25, y - 37, 0.7, 0x000000, hot_button);
 	}
-	static void draw_Settings(float x, float y, float half_size_x, float half_size_y, bool& g_music_menu) {
+	static void draw_Settings(float x, float y, float half_size_x, float half_size_y, bool g_music_menu) {
 		draw_Background3(0, 0, 0, 0);
 		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
 		draw_Button(SETTINGS, x - 30, y + 45, 1, 0x000000, MAIN);
@@ -2328,10 +2352,22 @@ public:
 		draw_things(!g_music_menu ? UNMUTE : UNMUTE_AVA, x + 10, y + 10, 1);
 		draw_text("UNMUTE", x + 8, y - 10, 0.5, !g_music_menu ? 0x7696B4 : 0xffffff);
 	}
-	static void draw_Introduction(float x, float y, float half_size_x, float half_size_y) {
+	static void draw_Introduction(float x, float y, float half_size_x, float half_size_y, bool page) {
 		draw_Background3(0, 0, 0, 0);
 		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
 		draw_Button(INTRODUCTION, x - 30, y + 45, 1, 0x000000, MAIN);
+		if (!page) {
+			draw_things(NEXT, x + 80, y - 15, 0.5);
+			draw_text("PROJECT BY GROUP THREE", x - 45, y + 30, 0.7, 0xffffff);
+			draw_text("DO PHAM THANH HUY", x - 40, y + 20, 0.7, 0xffffff);
+			draw_text("LE VU NGAN TRUC", x - 40, y + 10, 0.7, 0xffffff);
+			draw_text("CAO HOAI YEN VY", x - 40, y, 0.7, 0xffffff);
+			draw_text("PHAN MINH NHAT HUNG", x - 40, y - 10, 0.7, 0xffffff);
+		}
+		else {
+			draw_things(BACK, x + 70, y - 15, 0.5);
+			draw_text("HELLO", x - 45, y + 30, 1, 0xffffff);
+		}
 	}
 	static void draw_player(float x, float y, float half_size_x, float half_size_y) {
 

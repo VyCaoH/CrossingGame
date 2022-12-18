@@ -5,6 +5,7 @@ static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
 static bool sound_temp = true;
+static bool introduction_page = 0;
 class MenuGame 
 {
 	BUTTON menuMode;
@@ -14,7 +15,7 @@ public:
 	void loadSettings(Input* input) {
 		render_state = getRender();
 		Renderer::draw_Settings(0, 0, 0, 0, sound_temp);
-		if (pressed(BUTTON_B)) {
+		if (released(BUTTON_B)) {
 			menuMode = MAIN;
 		}
 		if (pressed(BUTTON_LEFT) && sound_temp == true) sound_temp = false;
@@ -29,8 +30,11 @@ public:
 	}
 	void loadIntroduction(Input* input) {
 		render_state = getRender();
-		Renderer::draw_Introduction(0, 0, 0, 0);
-		if (pressed(BUTTON_B)) {
+		Renderer::draw_Introduction(0, 0, 0, 0, introduction_page);
+		if (pressed(BUTTON_LEFT)) introduction_page = 0;
+		if (pressed(BUTTON_RIGHT)) introduction_page = 1;
+		if (released(BUTTON_B)) {
+			introduction_page = 1;
 			menuMode = MAIN;
 		}
 	}
@@ -52,15 +56,6 @@ public:
 	}
 	void loadMainMenu(Input* input) {
 		render_state = getRender();
-		/*
-		if (released(BUTTON_UP))
-		{
-			g_music_menu = !g_music_menu;
-			if (g_music_menu)
-				Sound::audioMenu();
-			else
-				Sound::audioStop();
-		}*/
 		if (pressed(BUTTON_S))
 		{
 			g_music_button = !g_music_button;
@@ -100,7 +95,6 @@ public:
 			running = false;
 			break;
 		case LOAD_GAME:
-			//loadGame(input);
 			running = false;
 			break;
 		case SETTINGS:
