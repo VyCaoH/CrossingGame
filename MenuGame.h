@@ -1,10 +1,11 @@
 #pragma once
-#include"ConsoleWindow.h"
+#include "ConsoleWindow.h"
 #include"Sound.h"
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
-class MenuGame
+static bool sound_temp = true;
+class MenuGame 
 {
 	BUTTON menuMode;
 	BUTTON hotButton;
@@ -12,9 +13,18 @@ class MenuGame
 public:
 	void loadSettings(Input* input) {
 		render_state = getRender();
-		Renderer::draw_Settings(0, 0, 0, 0);
-		if (pressed(BUTTON_M)) {
+		Renderer::draw_Settings(0, 0, 0, 0, sound_temp);
+		if (pressed(BUTTON_B)) {
 			menuMode = MAIN;
+		}
+		if (pressed(BUTTON_LEFT) && sound_temp == true) sound_temp = false;
+		if (pressed(BUTTON_RIGHT) && !sound_temp == true) sound_temp = true;
+		if (pressed(BUTTON_ENTER)) {
+			g_music_menu = sound_temp;
+			if (g_music_menu)
+				Sound::audioMenu();
+			else
+				Sound::audioStop();
 		}
 	}
 	void loadIntroduction(Input* input) {
@@ -27,6 +37,7 @@ public:
 	MenuGame() {
 		menuMode = MAIN;
 		hotButton = NEW_GAME;
+		Sound::audioMenu();
 		running = true;
 	}
 	bool isRunning() {
@@ -41,6 +52,7 @@ public:
 	}
 	void loadMainMenu(Input* input) {
 		render_state = getRender();
+		/*
 		if (released(BUTTON_UP))
 		{
 			g_music_menu = !g_music_menu;
@@ -48,7 +60,7 @@ public:
 				Sound::audioMenu();
 			else
 				Sound::audioStop();
-		}
+		}*/
 		if (pressed(BUTTON_S))
 		{
 			g_music_button = !g_music_button;
@@ -78,6 +90,7 @@ public:
 		Renderer::draw_Menu(0, 0, 50, 50, hotButton);
 	}
 	void loadMenuGame(Input* input) {
+		Renderer::clear_screen(0x01C4FF);
 		render_state = getRender();
 		switch (menuMode) {
 		case MAIN:
@@ -87,6 +100,7 @@ public:
 			running = false;
 			break;
 		case LOAD_GAME:
+			//loadGame(input);
 			running = false;
 			break;
 		case SETTINGS:
@@ -96,7 +110,8 @@ public:
 			loadIntroduction(input);
 			break;
 		case EXIT:
-			exit(1);
+			menuMode = EXIT;
+			break;
 		}
 	}
 };

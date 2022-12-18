@@ -2,12 +2,11 @@ typedef int s32;
 typedef unsigned int u32;
 enum TYPE {
 	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
-	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS, TRAFFIC,
+	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS
 };
 
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
-enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE };
-
+enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE, MUTE_AVA, UNMUTE_AVA };
 
 
 static float render_scale = 0.01f;
@@ -254,11 +253,28 @@ static const char* entities[][14] = {
 "9990999999909999",
 "",
 
-//Trafficlight
+//Traffic red
 "11",
 "11",
-"22",
-"22",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+
+//Traffic green
+"11",
+"11",
+"",
+"",
 "",
 "",
 "",
@@ -681,17 +697,41 @@ static const char* things[][11] = {
 	"00022222222000022222222222",
 	"00022222222",
 	//MUTE
-	"2000000100",
-	"0200001100",
-	"0020011100",
-	"0002111100",
-	"0011211100",
-	"0011121100",
-	"0011112100",
-	"0000111200",
-	"0000011120",
-	"0000001102",
-	"00000001002",
+	"9000000900",
+	"0900009900",
+	"0090099900",
+	"0009999900",
+	"0099999900",
+	"0099999900",
+	"0099999900",
+	"0000999900",
+	"0000099990",
+	"0000009909",
+	"00000009009",
+	//UMNUTE
+	"00000900",
+	"00009900",
+	"0009990000009",
+	"00999900009009",
+	"999999009009009",
+	"999999000909009",
+	"999999009009009",
+	"00999900009009",
+	"0009990000009",
+	"00009900",
+	"00000900",
+	//MUTE
+	"1000000100",
+	"0100001100",
+	"0010011100",
+	"0001111100",
+	"0011111100",
+	"0011111100",
+	"0011111100",
+	"0000111100",
+	"0000011110",
+	"0000001101",
+	"00000001001",
 	//UMNUTE
 	"00000100",
 	"00001100",
@@ -1752,45 +1792,6 @@ public:
 			}
 			break;
 		}
-		case TRAFFIC:
-		{
-			const char** entity;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
-			entity = entities[number];
-			float original_x = x;
-
-			for (int i = 0; i <= 13; i++) {
-				const char* row = entity[i];
-				while (*row) {
-					switch (*row)
-					{
-					case '0':
-					{
-						draw_rect(x, y, half_size, half_size, 0x000000);
-						break;
-					}
-					case '1':
-					{
-						draw_rect(x, y, half_size, half_size, 0xED1C24);
-						break;
-					}
-					case '2':
-					{
-						draw_rect(x, y, half_size, half_size, 0x22B14C);
-						break;
-					}
-
-					}
-
-					x += size;
-					row++;
-				}
-				y -= size;
-				x = original_x;
-			}
-			break;
-		}
 		case BEE_RIGHT:
 		{
 			const char** entity;
@@ -2119,7 +2120,6 @@ public:
 			break;
 		}
 		}
-
 	}
 	static void draw_number(int number, float x, float y, float size, u32 color) {
 		float half_size = size * .5f;
@@ -2318,20 +2318,15 @@ public:
 		draw_Button(SETTINGS, x - 25, y - 11, 0.7, 0x000000, hot_button);
 		draw_Button(INTRODUCTION, x - 25, y - 24, 0.7, 0x000000, hot_button);
 		draw_Button(EXIT, x - 25, y - 37, 0.7, 0x000000, hot_button);
-
-	/*	draw_Background3(0, 0, 0, 0);
-		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
-		draw_Button(SETTINGS, x - 30, y +45, 1, 0x000000, hot_button);
-		draw_things(MUTE, x - 30, y, 1);
-		draw_things(UNMUTE, x , y, 1);*/
 	}
-	static void draw_Settings(float x, float y, float half_size_x, float half_size_y) {
-
+	static void draw_Settings(float x, float y, float half_size_x, float half_size_y, bool& g_music_menu) {
 		draw_Background3(0, 0, 0, 0);
 		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
 		draw_Button(SETTINGS, x - 30, y + 45, 1, 0x000000, MAIN);
-		draw_things(MUTE, x - 30, y, 1);
-		draw_things(UNMUTE, x, y, 1);
+		draw_things(g_music_menu?MUTE:MUTE_AVA, x - 20, y + 10, 1);
+		draw_text("MUTE", x - 20, y - 10, 0.5, g_music_menu ? 0x7696B4: 0xffffff);
+		draw_things(!g_music_menu ? UNMUTE : UNMUTE_AVA, x + 10, y + 10, 1);
+		draw_text("UNMUTE", x + 8, y - 10, 0.5, !g_music_menu ? 0x7696B4 : 0xffffff);
 	}
 	static void draw_Introduction(float x, float y, float half_size_x, float half_size_y) {
 		draw_Background3(0, 0, 0, 0);
@@ -2375,6 +2370,14 @@ public:
 		draw_rect(x, y, 0.9, 0.9, 0xF4303E);
 		draw_rect(x + 0.7, y + 1.2, 1, 0.4, 0x868F26); // la
 		draw_rect(x + 0.2, y + 0.4, 0.8, 0.7, 0xD9614D);
+	}
+	static void draw_redlight(int x, int y)
+	{
+		draw_rect(x, y, 2, 2, 0xDB0F0F);
+	}
+	static void draw_greenlight(int x, int y)
+	{
+		draw_rect(x, y, 2, 2, 0x09B000);
 	}
 	static void draw_plant(int x, int y)
 	{
@@ -2463,6 +2466,11 @@ public:
 					draw_rect(x, y, half_size, half_size, 0x63b15d);
 					break;
 				}
+				case '9':
+				{
+					draw_rect(x, y, half_size, half_size, 0x7696B4);
+					break;
+				}
 				}
 				x += size;
 				row++;
@@ -2510,5 +2518,6 @@ public:
 			draw_tree(x - 80 + i, y - 36, 1.7, 0xC3FF5F);
 		}
 	}
+
 };
 
