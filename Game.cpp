@@ -58,7 +58,7 @@ void Game::simulate_game(Input* input, float dt)
 
 }
 
-bool Game::saveGame(Input* input)
+void Game::loadGame(Input* input)
 {
 	deque<string> listName;
 	deque<int> listLevel;
@@ -110,9 +110,6 @@ bool Game::saveGame(Input* input)
 		}
 }
 
-void saveGame()
-{
-}
 
 bool Game::saveGame(Input*input)
 {
