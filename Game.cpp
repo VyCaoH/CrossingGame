@@ -64,8 +64,6 @@ void Game::loadGame(Input* input)
 {
 	deque<string> listName;
 	deque<int> listLevel;
-
-	//Get data
 	fstream fin("SaveGame.txt", std::ios::in);
 	string name;
 	int lvl;
@@ -103,17 +101,7 @@ void Game::loadGame(Input* input)
 		output.close();
 	}
 
-	/*game.drawLoadMenu()
-	for (int i = 0; i < n; i++)
-	{
-		gameScene.setStrToBuffer(38, 11 + i, listName[i]);
-		gameScene.setStrToBuffer(52, 11 + i, "level: " + std::to_string(listLevel[i]));
-	}
-	gameScene.PrintBuffer();
-
-	GotoXY(55, 22); getline(std::cin, name);
-	gameScene.clearPrevBuffer();
-	gameScene.PrintBuffer();*/
+	//game.drawLoadMenu()
 
 	for (int i = 0; i < n; i++)
 		if (name == listName[i])
