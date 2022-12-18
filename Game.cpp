@@ -58,9 +58,7 @@ void Game::simulate_game(Input* input, float dt)
 
 }
 
-
-
-void Game::saveGame(Input*input)
+bool Game::saveGame(Input*input)
 {
 	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
 	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
@@ -92,10 +90,11 @@ void Game::saveGame(Input*input)
 		{
 			file << dino[i].getX() << " " << dino[i].getY() << " " << dino[i].getDP() << " ";
 		}
+		name = "YOUR NAME IS ";
 		file.close();
+		return true;
 	}
-
-
+	return false;
 }
 
 void Game::loadGame(char key)
@@ -184,10 +183,6 @@ bool Game::next_level()
 }
 int Game::overGame(Input* input)
 {
-	//if (is_down(BUTTON_Y))
-	//	return 1;
-	//if (pressed(BUTTON_ESC))
-	//	return -1;
 	return 0;
 }
 bool Game::quit(Input* input)
@@ -202,7 +197,7 @@ void Game::threatMove(float dt)
 	for (auto x : threat)
 	{
 
-		x->move(0.5,dt);
+		x->move(0.5,0.5*lv*dt);
 
 	}
 	return;

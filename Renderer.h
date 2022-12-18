@@ -2326,6 +2326,7 @@ public:
 		draw_things(UNMUTE, x , y, 1);*/
 	}
 	static void draw_Settings(float x, float y, float half_size_x, float half_size_y) {
+
 		draw_Background3(0, 0, 0, 0);
 		draw_text("BACK", x - 80, y + 45, 0.5, 0x000000);
 		draw_Button(SETTINGS, x - 30, y + 45, 1, 0x000000, MAIN);

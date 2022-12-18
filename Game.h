@@ -14,6 +14,7 @@ static string name="YOUR NAME IS ";
 static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
+static bool g_save = false;
 static gamemode g_mode = GM_MENUGAME;
 
 //static BUTTON hot_button = (BUTTON) NEW_GAME;
@@ -67,7 +68,7 @@ public:
 	bool exitGame(thread&t1);
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
-	void saveGame(Input* input);
+	bool saveGame(Input* input);
 	void loadGame(char key);
 };
 

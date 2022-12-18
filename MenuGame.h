@@ -13,7 +13,7 @@ public:
 	void loadSettings(Input* input) {
 		render_state = getRender();
 		Renderer::draw_Settings(0, 0, 0, 0);
-		if (pressed(BUTTON_B)) {
+		if (pressed(BUTTON_M)) {
 			menuMode = MAIN;
 		}
 	}
@@ -96,7 +96,7 @@ public:
 			loadIntroduction(input);
 			break;
 		case EXIT:
-			break;
+			exit(1);
 		}
 	}
 };
