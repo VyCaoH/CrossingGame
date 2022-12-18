@@ -94,23 +94,22 @@ bool Player::isImpact(vector<Threat*>threat)
 void Player::move(Input* input, float dt, float speed)
 {
 	{
-		if (pressed(BUTTON_W))
+		if (pressed(BUTTON_W)||pressed(BUTTON_UP))
 		{
 			up(speed, dt);
 		}
-		if (pressed(BUTTON_S))
+		if (pressed(BUTTON_S)||pressed(BUTTON_DOWN))
 		{
 			down(speed, dt);
 		}
-		if (pressed(BUTTON_A))
+		if (pressed(BUTTON_A) || pressed(BUTTON_LEFT))
 		{
 			left(speed, dt);
 		}
-		if (pressed(BUTTON_D))
+		if (pressed(BUTTON_D) || pressed(BUTTON_RIGHT))
 		{
 			right(speed, dt);
 		}
-		//checkWall()
 		render_state = getRender();
 		Renderer::draw_titan(getX(), getY(), getHalfX(), getHalfY());
 		return;
@@ -139,13 +138,3 @@ void Player::checkWall(float x, float y, float half_x, float half_y)
 		setDP(-40);
 	}
 }
-
-//}
-////void Player::Player:: setHeiPlayer:: ght(int heiPlayer:: ght)
-////{
-////	thiPlayer:: s->heiPlayer:: ght = heiPlayer:: ght;
-////}
-////void Player::Player:: setWidth(int width)
-////{
-////	thiPlayer:: s->width = width;
-////}

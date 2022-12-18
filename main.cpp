@@ -84,8 +84,7 @@ int main()
 					}
 					else if (MOVING.buttons[BUTTON_T].is_down)
 					{
-						g_pause = true;
-						g_save = true;
+						g_pause = g_save = true;
 						continue;
 					}
 				}
@@ -98,7 +97,6 @@ int main()
 							g_save = g_pause = false;
 							MOVING.buttons[BUTTON_T].is_down = false;
 							game.menu.setMenuMode(MAIN);
-
 						}
 					}
 					else

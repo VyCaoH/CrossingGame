@@ -15,6 +15,7 @@ public:
 		render_state = getRender();
 		Renderer::draw_Settings(0, 0, 0, 0, sound_temp);
 		if (pressed(BUTTON_B)) {
+			is_down(BUTTON_B) = false;
 			menuMode = MAIN;
 		}
 		if (pressed(BUTTON_LEFT) && sound_temp == true) sound_temp = false;
@@ -31,6 +32,7 @@ public:
 		render_state = getRender();
 		Renderer::draw_Introduction(0, 0, 0, 0);
 		if (pressed(BUTTON_B)) {
+			is_down(BUTTON_B) = false;
 			menuMode = MAIN;
 		}
 	}
@@ -52,15 +54,6 @@ public:
 	}
 	void loadMainMenu(Input* input) {
 		render_state = getRender();
-		/*
-		if (released(BUTTON_UP))
-		{
-			g_music_menu = !g_music_menu;
-			if (g_music_menu)
-				Sound::audioMenu();
-			else
-				Sound::audioStop();
-		}*/
 		if (pressed(BUTTON_S))
 		{
 			g_music_button = !g_music_button;

@@ -58,42 +58,20 @@ void Game::simulate_game(Input* input, float dt)
 
 }
 
-bool Game::saveGame(Input*input)
+bool Game::saveGame(Input* input)
 {
-	deque<string> listName;
-	deque<int> listLevel;
+	Renderer::draw_rect(0, 0, 20, 10, 0x00AAFF);
+	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
+	for (int i = 4; i < 40; i++)
+		if (pressed(i))
+			name += (char)(i + 61);
 
-	//Get data
-	fstream fin("SaveGame.txt", std::ios::in);
-	string name;
-	int lvl;
-	while (fin.eof() == false)
-	{
-		fin >> lvl;
-		fin.ignore(80, ' ');
-		for (int i = 4; i < 40; i++)
-			if (pressed(i))
-				name += (char)(i + 61);
-		if (pressed(BUTTON_ENTER))
-		{
-			listName.push_back(name);
-			listLevel.push_back(lvl);
-		}
-		
-	}
-	listName.pop_back();
-	listLevel.pop_back();
-	fin.close();
-
-	//Update the number of data in the file
-	int n = listName.size();
-	if (n > 10)
-	{
-		for (int i = 0; i < n - 10; i++)
-		{
-			listName.erase(listName.begin());
-			listLevel.erase(listLevel.begin());
-		}
+	if (pressed(BUTTON_ENTER)) {
+		string load = name.erase(0, 12) + ".txt";
+		fstream file(load, ios::out);
+		file << lv << " " << playerScore << " "
+			<< player.getX() << " " << player.getY() << " "
+			<< player.getIsDead() << " ";
 		name = "YOUR NAME IS ";
 		file.close();
 		return true;
@@ -101,37 +79,6 @@ bool Game::saveGame(Input*input)
 	return false;
 }
 
-	GotoXY(55, 22); getline(std::cin, name);
-	gameScene.clearPrevBuffer();
-	gameScene.PrintBuffer();*/
-
-	for (int i = 0; i < n; i++)
-		if (name == listName[i])
-		{
-			lv = listLevel[i];
-			reset_game();
-			startGame();
-		}
-}
-
-void saveGame()
-{
-}
-
-void Game::saveGame(Input*input)
-{
-	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
-	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
-	for (int i = 4; i < 40; i++)
-		if (pressed(i))
-			name += (char)(i + 61);
-
-	if (pressed(BUTTON_ENTER)) {
-		fstream out("SaveGame.txt", std::ios::app);
-		out << lv << " " << name << " " << playerScore << endl;
-		out.close();
-	}
-}
 void Game::reset_game()
 {
 	player.setY(-45);
