@@ -2366,7 +2366,11 @@ public:
 		}
 		else {
 			draw_things(BACK, x + 70, y - 15, 0.5);
-			draw_text("HELLO", x - 45, y + 30, 1, 0xffffff);
+			draw_text("USE W A S D TO MOVE THE PLAYER UP DOWN LEFT AND RIGHT", x - 80, y + 30, 0.5, 0xffffff);
+			draw_text("THE VEHICLES WILL MOVE WHEN TRAFFIC LIGHT TURN GREEN", x - 80, y + 20, 0.5, 0xffffff);
+			draw_text("                              AND STOP WHEN TURN RED", x - 80, y + 10, 0.5, 0xffffff);
+			draw_text("KEEP MOVING UNTIL YOU REACH THE MOST BOTTOM LANE", x - 80, y, 0.5, 0xffffff);
+			draw_text("THE SPEED WILL BE HIGHER AFTER EACH ROUND", x - 80, y - 10, 0.5, 0xffffff);
 		}
 	}
 	static void draw_player(float x, float y, float half_size_x, float half_size_y) {
