@@ -31,18 +31,9 @@ public:
 	}
 	Car(float posX, float posY)
 	{
-		//Dinosuar = new Dinosuar("Dinosuar-Left.txt");
 		car_pX = posX;
 		car_pY = posY;
-		//Dinosuar->setXY(posX, posY);
-		//Dinosuar->setXY(getX(), getY());
 	}
-	//Entity* getBird() const
-	//{
-	//	/*Dinosuar->setXY(getX(), getY());
-	//	Entity temp=*Dinosuar;*/
-	//	return Dinosuar;
-	//}
 	Car(const char* file)
 	{
 

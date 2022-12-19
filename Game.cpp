@@ -58,14 +58,10 @@ void Game::simulate_game(Input* input, float dt)
 
 }
 
-
-
 void Game::loadGame(Input* input)
 {
 	deque<string> listName;
 	deque<int> listLevel;
-
-	//Get data
 	fstream fin("SaveGame.txt", std::ios::in);
 	string name;
 	int lvl;
@@ -103,17 +99,7 @@ void Game::loadGame(Input* input)
 		output.close();
 	}
 
-	/*game.drawLoadMenu()
-	for (int i = 0; i < n; i++)
-	{
-		gameScene.setStrToBuffer(38, 11 + i, listName[i]);
-		gameScene.setStrToBuffer(52, 11 + i, "level: " + std::to_string(listLevel[i]));
-	}
-	gameScene.PrintBuffer();
-
-	GotoXY(55, 22); getline(std::cin, name);
-	gameScene.clearPrevBuffer();
-	gameScene.PrintBuffer();*/
+	//game.drawLoadMenu()
 
 	for (int i = 0; i < n; i++)
 		if (name == listName[i])
@@ -124,11 +110,8 @@ void Game::loadGame(Input* input)
 		}
 }
 
-void saveGame()
-{
-}
 
-void Game::saveGame(Input*input)
+bool Game::saveGame(Input*input)
 {
 	Renderer::draw_rect(0, 0, 20, 10, 0x0000FF);
 	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
@@ -137,11 +120,18 @@ void Game::saveGame(Input*input)
 			name += (char)(i + 61);
 
 	if (pressed(BUTTON_ENTER)) {
-		fstream out("SaveGame.txt", std::ios::app);
-		out << lv << " " << name << " " << playerScore << endl;
-		out.close();
+		string load = name.erase(0, 12) + ".txt";
+		fstream file(load, ios::out);
+		file << lv << " " << playerScore << " "
+			<< player.getX() << " " << player.getY() << " "
+			<< player.getIsDead() << " ";
+		name = "YOUR NAME IS ";
+		file.close();
+		return true;
 	}
+	return false;
 }
+
 void Game::reset_game()
 {
 	player.setY(-45);
@@ -165,10 +155,6 @@ bool Game::next_level()
 }
 int Game::overGame(Input* input)
 {
-	//if (is_down(BUTTON_Y))
-	//	return 1;
-	//if (pressed(BUTTON_ESC))
-	//	return -1;
 	return 0;
 }
 bool Game::quit(Input* input)
@@ -183,7 +169,7 @@ void Game::threatMove(float dt)
 	for (auto x : threat)
 	{
 
-		x->move(0.5,dt);
+		x->move(0.5,0.5*lv*dt);
 
 	}
 	return;
