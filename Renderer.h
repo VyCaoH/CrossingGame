@@ -2353,19 +2353,19 @@ public:
 		draw_Button(INTRODUCTION, x - 30, y + 45, 1, 0x000000, MAIN);
 		if (!page) {
 			draw_things(NEXT, x + 80, y - 15, 0.5);
-			draw_text("PROJECT BY GROUP THREE", x - 45, y + 30, 0.7, 0xffffff);
-			draw_text("DO PHAM THANH HUY", x - 40, y + 20, 0.7, 0xffffff);
-			draw_text("LE VU NGAN TRUC", x - 40, y + 10, 0.7, 0xffffff);
-			draw_text("CAO HOAI YEN VY", x - 40, y, 0.7, 0xffffff);
-			draw_text("PHAN MINH NHAT HUNG", x - 40, y - 10, 0.7, 0xffffff);
+			draw_text("PROJECT BY GROUP THREE", x - 45, y + 30, 0.7, 0x000000);
+			draw_text("DO PHAM THANH HUY", x - 40, y + 20, 0.7, 0xED1C24);
+			draw_text("LE VU NGAN TRUC", x - 40, y + 10, 0.7, 0xED1C24);
+			draw_text("CAO HOAI YEN VY", x - 40, y, 0.7, 0xED1C24);
+			draw_text("PHAN MINH NHAT HUNG", x - 40, y - 10, 0.7, 0xED1C24);
 		}
 		else {
 			draw_things(BACK, x + 70, y - 15, 0.5);
-			draw_text("USE W A S D TO MOVE THE PLAYER UP DOWN LEFT AND RIGHT", x - 80, y + 30, 0.5, 0xffffff);
-			draw_text("THE VEHICLES WILL MOVE WHEN TRAFFIC LIGHT TURN GREEN", x - 80, y + 20, 0.5, 0xffffff);
-			draw_text("                              AND STOP WHEN TURN RED", x - 80, y + 10, 0.5, 0xffffff);
-			draw_text("KEEP MOVING UNTIL YOU REACH THE MOST BOTTOM LANE", x - 80, y, 0.5, 0xffffff);
-			draw_text("THE SPEED WILL BE HIGHER AFTER EACH ROUND", x - 80, y - 10, 0.5, 0xffffff);
+			draw_text("USE W A S D TO MOVE THE PLAYER UP DOWN LEFT AND RIGHT", x - 80, y + 30, 0.5, 0x000000);
+			draw_text("THE VEHICLES WILL MOVE WHEN TRAFFIC LIGHT TURN GREEN", x - 80, y + 20, 0.5, 0x000000);
+			draw_text("                              AND STOP WHEN TURN RED", x - 80, y + 10, 0.5, 0x000000);
+			draw_text("KEEP MOVING UNTIL YOU REACH THE MOST BOTTOM LANE", x - 80, y, 0.5, 0x000000);
+			draw_text("THE SPEED WILL BE HIGHER AFTER EACH ROUND", x - 80, y - 10, 0.5, 0x000000);
 		}
 	}
 	static void draw_player(float x, float y, float half_size_x, float half_size_y) {
