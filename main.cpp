@@ -59,7 +59,7 @@ int main()
 				case EXIT:
 				{
 					exit(1);
-				}break;
+				}
 				default:;
 				}
 			render_state = getRender();
@@ -155,7 +155,6 @@ int main()
 		}
 		Sleep(20);
 	}
-	exit_game:
 	game.exitGame(t1);
 	return 0;
 }
