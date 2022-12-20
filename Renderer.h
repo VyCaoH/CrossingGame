@@ -1,5 +1,9 @@
+#include <vector>
+#include <string>
+using namespace std;
 typedef int s32;
 typedef unsigned int u32;
+
 enum TYPE {
 	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
 	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS
@@ -2326,6 +2330,27 @@ public:
 			}
 			y -= size;
 			x = original_x;
+		}
+	}
+	static void draw_Load(vector<string>listName, vector<int> listLevel, int name_count) {
+		clear_screen(0x01C4FF);
+		draw_Background2(0, 0, 0, 0);
+		draw_text("NAME", -80, 47, 0.5f, 0xB97A57);
+		draw_text("LEVEL", 73, 47, 0.5f, 0xB97A57);
+		int n = listName.size();
+		if (n > 10)n = 10;
+		for (int i = 0; i < n; i++)
+		{
+			if (i == name_count)
+			{
+				Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0xFF0000);
+				Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0xFF0000);
+			}
+			else
+			{
+				Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0x0000);
+				Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0x0000);
+			}
 		}
 	}
 	static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {

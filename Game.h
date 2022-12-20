@@ -69,6 +69,7 @@ public:
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
 	bool saveGame(Input* input);
-	void loadGame(Input* input);
+	void loadGame(Input* input, vector<string>listName, vector<int> listLevel, int name_count);
+	void FileLoadGame(vector<string>&listname, vector<int>& listlv);
 };
 
