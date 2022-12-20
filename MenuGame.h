@@ -2,6 +2,9 @@
 #include "ConsoleWindow.h"
 #include"Sound.h"
 #include <iostream>
+#include <deque>
+#include <string>
+using namespace std;
 static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
@@ -9,10 +12,63 @@ static bool sound_temp = true;
 static bool introduction_page = 0;
 class MenuGame 
 {
+
 	BUTTON menuMode;
 	BUTTON hotButton;
 	bool running;
 public:
+	void loadGame() {
+		deque<string> listName;
+		deque<int> listLevel;
+		fstream fin("SaveGame.txt", std::ios::in);
+		string name;
+		int lvl;
+		while (fin.eof() == false)
+		{
+			fin >> lvl;
+			fin.ignore(80, ' ');
+			getline(fin, name);
+			listName.push_back(name);
+			listLevel.push_back(lvl);	
+		}
+		listName.pop_back();
+		listLevel.pop_back();
+		fin.close();
+
+		//Update the number of data in the file
+		int n = listName.size();
+		if (n > 10)
+		{
+			for (int i = 0; i < n - 10; i++)
+			{
+				listName.erase(listName.begin());
+				listLevel.erase(listLevel.begin());
+			}
+			n = listName.size();
+			std::fstream output("SaveGame.txt", std::ios::out);
+			for (int i = 0; i < n; i++)
+				output << listLevel[i] << " " << listName[i] << std::endl;
+			output.close();
+		}
+
+		//game.drawLoadMenu()
+		Renderer::clear_screen(0x01C4FF);
+		for (int i = 0; i < n; i++)
+		{
+			
+			//char buf[100];
+			Renderer::draw_text(listName[i].c_str(), 0, 0, 0.5f, 0xFF0000);
+			Renderer::draw_text((to_string(listLevel[i])).c_str(), 0, 5, 0.5f, 0xFF0000);
+		}
+
+		for (int i = 0; i < n; i++)
+			if (name == listName[i])
+			{
+				/*getLv() = listLevel[i];
+				reset_game();
+				startGame();*/
+			}
+	}
 	void loadSettings(Input* input) {
 		render_state = getRender();
 		Renderer::draw_Settings(0, 0, 0, 0, sound_temp);
@@ -98,6 +154,7 @@ public:
 			running = false;
 			break;
 		case LOAD_GAME:
+			loadGame();
 			running = false;
 			break;
 		case SETTINGS:
