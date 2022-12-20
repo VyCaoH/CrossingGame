@@ -24,16 +24,9 @@ class Game
 	Player player;
 	int lv;
 	Score score;
-	//int time;
 	std::vector<Threat*> threat;
-	//vector<Row*> row;
 	TrafficLight lights;
-	Truck *truck;
-	Car *car;
-	Bird *bird;
-	Dinosaur *dino;
-	int curVH, curAN;
-	
+	int name_count;
 public:
 	int playerScore = score.getScore();
 	MenuGame menu;
@@ -43,6 +36,7 @@ public:
 		menu = MenuGame();
 		lv = 1;
 		score.readHighScore();
+		name_count = 0;
 		threat.clear();
 	};
 	~Game()
@@ -53,6 +47,7 @@ public:
 	}
 	Player getPlayer();
 	int getLv();
+	int getNameCount();
 	void setHighScore();
 	void simulate_game(Input* input, float dt);
 	void simulate_menu(Input* input);
@@ -69,7 +64,7 @@ public:
 	void pauseGame(HANDLE hd);
 	void resumeGame(HANDLE hd);
 	bool saveGame(Input* input);
-	void loadGame(Input* input, vector<string>listName, vector<int> listLevel, int name_count);
+	void loadGame(Input* input, vector<string>listName, vector<int> listLevel);
 	void FileLoadGame(vector<string>&listname, vector<int>& listlv);
 };
 

@@ -6,9 +6,8 @@ int Score::getScore()
 }
 void Score::setScore(int x)
 {
-	if (x > 1)
-		score = (x - 1) * 100;
-
+    if (x > 1)
+        score = (x - 1) * 100;
 }
 void Score::DisplayScore()
 {

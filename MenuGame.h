@@ -54,6 +54,9 @@ public:
 	bool isRunning() {
 		return running;
 	}
+	void setRunning(bool check) {
+		running = check;
+	}
 	BUTTON getMenuMode() {
 		return menuMode;
 	}
@@ -87,6 +90,7 @@ public:
 		/*Do something in menu*/;
 		if (pressed(BUTTON_ENTER))
 		{
+			is_down(BUTTON_ENTER) = false;
 			menuMode = hotButton;
 		}
 		Renderer::draw_Menu(0, 0, 50, 50, hotButton);

@@ -1,11 +1,12 @@
 #include "Game.h"
-//dp: derivative of position: Van toc
-//ddp:  derivative of derivative of positon: Gia toc
-float arena_half_size_x = 85, arena_half_size_y = 45;
-
 int Game::getLv()
 {
 	return lv;
+}
+
+int Game::getNameCount()
+{
+	return name_count;
 }
 
 vector<Threat*> Game::getThreat()
@@ -38,7 +39,7 @@ void Game::simulate_menu(Input* input)
 		static int name_count = 0;
 
 		FileLoadGame(listName, listLevel);
-		loadGame(input, listName, listLevel , name_count);
+		loadGame(input, listName, listLevel);
 	}
 }
 void Game::simulate_game(Input* input, float dt)
@@ -67,7 +68,6 @@ void Game::simulate_game(Input* input, float dt)
 void Game::FileLoadGame(vector<string>&listName, vector<int> &listLevel)
 {
 	fstream fin("SaveGame.txt", std::ios::in);
-	string temp;
 	while (!fin.eof())
 	{
 		string player_name;
@@ -78,21 +78,13 @@ void Game::FileLoadGame(vector<string>&listName, vector<int> &listLevel)
 		listName.push_back(temp);
 		string temp_file = "temp\\" + player_name;
 		fstream fin_player(temp_file, std::ios::in);
-		while (!fin_player.eof()) {
-			fin_player >> lv >> playerScore;
-			listLevel.push_back(lv);
-			fin_player >> temp;
-			player.setX(stof(temp));
-			fin_player >> temp;
-			player.setY(stof(temp));
-			fin_player >> temp;
-			player.setIsDead(stof(temp));
-		}
+		fin_player >> lv;
+		listLevel.push_back(lv);
 		fin_player.close();
 	}
 	fin.close();
 }
-void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel , int name_count) {
+void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel) {
 	
 	render_state = getRender();
 	if (pressed(BUTTON_S))
@@ -105,9 +97,9 @@ void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel ,
 		}
 		g_music_button = !g_music_button;
 		name_count = name_count + 1;
-		if (name_count > 10)name_count = 10;
+		if (name_count > listName.size() - 1)name_count = listName.size() - 1;
 	}
-	if (pressed(BUTTON_W)) {
+	else if (pressed(BUTTON_W)) {
 		is_down(BUTTON_W) = false;
 		g_music_button = !g_music_button;
 		if (g_music_button)
@@ -118,15 +110,31 @@ void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel ,
 		name_count = name_count - 1;
 		if (name_count < 0)name_count = 0;
 	}
-	/*Do something in menu*/;
-	if (pressed(BUTTON_ENTER))
-	{
-		is_down(BUTTON_ENTER) = false;
-		//gan thong so cho player 
-		lv = listLevel[name_count];
-		running = true;
+	else if (pressed(BUTTON_B)) {
+		is_down(BUTTON_B) = false;
+		menu.setMenuMode(MAIN);
 	}
 	Renderer::draw_Load(listName, listLevel, name_count);
+	if (pressed(BUTTON_ENTER))
+	{
+		string file = "temp\\"+listName[name_count] + ".txt";
+		fstream fin(file,ios::in);
+		string temp;
+		fin >> temp;
+		lv = stoi(temp);
+		fin >> temp;
+		playerScore = stoi(temp);
+		fin >> temp;
+		player.setX(stof(temp));
+		fin >> temp;
+		player.setY(stof(temp));
+		fin >> temp;
+		player.setIsDead(stoi(temp));
+		fin >> temp;
+		score.setScore(stoi(temp)/100);
+		menu.setRunning(false);
+		fin.close();
+	}
 }
 
 
@@ -149,7 +157,7 @@ bool Game::saveGame(Input*input)
 		file_save <<endl<< load ;
 		file << lv << " " << playerScore << " "
 			<< player.getX() << " " << player.getY() << " "
-			<< player.getIsDead() << " ";
+			<< player.getIsDead() << " "<<score.getScore();
 		name = "YOUR NAME IS ";
 		file_save.close();
 		file.close();
@@ -169,7 +177,6 @@ void Game::restartGame()
 }
 bool Game::next_level()
 {
-	//Bien tren Y
 	if (player.getY() == 40)
 	{
 		lv++;
@@ -182,11 +189,20 @@ bool Game::next_level()
 int Game::overGame(Input* input)
 {
 	if (pressed(BUTTON_Y))
+	{
+		is_down(BUTTON_Y) = false;
 		return 1;
+	}
 	else if (pressed(BUTTON_ESC))
+	{
+		is_down(BUTTON_ESC) = false;
 		return -1;
+	}
 	else if (pressed(BUTTON_B))
+	{
+		is_down(BUTTON_B) = false;
 		return 2;
+	}
 	else return 0;
 }
 bool Game::quit(Input* input)
@@ -200,9 +216,7 @@ void Game::threatMove(float dt)
 {
 	for (auto x : threat)
 	{
-
 		x->move(0.5,0.4*lv*dt);
-
 	}
 	return;
 }
@@ -255,7 +269,6 @@ void Game::updatePosThreat()
 		}
 		x->setListEntity((TYPE)randomType, randomDir);
 	}
-	// draw traffic light 
 }
 
 bool Game::exitGame(thread& t1)
@@ -271,6 +284,5 @@ void Game::pauseGame(HANDLE hd)
 
 void Game::resumeGame(HANDLE hd)
 {
-	//g_pause = false;
 	ResumeThread(hd);
 }

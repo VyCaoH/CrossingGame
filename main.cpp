@@ -148,7 +148,6 @@ int main()
 					Renderer::draw_Gameover(0, 0);
 
 			}
-
 		}
 		if (MOVING.buttons[BUTTON_ESC].is_down)
 		{

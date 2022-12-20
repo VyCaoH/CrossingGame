@@ -65,9 +65,9 @@ float Player:: getDDP()
 {
 	return player_ddp;
 }
-void Player:: setIsDead(bool type)
+void Player:: setIsDead(bool check)
 {
-	Player:: isDead = type;
+	 isDead = check;
 }
 bool Player:: getIsDead()
 {
