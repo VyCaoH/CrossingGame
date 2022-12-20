@@ -153,7 +153,6 @@ int main()
 			g_running = false;
 			game.resumeGame((HANDLE)t1.native_handle());
 		}
-		//Thoi gian Frame end
 		Sleep(20);
 	}
 	game.exitGame(t1);
