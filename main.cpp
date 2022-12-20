@@ -31,17 +31,15 @@ void subThread(HWND window)
 }
 int main()
 {
-//	game.startGame();
-	HWND window = winMain();
+	HWND window = Window::winMain();
 	HDC hdc = GetDC(window);
-
 
 	thread t1(subThread, window);
 	game.pauseGame(t1.native_handle());
 	while (g_running) {
 
 		MSG message;
-		char key = messageInput(MOVING, message, window);
+		char key = Window::messageInput(MOVING, message, window);
 		if (game.menu.isRunning())
 		{
 				game.simulate_menu(&MOVING);

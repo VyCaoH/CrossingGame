@@ -69,12 +69,16 @@ enum {
 	BUTTON_ESC,
 	BUTTON_ENTER,
 
-	BUTTON_COUNT, // Should be the last item
+	BUTTON_COUNT,
 };
 struct Input {
 	Button_State buttons[BUTTON_COUNT];
 };
-LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-HWND winMain();
-char messageInput(Input& input,MSG &message, HWND &window);
+class Window
+{
+public:
+	static LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	static HWND winMain();
+	static char messageInput(Input& input, MSG& message, HWND& window);
+};
 Render_State getRender();
