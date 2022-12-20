@@ -96,22 +96,26 @@ void Player::move(Input* input, float dt, float speed)
 	{
 		if (released(BUTTON_W)|| released(BUTTON_UP))
 		{
-			is_down(BUTTON_W) = is_down(BUTTON_UP) = false;
+			is_down(BUTTON_W) = false;
+			is_down(BUTTON_UP) = false;
 			up(speed, dt);
 		}
 		if (released(BUTTON_S)|| released(BUTTON_DOWN))
 		{
-			is_down(BUTTON_S) = is_down(BUTTON_DOWN) = false;
+			is_down(BUTTON_S) = false;
+			is_down(BUTTON_DOWN) = false;
 			down(speed, dt);
 		}
 		if (released(BUTTON_A) || released(BUTTON_LEFT))
 		{
-			is_down(BUTTON_A) = is_down(BUTTON_LEFT) = false;
+			is_down(BUTTON_A) = false;
+			is_down(BUTTON_LEFT) = false;
 			left(speed, dt);
 		}
 		if (released(BUTTON_D) || released(BUTTON_RIGHT))
 		{
-			is_down(BUTTON_D) = is_down(BUTTON_RIGHT) = false;
+			is_down(BUTTON_D) = false;
+			is_down(BUTTON_RIGHT) = false;
 			right(speed, dt);
 		}
 		render_state = getRender();

@@ -18,8 +18,9 @@ void subThread(HWND window)
 		}
 		if (!game.getPlayer().getIsDead())
 		{
-			if (!g_save && !g_pause)
-				game.simulate_game(&MOVING, delta_time);
+			if (!g_pause)
+				if (!g_save)
+					game.simulate_game(&MOVING, delta_time);
 		}
 		else
 			continue;
@@ -84,7 +85,7 @@ int main()
 					}
 					else if (MOVING.buttons[BUTTON_Y].is_down)
 					{
-						MOVING.buttons[BUTTON_Y].is_down = false;
+						MOVING.buttons[BUTTON_Y].is_down = true;
 						game.resumeGame((HANDLE)t1.native_handle());
 						continue;
 					}
@@ -97,7 +98,7 @@ int main()
 				}
 				else
 				{
-					if (g_save && g_pause)
+					if (g_save)
 					{
 						if (game.saveGame(&MOVING))
 						{
@@ -108,6 +109,7 @@ int main()
 					}
 					else
 					{
+						//game.pauseGame(t1.native_handle());
 						if (MOVING.buttons[BUTTON_ESC].is_down)
 						{
 							g_running = false;
@@ -127,23 +129,23 @@ int main()
 					game.pauseGame(t1.native_handle());
 				StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
 
-				if (game.overGame(&MOVING) == 1)
+				int check = game.overGame(&MOVING);
+				if (check == 1)
 				{
 					g_pause = false;
 					g_running = true;
 					game.restartGame();
 					game.resumeGame((HANDLE)t1.native_handle());
 				}
-				else if(game.overGame(&MOVING) == -1)
+				else if (check == -1)
 				{
 					g_running = false;
 					game.resumeGame((HANDLE)t1.native_handle());
 				}
+				else if (check == 2)
+					game.menu.setMenuMode(MAIN);
 				else
-				{
-					//GAME OVER
 					Renderer::draw_Gameover(0, 0);
-				}
 
 			}
 
@@ -155,7 +157,6 @@ int main()
 		}
 		Sleep(20);
 	}
-	exit_game:
 	game.exitGame(t1);
 	return 0;
 }

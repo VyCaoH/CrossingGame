@@ -182,6 +182,8 @@ int Game::overGame(Input* input)
 		return 1;
 	else if (pressed(BUTTON_ESC))
 		return -1;
+	else if (pressed(BUTTON_B))
+		return 2;
 	else return 0;
 }
 bool Game::quit(Input* input)
@@ -261,8 +263,7 @@ bool Game::exitGame(thread& t1)
 
 void Game::pauseGame(HANDLE hd)
 {
-	//g_pause = true;
-	SuspendThread(hd);
+	Renderer::draw_Pause(0, 0);
 }
 
 void Game::resumeGame(HANDLE hd)
