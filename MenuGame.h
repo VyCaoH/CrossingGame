@@ -24,8 +24,8 @@ public:
 			is_down(BUTTON_B) = false;
 			menuMode = MAIN;
 		}
-		if (pressed(BUTTON_LEFT) && sound_temp == true) sound_temp = false;
-		if (pressed(BUTTON_RIGHT) && !sound_temp == true) sound_temp = true;
+		if ((pressed(BUTTON_LEFT)||pressed(BUTTON_A)) && sound_temp == true) sound_temp = false;
+		if ((pressed(BUTTON_RIGHT) || pressed(BUTTON_D)) && !sound_temp == true) sound_temp = true;
 		if (pressed(BUTTON_ENTER)) {
 			g_music_menu = sound_temp;
 			if (g_music_menu)
@@ -37,8 +37,8 @@ public:
 	void loadIntroduction(Input* input) {
 		render_state = getRender();
 		Renderer::draw_Introduction(0, 0, 0, 0, introduction_page);
-		if (pressed(BUTTON_LEFT)) introduction_page = 0;
-		if (pressed(BUTTON_RIGHT)) introduction_page = 1;
+		if (pressed(BUTTON_LEFT) || pressed(BUTTON_A)) introduction_page = 0;
+		if (pressed(BUTTON_RIGHT) || pressed(BUTTON_D)) introduction_page = 1;
 		if (pressed(BUTTON_B)) {
 			introduction_page = 1;
 			is_down(BUTTON_B) = false;
