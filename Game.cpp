@@ -262,6 +262,7 @@ bool Game::exitGame(thread& t1)
 void Game::pauseGame(HANDLE hd)
 {
 	//g_pause = true;
+	Renderer::draw_Pause(0, 0);
 	SuspendThread(hd);
 }
 
