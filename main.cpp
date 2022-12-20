@@ -56,6 +56,10 @@ int main()
 					g_pause = false;
 					game.resumeGame(t1.native_handle());
 				}break;
+				case EXIT:
+				{
+					exit(1);
+				}break;
 				default:;
 				}
 			render_state = getRender();
@@ -148,7 +152,6 @@ int main()
 			g_running = false;
 			game.resumeGame((HANDLE)t1.native_handle());
 		}
-		//Thoi gian Frame end
 		Sleep(20);
 	}
 	exit_game:

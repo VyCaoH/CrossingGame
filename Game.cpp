@@ -38,20 +38,26 @@ void Game::simulate_menu(Input* input)
 }
 void Game::simulate_game(Input* input, float dt)
 {
-	render_state = getRender();
-	float speed = 5.f;
-	Renderer::draw_Background(0, 0, 73, 45);
-	//Renderer::draw_turtleL(0, 0, 1, 1);
-	player.move(input, dt, speed);
-	player.checkWall(-28.5, 0, 71.5, 45);
-	player.isImpact(threat);
-	Renderer::draw_trees(0, 0);
-	updatePosThreat();
-	threatMove(dt);
-	score.DisplayScore();
-	score.DisplayHighScore();
-	next_level();
-
+	if (pressed(BUTTON_B))
+	{
+		is_down(BUTTON_B) = false;
+		menu.setMenuMode(MAIN);
+	}
+	else
+	{
+		render_state = getRender();
+		float speed = 5.f;
+		Renderer::draw_Background(0, 0, 73, 45);
+		player.move(input, dt, speed);
+		player.checkWall(-28.5, 0, 71.5, 45);
+		player.isImpact(threat);
+		Renderer::draw_trees(0, 0);
+		updatePosThreat();
+		threatMove(dt);
+		score.DisplayScore();
+		score.DisplayHighScore();
+		next_level();
+	}
 }
 void Game::loadGame(Input*input) {
 	deque<string> listName;
