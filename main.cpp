@@ -60,7 +60,7 @@ int main()
 				case EXIT:
 				{
 					exit(1);
-				}break;
+				}
 				default:;
 				}
 			render_state = getRender();
@@ -78,15 +78,14 @@ int main()
 					}
 					else if (MOVING.buttons[BUTTON_P].is_down)
 					{
-						MOVING.buttons[BUTTON_P].is_down = false;
+						MOVING.buttons[BUTTON_P].is_down = true;
 						g_pause = true;
 						game.pauseGame(t1.native_handle());
 						continue;
 					}
 					else if (MOVING.buttons[BUTTON_Y].is_down)
 					{
-						MOVING.buttons[BUTTON_Y].is_down = true;
-						game.resumeGame((HANDLE)t1.native_handle());
+						MOVING.buttons[BUTTON_Y].is_down = false;
 						continue;
 					}
 					else if (MOVING.buttons[BUTTON_T].is_down)
@@ -109,17 +108,18 @@ int main()
 					}
 					else
 					{
-						//game.pauseGame(t1.native_handle());
+						
 						if (MOVING.buttons[BUTTON_ESC].is_down)
 						{
 							g_running = false;
 							game.resumeGame((HANDLE)t1.native_handle());
 						}
-						if (MOVING.buttons[BUTTON_Y].is_down)
+						else if (MOVING.buttons[BUTTON_Y].is_down)
 						{
 							g_pause = false;
 							game.resumeGame((HANDLE)t1.native_handle());
 						}
+						else game.pauseGame(t1.native_handle());
 					}
 				}
 			}

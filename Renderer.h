@@ -12,7 +12,6 @@ enum TYPE {
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
 enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE, MUTE_AVA, UNMUTE_AVA, NEXT, BACK };
 
-
 static float render_scale = 0.01f;
 static const char* tree[13] = {
 	"00411100",
@@ -2452,10 +2451,11 @@ public:
 		draw_text("ESC. EXIT", x-23, y - 9, 0.5, 0x000000);
 	}
 	static void draw_Gameover(float x, float y) {
-		draw_rect(x, y, 30, 20, 0xC9F5FF);
+		draw_rect(x, y, 30, 25, 0xC9F5FF);
 		draw_title(2, x-20, y+15, 0.4, 0xffffff);
 		draw_title(3, x-20, y+3, 0.4, 0xffffff);
 		draw_text("ESC  EXIT", x - 23, y - 13, 0.5, 0x000000);
+		draw_text("B    BACK", x - 23, y - 18, 0.5, 0x000000);
 	}
 	static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {
 		clear_screen(0x01C4FF);

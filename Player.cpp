@@ -94,28 +94,28 @@ bool Player::isImpact(vector<Threat*>threat)
 void Player::move(Input* input, float dt, float speed)
 {
 	{
-		if (released(BUTTON_W)|| released(BUTTON_UP))
+		if (released(BUTTON_W)||released(BUTTON_UP))
 		{
-			is_down(BUTTON_W) = false;
-			is_down(BUTTON_UP) = false;
+			is_down(BUTTON_W) = true;
+			is_down(BUTTON_UP) = true;
 			up(speed, dt);
 		}
-		if (released(BUTTON_S)|| released(BUTTON_DOWN))
+		if (released(BUTTON_S)||released(BUTTON_DOWN))
 		{
-			is_down(BUTTON_S) = false;
-			is_down(BUTTON_DOWN) = false;
+			is_down(BUTTON_S) = true;
+			is_down(BUTTON_DOWN) = true;
 			down(speed, dt);
 		}
 		if (released(BUTTON_A) || released(BUTTON_LEFT))
 		{
-			is_down(BUTTON_A) = false;
-			is_down(BUTTON_LEFT) = false;
+			is_down(BUTTON_A) = true;
+			is_down(BUTTON_LEFT) = true;
 			left(speed, dt);
 		}
 		if (released(BUTTON_D) || released(BUTTON_RIGHT))
 		{
-			is_down(BUTTON_D) = false;
-			is_down(BUTTON_RIGHT) = false;
+			is_down(BUTTON_D) = true;
+			is_down(BUTTON_RIGHT) = true;
 			right(speed, dt);
 		}
 		render_state = getRender();
