@@ -12,7 +12,6 @@ enum TYPE {
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
 enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE, MUTE_AVA, UNMUTE_AVA, NEXT, BACK };
 
-
 static float render_scale = 0.01f;
 static const char* tree[13] = {
 	"00411100",
@@ -2596,14 +2595,14 @@ public:
 		//Score
 		draw_text("SCORE", x + 58.5, y + 44, 1.1, 0x0002D9);
 		draw_text("HIGHSCORE", x + 58, y + 19, 0.6, 0xE30000);
-		draw_text("ESC: EXIT", x + 58, y + 5 , 0.5, 0x0000);
-		draw_text("Y: CONTINUE", x + 58, y, 0.5, 0x0000);
-		draw_text("P: PAUSE", x + 60, y - 5, 0.5, 0x000000);
-		draw_text("T: SAVE", x + 60, y - 10, 0.5, 0x0000);
-		draw_text("W: UP", x + 60, y -20 , 0.5, 0x0000);
-		draw_text("S: DOWN", x + 60, y - 25, 0.5, 0x0000);
-		draw_text("A: LEFT", x + 60, y - 30, 0.5, 0x0000);
-		draw_text("D: RIGHT", x + 60, y - 35, 0.5, 0x0000);
+		draw_text("ESC. EXIT", x + 58, y + 5 , 0.5, 0x0000);
+		draw_text("Y. CONTINUE", x + 58, y, 0.5, 0x0000);
+		draw_text("P. PAUSE", x + 60, y - 5, 0.5, 0x000000);
+		draw_text("T. SAVE", x + 60, y - 10, 0.5, 0x0000);
+		draw_text("W. UP", x + 60, y -20 , 0.5, 0x0000);
+		draw_text("S. DOWN", x + 60, y - 25, 0.5, 0x0000);
+		draw_text("A. LEFT", x + 60, y - 30, 0.5, 0x0000);
+		draw_text("D. RIGHT", x + 60, y - 35, 0.5, 0x0000);
 	}
 	static void draw_things(int number, float x, float y, float size) {
 		float half_size = size * .5f;
