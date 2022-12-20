@@ -2491,9 +2491,10 @@ public:
 		//Score
 		draw_text("SCORE", x + 58.5, y + 44, 1.1, 0x0002D9);
 		draw_text("HIGHSCORE", x + 58, y + 19, 0.6, 0xE30000);
-		draw_text("ESC: EXIT", x + 58, y , 0.5, 0x0000);
+		draw_text("ESC: EXIT", x + 58, y + 5 , 0.5, 0x0000);
+		draw_text("Y: CONTINUE", x + 58, y, 0.5, 0x0000);
 		draw_text("P: PAUSE", x + 60, y - 5, 0.5, 0x000000);
-		draw_text("S: SAVE", x + 60, y - 10, 0.5, 0x0000);
+		draw_text("T: SAVE", x + 60, y - 10, 0.5, 0x0000);
 		draw_text("W: UP", x + 60, y -20 , 0.5, 0x0000);
 		draw_text("S: DOWN", x + 60, y - 25, 0.5, 0x0000);
 		draw_text("A: LEFT", x + 60, y - 30, 0.5, 0x0000);
