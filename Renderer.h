@@ -1,5 +1,9 @@
+#include <vector>
+#include <string>
+using namespace std;
 typedef int s32;
 typedef unsigned int u32;
+
 enum TYPE {
 	CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_RIGHT, CAR2_LEFT, BALLOON_RIGHT, BALLOON_LEFT, BEE_RIGHT,
 	BEE_LEFT, PIG_RIGHT, PIG_LEFT, CAT_RIGHT, CAT_LEFT, BIRD_RIGHT, BIRD_LEFT, TURTLE_RIGHT, TURTLE_LEFT, TEXT_GAME_OVER, CLOUD, GRASS
@@ -2420,6 +2424,27 @@ public:
 			x = original_x;
 		}
 	}
+	static void draw_Load(vector<string>listName, vector<int> listLevel, int name_count) {
+		clear_screen(0x01C4FF);
+		draw_Background2(0, 0, 0, 0);
+		draw_text("NAME", -80, 47, 0.5f, 0xB97A57);
+		draw_text("LEVEL", 73, 47, 0.5f, 0xB97A57);
+		int n = listName.size();
+		if (n > 10)n = 10;
+		for (int i = 0; i < n; i++)
+		{
+			if (i == name_count)
+			{
+				Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0xFF0000);
+				Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0xFF0000);
+			}
+			else
+			{
+				Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0x0000);
+				Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0x0000);
+			}
+		}
+	}
 	static void draw_Pause(float x, float y) {
 		draw_rect(x, y, 30, 20, 0xC9F5FF);
 		draw_title(1, x-23, y+15, 0.4, 0xffffff);
@@ -2570,9 +2595,10 @@ public:
 		//Score
 		draw_text("SCORE", x + 58.5, y + 44, 1.1, 0x0002D9);
 		draw_text("HIGHSCORE", x + 58, y + 19, 0.6, 0xE30000);
-		draw_text("ESC: EXIT", x + 58, y , 0.5, 0x0000);
+		draw_text("ESC: EXIT", x + 58, y + 5 , 0.5, 0x0000);
+		draw_text("Y: CONTINUE", x + 58, y, 0.5, 0x0000);
 		draw_text("P: PAUSE", x + 60, y - 5, 0.5, 0x000000);
-		draw_text("S: SAVE", x + 60, y - 10, 0.5, 0x0000);
+		draw_text("T: SAVE", x + 60, y - 10, 0.5, 0x0000);
 		draw_text("W: UP", x + 60, y -20 , 0.5, 0x0000);
 		draw_text("S: DOWN", x + 60, y - 25, 0.5, 0x0000);
 		draw_text("A: LEFT", x + 60, y - 30, 0.5, 0x0000);

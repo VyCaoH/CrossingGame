@@ -33,7 +33,12 @@ void Game::simulate_menu(Input* input)
 	menu.loadMenuGame(input);
 	if (menu.getMenuMode() == LOAD_GAME)
 	{
-		loadGame(input);
+		vector<string>listName; 
+		vector<int> listLevel;
+		static int name_count = 0;
+
+		FileLoadGame(listName, listLevel);
+		loadGame(input, listName, listLevel , name_count);
 	}
 }
 void Game::simulate_game(Input* input, float dt)
@@ -41,7 +46,6 @@ void Game::simulate_game(Input* input, float dt)
 	render_state = getRender();
 	float speed = 5.f;
 	Renderer::draw_Background(0, 0, 73, 45);
-	//Renderer::draw_turtleL(0, 0, 1, 1);
 	player.move(input, dt, speed);
 	player.checkWall(-28.5, 0, 71.5, 45);
 	player.isImpact(threat);
@@ -53,9 +57,8 @@ void Game::simulate_game(Input* input, float dt)
 	next_level();
 
 }
-void Game::loadGame(Input*input) {
-	deque<string> listName;
-	deque<int> listLevel;
+void Game::FileLoadGame(vector<string>&listName, vector<int> &listLevel)
+{
 	fstream fin("SaveGame.txt", std::ios::in);
 	string temp;
 	while (!fin.eof())
@@ -80,33 +83,40 @@ void Game::loadGame(Input*input) {
 		}
 		fin_player.close();
 	}
-	//listName.pop_back();
-	//listLevel.pop_back();
 	fin.close();
-
-	//Update the number of data in the file
-	int n = listName.size();
-	if (n > 10)n = 10;
-	Renderer::draw_text("NAME", -80, 47, 0.5f, 0x000000);
-	Renderer::draw_text("LEVEL", 73, 47 , 0.5f, 0x000000);
-	for (int i = 0; i < n ; i++)
+}
+void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel , int name_count) {
+	
+	render_state = getRender();
+	if (pressed(BUTTON_S))
 	{
-		Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0xFF0000);
-		Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0xFF0000);
-		//listName.erase(listName.begin());
-		//listLevel.erase(listLevel.begin());
+
+		g_music_button = !g_music_button;
+		if (g_music_button)
+		{
+			Sound::audioButton();
+		}
+		g_music_button = !g_music_button;
+		name_count = name_count + 1;
+		if (name_count > 10)name_count = 10;
 	}
-	if (pressed(BUTTON_B)) {
-		is_down(BUTTON_B) = false;
-		menu.setMenuMode(MAIN);
+	if (pressed(BUTTON_W)) {
+		g_music_button = !g_music_button;
+		if (g_music_button)
+		{
+			Sound::audioButton();
+		}
+		g_music_button = !g_music_button;
+		name_count = name_count - 1;
+		if (name_count < 0)name_count = 0;
 	}
-	//for (int i = 0; i < n; i++)
-		//		if (name == listName[i])
-		//		{
-		//			lv = listLevel[i];
-		//			reset_game();
-		//			startGame();
-		//		}
+	/*Do something in menu*/;
+	if (pressed(BUTTON_ENTER))
+	{
+		//gan thong so cho player 
+
+	}
+	Renderer::draw_Load(listName, listLevel, name_count);
 }
 
 
@@ -179,7 +189,7 @@ void Game::threatMove(float dt)
 	for (auto x : threat)
 	{
 
-		x->move(0.5,0.5*lv*dt);
+		x->move(0.5,0.4*lv*dt);
 
 	}
 	return;
