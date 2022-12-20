@@ -9,6 +9,7 @@ static bool g_sound = true;
 static bool g_music_button = false;
 static bool g_music_menu = true;
 static bool sound_temp = true;
+static bool introduction_page = 0;
 class MenuGame 
 {
 
@@ -87,8 +88,11 @@ public:
 	}
 	void loadIntroduction(Input* input) {
 		render_state = getRender();
-		Renderer::draw_Introduction(0, 0, 0, 0);
+		Renderer::draw_Introduction(0, 0, 0, 0, introduction_page);
+		if (pressed(BUTTON_LEFT)) introduction_page = 0;
+		if (pressed(BUTTON_RIGHT)) introduction_page = 1;
 		if (pressed(BUTTON_B)) {
+			introduction_page = 1;
 			is_down(BUTTON_B) = false;
 			menuMode = MAIN;
 		}
