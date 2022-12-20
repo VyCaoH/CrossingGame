@@ -138,6 +138,7 @@ int main()
 				else
 				{
 					//GAME OVER
+					Renderer::draw_Gameover(0, 0);
 				}
 
 			}
