@@ -793,11 +793,6 @@ public:
 
 		draw_rect_in_pixels(0, 0, render_state.width, render_state.height, color);
 		draw_rect_in_pixels((int)x0, (int)y0, (int)x1, (int)y1, 0xffffffff);
-		//draw_rect_in_pixels(0, render_state.height,x1, y1, color);
-		//draw_rect_in_pixels(x1, y1, render_state.width, 0, color);
-		//draw_rect_in_pixels(0, y1, x1, render_state.height, color);
-		//draw_rect_in_pixels(x0, y1, render_state.width, render_state.height, color);
-		//draw_rect_in_pixels(x1, y0, render_state.width, render_state.height, color);
 	}
 	static void draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 

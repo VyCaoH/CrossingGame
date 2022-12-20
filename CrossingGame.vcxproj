@@ -213,7 +213,9 @@
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include=" HUY.txt" />
     <Text Include="Highscores.txt" />
+    <Text Include="SaveGame.txt" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="character.txt" />

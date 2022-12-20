@@ -43,7 +43,7 @@ int main()
 		char key = messageInput(MOVING, message, window);
 		if (game.menu.isRunning())
 		{
-				game.menu.loadMenuGame(&MOVING);
+				game.simulate_menu(&MOVING);
 				switch(game.menu.getMenuMode())
 				{case NEW_GAME:
 				{

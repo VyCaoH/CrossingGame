@@ -32,18 +32,15 @@ void Game::setHighScore()
 void Game::simulate_menu(Input* input)
 {
 	menu.loadMenuGame(input);
+	if (menu.getMenuMode() == LOAD_GAME)
+	{
+		loadGame(input);
+	}
 }
 void Game::simulate_game(Input* input, float dt)
 {
 	render_state = getRender();
-
-	//Renderer::	clear_screen(0xffffffff);
-
 	float speed = 5.f;
-
-
-
-
 	Renderer::draw_Background(0, 0, 73, 45);
 	//Renderer::draw_turtleL(0, 0, 1, 1);
 	player.move(input, dt, speed);
@@ -56,6 +53,57 @@ void Game::simulate_game(Input* input, float dt)
 	score.DisplayHighScore();
 	next_level();
 
+}
+void Game::loadGame(Input*input) {
+	deque<string> listName;
+	deque<int> listLevel;
+	fstream fin("SaveGame.txt", std::ios::in);
+	string temp;
+	while (!fin.eof())
+	{
+		string player_name;
+		fin >> player_name;
+		stringstream ss(player_name);
+		string temp;
+		getline(ss, temp, '.');
+		listName.push_back(temp);
+		string temp_file = "temp\\" + player_name;
+		fstream fin_player(temp_file, std::ios::in);
+		while (!fin_player.eof()) {
+			fin_player >> lv >> playerScore;
+			listLevel.push_back(lv);
+			fin_player >> temp;
+			player.setX(stof(temp));
+			fin_player >> temp;
+			player.setY(stof(temp));
+			fin_player >> temp;
+			player.setIsDead(stof(temp));
+		}
+		fin_player.close();
+	}
+	//listName.pop_back();
+	//listLevel.pop_back();
+	fin.close();
+
+	//Update the number of data in the file
+	int n = listName.size();
+	if (n > 10)n = 10;
+	Renderer::draw_text("NAME", -80, 47, 0.5f, 0x000000);
+	Renderer::draw_text("LEVEL", 73, 47 , 0.5f, 0x000000);
+	for (int i = 0; i < n ; i++)
+	{
+		Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0xFF0000);
+		Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0xFF0000);
+		//listName.erase(listName.begin());
+		//listLevel.erase(listLevel.begin());
+	}
+	//for (int i = 0; i < n; i++)
+		//		if (name == listName[i])
+		//		{
+		//			lv = listLevel[i];
+		//			reset_game();
+		//			startGame();
+		//		}
 }
 
 //void Game::loadGame(Input* input)
@@ -120,12 +168,16 @@ bool Game::saveGame(Input*input)
 			name += (char)(i + 61);
 
 	if (pressed(BUTTON_ENTER)) {
-		string load = name.erase(0, 12) + ".txt";
-		fstream file(load, ios::out);
+		string load = name.erase(0, 13) + ".txt";
+		string temp_file = "temp\\" + load;
+		fstream file(temp_file, ios::out);
+		fstream file_save("SaveGame.txt", ios::out|ios::app);
+		file_save <<endl<< load ;
 		file << lv << " " << playerScore << " "
 			<< player.getX() << " " << player.getY() << " "
 			<< player.getIsDead() << " ";
 		name = "YOUR NAME IS ";
+		file_save.close();
 		file.close();
 		return true;
 	}
