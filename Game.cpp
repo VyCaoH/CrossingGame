@@ -97,7 +97,7 @@ void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel ,
 	render_state = getRender();
 	if (pressed(BUTTON_S))
 	{
-
+		is_down(BUTTON_S) = false;
 		g_music_button = !g_music_button;
 		if (g_music_button)
 		{
@@ -108,6 +108,7 @@ void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel ,
 		if (name_count > 10)name_count = 10;
 	}
 	if (pressed(BUTTON_W)) {
+		is_down(BUTTON_W) = false;
 		g_music_button = !g_music_button;
 		if (g_music_button)
 		{
@@ -120,9 +121,10 @@ void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel ,
 	/*Do something in menu*/;
 	if (pressed(BUTTON_ENTER))
 	{
+		is_down(BUTTON_ENTER) = false;
 		//gan thong so cho player 
-		
-		//running = false;
+		lv = listLevel[name_count];
+		running = true;
 	}
 	Renderer::draw_Load(listName, listLevel, name_count);
 }
