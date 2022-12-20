@@ -16,7 +16,7 @@ static bool g_running = true;
 static bool g_pause=true;
 static bool g_save = false;
 static gamemode g_mode = GM_MENUGAME;
-//static int count_name {}
+
 
 //static BUTTON hot_button = (BUTTON) NEW_GAME;
 class Game

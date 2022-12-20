@@ -60,6 +60,7 @@ void Game::simulate_game(Input* input, float dt)
 		Renderer::draw_trees(0, 0);
 		updatePosThreat();
 		threatMove(dt);
+		Renderer::draw_Boarder(0,0,0,0);
 		score.DisplayScore();
 		score.DisplayHighScore();
 		next_level();
