@@ -12,7 +12,6 @@ enum TYPE {
 enum BUTTON { NEW_GAME, LOAD_GAME, SETTINGS, INTRODUCTION, EXIT, MAIN };
 enum THINGS { CLOUD1, CLOUD2, GRASS1, ROCK1, ROCK2, ROCK3, MUTE, UNMUTE, MUTE_AVA, UNMUTE_AVA, NEXT, BACK };
 
-
 static float render_scale = 0.01f;
 static const char* tree[13] = {
 	"00411100",

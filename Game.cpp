@@ -114,7 +114,8 @@ void Game::loadGame(Input*input, vector<string>listName, vector<int> listLevel ,
 	if (pressed(BUTTON_ENTER))
 	{
 		//gan thong so cho player 
-
+		
+		//running = false;
 	}
 	Renderer::draw_Load(listName, listLevel, name_count);
 }
