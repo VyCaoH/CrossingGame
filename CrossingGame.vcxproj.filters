@@ -33,5 +33,6 @@
     <Text Include="character.txt" />
     <Text Include=" HUY.txt" />
     <Text Include="SaveGame.txt" />
+    <Text Include="Text\crossing game.txt" />
   </ItemGroup>
 </Project>

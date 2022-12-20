@@ -216,6 +216,7 @@
     <Text Include=" HUY.txt" />
     <Text Include="Highscores.txt" />
     <Text Include="SaveGame.txt" />
+    <Text Include="Text\crossing game.txt" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="character.txt" />
