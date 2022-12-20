@@ -520,7 +520,7 @@ static const char* letters[][7] = {
 	"0000",
 	"0",
 	"0",
-	"000",
+	"0000",
 	"0",
 	"0",
 	"0000",
@@ -2447,14 +2447,15 @@ public:
 	static void draw_Pause(float x, float y) {
 		draw_rect(x, y, 30, 20, 0xC9F5FF);
 		draw_title(1, x-23, y+15, 0.4, 0xffffff);
-		draw_text("Y    CONTINUE", x - 23, y - 7, 0.5, 0x000000);
-		draw_text("ESC  EXIT", x - 23, y - 7, 0.5, 0x000000);
+		draw_text("Y. CONTINUE", x - 23, y - 2, 0.5, 0x000000);
+		draw_text("ESC. EXIT", x-23, y - 9, 0.5, 0x000000);
 	}
 	static void draw_Gameover(float x, float y) {
-		draw_rect(x, y, 30, 20, 0xC9F5FF);
+		draw_rect(x, y, 30, 25, 0xC9F5FF);
 		draw_title(2, x-20, y+15, 0.4, 0xffffff);
 		draw_title(3, x-20, y+3, 0.4, 0xffffff);
 		draw_text("ESC  EXIT", x - 23, y - 13, 0.5, 0x000000);
+		draw_text("B    BACK", x - 23, y - 18, 0.5, 0x000000);
 	}
 	static void draw_Menu(float x, float y, float half_size_x, float half_size_y, int hot_button) {
 		clear_screen(0x01C4FF);
@@ -2594,7 +2595,7 @@ public:
 		//Score
 		draw_text("SCORE", x + 58.5, y + 44, 1.1, 0x0002D9);
 		draw_text("HIGHSCORE", x + 58, y + 19, 0.6, 0xE30000);
-		draw_text("ESC. EXIT", x + 58, y + 5 , 0.5, 0x0000);
+		draw_text("ESC.  EXIT", x + 58, y + 5 , 0.5, 0x0000);
 		draw_text("Y. CONTINUE", x + 58, y, 0.5, 0x0000);
 		draw_text("P. PAUSE", x + 60, y - 5, 0.5, 0x000000);
 		draw_text("T. SAVE", x + 60, y - 10, 0.5, 0x0000);

@@ -58,7 +58,6 @@ public:
 	void simulate_menu(Input* input);
 	vector<Threat*> getThreat();
 	void startGame();
-	//BUTTON menu_game(Input* input);
 	void reset_game();
 	void restartGame();
 	bool next_level();
