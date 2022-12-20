@@ -204,7 +204,7 @@
     <ClInclude Include="MenuGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Score.h" />
     <ClInclude Include="Sound.h" />
