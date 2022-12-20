@@ -73,17 +73,20 @@ int main()
 					}
 					else if (MOVING.buttons[BUTTON_P].is_down)
 					{
+						MOVING.buttons[BUTTON_P].is_down = false;
 						g_pause = true;
 						game.pauseGame(t1.native_handle());
 						continue;
 					}
 					else if (MOVING.buttons[BUTTON_Y].is_down)
 					{
+						MOVING.buttons[BUTTON_Y].is_down = false;
 						game.resumeGame((HANDLE)t1.native_handle());
 						continue;
 					}
 					else if (MOVING.buttons[BUTTON_T].is_down)
 					{
+						MOVING.buttons[BUTTON_T].is_down = false;
 						g_pause = g_save = true;
 						continue;
 					}
@@ -123,6 +126,8 @@ int main()
 				if (game.overGame(&MOVING) == 1)
 				{
 					g_pause = false;
+					g_running = true;
+					game.restartGame();
 					game.resumeGame((HANDLE)t1.native_handle());
 				}
 				else if(game.overGame(&MOVING) == -1)

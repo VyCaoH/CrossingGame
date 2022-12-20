@@ -116,7 +116,10 @@ bool Game::saveGame(Input*input)
 	Renderer::draw_text(name.c_str(), -15, 0, 0.3f, 0xFFFFFF);
 	for (int i = 4; i < 40; i++)
 		if (pressed(i))
+		{
+			is_down(i) = false;
 			name += (char)(i + 61);
+		}
 
 	if (pressed(BUTTON_ENTER)) {
 		string load = name.erase(0, 13) + ".txt";
@@ -158,7 +161,11 @@ bool Game::next_level()
 }
 int Game::overGame(Input* input)
 {
-	return 0;
+	if (pressed(BUTTON_Y))
+		return 1;
+	else if (pressed(BUTTON_ESC))
+		return -1;
+	else return 0;
 }
 bool Game::quit(Input* input)
 {
