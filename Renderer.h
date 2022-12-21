@@ -583,7 +583,7 @@ static const char* letters[][7] = {
 	"0000",
 
 	"0   0",
-	"0 0 0",
+	"00 00",
 	"0 0 0",
 	"0   0",
 	"0   0",
@@ -2404,21 +2404,21 @@ public:
 	static void draw_Load(vector<string>listName, vector<int> listLevel, int name_count) {
 		clear_screen(0x01C4FF);
 		draw_Background2(0, 0, 0, 0);
-		draw_text("NAME", -80, 47, 0.5f, 0xB97A57);
-		draw_text("LEVEL", 73, 47, 0.5f, 0xB97A57);
+		draw_text("NAME", -40, 44, 0.8f, 0xB97A57);
+		draw_text("LEVEL", 30, 44, 0.7f, 0xB97A57);
 		int n = listName.size();
-		if (n > 10)n = 10;
+		if (n > 10)n = 7;
 		for (int i = 0; i < n; i++)
 		{
 			if (i == name_count)
 			{
-				Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0xFF0000);
-				Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0xFF0000);
+				Renderer::draw_text(listName[i].c_str(), -30, 35 - 9 * i, 0.7f, 0xFF0000);
+				Renderer::draw_number(listLevel[i], 30, 35 - 9 * i, 0.7f, 0xFF0000);
 			}
 			else
 			{
-				Renderer::draw_text(listName[i].c_str(), -80, 40 - 5 * i, 0.5f, 0x0000);
-				Renderer::draw_number(listLevel[i], 80, 40 - 5 * i, 0.7f, 0x0000);
+				Renderer::draw_text(listName[i].c_str(), -40,35 - 9 * i, 0.7f, 0x0000);
+				Renderer::draw_number(listLevel[i], 40, 35 - 9 * i, 0.7f, 0x0000);
 			}
 		}
 	}
@@ -2582,6 +2582,12 @@ public:
 		draw_text("A. LEFT", x + 60, y - 30, 0.5, 0x0000);
 		draw_text("D. RIGHT", x + 60, y - 35, 0.5, 0x0000);
 		draw_text("B. BACK", x + 60, y - 40, 0.5, 0x0000);
+	}
+	static void draw_Boarder(float x, float y, float max_size_x, float max_size_y)
+	{
+		draw_rect(x - 92, y, 2, 49, 0x2D9929);
+		draw_rect(x + 55, y, 2, 49, 0x2D9929);
+		draw_rect(x + 74, y + 24, 18, 1.7, 0x2D9929);
 	}
 	static void draw_things(int number, float x, float y, float size) {
 		float half_size = size * .5f;
