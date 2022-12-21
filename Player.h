@@ -1,19 +1,14 @@
 #pragma once
-//#include<fstream>
-//#include<string>
 #include <vector>
 #include<iostream>
 #include"ConsoleWindow.h"
 #include "Threat.h"
 using namespace std;
 
-class Player //:public Entity
+class Player 
 {
 	bool isDead; //true=dead, false=alive
-	float player_dp;//van toc
-	float player_ddp;
 	float player_half_X, player_half_Y;
-	//int height, width;
 protected:
 	float player_pX, player_pY;
 	vector<vector<char>> entity;
@@ -27,12 +22,8 @@ public:
 	void right(float speed, float dt);
 	float getX();
 	float getY();
-	float getDP();
 	void setX(float src);
 	void setY(float src);
-	void setDP(float src);
-	void setDDP(float src);
-	float getDDP();
 	bool isImpact(vector<Threat*> threat);
 	void setIsDead(bool type);
 	bool getIsDead();

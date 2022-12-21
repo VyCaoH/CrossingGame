@@ -19,7 +19,6 @@ class Threat
 	int dir;
 	TYPE type;
 public:
-	//std::random_device gen;
 	Threat(int posY);
 	enum DIRECTION { RIGHT, LEFT };
 	int getNumEnemyInRow();

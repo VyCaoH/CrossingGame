@@ -87,7 +87,6 @@ public:
 			hotButton = (BUTTON)(hotButton - 1);
 			if (hotButton < 0)hotButton = NEW_GAME;
 		}
-		/*Do something in menu*/;
 		if (pressed(BUTTON_ENTER))
 		{
 			is_down(BUTTON_ENTER) = false;

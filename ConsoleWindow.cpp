@@ -57,7 +57,7 @@ HWND Window::winMain() {
 	HWND window = CreateWindowEx(0, className, L"CrossingGame", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
 	return window;
 }
-char Window::messageInput(Input&input,MSG &message,HWND &window)
+void Window::messageInput(Input&input,MSG &message,HWND &window)
 {
 	for (int i = 0; i < BUTTON_COUNT; i++) {
 		input.buttons[i].changed = false;
@@ -76,10 +76,7 @@ char Window::messageInput(Input&input,MSG &message,HWND &window)
 				&& vk_code != 'W'
 				&& vk_code != 'Y'
 				&& vk_code != 'P')
-			{
-				return (char)vk_code;
 				break;
-			}
 		}
 		case WM_KEYDOWN: {
 			u32 vk_code = (u32)message.wParam;
@@ -137,7 +134,6 @@ input.buttons[b].is_down = is_down;\
 				process_button(BUTTON_LEFT, VK_LEFT);
 				process_button(BUTTON_RIGHT, VK_RIGHT);
 			}
-			return (char)vk_code;
 		} break;
 		default: {
 			TranslateMessage(&message);
@@ -145,7 +141,6 @@ input.buttons[b].is_down = is_down;\
 		}
 		}
 	}
-	return ' ';
 }
 Render_State getRender()
 {

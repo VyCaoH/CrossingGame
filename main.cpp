@@ -39,7 +39,7 @@ int main()
 	while (g_running) {
 
 		MSG message;
-		char key = Window::messageInput(MOVING, message, window);
+		Window::messageInput(MOVING, message, window);
 		if (game.menu.isRunning())
 		{
 				game.simulate_menu(&MOVING);
@@ -76,7 +76,7 @@ int main()
 					}
 					else if (MOVING.buttons[BUTTON_P].is_down)
 					{
-						MOVING.buttons[BUTTON_P].is_down = true;
+						MOVING.buttons[BUTTON_P].is_down = false;
 						g_pause = true;
 						game.pauseGame(t1.native_handle());
 						continue;
@@ -106,7 +106,6 @@ int main()
 					}
 					else
 					{
-						
 						if (MOVING.buttons[BUTTON_ESC].is_down)
 						{
 							g_running = false;
@@ -144,7 +143,6 @@ int main()
 					game.menu.setMenuMode(MAIN);
 				else
 					Renderer::draw_Gameover(0, 0);
-
 			}
 		}
 		if (MOVING.buttons[BUTTON_ESC].is_down)

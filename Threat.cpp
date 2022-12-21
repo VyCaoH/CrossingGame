@@ -1,9 +1,6 @@
 #include"Threat.h"
 Threat::Threat(int posY) :y_coord(posY)
 {
-	//std::uniform_int_distribution <int> randType(0, 3);
-	//type = randType(gen);
-	//pos_row = posY;
 	trafficlight.setTime(random_int(100, 500));
 	numEnemyInRow = 3;
 	lv = 1;
@@ -14,7 +11,6 @@ Threat::Threat(int posY) :y_coord(posY)
 	dir = -1;
 }
 enum DIRECTION { RIGHT, LEFT }; 
-//enum TYPE { CAR_RIGHT, CAR_LEFT, BUS_RIGHT, BUS_LEFT, CAR2_LEFT, CAR2_RIGHT, BIRD, DINOSAUR};
 int Threat::getNumEnemyInRow()
 {
 	return numEnemyInRow;

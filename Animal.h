@@ -14,160 +14,43 @@ public:
 class Bird : public Animal
 {
 private:
-	float bird_dp;//van toc
-	//int height,width;
 	float bird_half_X, bird_half_Y;
 	float bird_pX, bird_pY;
 	bool is_right;
 
 protected:
-	//float bird_pX, bird_pY;
 	vector<vector<char>> entity;
 public:
-	Bird()
-	{
-		bird_dp = 0;
-		//height = width = 0;
-		is_right = true;
-		bird_pX = 0;
-		bird_pY = 0;
-		entity.clear();
-	}
-	Bird(float posX, float posY)
-	{
-		//bird = new Bird("Bird-Left.txt");
-		bird_pX = posX;
-		bird_pY =posY;
-		//bird->setXY(posX, posY);
-		//bird->setXY(getX(), getY());
-	}
-	//Entity* getBird() const
-	//{
-	//	/*bird->setXY(getX(), getY());
-	//	Entity temp=*bird;*/
-	//	return bird;
-	//}
-	void left(float speed,float dt,int lv) override
-	{
-		bird_pX -= speed * dt *lv;
-	}
-	void right(float speed, float dt,int lv) override {
-		bird_pX += speed * dt*lv;
-	}
-	float getX() const override
-	{
-		return bird_pX;
-	}
-	float getY() const override
-	{
-		return bird_pY;
-	}
-	float getHalfX() const override
-	{
-		return bird_half_X;
-	}
-	float getHalfY()const override
-	{
-		return bird_half_Y;
-	}
-	float getDP()
-	{
-		return bird_dp;
-	}
-	bool Right()
-	{
-		return is_right;
-	}
-	void setHalf(float x, float y) override
-	{
-		bird_half_X = x;
-		bird_half_Y = y;
-	}
-	void setDP(float dp)
-	{
-		bird_dp = dp;
-	}
+	Bird();
+	Bird(float posX, float posY);
+	void left(float speed, float dt, int lv) override;
+	void right(float speed, float dt, int lv) override;
+	float getX() const override;
+	float getY() const override;
+	float getHalfX() const override;
+	float getHalfY()const override;
+	bool Right();
+	void setHalf(float x, float y) override;
 };
 class Dinosaur : public Animal
 {
 private:
-	float dinosaur_dp;//van toc
-	int height, width;
 	bool is_right;
 	float dinosaur_half_X, dinosaur_half_Y;
 	float dinosaur_pX,dinosaur_pY;
 protected:
 	vector<vector<char>> entity;
 public:
-	Dinosaur()
-	{
-		dinosaur_dp = 0;
-		height = width = 0;
-		is_right = true;
-		dinosaur_pX = 0;
-		dinosaur_pY = 0;
-		entity.clear();
-	}
-	Dinosaur(float posX, float posY)
-	{
-		//Dinosuar = new Dinosuar("Dinosuar-Left.txt");
-		dinosaur_pX = posX;
-		dinosaur_pY = posY;
-		//Dinosuar->setXY(posX, posY);
-		//Dinosuar->setXY(getX(), getY());
-	}
-	//Entity* getBird() const
-	//{
-	//	/*Dinosuar->setXY(getX(), getY());
-	//	Entity temp=*Dinosuar;*/
-	//	return Dinosuar;
-	//}
-	void left(float speed, float dt,int lv) override
-	{
-		dinosaur_pX -= speed * dt*lv;
-	}
-	void right(float speed, float dt,int lv) override {
-		dinosaur_pX += speed * dt*lv;
-	}
-	float getHalfX() const override
-	{
-		return dinosaur_half_X;
-	}
-	float getHalfY()const override
-	{
-		return dinosaur_half_Y;
-	}
-	float getX() const override
-	{
-		return dinosaur_pX;
-	}
-	float getY() const override
-	{
-		return dinosaur_pY;
-	}
-	void setX(float src) override
-	{
-		dinosaur_pX = src;
-	}
-	virtual void setY(float src) override
-	{
-		dinosaur_pY = src;
-	}
-	float getDP()
-	{
-		return dinosaur_dp;
-	}
-	bool Right()
-	{
-		return is_right;
-	}
-	void setHalf(float x, float y) override
-	{
-		dinosaur_half_X = x;
-		dinosaur_half_Y = y;
-	}
-	void setDP(float dp)
-	{
-		dinosaur_dp = dp;
-	}
+	Dinosaur();
+	Dinosaur(float posX, float posY);
+	void left(float speed, float dt, int lv) override;
+	void right(float speed, float dt, int lv) override;
+	float getHalfX() const override;
+	float getHalfY()const override;
+	float getX() const override;
+	float getY() const override;
+	void setX(float src) override;
+	void setY(float src) override;
+	bool Right();
+	void setHalf(float x, float y) override;
 };

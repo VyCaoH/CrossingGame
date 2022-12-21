@@ -944,8 +944,6 @@ public:
 		x2 += render_state.width / 2.f;
 		y2 += render_state.height / 2.f;
 
-		/*half_size_x *= render_state.height * render_scale;
-		half_size_y *= render_state.height * render_scale;*/
 		float x_1 = x1 - half_size_x1;
 		float x_2 = x1 + half_size_x1;
 		float y_1 = y1 - half_size_y1;
@@ -1470,8 +1468,6 @@ public:
 			const char** entity;
 			x -= 7;
 			y += 4;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -1737,8 +1733,6 @@ public:
 			const char** entity;
 			x -= 5;
 			y += 2;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -1801,8 +1795,6 @@ public:
 			const char** entity;
 			x -= 2;
 			y += 3;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -1856,9 +1848,6 @@ public:
 			const char** entity;
 			x -= 2.25;
 			y += 3;
-
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -1912,8 +1901,6 @@ public:
 			const char** entity;
 			x -= 3.5;
 			y += 3.5;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -1968,8 +1955,6 @@ public:
 			const char** entity;
 			x -= 3.5;
 			y += 3.5;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -2024,8 +2009,6 @@ public:
 			const char** entity;
 			x -= 5.;
 			y += 3.;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -2081,8 +2064,6 @@ public:
 			const char** entity;
 			x -= 5;
 			y += 3;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -2137,8 +2118,6 @@ public:
 			const char** entity;
 			x -= 4;
 			y += 3.5;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 
@@ -2188,8 +2167,6 @@ public:
 			const char** entity;
 			x -= 4;
 			y += 3.5;
-			/*if (*text == 47) entity = entities[27];
-			else if (*text == 46) entity = entities[26];*/
 			entity = entities[number];
 			float original_x = x;
 

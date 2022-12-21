@@ -79,6 +79,6 @@ class Window
 public:
 	static LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	static HWND winMain();
-	static char messageInput(Input& input, MSG& message, HWND& window);
+	static void messageInput(Input& input, MSG& message, HWND& window);
 };
 Render_State getRender();

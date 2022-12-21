@@ -1,24 +1,16 @@
 #pragma once
-//#include<vector>
 #include<Thread>
 #include <deque>
-//#include"Renderer.h"
 #include"Player.h"
 #include"Animal.h"
 #include"Threat.h"
 #include"ConsoleWindow.h"
 #include"MenuGame.h"
 #include"Score.h"
-//#include"Renderer.h"
 static string name="YOUR NAME IS ";
-static enum gamemode { GM_MENUGAME, GM_PLAYGAME };
 static bool g_running = true;
 static bool g_pause=true;
 static bool g_save = false;
-static gamemode g_mode = GM_MENUGAME;
-//static int count_name {}
-
-//static BUTTON hot_button = (BUTTON) NEW_GAME;
 class Game
 {
 	Player player;

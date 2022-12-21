@@ -1,13 +1,4 @@
 #include "Entity.h"
-//
-//void Entity::setHeight(int height)
-//{
-//	this->height = height;
-//}
-//void Entity::setWidth(int width)
-//{
-//	this->width = width;
-//}
  void Entity::setX(float src)
 {
 	entity_pX = src;
@@ -45,21 +36,3 @@ void Entity::left(float speed, float dt, int lv)
 void Entity::right(float speed, float dt, int lv) {
 	entity_pX += speed * lv;
 }
-
-//vector<vector<char>> Entity::getEntity() const
-//{
-//	return entity;
-//}
-//int Entity::getHeight() const
-//{
-//	return height;
-//}
-//int Entity::getWidth() const
-//{
-//	return width;
-//}
-////void Entity::setXY(SHORT posX, SHORT posY)
-////{
-////	coord.X = posX;
-////	coord.Y = posY;
-////}
