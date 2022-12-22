@@ -148,6 +148,8 @@ bool Game::saveGame(Input*input)
 		{
 			is_down(i) = false;
 			name += (char)(i + 61);
+			if (name.length() > 19)
+				name.erase(19, name.size() - 1);
 		}
 
 	if (pressed(BUTTON_ENTER)) {
